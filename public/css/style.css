@@ -1,15 +1,21 @@
+#navbarSupportedContent ul{
+    float:right;
+}
+#contain {
+    display: flex;
+}
+#contain .role .delete-form{
+    display: unset;
+}
 #sidebar {
     display: block;
-    float: left;
     position: relative;
-    width: 220px;
     z-index: 16;
 }
 #sidebar > ul {
     list-style: none;
     margin: 0px 0 0;
     padding: 0;
-    position: absolute;
     width: 220px;
 }
 #sidebar > ul > li {
@@ -51,4 +57,17 @@
 }
 #sidebar > ul li ul li:last-child a {
     border-bottom: 0;
+}
+.modal-header .close{
+    right: 0;
+    padding: 0 1rem;
+    position: absolute;
+    margin: 0;
+}
+.modal-header .modal-title{
+    margin: auto;
+    float: left;
+}
+.modal-body {
+    text-align: center;
 }
