@@ -17,10 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('password');
-            $table->integer('QLHT')->nullable();
-            $table->integer('QLDM')->nullable();
-            $table->integer('BCTK')->nullable();
-            $table->integer('MaQuyen')->default(0)	;
+            $table->integer('MaQuyen')->default(1)	;
             $table->rememberToken();
             $table->timestamps();
         });
