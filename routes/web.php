@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('user', 'UserController');
 Route::get('/user/create','UserController@indexCreate')->name('createUser');
 Route::resource('provider','NhaCungCapController');
+Route::resource('/phanxuong','PhanXuongController');
