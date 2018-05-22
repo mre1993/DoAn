@@ -6,7 +6,7 @@
         <li> <a href="{{route('user.index')}}"><i class="fa fa-user-circle"></i> <span>Tài Khoản</span></a> </li>
         <li> <a href="{{route('provider.index')}}"><i class="fa fa-inbox"></i> <span>Nhà cung cấp</span></a></li>
         <li><a href="{{route('phanxuong.index')}}"><i class="fa fa-th"></i> <span>Phân xưởng</span></a></li>
-        {{--<li><a href="{{route('material.index')}}"><i class="fa fa-th"></i> <span>Vật tư</span></a></li>--}}
+        {{--<li><a href="{{route('vattu.index')}}"><i class="fa fa-th"></i> <span>Vật tư</span></a></li>--}}
         {{--<li><a href="{{route('factories.index')}}"><i class="fa fa-th"></i> <span>Loại vật tư</span></a></li>--}}
         {{--<li><a href="{{route('factories.index')}}"><i class="fa fa-th"></i> <span>Kho vật tư</span></a></li>--}}
         {{--<li><a href="{{route('factories.index')}}"><i class="fa fa-th"></i> <span>Nhân viên</span></a></li>--}}
