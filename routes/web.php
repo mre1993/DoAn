@@ -24,3 +24,5 @@ Route::get('/user/create','UserController@indexCreate')->name('createUser');
 Route::resource('provider','NhaCungCapController');
 Route::resource('/phanxuong','PhanXuongController');
 Route::resource('/vattu','VatTuController');
+Route::resource('/theloai','TheLoaiController');
+
