@@ -18,7 +18,7 @@
                 <th>Phân xưởng</th>
                 <th>Ghi chú</th>
                 <th>
-                    <form action="/phanxuong/create">
+                    <form action="{{route('phanxuong.create')}}">
                         <button class="btn btn-success fa fa-plus-circle" ></button>
                     </form>
                 </th>
