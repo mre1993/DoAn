@@ -15,8 +15,9 @@ class PhanXuongController extends Controller
      */
     public function index()
     {
-        $items = PhanXuong::orderBy('id','DESC')->paginate(10);
-        return view('phanxuong.index',compact('items'));
+        $i = 1;
+        $items = PhanXuong::orderBy('MaPX','ASC')->paginate(10);
+        return view('phanxuong.index',compact('items','i'));
     }
 
     /**
@@ -80,7 +81,7 @@ class PhanXuongController extends Controller
      */
     public function edit($id)
     {
-        $factory = PhanXuong::find($id);
+        $factory  = PhanXuong::where('MaPX',$id)->first();
         return view('phanxuong.edit',compact('factory'));
     }
 
@@ -93,7 +94,7 @@ class PhanXuongController extends Controller
      */
     public function update(Request $request)
     {
-        $provider = PhanXuong::find($request->all()['id']);
+        $provider = PhanXuong::where('MaPX',$request->id)->first();
         $message = [
             'MaPX.required' => 'Mã phân xưởng  không được để trống',
             'TenPX.required' => 'Tên phân xưởng không được để trống',
@@ -127,7 +128,7 @@ class PhanXuongController extends Controller
      */
     public function destroy($id)
     {
-        $factory = PhanXuong::find($id);
+        $factory = PhanXuong::where('MaPX',$id)->first();
         $factory->delete();
         return redirect()->back();
     }

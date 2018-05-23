@@ -11,16 +11,16 @@
     @endif
     <div class="col-md-8" style="margin:auto">
         <div class="card">
-            <div class="card-header">{{ __('Thêm nhà cung cấp') }}</div>
+            <div class="card-header">{{ __('Sửa nhà cung cấp') }}</div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('provider.update',$provider['id']) }}" name="update">
+                <form method="POST" action="{{ route('provider.update',$provider->MaNCC) }}" name="update">
                     <input name="_method" type="hidden" value="PATCH">
-                    <input name="id" type="hidden" value="{{$provider->id}}">
+                    <input name="id" type="hidden" value="{{$provider->MaNCC}}">
                     @csrf
 
                     <div class="form-group row">
-                        <label for="MaNCC" class="col-md-4 col-form-label text-md-right">Mã nhà cung cấp</label>
+                        <label for="MaNCC" class="col-md-4 col-form-label text-md-right">Mã nhà cung cấp*</label>
 
                         <div class="col-md-6">
                             <input id="MaNCC" type="text" class="form-control" name="MaNCC" value="{{$provider->MaNCC}}">
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="TenNCC" class="col-md-4 col-form-label text-md-right">Tên nhà cung cấp</label>
+                        <label for="TenNCC" class="col-md-4 col-form-label text-md-right">Tên nhà cung cấp*</label>
 
                         <div class="col-md-6">
                             <input id="TenNCC" type="text" class="form-control" name="TenNCC" value="{{$provider->TenNCC}}">
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="DiaChi" class="col-md-4 col-form-label text-md-right">Địa chỉ nhà cung cấp</label>
+                        <label for="DiaChi" class="col-md-4 col-form-label text-md-right">Địa chỉ nhà cung cấp*</label>
 
                         <div class="col-md-6">
                             <input id="DiaChi" type="text" class="form-control" name="DiaChi" value="{{$provider->DiaChi}}">
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="sdtNCC" class="col-md-4 col-form-label text-md-right">Số điện thoại</label>
+                        <label for="sdtNCC" class="col-md-4 col-form-label text-md-right">Số điện thoại*</label>
 
                         <div class="col-md-6">
                             <input id="sdtNCC" type="text" class="form-control" name="sdtNCC" value="{{$provider->SDT}}">
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="emailNCC" class="col-md-4 col-form-label text-md-right">Email</label>
+                        <label for="emailNCC" class="col-md-4 col-form-label text-md-right">Email*</label>
 
                         <div class="col-md-6">
                             <input id="emailNCC" type="email" class="form-control" name="emailNCC" value="{{$provider->Email}}">
@@ -79,8 +79,11 @@
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Thêm mới') }}
+                                {{ __('Sửa') }}
                             </button>
+                            <a href="{{ \Illuminate\Support\Facades\URL::previous() }}" class="btn btn-back">
+                                {{ __('Quay lại') }}
+                            </a>
                         </div>
                     </div>
                 </form>

@@ -75,3 +75,7 @@
     border: 1px solid #ddd!important;
     background: #ddd!important;
 }
+.btn-back{
+    background-color: #cccccc!important;
+    color: black;
+}

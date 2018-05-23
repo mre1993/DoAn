@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\NhaCungCap;
+use App\VatTu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -16,7 +17,7 @@ class NhaCungCapController extends Controller
      */
     public function index()
     {
-        $provider = NhaCungCap::orderBy('id','DESC')->paginate(10);
+        $provider = NhaCungCap::orderBy('MaNCC','ASC')->paginate(10);
         $i = 1;
         return view('provider.index',compact('provider','i'));
     }
@@ -91,7 +92,7 @@ class NhaCungCapController extends Controller
      */
     public function edit($id)
     {
-        $provider = NhaCungCap::find($id);
+        $provider = NhaCungCap::where('MaNCC',$id)->first();
         return view('provider.edit',compact('provider'));
     }
 
@@ -102,9 +103,9 @@ class NhaCungCapController extends Controller
      * @param  \App\NhaCungCap  $provider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NhaCungCap $provider)
+    public function update(Request $request)
     {
-        $provider = NhaCungCap::find($request->all()['id']);
+        $provider = NhaCungCap::where('MaNCC',$request->id)->first();
         $message = [
             'MaNCC.required' => 'Mã nhà cung cấp  không được để trống',
             'TenNCC.required' => 'Tên nhà cung cấp không được để trống',
@@ -126,13 +127,14 @@ class NhaCungCapController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $provider->MaNCC = $request->all()['MaNCC'];
-        $provider->TenNCC = $request->all()['TenNCC'];
-        $provider->DiaChi = $request->all()['DiaChi'];
-        $provider->SDT = $request->all()['sdtNCC'];
-        $provider->Fax = $request->all()['fax'];
-        $provider->Email = $request->all()['emailNCC'];
-        $provider->GhiChu = $request->all()['ghiChu'];
+        VatTu::where('MaNCC', '=', $provider->MaNCC)->update(['MaNCC' => $request->MaNCC]);
+        $provider->MaNCC = $request->MaNCC;
+        $provider->TenNCC = $request->TenNCC;
+        $provider->DiaChi = $request->DiaChi;
+        $provider->SDT = $request->sdtNCC;
+        $provider->Fax = $request->fax;
+        $provider->Email = $request->emailNCC;
+        $provider->GhiChu = $request->ghiChu;
         $provider->save();
 
         return redirect('/provider');

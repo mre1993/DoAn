@@ -31,7 +31,7 @@
             <tbody>
                 @foreach($provider as $item)
                     <tr>
-                        <td>{{$item->id}}</td>
+                        <td>{{$i++}}</td>
                         <td>{{$item->MaNCC}}</td>
                         <td>{{$item->TenNCC}}</td>
                         <td>{{$item->DiaChi}}</td>
@@ -40,8 +40,8 @@
                         <td>{{$item->Email}}</td>
                         <td>{{$item->GhiChu}}</td>
                         <td>
-                            <a class="btn btn-comment fa fa-edit" href="{{route('provider.edit',$item->id)}}"></a>
-                            <form class="delete-form" action="{{ route('provider.destroy',$item->id) }}" method="post">
+                            <a class="btn btn-comment fa fa-edit" href="{{route('provider.edit',$item->MaNCC)}}"></a>
+                            <form class="delete-form" action="{{ route('provider.destroy',$item->MaNCC) }}" method="post">
                                 <input name="_method" type="hidden" value="DELETE">
                                 <button class="btn btn-danger fa fa-remove"></button>
                                 {{ csrf_field() }}

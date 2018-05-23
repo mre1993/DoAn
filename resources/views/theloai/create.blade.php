@@ -18,7 +18,7 @@
                     @csrf
 
                     <div class="form-group row">
-                        <label for="MaLoaiVT" class="col-md-4 col-form-label text-md-right">Mã loại vật tư</label>
+                        <label for="MaLoaiVT" class="col-md-4 col-form-label text-md-right">Mã loại vật tư*</label>
 
                         <div class="col-md-6">
                             <input id="MaLoaiVT" type="text" class="form-control" name="MaLoaiVT">
@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="TenLoaiVT" class="col-md-4 col-form-label text-md-right">Tên loại vật tư</label>
+                        <label for="TenLoaiVT" class="col-md-4 col-form-label text-md-right">Tên loại vật tư*</label>
 
                         <div class="col-md-6">
                             <input id="TenLoaiVT" type="text" class="form-control" name="TenLoaiVT">

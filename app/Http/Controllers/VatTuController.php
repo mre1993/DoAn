@@ -17,8 +17,9 @@ class VatTuController extends Controller
      */
     public function index()
     {
-        $items = VatTu::orderBy('id','DESC')->paginate(10);
-        return view('vattu.index',compact('items'));
+        $items = VatTu::orderBy('MaVT','ASC')->paginate(10);
+        $i = 1;
+        return view('vattu.index',compact('items','i'));
     }
 
     /**
@@ -28,8 +29,8 @@ class VatTuController extends Controller
      */
     public function create()
     {
-        $NCC = NhaCungCap::orderBy('id','DESC')->get();
-        $MaLoaiVT = TheLoai::orderBy('id','DESC')->get();
+        $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
+        $MaLoaiVT = TheLoai::orderBy('MaLoaiVT','ASC')->get();
         return view('vattu.create',compact('MaLoaiVT','NCC'));
     }
 
@@ -90,8 +91,8 @@ class VatTuController extends Controller
     public function edit($id)
     {
         $item = VatTu::find($id);
-        $NCC = NhaCungCap::orderBy('id','DESC')->get();
-        $MaLoaiVT = TheLoai::orderBy('id','DESC')->get();
+        $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
+        $MaLoaiVT = TheLoai::orderBy('MaLoaiVT','ASC')->get();
         return view('vattu.edit',compact('item','NCC','MaLoaiVT'));
     }
 
@@ -102,9 +103,9 @@ class VatTuController extends Controller
      * @param  \App\VatTu  $vatTu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, VatTu $vatTu)
+    public function update(Request $request)
     {
-        $item = VatTu::find($request['id']);
+        $item = VatTu::where('MaVT',$request->id)->first();
         $message = [
             'MaVT.required' => 'Mã vật tư  không được để trống',
             'TenVT.required' => 'Tên vật tư không được để trống',

@@ -30,6 +30,6 @@ class User extends Authenticatable
     ];
 
     public function phanQuyen(){
-        return $this->belongsTo('App\PhanQuyen','MaQuyen');
+        return $this->belongsTo('App\PhanQuyen','MaQuyen', 'MaQuyen');
     }
 }

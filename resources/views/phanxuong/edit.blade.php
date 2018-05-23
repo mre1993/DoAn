@@ -14,9 +14,9 @@
             <div class="card-header">{{ __('Sửa phân xưởng') }}</div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('phanxuong.update',$factory['id']) }}" name="update">
+                <form method="POST" action="{{ route('phanxuong.update',$factory->MaPX) }}" name="update">
                     <input name="_method" type="hidden" value="PATCH">
-                    <input name="id" type="hidden" value="{{$factory->id}}">
+                    <input name="id" type="hidden" value="{{$factory->MaPX}}">
                     @csrf
 
                     <div class="form-group row">

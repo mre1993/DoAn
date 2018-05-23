@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\TheLoai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\VatTu;
 
 class TheLoaiController extends Controller
 {
@@ -15,8 +16,9 @@ class TheLoaiController extends Controller
      */
     public function index()
     {
-        $items =  TheLoai::orderBy('id','DESC')->paginate(10);
-        return view('theloai.index',compact('items'));
+        $items =  TheLoai::orderBy('MaLoaiVT','ASC')->paginate(10);
+        $i = 1;
+        return view('theloai.index',compact('items','i'));
     }
 
     /**
@@ -81,7 +83,7 @@ class TheLoaiController extends Controller
      */
     public function edit($id)
     {
-        $loai = TheLoai::find($id);
+        $loai = TheLoai::where('MaLoaiVT', $id)->first();
         return view('theloai.edit',compact('loai'));
     }
 
@@ -92,9 +94,9 @@ class TheLoaiController extends Controller
      * @param  \App\TheLoai  $loaiVatTu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TheLoai $loaiVatTu)
+    public function update(Request $request)
     {
-        $provider = TheLoai::find($request->all()['id']);
+        $provider = TheLoai::where('MaLoaiVT', $request->id)->first();
 
         $message = [
             'MaLoaiVT.required' => 'Mã loại vật tư  không được để trống',
@@ -112,9 +114,9 @@ class TheLoaiController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
-        $provider->MaLoaiVT = $request->all()['MaLoaiVT'];
-        $provider->TenLoaiVT = $request->all()['TenLoaiVT'];
+        VatTu::where('MaLoaiVT', '=', $provider->MaLoaiVT)->update(['MaLoaiVT' => $request->MaLoaiVT]);
+        $provider->MaLoaiVT = $request->MaLoaiVT;
+        $provider->TenLoaiVT = $request->TenLoaiVT;
         $provider->save();
 
             return redirect('/theloai');
@@ -128,7 +130,7 @@ class TheLoaiController extends Controller
      */
     public function destroy($id)
     {
-        $item = TheLoai::find($id);
+        $item = TheLoai::where('MaLoaiVT',$id)->first();
         $item->delete();
         return redirect()->back();
     }

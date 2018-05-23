@@ -14,7 +14,6 @@ class CreatePhanXuongTable extends Migration
     public function up()
     {
         Schema::create('phan_xuong', function (Blueprint $table) {
-            $table->increments('id');
             $table->char('MaPX');
             $table->string('TenPX');
             $table->string('GhiChu')->nullable();

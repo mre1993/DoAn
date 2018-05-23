@@ -30,7 +30,7 @@
             <tbody>
             @foreach($items as $item)
                 <tr>
-                    <td>{{$item->id}}</td>
+                    <td>{{$i++}}</td>
                     <td>{{$item->MaVT}}</td>
                     <td>{{$item->TenVT}}</td>
                     <td>{{$item->DVT}}</td>
@@ -38,8 +38,8 @@
                     <td>{{$item->LoaiVatTu->TenLoaiVT}}</td>
                     <td>{{$item->MoTa}}</td>
                     <td>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('vattu.edit',$item->id)}}"></a>
-                        <form class="delete-form" action="{{ route('vattu.destroy',$item->id) }}" method="post">
+                        <a class="btn btn-comment fa fa-edit" href="{{route('vattu.edit',$item->MaVT)}}"></a>
+                        <form class="delete-form" action="{{ route('vattu.destroy',$item->MaVT) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove"></button>
                             {{ csrf_field() }}

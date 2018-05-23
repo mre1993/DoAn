@@ -14,13 +14,13 @@
             <div class="card-header">{{ __('Thêm vật tư') }}</div>
 
             <div class="card-body">
-                <form method="POST" action="{{route('vattu.update',$item->id)}}" name="update">
+                <form method="POST" action="{{route('vattu.update',$item->MaVT)}}" name="update">
                     <input name="_method" type="hidden" value="PATCH">
-                    <input name="id" type="hidden" value="{{$item->id}}">
+                    <input name="id" type="hidden" value="{{$item->MaVT}}">
                     @csrf
 
                     <div class="form-group row">
-                        <label for="MaVT" class="col-md-4 col-form-label text-md-right">Mã vật tư</label>
+                        <label for="MaVT" class="col-md-4 col-form-label text-md-right">Mã vật tư*</label>
 
                         <div class="col-md-6">
                             <input id="MaVT" type="text" class="form-control" name="MaVT" value="{{$item->MaVT}}">
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="TenVT" class="col-md-4 col-form-label text-md-right">Tên vật tư</label>
+                        <label for="TenVT" class="col-md-4 col-form-label text-md-right">Tên vật tư*</label>
 
                         <div class="col-md-6">
                             <input id="TenVT" type="text" class="form-control" name="TenVT" value="{{$item->TenVT}}">

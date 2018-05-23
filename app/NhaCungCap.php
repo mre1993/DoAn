@@ -8,6 +8,10 @@ class NhaCungCap extends Model
 {
     protected $table = 'nha_cung_cap';
 
+    protected $primaryKey = 'MaNCC';
+
+    public  $incrementing = false;
+
     protected $fillable = [
         'MaNCC', 'TenNCC', 'DiaChi', 'SDT', 'Fax', 'Email', 'Ghi'
     ];
