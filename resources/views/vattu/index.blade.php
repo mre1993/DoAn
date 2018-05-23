@@ -17,8 +17,8 @@
                 <th>Mã Vật tư</th>
                 <th>Tên vật tư</th>
                 <th>Đơn vị tính</th>
-                <th>Mã nhà cung cấp</th>
-                <th>Mã loại vật tư</th>
+                <th>Nhà cung cấp</th>
+                <th>Loại vật tư</th>
                 <th>Mô tả</th>
                 <th>
                     <form action="{{route('vattu.create')}}">
@@ -34,8 +34,8 @@
                     <td>{{$item->MaVT}}</td>
                     <td>{{$item->TenVT}}</td>
                     <td>{{$item->DVT}}</td>
-                    <td>{{$item->MaNCC}}</td>
-                    <td>{{$item->MaLoai}}</td>
+                    <td>{{$item->NhaCungCap->TenNCC}}</td>
+                    <td>{{$item->LoaiVatTu->TenLoaiVT}}</td>
                     <td>{{$item->MoTa}}</td>
                     <td>
                         <a class="btn btn-comment fa fa-edit" href="{{route('vattu.edit',$item->id)}}"></a>

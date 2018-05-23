@@ -19,7 +19,7 @@ class CreateVatTuTable extends Migration
             $table->string('TenVT');
             $table->string('DVT');
             $table->char('MaNCC');
-            $table->char('MaLoai');
+            $table->char('MaLoaiVT');
             $table->string('MoTa')->nullable();
         });
     }

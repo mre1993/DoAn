@@ -14,4 +14,8 @@ class NhaCungCap extends Model
 
     public $timestamps = false;
 
+    public function NhaCungCap1(){
+        return $this->belongsTo('App\VatTu','MaNCC');
+    }
+
 }

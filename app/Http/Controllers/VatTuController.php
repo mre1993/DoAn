@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\NhaCungCap;
+use App\TheLoai;
 use App\VatTu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class VatTuController extends Controller
 {
@@ -25,7 +28,9 @@ class VatTuController extends Controller
      */
     public function create()
     {
-        //
+        $NCC = NhaCungCap::orderBy('id','DESC')->get();
+        $MaLoaiVT = TheLoai::orderBy('id','DESC')->get();
+        return view('vattu.create',compact('MaLoaiVT','NCC'));
     }
 
     /**
@@ -36,7 +41,33 @@ class VatTuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = [
+            'MaVT.required' => 'Mã vật tư  không được để trống',
+            'TenVT.required' => 'Tên vật tư không được để trống',
+            'DVT.required'  => 'Đơn vị tính không được để trống',
+        ];
+        $rules = [
+            'MaVT' => 'required|string|max:10|unique:vat_tu',
+            'TenVT' => 'required|string|max:200',
+            'DVT' => 'required|string|max:200',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        };
+        VatTu::create([
+            'MaVT' =>$request['MaVT'],
+            'TenVT' => $request['TenVT'],
+            'DVT' => $request['DVT'],
+            'MaNCC' => $request['MaNCC'],
+            'MaLoaiVT' => $request['MaLoaiVT'],
+            'MoTa' =>$request['MoTa']
+        ]);
+        return redirect('vattu');
     }
 
     /**
@@ -56,9 +87,12 @@ class VatTuController extends Controller
      * @param  \App\VatTu  $vatTu
      * @return \Illuminate\Http\Response
      */
-    public function edit(VatTu $vatTu)
+    public function edit($id)
     {
-        //
+        $item = VatTu::find($id);
+        $NCC = NhaCungCap::orderBy('id','DESC')->get();
+        $MaLoaiVT = TheLoai::orderBy('id','DESC')->get();
+        return view('vattu.edit',compact('item','NCC','MaLoaiVT'));
     }
 
     /**
@@ -70,7 +104,33 @@ class VatTuController extends Controller
      */
     public function update(Request $request, VatTu $vatTu)
     {
-        //
+        $item = VatTu::find($request['id']);
+        $message = [
+            'MaVT.required' => 'Mã vật tư  không được để trống',
+            'TenVT.required' => 'Tên vật tư không được để trống',
+            'DVT.required'  => 'Đơn vị tính không được để trống',
+        ];
+        $rules = [
+            'MaVT' => 'required|string|max:10',
+            'TenVT' => 'required|string|max:200',
+            'DVT' => 'required|string|max:200',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $item->MaVT = $request['MaVT'];
+        $item->TenVT = $request['TenVT'];
+        $item->DVT = $request['DVT'];
+        $item->MaNCC = $request['MaNCC'];
+        $item->MaLoaiVT = $request['MaLoaiVT'];
+        $item->MoTa = $request['MoTa'];
+        $item->save();
+
+        return redirect('/vattu');
     }
 
     /**
@@ -79,8 +139,10 @@ class VatTuController extends Controller
      * @param  \App\VatTu  $vatTu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(VatTu $vatTu)
+    public function destroy($id)
     {
-        //
+        $item = VatTu::find($id);
+        $item->delete();
+        return redirect()->back();
     }
 }
