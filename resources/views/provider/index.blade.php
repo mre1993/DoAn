@@ -22,7 +22,7 @@
                 <th>Email</th>
                 <th>Ghi chú</th>
                 <th>
-                    <form action="/provider/create">
+                    <form action="{{route('provider.create')}}">
                         <button class="btn btn-success fa fa-plus-circle" ></button>
                     </form>
                 </th>

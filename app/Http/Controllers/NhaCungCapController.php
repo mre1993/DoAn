@@ -108,9 +108,9 @@ class NhaCungCapController extends Controller
         $message = [
             'MaNCC.required' => 'Mã nhà cung cấp  không được để trống',
             'TenNCC.required' => 'Tên nhà cung cấp không được để trống',
-            'DiaChi' => 'Địa chỉ không được để trống',
-            'sdtNCC' => 'Số điện thoại không được để trống',
-            'emailNCC' => 'Email không được để trống'
+            'DiaChi.required' => 'Địa chỉ không được để trống',
+            'sdtNCC.required' => 'Số điện thoại không được để trống',
+            'emailNCC.required' => 'Email không được để trống'
         ];
         $rules = [
             'MaNCC' => 'required|string|max:10',
