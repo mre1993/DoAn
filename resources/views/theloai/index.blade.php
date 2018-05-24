@@ -26,12 +26,12 @@
             <tbody>
             @foreach($items as $item)
                 <tr>
-                    <td>{{$item->id}}</td>
+                    <td>{{$i++}}</td>
                     <td>{{$item->MaLoaiVT}}</td>
                     <td>{{$item->TenLoaiVT}}</td>
                     <td>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('theloai.edit',$item->id)}}"></a>
-                        <form class="delete-form" action="{{ route('theloai.destroy',$item->id) }}" method="post">
+                        <a class="btn btn-comment fa fa-edit" href="{{route('theloai.edit',$item->MaLoaiVT)}}"></a>
+                        <form class="delete-form" action="{{ route('theloai.destroy',$item->MaLoaiVT) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove"></button>
                             {{ csrf_field() }}

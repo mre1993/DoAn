@@ -2,7 +2,7 @@
 @section('content')
 <div id="sidebar" class="col-md-2">
     <ul>
-        <li class="active"><a href="/home"><i class="fa fa-home"></i> <span>Dashboard</span></a> </li>
+        <li class="active"><a href="{{route('home')}}"><i class="fa fa-home"></i> <span>Dashboard</span></a> </li>
         <li> <a href="{{route('user.index')}}"><i class="fa fa-user-circle"></i> <span>Tài Khoản</span></a> </li>
         <li> <a href="{{route('provider.index')}}"><i class="fa fa-inbox"></i> <span>Nhà cung cấp</span></a></li>
         <li><a href="{{route('phanxuong.index')}}"><i class="fa fa-th"></i> <span>Phân xưởng</span></a></li>

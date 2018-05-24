@@ -27,13 +27,13 @@
             <tbody>
             @foreach($items as $item)
                 <tr>
-                    <td>{{$item->id}}</td>
+                    <td>{{$i++}}</td>
                     <td>{{$item->MaPX}}</td>
                     <td>{{$item->TenPX}}</td>
                     <td>{{$item->GhiChu}}</td>
                     <td>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('phanxuong.edit',$item->id)}}"></a>
-                        <form class="delete-form" action="{{ route('phanxuong.destroy',$item->id) }}" method="post">
+                        <a class="btn fa fa-edit" href="{{route('phanxuong.edit',$item->MaPX)}}"></a>
+                        <form class="delete-form" action="{{ route('phanxuong.destroy',$item->MaPX) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove"></button>
                             {{ csrf_field() }}

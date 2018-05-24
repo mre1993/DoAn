@@ -14,13 +14,13 @@
             <div class="card-header">{{ __('Sửa phân xưởng') }}</div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('phanxuong.update',$factory['id']) }}" name="update">
+                <form method="POST" action="{{ route('phanxuong.update',$factory->MaPX) }}" name="update">
                     <input name="_method" type="hidden" value="PATCH">
-                    <input name="id" type="hidden" value="{{$factory->id}}">
+                    <input name="id" type="hidden" value="{{$factory->MaPX}}">
                     @csrf
 
                     <div class="form-group row">
-                        <label for="MaPX" class="col-md-4 col-form-label text-md-right">Mã phân xưởng</label>
+                        <label for="MaPX" class="col-md-4 col-form-label text-md-right">Mã phân xưởng<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="MaPX" type="text" class="form-control" name="MaPX" value="{{$factory->MaPX}}">
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="TenPX" class="col-md-4 col-form-label text-md-right">Tên phân xưởng</label>
+                        <label for="TenPX" class="col-md-4 col-form-label text-md-right">Tên phân xưởng<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="TenPX" type="text" class="form-control" name="TenPX" value="{{$factory->TenPX}}">

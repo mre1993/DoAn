@@ -14,7 +14,6 @@ class CreateTheLoaiTable extends Migration
     public function up()
     {
         Schema::create('loai_vat_tu', function (Blueprint $table) {
-            $table->increments('id');
             $table->char('MaLoaiVT');
             $table->string('TenLoaiVT');
         });

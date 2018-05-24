@@ -9,11 +9,14 @@ class VatTu extends Model
     protected $table = 'vat_tu';
 
     protected $fillable = [
-        'id', 'MaVT', 'TenVT', 'DVT', 'MaNCC', 'MaLoaiVT', 'MoTa'
+        'MaVT', 'TenVT', 'DVT', 'MaNCC', 'MaLoaiVT', 'MoTa'
     ];
+
+    protected $primaryKey = "MaVT";
 
     public $timestamps = false;
 
+    public $incrementing = false;
     public function LoaiVatTu(){
         return $this->belongsTo('App\TheLoai','MaLoaiVT', 'MaLoaiVT');
     }

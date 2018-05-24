@@ -14,7 +14,6 @@ class CreateNhaCungCapTable extends Migration
     public function up()
     {
         Schema::create('nha_cung_cap', function (Blueprint $table) {
-            $table->increments('id');
             $table->char('MaNCC');
             $table->string('TenNCC');
             $table->string('DiaChi');

@@ -14,7 +14,6 @@ class CreateVatTuTable extends Migration
     public function up()
     {
         Schema::create('vat_tu', function (Blueprint $table) {
-            $table->increments('id');
             $table->char('MaVT');
             $table->string('TenVT');
             $table->string('DVT');

@@ -14,13 +14,13 @@
             <div class="card-header">{{ __('Sửa loại vật tư') }}</div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('theloai.update',$loai['id']) }}" name="update">
+                <form method="POST" action="{{ route('theloai.update',$loai->MaLoaiVT) }}" name="update">
                     <input name="_method" type="hidden" value="PATCH">
-                    <input name="id" type="hidden" value="{{$loai->id}}">
+                    <input name="id" type="hidden" value="{{$loai->MaLoaiVT}}">
                     @csrf
 
                     <div class="form-group row">
-                        <label for="MaLoaiVT" class="col-md-4 col-form-label text-md-right">Mã loại vật tư</label>
+                        <label for="MaLoaiVT" class="col-md-4 col-form-label text-md-right">Mã loại vật tư<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="MaLoaiVT" type="text" class="form-control" name="MaLoaiVT" value="{{$loai->MaLoaiVT}}">
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="TenLoaiVT" class="col-md-4 col-form-label text-md-right">Tên loại vật tư</label>
+                        <label for="TenLoaiVT" class="col-md-4 col-form-label text-md-right">Tên loại vật tư<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="TenLoaiVT" type="text" class="form-control" name="TenLoaiVT" value="{{$loai->TenLoaiVT}}">

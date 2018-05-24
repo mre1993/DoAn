@@ -23,13 +23,13 @@
             <tbody>
             @foreach($users as $user)
                 <tr>
-                    <td>{{ $user['id'] }}</td>
-                    <td>{{ $user['name'] }}</td>
+                    <td>{{$i++}}</td>
+                    <td>{{ $user->name }}</td>
                     <td>{{ $user->phanQuyen->TenQuyen }}</td>
                     <td>
                         <button class="btn btn-comment fa fa-edit" data-toggle="modal" data-target="#changeRole-{{$user->id}}"></button>
                         <button class="btn btn-comment fa fa-user" data-toggle="modal" data-target="#changePass-{{$user->id}}"></button>
-                        <form class="delete-form" action="{{ route('user.destroy',$user['id']) }}" method="post">
+                        <form class="delete-form" action="{{ route('user.destroy',$user->id) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove">Delete</button>
                             {{ csrf_field() }}
@@ -43,7 +43,7 @@
                                         <h4 class="modal-title">Edit User</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="{{ route('user.update',$user['id']) }}">
+                                        <form method="POST" action="{{ route('user.update',$user->id) }}">
                                             <input name="_method" type="hidden" value="PATCH">
                                             <input name="userId" type="hidden" value="{{$user->id}}">
                                             @csrf
@@ -60,7 +60,7 @@
                                                 <div  class="col-md-6">
                                                     <select style="width: 50%;height: 100%;"  name="role">
                                                         @foreach($listQuyen as $item)
-                                                            <option value="{{ $item->Id }}" @if($user->phanQuyen->TenQuyen=== $item->TenQuyen) selected='selected' @endif> {{ strtoupper($item->TenQuyen) }}</option>
+                                                            <option value="{{ $item->MaQuyen }}" @if($user->phanQuyen->TenQuyen=== $item->TenQuyen) selected='selected' @endif> {{ strtoupper($item->TenQuyen) }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -86,7 +86,7 @@
                                         <h4 class="modal-title">Edit User</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="{{ route('user.update',$user['id']) }}">
+                                        <form method="POST" action="{{ route('user.update',$user->id) }}">
                                             <input name="_method" type="hidden" value="PATCH">
                                             <input name="userId" type="hidden" value="{{$user->id}}">
                                             @csrf
@@ -99,12 +99,21 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
+                                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu mới') }}</label>
                                                 <div class="col-md-6">
-                                                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="oldpassword" required>
-                                                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-                                                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="cpassword" required>
+                                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="oldpassword" class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu') }}</label>
+                                                <div class="col-md-6">
+                                                    <input id="oldpassword" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="oldpassword" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="cpassword" class="col-md-4 col-form-label text-md-right">{{ __('Nhập lại mật khẩu') }}</label>
+                                                <div class="col-md-6">
+                                                    <input id="cpassword" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="cpassword" required>
                                                 </div>
                                             </div>
 

@@ -22,9 +22,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id','DESC')->paginate(10);
-        $listQuyen = PhanQuyen::orderBy('id','DESC')->get();
-        return view('user', compact('users','listQuyen'));
+        $users = User::orderBy('id','ASC')->paginate(10);
+        $listQuyen = PhanQuyen::orderBy('MaQuyen','ASC')->get();
+        $i = 1;
+        return view('user', compact('users','listQuyen','i'));
     }
 
     /**

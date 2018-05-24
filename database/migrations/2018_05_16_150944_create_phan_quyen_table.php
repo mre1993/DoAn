@@ -14,7 +14,7 @@ class CreatePhanQuyenTable extends Migration
     public function up()
     {
         Schema::create('phan_quyen', function (Blueprint $table) {
-            $table->increments('Id');
+            $table->increments('MaQuyen');
             $table->string('TenQuyen');
         });
     }
