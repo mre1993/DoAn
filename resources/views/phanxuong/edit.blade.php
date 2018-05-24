@@ -20,7 +20,7 @@
                     @csrf
 
                     <div class="form-group row">
-                        <label for="MaPX" class="col-md-4 col-form-label text-md-right">Mã phân xưởng</label>
+                        <label for="MaPX" class="col-md-4 col-form-label text-md-right">Mã phân xưởng<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="MaPX" type="text" class="form-control" name="MaPX" value="{{$factory->MaPX}}">
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="TenPX" class="col-md-4 col-form-label text-md-right">Tên phân xưởng</label>
+                        <label for="TenPX" class="col-md-4 col-form-label text-md-right">Tên phân xưởng<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="TenPX" type="text" class="form-control" name="TenPX" value="{{$factory->TenPX}}">

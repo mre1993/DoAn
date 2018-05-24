@@ -18,7 +18,7 @@
                     @csrf
 
                     <div class="form-group row">
-                        <label for="MaVT" class="col-md-4 col-form-label text-md-right">Mã vật tư*</label>
+                        <label for="MaVT" class="col-md-4 col-form-label text-md-right">Mã vật tư<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="MaVT" type="text" class="form-control" name="MaVT">
@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="TenVT" class="col-md-4 col-form-label text-md-right">Tên vật tư*</label>
+                        <label for="TenVT" class="col-md-4 col-form-label text-md-right">Tên vật tư<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="TenVT" type="text" class="form-control" name="TenVT">

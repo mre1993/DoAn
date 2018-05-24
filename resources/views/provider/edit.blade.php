@@ -20,7 +20,7 @@
                     @csrf
 
                     <div class="form-group row">
-                        <label for="MaNCC" class="col-md-4 col-form-label text-md-right">Mã nhà cung cấp*</label>
+                        <label for="MaNCC" class="col-md-4 col-form-label text-md-right">Mã nhà cung cấp<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="MaNCC" type="text" class="form-control" name="MaNCC" value="{{$provider->MaNCC}}">
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="TenNCC" class="col-md-4 col-form-label text-md-right">Tên nhà cung cấp*</label>
+                        <label for="TenNCC" class="col-md-4 col-form-label text-md-right">Tên nhà cung cấp<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="TenNCC" type="text" class="form-control" name="TenNCC" value="{{$provider->TenNCC}}">
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="DiaChi" class="col-md-4 col-form-label text-md-right">Địa chỉ nhà cung cấp*</label>
+                        <label for="DiaChi" class="col-md-4 col-form-label text-md-right">Địa chỉ nhà cung cấp<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="DiaChi" type="text" class="form-control" name="DiaChi" value="{{$provider->DiaChi}}">
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="sdtNCC" class="col-md-4 col-form-label text-md-right">Số điện thoại*</label>
+                        <label for="sdtNCC" class="col-md-4 col-form-label text-md-right">Số điện thoại<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="sdtNCC" type="text" class="form-control" name="sdtNCC" value="{{$provider->SDT}}">
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="emailNCC" class="col-md-4 col-form-label text-md-right">Email*</label>
+                        <label for="emailNCC" class="col-md-4 col-form-label text-md-right">Email<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="emailNCC" type="email" class="form-control" name="emailNCC" value="{{$provider->Email}}">
