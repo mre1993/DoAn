@@ -105,19 +105,22 @@ class NhaCungCapController extends Controller
      */
     public function update(Request $request)
     {
+
         $provider = NhaCungCap::where('MaNCC',$request->id)->first();
         $message = [
             'MaNCC.required' => 'Mã nhà cung cấp  không được để trống',
             'TenNCC.required' => 'Tên nhà cung cấp không được để trống',
             'DiaChi.required' => 'Địa chỉ không được để trống',
             'sdtNCC.required' => 'Số điện thoại không được để trống',
-            'emailNCC.required' => 'Email không được để trống'
+            'emailNCC.required' => 'Email không được để trống',
+            'sdtNCC.regex'  => 'Số điện thoại không hợp lệ',
+            'sdtNCC.max'  => 'Số điện thoại không hợp lệ'
         ];
         $rules = [
             'MaNCC' => 'required|string|max:10',
             'TenNCC' => 'required|string|max:200',
             'DiaChi' => 'required|string',
-            'sdtNCC' => 'required|string',
+            'sdtNCC' => 'required|string|regex:/^[0-9-+]+$/|max:13',
             'emailNCC' => 'required|string',
         ];
 
