@@ -17,6 +17,7 @@ class VatTu extends Model
     public $timestamps = false;
 
     public $incrementing = false;
+
     public function LoaiVatTu(){
         return $this->belongsTo('App\TheLoai','MaLoaiVT', 'MaLoaiVT');
     }
