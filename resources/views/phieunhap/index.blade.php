@@ -14,15 +14,13 @@
             <thead>
             <tr>
                 <th>STT</th>
-                <th>Mã Vật tư</th>
-                <th>Tên vật tư</th>
-                <th>Đơn vị tính</th>
+                <th>Mã phiếu nhập</th>
+                <th>Nhân viên</th>
+                <th>Kho vật tư</th>
                 <th>Nhà cung cấp</th>
-                <th>Loại vật tư</th>
-                <th>Đơn giá</th>
-                <th>Mô tả</th>
+                <th>Nội dung</th>
                 <th>
-                    <form action="{{route('vattu.create')}}">
+                    <form action="{{route('nhanvien.create')}}">
                         <button class="btn btn-success fa fa-plus-circle" ></button>
                     </form>
                 </th>
@@ -32,16 +30,14 @@
             @foreach($items as $item)
                 <tr>
                     <td>{{$i++}}</td>
-                    <td>{{$item->MaVT}}</td>
-                    <td>{{$item->TenVT}}</td>
-                    <td>{{$item->DVT}}</td>
+                    <td>{{$item->MaPN}}</td>
+                    <td>{{$item->NhanVien->TenNV}}</td>
+                    <td>{{$item->KhoVT->TenKho}}</td>
                     <td>{{$item->NhaCungCap->TenNCC}}</td>
-                    <td>{{$item->LoaiVatTu->TenLoaiVT}}</td>
-                    <td>{{$item->DonGia}}</td>
-                    <td>{{$item->MoTa}}</td>
+                    <td>{{$item->NoiDung}}</td>
                     <td>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('vattu.edit',$item->MaVT)}}"></a>
-                        <form class="delete-form" action="{{ route('vattu.destroy',$item->MaVT) }}" method="post">
+                        <a class="btn btn-comment fa fa-edit" href="{{route('nhanvien.edit',$item->MaNV)}}"></a>
+                        <form class="delete-form" action="{{ route('nhanvien.destroy',$item->MaNV) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove"></button>
                             {{ csrf_field() }}

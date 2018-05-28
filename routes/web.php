@@ -25,4 +25,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/vattu', 'VatTuController');
     Route::resource('/theloai', 'TheLoaiController');
     Route::resource('/nhanvien', 'NhanVienController');
+    Route::resource('/phieunhap','PhieuNhapController');
+    Route::resource('/chitietphieunhap','ChiTietPhieuNhapController');
 });

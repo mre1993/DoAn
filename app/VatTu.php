@@ -9,7 +9,7 @@ class VatTu extends Model
     protected $table = 'vat_tu';
 
     protected $fillable = [
-        'MaVT', 'TenVT', 'DVT', 'MaNCC', 'MaLoaiVT', 'MoTa'
+        'MaVT', 'TenVT', 'DVT', 'MaNCC', 'MaLoaiVT', 'MoTa', 'DonGia'
     ];
 
     protected $primaryKey = "MaVT";
