@@ -23,6 +23,19 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="MaNV" class="col-md-4 col-form-label text-md-right">{{ __('Nhập lại mật khẩu') }}<span class="color-red">*</span></label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" id="MaNV" name="MaNV" style="height:100%">
+                                    <option selected disabled>Chọn nhân <viên></viên></option>
+                                    @foreach($nhanvien as $item)
+                                        <option value="{{$item}}">{{$item->TenNV}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu') }}<span class="color-red">*</span></label>
 
                             <div class="col-md-6">
