@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\KhoVatTu;
 use App\PhieuNhap;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class PhieuNhapController extends Controller
      */
     public function create()
     {
-        //
+        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
+        return view('phieunhap.create',compact('MaKVT'));
     }
 
     /**

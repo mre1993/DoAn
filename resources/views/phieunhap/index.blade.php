@@ -20,7 +20,7 @@
                 <th>Nhà cung cấp</th>
                 <th>Nội dung</th>
                 <th>
-                    <form action="{{route('nhanvien.create')}}">
+                    <form action="{{route('phieunhap.create')}}">
                         <button class="btn btn-success fa fa-plus-circle" ></button>
                     </form>
                 </th>
@@ -36,8 +36,8 @@
                     <td>{{$item->NhaCungCap->TenNCC}}</td>
                     <td>{{$item->NoiDung}}</td>
                     <td>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('nhanvien.edit',$item->MaNV)}}"></a>
-                        <form class="delete-form" action="{{ route('nhanvien.destroy',$item->MaNV) }}" method="post">
+                        <a class="btn btn-comment fa fa-edit" href="{{route('phieunhap.edit',$item->MaNV)}}"></a>
+                        <form class="delete-form" action="{{ route('phieunhap.destroy',$item->MaNV) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove"></button>
                             {{ csrf_field() }}

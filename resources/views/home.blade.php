@@ -28,10 +28,10 @@
         </div>
         <div class="menu-list">
             <a data-toggle="collapse" href="#nhapxuat" class="list-group-item">
-                <span class="indent"></span> <b>Quản lý nhập xuất tồn</b>
+                <span class="fa fa-in"></span> <b>Quản lý nhập xuất tồn</b>
             </a>
             <ul class="collapse out" id="nhapxuat">
-                <li class=""><a href="{{route('phieunhap.index')}}"><i class="fa fa-th-list"></i> <span>Kho vật tư</span></a></li>
+                <li class=""><a href="{{route('phieunhap.index')}}"><i class="fa fa-th-list"></i> <span>Quản lý nhập</span></a></li>
             </ul>
         </div>
     </div>
