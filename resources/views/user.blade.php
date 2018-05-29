@@ -16,6 +16,7 @@
             <tr>
                 <th>STT</th>
                 <th>Tên đăng nhập</th>
+                <th>Tên nhân viên</th>
                 <th>Vai trò</th>
                 <th><a href="{{route('createUser')}}" class="btn btn-comment fa fa-plus-circle" style="padding:3px 4px;font-size:20px"></a></th>
             </tr>
@@ -25,6 +26,7 @@
                 <tr>
                     <td>{{$i++}}</td>
                     <td>{{ $user->name }}</td>
+                    <th>{{$user->nhanVien->TenNV}}</th>
                     <td>{{ $user->phanQuyen->TenQuyen }}</td>
                     <td>
                         <button class="btn btn-comment fa fa-edit" data-toggle="modal" data-target="#changeRole-{{$user->id}}"></button>
