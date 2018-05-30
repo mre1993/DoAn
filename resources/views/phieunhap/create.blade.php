@@ -39,7 +39,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="text" placeholder="Nhập mã phiếu nhập" class="form-control">
+                            <input type="text" placeholder="Nhập mã phiếu nhập" class="form-control" name="MaPN">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -63,6 +63,7 @@
                                     <th>Số lượng</th>
                                     <th>Đơn giá</th>
                                     <th>Thành tiền</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody class="inputVT">

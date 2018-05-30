@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ChiTietPhieuNhap;
 use App\KhoVatTu;
 use App\NhaCungCap;
 use App\NhanVien;
@@ -21,8 +22,9 @@ class PhieuNhapController extends Controller
      */
     public function index()
     {
+        $i = 1;
         $items = PhieuNhap::orderBy('MaPN','ASC')->paginate(10);
-        return view('phieunhap.index',compact('items'));
+        return view('phieunhap.index',compact('items','i'));
     }
 
     /**
@@ -48,14 +50,17 @@ class PhieuNhapController extends Controller
     public function store(Request $request)
     {
         $message = [
-            'MaKVT.required' => 'Mã loại vật tư  không được để trống',
-            'MaPN.unique' => 'Mã loại đã tồn tại',
-            'MaNCC.required' => 'Tên loại vật tư không được để trống',
-            'MaVT.unique' => 'Tên loại đã tồn tại',
+            'MaKVT.required' => 'Mã kho vật tư không được để trống',
+            'MaPN.unique' => 'Mã phiếu nhập đã tồn tại',
+            'MaPN.required' => 'Mã phiếu nhập không được để trống',
+            'MaNCC.required' => 'Mã nhà cung cấp không được để trống',
+            'MaVT.required' => 'Mã vật tư không được để trống',
         ];
         $rules = [
-            'MaLoaiVT' => 'required|string|max:10|unique:loai_vat_tu',
-            'TenLoaiVT' => 'required|string|max:200,unique:loai_vat_tu',
+            'MaKVT' => 'required|string|max:10',
+            'MaPN' => 'required|string|max:10|unique:phieu_nhap',
+            'MaNCC' => 'required|string|max:10',
+            'MaVT' => 'required|max:10',
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -65,11 +70,24 @@ class PhieuNhapController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         };
-        TheLoai::create([
-            'MaLoaiVT' =>$request['MaLoaiVT'],
-            'TenLoaiVT' => $request['TenLoaiVT'],
+        $count = count($request->MaVT);
+        for($i=0; $i<$count; $i++){
+            ChiTietPhieuNhap::created([
+                'MaPN' => $request->MaPN,
+                'MaVT' => $request->MaVT[$i],
+                'SoLuong' => $request->SoLuong[$i],
+                'DonGia' => $request->DonGia[$i],
+                'ThanhTien' => $request->ThanhTien[$i],
+            ]);
+        }
+        PhieuNhap::create([
+            'MaPN' =>$request->MaPN,
+            'MaKVT' => $request->MaKVT,
+            'MaNV' => $request->MaNV,
+            'MaNCC' => $request->MaNCC,
+            'NoiDung' => $request->NoiDung,
         ]);
-        return redirect('theloai');
+        return redirect('phieunhap');
     }
 
     /**

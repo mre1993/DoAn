@@ -44,6 +44,7 @@ $(document).ready(function() {
                     '<td><input name="SoLuong[]" type="number" class="form-control" onclick="return  myFunction(this)" min="0" value="0"></td>' +
                     '<td><input name="DonGia[]" name="DonGia[]"  readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
                     '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
+                    '<td><button type="button">Delete</button></td>'+
                     '</tr>';
                 $('.suggest-search').css('display','none').find("a").remove();
                 $('.inputVT').append(record);

@@ -18,7 +18,7 @@ class CreatePhieuNhapTable extends Migration
             $table->char('MaNV');
             $table->char('MaKVT');
             $table->char('MaNCC');
-            $table->char('NoiDung');
+            $table->char('NoiDung')->nullable();
             $table->timestamps();
         });
     }

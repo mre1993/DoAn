@@ -32,10 +32,11 @@
                     <td>{{$i++}}</td>
                     <td>{{$item->MaPN}}</td>
                     <td>{{$item->NhanVien->TenNV}}</td>
-                    <td>{{$item->KhoVT->TenKho}}</td>
+                    <td>{{$item->KhoVatTu->TenKVT}}</td>
                     <td>{{$item->NhaCungCap->TenNCC}}</td>
                     <td>{{$item->NoiDung}}</td>
                     <td>
+                        <a class="btn btn-comment fa fa-shower" href="{{route('phieunhap.show',$item->MaNV)}}"></a>
                         <a class="btn btn-comment fa fa-edit" href="{{route('phieunhap.edit',$item->MaNV)}}"></a>
                         <form class="delete-form" action="{{ route('phieunhap.destroy',$item->MaNV) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">

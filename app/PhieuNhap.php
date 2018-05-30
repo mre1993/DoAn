@@ -20,8 +20,8 @@ class PhieuNhap extends Model
         return $this->belongsTo('App\NhanVien','MaNV', 'MaNV');
     }
 
-    public function KhoVT(){
-        return $this->belongsTo('App\KhoVT','MaKVT', 'MaKVT');
+    public function KhoVatTu(){
+        return $this->belongsTo('App\KhoVatTu','MaKVT', 'MaKVT');
     }
 
     public function NhaCungCap(){
