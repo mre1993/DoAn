@@ -61,3 +61,19 @@
 .color-red{
     color: red!important;
 }
+.suggest-search{
+    display: none;
+    border:1px solid #ddd;
+}
+.suggest-search a{
+    padding:5px;
+    border-bottom:1px solid #ddd;
+    display: block;
+}
+.suggest-search a:hover {
+    background-color: #ccc;
+    text-decoration: none;
+}
+.suggest-search a:last-child{
+    border:none;
+}

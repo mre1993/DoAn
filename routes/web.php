@@ -27,5 +27,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/nhanvien', 'NhanVienController');
     Route::resource('khovattu','KhoVatTuController');
     Route::resource('/phieunhap','PhieuNhapController');
-    Route::resource('/chitietphieunhap','ChiTietPhieuNhapController');
+    Route::get('phieunhap/search/{TimVT}','PhieuNhapController@search')->name('search');
+    Route::get('phieunhap/getVT/{TimVT}','PhieuNhapController@getVT')->name('getVT');
 });

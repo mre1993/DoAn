@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\KhoVatTu;
+use App\NhaCungCap;
+use App\NhanVien;
 use App\PhieuNhap;
+use App\VatTu;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PhieuNhapController extends Controller
 {
@@ -26,8 +32,11 @@ class PhieuNhapController extends Controller
      */
     public function create()
     {
+        $user =  Auth::user();
+        $nhanVien = NhanVien::find($user->MaNV);
         $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
-        return view('phieunhap.create',compact('MaKVT'));
+        $MaNCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
+        return view('phieunhap.create',compact('MaKVT','nhanVien','MaNCC'));
     }
 
     /**
@@ -38,7 +47,29 @@ class PhieuNhapController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = [
+            'MaKVT.required' => 'Mã loại vật tư  không được để trống',
+            'MaPN.unique' => 'Mã loại đã tồn tại',
+            'MaNCC.required' => 'Tên loại vật tư không được để trống',
+            'MaVT.unique' => 'Tên loại đã tồn tại',
+        ];
+        $rules = [
+            'MaLoaiVT' => 'required|string|max:10|unique:loai_vat_tu',
+            'TenLoaiVT' => 'required|string|max:200,unique:loai_vat_tu',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        };
+        TheLoai::create([
+            'MaLoaiVT' =>$request['MaLoaiVT'],
+            'TenLoaiVT' => $request['TenLoaiVT'],
+        ]);
+        return redirect('theloai');
     }
 
     /**
@@ -84,5 +115,15 @@ class PhieuNhapController extends Controller
     public function destroy(PhieuNhap $phieuNhap)
     {
         //
+    }
+
+    public function search($request){
+        $result = VatTu::where('TenVT','LIKE','%'.$request.'%')->get();
+        return response()->json($result);
+    }
+
+    public function getVT($request){
+        $result = VatTu::where('MaVT',$request)->first();
+        return response()->json($result);
     }
 }
