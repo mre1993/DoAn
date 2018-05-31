@@ -1,3 +1,6 @@
+
+
+//Tính tiền cho phiếu nhập
 function myFunction(e) {
     var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val();
     var SoLuong =  $(e).val();
@@ -5,8 +8,11 @@ function myFunction(e) {
     $(e).parent().parent().find("input[name='ThanhTien[]']").val(ThanhTien);
 }
 
+function remove(e){
+    $(e).parent().parent().remove();
+}
+
 $(document).ready(function() {
-    // //Tính tiền cho phiếu nhập
 
     //search vật tư
     $(".search-query").autocomplete({
@@ -44,11 +50,16 @@ $(document).ready(function() {
                     '<td><input name="SoLuong[]" type="number" class="form-control" onclick="return  myFunction(this)" min="0" value="0"></td>' +
                     '<td><input name="DonGia[]" name="DonGia[]"  readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
                     '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
-                    '<td><button type="button">Delete</button></td>'+
+                    '<td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>'+
                     '</tr>';
                 $('.suggest-search').css('display','none').find("a").remove();
                 $('.inputVT').append(record);
             }
         });
+    });
+    //xóa record phiếu nhập
+    $('.remove-record').click(function(e){
+        var target = e.target;
+        $(target).parent().parent().parent().remove();
     });
 });

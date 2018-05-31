@@ -72,7 +72,7 @@ class PhieuNhapController extends Controller
         };
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
-            ChiTietPhieuNhap::created([
+            ChiTietPhieuNhap::create([
                 'MaPN' => $request->MaPN,
                 'MaVT' => $request->MaVT[$i],
                 'SoLuong' => $request->SoLuong[$i],
@@ -80,6 +80,7 @@ class PhieuNhapController extends Controller
                 'ThanhTien' => $request->ThanhTien[$i],
             ]);
         }
+
         PhieuNhap::create([
             'MaPN' =>$request->MaPN,
             'MaKVT' => $request->MaKVT,
@@ -96,9 +97,9 @@ class PhieuNhapController extends Controller
      * @param  \App\PhieuNhap  $phieuNhap
      * @return \Illuminate\Http\Response
      */
-    public function show(PhieuNhap $phieuNhap)
+    public function show($id)
     {
-        //
+
     }
 
     /**
@@ -143,5 +144,16 @@ class PhieuNhapController extends Controller
     public function getVT($request){
         $result = VatTu::where('MaVT',$request)->first();
         return response()->json($result);
+    }
+
+    public function showExport($id){
+        $vatTu = ChiTietPhieuNhap::where('MaPN',$id)->orderBy('id','ASC')->get();
+        $phieuNhap = PhieuNhap::find($id)->first();
+        $i=1;
+        $sumSL = 0;
+        foreach($vatTu as $item){
+            $sumSL = $sumSL + $item->SoLuong;
+        }
+        return view('phieunhap.showExport',compact('vatTu','phieuNhap','i','sumSL'));
     }
 }

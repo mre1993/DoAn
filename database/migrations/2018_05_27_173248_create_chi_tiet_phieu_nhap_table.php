@@ -13,7 +13,7 @@ class CreateChiTietPhieuNhapTable extends Migration
      */
     public function up()
     {
-        Schema::create('chi_tieu_phieu_nhap', function (Blueprint $table) {
+        Schema::create('chi_tiet_phieu_nhap', function (Blueprint $table) {
             $table->increments('ID');
             $table->char('MaPN');
             $table->char('MaVT');

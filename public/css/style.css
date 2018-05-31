@@ -77,3 +77,41 @@
 .suggest-search a:last-child{
     border:none;
 }
+.form-nhap{
+    padding: 0% 5%!important
+}
+.form-nhap table{
+}
+.form-nhap table tr{
+    width: 100%;
+}
+.form-nhap table tr td{
+    border:1px solid white;
+    width: 14%;
+}
+.company-infor td{
+    border:1px solid black !important;
+    vertical-align: middle!important;
+}
+.khung td{
+    border: 1px solid black!important;
+}
+.khung-header td {
+    border: 1px solid black !important;
+    border-top: 1px solid black !important;
+}
+.width-14{
+    width: 14%;
+}
+.width-18{
+    width: 18%!important;
+}
+.bottom-form td p{
+    padding-bottom: 50% ;
+}
+.form-name{
+    font-size: xx-large;
+}
+.border-none td{
+    border:none!important;
+}

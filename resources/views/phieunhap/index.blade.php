@@ -1,6 +1,6 @@
 @extends('home')
 @section('right-content')
-    <div class="factories col-md-10">
+    <div class="col-md-10">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -36,9 +36,9 @@
                     <td>{{$item->NhaCungCap->TenNCC}}</td>
                     <td>{{$item->NoiDung}}</td>
                     <td>
-                        <a class="btn btn-comment fa fa-shower" href="{{route('phieunhap.show',$item->MaNV)}}"></a>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('phieunhap.edit',$item->MaNV)}}"></a>
-                        <form class="delete-form" action="{{ route('phieunhap.destroy',$item->MaNV) }}" method="post">
+                        <a class="btn btn-comment fa fa-shower" href="{{route('phieunhap.showExport',$item->MaPN)}}"></a>
+                        <a class="btn btn-comment fa fa-edit" href="{{route('phieunhap.edit',$item->MaPN)}}"></a>
+                        <form class="delete-form" action="{{ route('phieunhap.destroy',$item->MaPN) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove"></button>
                             {{ csrf_field() }}

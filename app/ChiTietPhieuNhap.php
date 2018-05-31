@@ -15,4 +15,8 @@ class ChiTietPhieuNhap extends Model
     protected $primaryKey = "ID";
 
     public $timestamps = false;
+
+    public function VatTu(){
+        return $this->belongsTo('App\VatTu','MaVT', 'MaVT');
+    }
 }
