@@ -9,7 +9,7 @@
             <a data-toggle="collapse" href="#hethong" class="list-group-item">
                 <span class="fa fa-user-circle"></span> <b>Quản lý hệ thống</b>
             </a>
-            <ul class="collapse out" id="hethong">
+            <ul class="collapse" id="hethong">
                 <li class=""> <a href="{{route('user.index')}}"><i class="fa fa-th-list"></i> <span>Tài Khoản</span></a> </li>
             </ul>
         </div>
@@ -17,7 +17,7 @@
             <a data-toggle="collapse" href="#danhmuc" class="list-group-item">
                 <span class="fa fa-th"></span> <b> Quản lý danh mục </b>
             </a>
-            <ul class="collapse out" id="danhmuc">
+            <ul class="collapse" id="danhmuc">
                 <li class=""><a href="{{route('provider.index')}}"><i class="fa fa-th-list"></i> <span>Nhà cung cấp</span></a></li>
                 <li class=""><a href="{{route('phanxuong.index')}}"><i class="fa fa-th-list"></i> <span>Phân xưởng</span></a></li>
                 <li class=""><a href="{{route('theloai.index')}}"><i class="fa fa-th-list"></i> <span>Loại vật tư</span></a></li>
@@ -30,8 +30,9 @@
             <a data-toggle="collapse" href="#nhapxuat" class="list-group-item">
                 <span class="fa fa-in"></span> <b>Quản lý nhập xuất tồn</b>
             </a>
-            <ul class="collapse out" id="nhapxuat">
+            <ul class="collapse" id="nhapxuat">
                 <li class=""><a href="{{route('phieunhap.index')}}"><i class="fa fa-th-list"></i> <span>Quản lý nhập</span></a></li>
+                <li class=""><a href="{{route('phieunhap.create')}}"><i class="fa fa-th-list"></i> <span>Thêm phiếu nhập</span></a></li>
             </ul>
         </div>
     </div>

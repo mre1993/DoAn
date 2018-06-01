@@ -20,9 +20,7 @@
                 <th>Nhà cung cấp</th>
                 <th>Nội dung</th>
                 <th>
-                    <form action="{{route('phieunhap.create')}}">
-                        <button class="btn btn-success fa fa-plus-circle" ></button>
-                    </form>
+
                 </th>
             </tr>
             </thead>
@@ -36,8 +34,8 @@
                     <td>{{$item->NhaCungCap->TenNCC}}</td>
                     <td>{{$item->NoiDung}}</td>
                     <td>
-                        <a class="btn btn-comment fa fa-shower" href="{{route('phieunhap.showExport',$item->MaPN)}}"></a>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('phieunhap.edit',$item->MaPN)}}"></a>
+                        <a class="btn fa fa-eye" href="{{route('phieunhap.show',$item->MaPN)}}" style="background-color: blue;color: white"></a>
+                        {{--<a class="btn btn-comment fa fa-edit" href="{{route('phieunhap.edit',$item->MaPN)}}"></a>--}}
                         <form class="delete-form" action="{{ route('phieunhap.destroy',$item->MaPN) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove"></button>

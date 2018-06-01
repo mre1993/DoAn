@@ -30,7 +30,7 @@
                     <td>{{ $user->phanQuyen->TenQuyen }}</td>
                     <td>
                         <button class="btn btn-comment fa fa-edit" data-toggle="modal" data-target="#changeRole-{{$user->id}}"></button>
-                        <button class="btn btn-comment fa fa-user" data-toggle="modal" data-target="#changePass-{{$user->id}}"></button>
+                        <button class="btn btn-primary fa fa-user" data-toggle="modal" data-target="#changePass-{{$user->id}}"></button>
                         <form class="delete-form" action="{{ route('user.destroy',$user->id) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove">Delete</button>

@@ -99,7 +99,10 @@ class PhieuNhapController extends Controller
      */
     public function show($id)
     {
-
+        $phieuNhap = PhieuNhap::find($id)->first();
+        $chiTiet = ChiTietPhieuNhap::where('MaPN',$id)->get();
+        $i=1;
+        return view('phieunhap.show',compact('phieuNhap','chiTiet','i'));
     }
 
     /**
