@@ -39,7 +39,11 @@
                         <label for="DVT" class="col-md-4 col-form-label text-md-right">Đơn vị tính</label>
 
                         <div class="col-md-6">
-                            <input id="DVT" type="text" class="form-control" name="DVT" value="{{$item->DVT}}">
+                            <select  style="width: 50%;height: 100%;" id="DVT" name="DVT" class="form-control" >
+                            @foreach($DVT as $dvt)
+                                <option name="DVT" value="{{ $dvt }}"  @if( ucfirst ($item->DVT) === $dvt) selected='selected' @endif> {{ $dvt }}</option>
+                            @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -47,7 +51,7 @@
                         <label for="MaNCC" class="col-md-4 col-form-label text-md-right">Nhà cung cấp</label>
 
                         <div class="col-md-6">
-                            <select style="width: 50%;height: 100%;"  name="MaNCC" id="MaNCC">
+                            <select style="width: 50%;height: 100%;" class="form-control"  name="MaNCC" id="MaNCC">
                                 @foreach($NCC as $item1)
                                     <option value="{{ $item1->MaNCC }}" @if( $item->NhaCungCap->TenNCC=== $item1->TenNCC) selected='selected' @endif> {{ $item1->TenNCC }}</option>
                                 @endforeach
