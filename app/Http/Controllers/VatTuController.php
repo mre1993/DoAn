@@ -29,9 +29,10 @@ class VatTuController extends Controller
      */
     public function create()
     {
+        $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');
         $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
         $MaLoaiVT = TheLoai::orderBy('MaLoaiVT','ASC')->get();
-        return view('vattu.create',compact('MaLoaiVT','NCC'));
+        return view('vattu.create',compact('MaLoaiVT','NCC','DVT'));
     }
 
     /**
@@ -94,10 +95,11 @@ class VatTuController extends Controller
      */
     public function edit($id)
     {
+        $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');
         $item = VatTu::find($id);
         $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
         $MaLoaiVT = TheLoai::orderBy('MaLoaiVT','ASC')->get();
-        return view('vattu.edit',compact('item','NCC','MaLoaiVT'));
+        return view('vattu.edit',compact('item','NCC','MaLoaiVT','DVT'));
     }
 
     /**
