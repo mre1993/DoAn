@@ -10,7 +10,11 @@
                 </ul>
             </div>
         @endif
-        <table class="table">
+        <div class="col-md-12">
+            <a href="{{route('phieunhap.printExcel',$phieuNhap->MaPN)}}">a</a>
+            <button class="print btn btn-primary fa fa-print"></button>
+        </div>
+        <table class="table print-phieu-nhap">
             <tr  class="company-infor">
                 <td colspan="1" rowspan="2"><img src="{{asset('img/epower.png')}}"></td>
                 <td colspan="5" rowspan="2" class="text-center">

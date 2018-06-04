@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ChiTietPhieuNhap;
+use App\Exports;
 use App\KhoVatTu;
 use App\NhaCungCap;
 use App\NhanVien;
@@ -12,6 +13,7 @@ use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PhieuNhapController extends Controller
 {
@@ -159,4 +161,18 @@ class PhieuNhapController extends Controller
         }
         return view('phieunhap.showExport',compact('vatTu','phieuNhap','i','sumSL'));
     }
+
+    public function printExcel($id,Excel $excel, \App\Exports $export)
+    {
+        $vatTu = ChiTietPhieuNhap::where('MaPN', $id)->orderBy('id', 'ASC')->get();
+        $phieuNhap = PhieuNhap::find($id)->first();
+        $i = 1;
+        $sumSL = 0;
+        foreach ($vatTu as $item) {
+            $sumSL = $sumSL + $item->SoLuong;
+        }
+        $array = array($vatTu, $phieuNhap, $i, $sumSL);
+        return Excel::download(new Exports, 'invoices.xlsx');
+    }
 }
+

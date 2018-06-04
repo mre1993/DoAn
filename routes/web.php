@@ -33,4 +33,9 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'phieunhap.showExport',
         'uses' => 'PhieuNhapController@showExport'
     ]);
+    Route::get('phieunhap/printExcel/{id}',[
+        'as' => 'phieunhap.printExcel',
+        'uses' => 'PhieuNhapController@printExcel'
+    ]);
+
 });
