@@ -37,15 +37,18 @@
                         <label for="DVT" class="col-md-4 col-form-label text-md-right">Đơn vị tính</label>
 
                         <div class="col-md-6">
-                            <input id="DVT" type="text" class="form-control" name="DVT">
-                        </div>
+                            <select style="width: 50%;height: 100%;"  name="DVT" id="DVT" class="form-control">
+                                @foreach($DVT as $dvt)
+                                    <option value="{{ $dvt }}"> {{ $dvt }}</option>
+                                @endforeach
+                            </select>                        </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="MaNCC" class="col-md-4 col-form-label text-md-right">Nhà cung cấp</label>
 
                         <div class="col-md-6">
-                            <select style="width: 50%;height: 100%;"  name="MaNCC" id="MaNCC">
+                            <select style="width: 50%;height: 100%;"  name="MaNCC" id="MaNCC" class="form-control">
                                 @foreach($NCC as $item1)
                                     <option value="{{ $item1->MaNCC }}" > {{ $item1->TenNCC }}</option>
                                 @endforeach
