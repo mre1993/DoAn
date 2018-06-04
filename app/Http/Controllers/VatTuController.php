@@ -46,11 +46,14 @@ class VatTuController extends Controller
             'MaVT.required' => 'Mã vật tư  không được để trống',
             'TenVT.required' => 'Tên vật tư không được để trống',
             'DVT.required'  => 'Đơn vị tính không được để trống',
+            'DonGia.required' => 'Đơn giá không được để trống',
+            'DonGia.numeric' => 'Đơn giá phải là số',
         ];
         $rules = [
             'MaVT' => 'required|string|max:10|unique:vat_tu',
             'TenVT' => 'required|string|max:200',
             'DVT' => 'required|string|max:200',
+            'DonGia' => 'required|numeric'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -61,12 +64,13 @@ class VatTuController extends Controller
                 ->withInput();
         };
         VatTu::create([
-            'MaVT' =>$request['MaVT'],
-            'TenVT' => $request['TenVT'],
-            'DVT' => $request['DVT'],
-            'MaNCC' => $request['MaNCC'],
-            'MaLoaiVT' => $request['MaLoaiVT'],
-            'MoTa' =>$request['MoTa']
+            'MaVT' =>$request->MaVT,
+            'TenVT' => $request->TenVT,
+            'DVT' => $request->DVT,
+            'MaNCC' => $request->MaNCC,
+            'MaLoaiVT' => $request->MaLoaiVT,
+            'DonGia' => $request->DonGia,
+            'MoTa' =>$request->MoTa
         ]);
         return redirect('vattu');
     }
@@ -110,11 +114,14 @@ class VatTuController extends Controller
             'MaVT.required' => 'Mã vật tư  không được để trống',
             'TenVT.required' => 'Tên vật tư không được để trống',
             'DVT.required'  => 'Đơn vị tính không được để trống',
+            'DonGia.required' => 'Đơn giá không được để trống',
+            'DonGia.numeric' => 'Đơn giá phải là số',
         ];
         $rules = [
             'MaVT' => 'required|string|max:10',
             'TenVT' => 'required|string|max:200',
             'DVT' => 'required|string|max:200',
+            'DonGia' => 'required|numeric'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -123,12 +130,13 @@ class VatTuController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $item->MaVT = $request['MaVT'];
-        $item->TenVT = $request['TenVT'];
-        $item->DVT = $request['DVT'];
-        $item->MaNCC = $request['MaNCC'];
-        $item->MaLoaiVT = $request['MaLoaiVT'];
-        $item->MoTa = $request['MoTa'];
+        $item->MaVT = $request->MaVT;
+        $item->TenVT = $request->TenVT;
+        $item->DVT = $request->DVT;
+        $item->MaNCC = $request->MaNCC;
+        $item->MaLoaiVT = $request->MaLoaiVT;
+        $item->DonGia = $request->DonGia;
+        $item->MoTa = $request->MoTa;
         $item->save();
 
         return redirect('/vattu');

@@ -32,7 +32,7 @@
                     <td>{{$item->TenPX}}</td>
                     <td>{{$item->GhiChu}}</td>
                     <td>
-                        <a class="btn fa fa-edit" href="{{route('phanxuong.edit',$item->MaPX)}}"></a>
+                        <a class="btn btn-comment fa fa-edit" style="background-color: #d6d8db" href="{{route('phanxuong.edit',$item->MaPX)}}"></a>
                         <form class="delete-form" action="{{ route('phanxuong.destroy',$item->MaPX) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove"></button>

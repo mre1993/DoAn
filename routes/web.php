@@ -26,4 +26,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/theloai', 'TheLoaiController');
     Route::resource('/nhanvien', 'NhanVienController');
     Route::resource('khovattu','KhoVatTuController');
+    Route::resource('/phieunhap','PhieuNhapController');
+    Route::get('phieunhap/search/{TimVT}','PhieuNhapController@search')->name('search');
+    Route::get('phieunhap/getVT/{TimVT}','PhieuNhapController@getVT')->name('getVT');
+    Route::get('phieunhap/showExport/{id}',[
+        'as' => 'phieunhap.showExport',
+        'uses' => 'PhieuNhapController@showExport'
+    ]);
 });

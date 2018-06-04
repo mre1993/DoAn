@@ -12,51 +12,30 @@
     position: relative;
     z-index: 16;
 }
-#sidebar > ul {
+#sidebar .panel ul {
     list-style: none;
-    margin: 0px 0 0;
-    padding: 0;
-    width: 220px;
-}
-#sidebar > ul > li {
-    display: block;
-    position: relative;
-}
-#sidebar > ul > li > a {
-    padding: 10px 0 10px 15px;
-    display: block;
-    color: #939da8;
-}
-#sidebar > ul > li > a > i {
-    margin-right: 10px;
-}
-#sidebar > ul > li.active > a {
-    background: url("../img/menu-active.png") no-repeat scroll right center transparent !important;
-    text-decoration:none;
-}
-#sidebar > ul > li > a > .label {
-    margin: 0 20px 0 0;
-    float: right;
-    padding: 3px 5px 2px;
-}
-#sidebar > ul li ul {
-    display: none;
     margin: 0;
     padding: 0;
 }
-#sidebar > ul li.open ul {
-    display: block;
+#sidebar .menu-list .list-group-item{
+    border-radius: 0;
+    background-color: #337ab7;
+    color:white;
 }
-#sidebar > ul li ul li a {
-    padding: 10px 0 10px 25px;
-    display: block;
-    color: #777777;
+#sidebar .menu-list .list-group-item:first-child{
+    border-bottom: none;
 }
-#sidebar > ul li ul li:first-child a {
-    border-top: 0;
+#sidebar .menu-list ul{
+    border-top:1px solid #ddd;
+    border-right:1px solid #ddd;
+    border-left:1px solid #ddd;
 }
-#sidebar > ul li ul li:last-child a {
-    border-bottom: 0;
+#sidebar .menu-list ul li{
+    border-top:1px solid #ddd;
+    padding: 15px 30px;
+}
+#sidebar .menu-list ul li:last-child{
+    border:none;
 }
 .modal-header .close{
     right: 0;
@@ -81,4 +60,87 @@
 }
 .color-red{
     color: red!important;
+}
+.suggest-search{
+    display: none;
+    border:1px solid #ddd;
+}
+.suggest-search a{
+    padding:5px;
+    border-bottom:1px solid #ddd;
+    display: block;
+}
+.suggest-search a:hover {
+    background-color: #ccc;
+    text-decoration: none;
+}
+.suggest-search a:last-child{
+    border:none;
+}
+.form-nhap{
+    padding: 0% 5%!important
+}
+.form-nhap table{
+}
+.form-nhap table tr{
+    width: 100%;
+}
+.form-nhap table tr td{
+    border:1px solid white;
+    width: 14%;
+}
+.company-infor td{
+    border:1px solid black !important;
+    vertical-align: middle!important;
+}
+.khung td{
+    border: 1px solid black!important;
+}
+.khung-header td {
+    border: 1px solid black !important;
+    border-top: 1px solid black !important;
+}
+.width-14{
+    width: 14%;
+}
+.width-18{
+    width: 18%!important;
+}
+.bottom-form td p{
+    padding-bottom: 50% ;
+}
+.form-name{
+    font-size: xx-large;
+}
+.border-none td{
+    border:none!important;
+}
+fieldset.infor-phieu-nhap{
+    border: 1px groove #ddd !important;
+    padding: 10px 0px 10px 2px !important;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+fieldset.infor-phieu-nhap legend{
+    font-size: 1.5em !important;
+    text-align: left !important;
+    color: #3C8DBC;
+    border-bottom: 0;
+    width: auto;
+    margin: 0;
+}
+.infor-phieu-nhap .col-md-6{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.chi-tiet{
+    margin-top:30px;
+}
+.chi-tiet table thead{
+    background-color: #ddd;
+}
+.chi-tiet table td{
+    border:1px solid #9d9d9d!important;
+}
+.delete-form{
+    display: inline-block;
 }
