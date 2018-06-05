@@ -1,15 +1,15 @@
 @extends('home')
-@section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="col-md-8" style="margin:auto">
+@section('right-content')
+    <div class="col-md-10" style="margin:auto">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card">
             <div class="card-header">{{ __('Thêm nhà cung cấp') }}</div>
 
@@ -20,7 +20,7 @@
                     <div class="form-group row">
                         <label for="MaNCC" class="col-md-4 col-form-label text-md-right">Mã nhà cung cấp<span class="color-red">*</span></label>
                         <div class="col-md-6">
-                            <input id="MaNCC" type="text" class="form-control" name="MaNCC">
+                            <input id="MaNCC" type="text" class="form-control" name="MaNCC" value="{{old('MaNCC')}}">
                         </div>
                     </div>
 
@@ -28,7 +28,7 @@
                         <label for="TenNCC" class="col-md-4 col-form-label text-md-right">Tên nhà cung cấp<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="TenNCC" type="text" class="form-control" name="TenNCC">
+                            <input id="TenNCC" type="text" class="form-control" name="TenNCC" {{old('TenNCC')}}>
                         </div>
                     </div>
 
@@ -36,7 +36,7 @@
                         <label for="DiaChi" class="col-md-4 col-form-label text-md-right">Địa chỉ nhà cung cấp<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="DiaChi" type="text" class="form-control" name="DiaChi">
+                            <input id="DiaChi" type="text" class="form-control" name="DiaChi" {{old('MaNCC')}}>
                         </div>
                     </div>
 
@@ -44,7 +44,7 @@
                         <label for="sdtNCC" class="col-md-4 col-form-label text-md-right">Số điện thoại<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="sdtNCC" type="text" class="form-control" name="sdtNCC">
+                            <input id="sdtNCC" type="text" class="form-control" name="sdtNCC" {{old('sdtNCC')}}>
                         </div>
                     </div>
 
@@ -52,7 +52,7 @@
                         <label for="fax" class="col-md-4 col-form-label text-md-right">Fax</label>
 
                         <div class="col-md-6">
-                            <input id="fax" type="text" class="form-control" name="fax">
+                            <input id="fax" type="text" class="form-control" name="fax" {{old('fax')}}>
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                         <label for="emailNCC" class="col-md-4 col-form-label text-md-right">Email<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="emailNCC" type="email" class="form-control" name="emailNCC">
+                            <input id="emailNCC" type="email" class="form-control" name="emailNCC" {{old('emailNCC')}}>
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@
                         <label for="ghiChu" class="col-md-4 col-form-label text-md-right">Ghi chú</label>
 
                         <div class="col-md-6">
-                            <textarea id="ghiChu" class="form-control" name="ghiChu"></textarea>
+                            <textarea id="ghiChu" class="form-control" name="ghiChu">{{old('ghiChu')}}</textarea>
                         </div>
                     </div>
 

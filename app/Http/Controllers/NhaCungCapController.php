@@ -49,7 +49,8 @@ class NhaCungCapController extends Controller
             'emailNCC.required' => 'Email không được để trống',
             'emailNCC.email' => 'Email không hợp lệ',
             'sdtNCC.regex'  => 'Số điện thoại không hợp lệ',
-            'sdtNCC.max'  => 'Số điện thoại không hợp lệ'
+            'sdtNCC.max'  => 'Số điện thoại không hợp lệ',
+            'MaNCC.unique' => 'Mã nhà cung cấp đã tồn tại'
         ];
         $rules = [
             'MaNCC' => 'required|string|max:10|unique:nha_cung_cap',
@@ -62,9 +63,8 @@ class NhaCungCapController extends Controller
         $validator = Validator::make($request->all(), $rules, $message);
 
         if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
+            return redirect()->back()->withInput()
+                ->withErrors($validator);
         }
         NhaCungCap::create([
             'TenNCC' => $request['TenNCC'],

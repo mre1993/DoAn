@@ -1,15 +1,15 @@
 @extends('home')
-@section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="col-md-8" style="margin:auto">
+@section('rightcontent')
+    <div class="col-md-10" style="margin:auto">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card">
             <div class="card-header">{{ __('Thêm loại vật tư') }}</div>
 
@@ -21,7 +21,7 @@
                         <label for="MaLoaiVT" class="col-md-4 col-form-label text-md-right">Mã loại vật tư<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="MaLoaiVT" type="text" class="form-control" name="MaLoaiVT">
+                            <input id="MaLoaiVT" type="text" class="form-control" name="MaLoaiVT" value="{{old('MaLoaiVT') }}">
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@
                         <label for="TenLoaiVT" class="col-md-4 col-form-label text-md-right">Tên loại vật tư<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="TenLoaiVT" type="text" class="form-control" name="TenLoaiVT">
+                            <input id="TenLoaiVT" type="text" class="form-control" name="TenLoaiVT" value="{{old('TenLoaiVT') }}>
                         </div>
                     </div>
 
