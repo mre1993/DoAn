@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ChiTietPhieuNhap;
-use App\Exports;
+use App\ExcelExports;
 use App\KhoVatTu;
 use App\NhaCungCap;
 use App\NhanVien;
@@ -11,9 +11,11 @@ use App\PhieuNhap;
 use App\VatTu;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+
 
 class PhieuNhapController extends Controller
 {
@@ -101,10 +103,16 @@ class PhieuNhapController extends Controller
      */
     public function show($id)
     {
+        $chiTiet = ChiTietPhieuNhap::where('MaPN',$id)->orderBy('id','ASC')->get();
         $phieuNhap = PhieuNhap::find($id)->first();
-        $chiTiet = ChiTietPhieuNhap::where('MaPN',$id)->get();
         $i=1;
-        return view('phieunhap.show',compact('phieuNhap','chiTiet','i'));
+        $sumSL = 0;
+        $sumTT = 0;
+        foreach($chiTiet as $item){
+            $sumSL = $sumSL + $item->SoLuong;
+            $sumTT = $sumTT + $item->ThanhTien;
+        }
+        return view('phieunhap.show',compact('phieuNhap','chiTiet','i','sumTT','sumSL'));
     }
 
     /**
@@ -151,28 +159,31 @@ class PhieuNhapController extends Controller
         return response()->json($result);
     }
 
-    public function showExport($id){
+    public function printExcel($id)
+    {
         $vatTu = ChiTietPhieuNhap::where('MaPN',$id)->orderBy('id','ASC')->get();
         $phieuNhap = PhieuNhap::find($id)->first();
         $i=1;
         $sumSL = 0;
+        $sumTT = 0;
         foreach($vatTu as $item){
             $sumSL = $sumSL + $item->SoLuong;
+            $sumTT = $sumTT + $item->ThanhTien;
         }
-        return view('phieunhap.showExport',compact('vatTu','phieuNhap','i','sumSL'));
-    }
+        Excel::create('New', function($excel) use($vatTu,$phieuNhap,$i,$sumSL,$sumTT) {
 
-    public function printExcel($id,Excel $excel, \App\Exports $export)
-    {
-        $vatTu = ChiTietPhieuNhap::where('MaPN', $id)->orderBy('id', 'ASC')->get();
-        $phieuNhap = PhieuNhap::find($id)->first();
-        $i = 1;
-        $sumSL = 0;
-        foreach ($vatTu as $item) {
-            $sumSL = $sumSL + $item->SoLuong;
-        }
-        $array = array($vatTu, $phieuNhap, $i, $sumSL);
-        return Excel::download(new Exports, 'invoices.xlsx');
+            $excel->sheet('First sheet', function($sheet)  use($vatTu,$phieuNhap,$i,$sumSL,$sumTT) {
+                $sheet->loadView('phieunhap.showExport')
+                    ->mergeCells('B1:G2')
+                    ->mergeCells('B1:G1')
+                    ->mergeCells('B1:B2')
+                    ->with('vatTu' , $vatTu)
+                    ->with('phieuNhap' , $phieuNhap)
+                    ->with('sumSL' , $sumSL)
+                    ->with('sumTT' , $sumTT)
+                    ->with('i' , $i);
+            });
+        })->download('xlsx');
     }
 }
 

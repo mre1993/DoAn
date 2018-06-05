@@ -1,15 +1,15 @@
 @extends('home')
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="col-md-8" style="margin:auto">
+    <div class="col-md-10" style="margin:auto">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card">
             <div class="card-header">{{ __('Thêm vật tư') }}</div>
 
@@ -21,7 +21,7 @@
                         <label for="MaVT" class="col-md-4 col-form-label text-md-right">Mã vật tư<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="MaVT" type="text" class="form-control" name="MaVT">
+                            <input id="MaVT" type="text" class="form-control" name="MaVT" value="{{old('MaVT')}}">
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@
                         <label for="TenVT" class="col-md-4 col-form-label text-md-right">Tên vật tư<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="TenVT" type="text" class="form-control" name="TenVT">
+                            <input id="TenVT" type="text" class="form-control" name="TenVT" value="{{old('TenVT')}}">
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                         <div class="col-md-6">
                             <select style="width: 50%;height: 100%;"  name="DVT" id="DVT" class="form-control">
                                 @foreach($DVT as $dvt)
-                                    <option value="{{ $dvt }}"> {{ $dvt }}</option>
+                                    <option value="{{ $dvt }}" {{ old('DVT') == $dvt ? 'selected' : '' }}> {{ $dvt }}</option>
                                 @endforeach
                             </select>                        </div>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="col-md-6">
                             <select style="width: 50%;height: 100%;"  name="MaNCC" id="MaNCC" class="form-control">
                                 @foreach($NCC as $item1)
-                                    <option value="{{ $item1->MaNCC }}" > {{ $item1->TenNCC }}</option>
+                                    <option value="{{ $item1->MaNCC }}"  {{ old('MaNCC') == $item1->MaNCC ? 'selected' : '' }}> {{ $item1->TenNCC }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -62,7 +62,7 @@
                         <div class="col-md-6">
                             <select style="width: 50%;height: 100%;"  name="MaLoaiVT" id="MaLoaiVT" class="form-control">
                                 @foreach($MaLoaiVT as $item2)
-                                    <option value="{{ $item2->MaLoaiVT }}" > {{ $item2->TenLoaiVT }}</option>
+                                    <option value="{{ $item2->MaLoaiVT }}"  {{ old('MaLoaiVT') == $item1->MaLoaiVT ? 'selected' : '' }}> {{ $item2->TenLoaiVT }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -72,7 +72,7 @@
                         <label for="DonGia" class="col-md-4 col-form-label text-md-right">Đơn giá</label>
 
                         <div class="col-md-6">
-                            <input id="DonGia" type="text" class="form-control" name="DonGia">
+                            <input id="DonGia" type="text" class="form-control" name="DonGia" value="{{old('DonGia')}}">
                         </div>
                     </div>
 
@@ -80,7 +80,7 @@
                         <label for="MoTa" class="col-md-4 col-form-label text-md-right">Mô tả</label>
 
                         <div class="col-md-6">
-                            <textarea id="MoTa" class="form-control" name="MoTa"></textarea>
+                            <textarea id="MoTa" class="form-control" name="MoTa">{{old('MoTa')}}</textarea>
                         </div>
                     </div>
 

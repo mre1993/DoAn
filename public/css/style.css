@@ -78,7 +78,8 @@
     border:none;
 }
 .form-nhap{
-    padding: 0% 5%!important
+    padding: 0% 5%!important;
+    margin-top:30px;
 }
 .form-nhap table{
 }
@@ -143,4 +144,7 @@ fieldset.infor-phieu-nhap legend{
 }
 .delete-form{
     display: inline-block;
+}
+.show-form{
+    margin-top:30px;
 }

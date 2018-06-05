@@ -1,15 +1,15 @@
 @extends('home')
-@section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="col-md-8" style="margin:auto">
+@section('right-content')
+    <div class="col-md-10" style="margin:auto">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card">
             <div class="card-header">{{ __('Thêm phân xưởng') }}</div>
 
@@ -21,7 +21,7 @@
                         <label for="MaPX" class="col-md-4 col-form-label text-md-right">Mã phân xưởng<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="MaPX" type="text" class="form-control" name="MaPX">
+                            <input id="MaPX" type="text" class="form-control" name="MaPX" value="{{old('MaPX') }}">
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@
                         <label for="TenPX" class="col-md-4 col-form-label text-md-right">Tên phân xưởng<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="TenPX" type="text" class="form-control" name="TenPX">
+                            <input id="TenPX" type="text" class="form-control" name="TenPX" value="{{old('TenPX') }}">
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@
                         <label for="ghiChu" class="col-md-4 col-form-label text-md-right">Ghi chú</label>
 
                         <div class="col-md-6">
-                            <textarea id="ghiChu" class="form-control" name="ghiChu"></textarea>
+                            <textarea id="ghiChu" class="form-control" name="ghiChu">{{old('ghiChu') }}</textarea>
                         </div>
                     </div>
 

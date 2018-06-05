@@ -1,6 +1,6 @@
 @extends('home')
-@section('content')
-        <div class="col-md-8" style="margin:auto">
+@section('right-content')
+        <div class="col-md-10" style="margin:auto">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
