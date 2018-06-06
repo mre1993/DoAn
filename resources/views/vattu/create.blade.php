@@ -57,18 +57,6 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="MaLoaiVT" class="col-md-4 col-form-label text-md-right">Loại vật tư</label>
-
-                        <div class="col-md-6">
-                            <select style="width: 50%;height: 100%;"  name="MaLoaiVT" id="MaLoaiVT" class="form-control">
-                                @foreach($MaLoaiVT as $item2)
-                                    <option value="{{ $item2->MaLoaiVT }}"  {{ old('MaLoaiVT') == $item1->MaLoaiVT ? 'selected' : '' }}> {{ $item2->TenLoaiVT }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
                         <label for="DonGia" class="col-md-4 col-form-label text-md-right">Đơn giá</label>
 
                         <div class="col-md-6">

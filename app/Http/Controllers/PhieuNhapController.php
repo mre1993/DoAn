@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\ChiTietKhoVT;
 use App\ChiTietPhieuNhap;
-use App\ExcelExports;
-use App\KhoVatTu;
 use App\NhaCungCap;
 use App\NhanVien;
+use App\PhanXuong;
 use App\PhieuNhap;
 use App\VatTu;
 use Illuminate\Auth\Access\Response;
@@ -41,9 +40,9 @@ class PhieuNhapController extends Controller
     {
         $user =  Auth::user();
         $nhanVien = NhanVien::find($user->MaNV);
-        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
+        $MaPX = PhanXuong::orderBy('MaPX','ASC')->get();
         $MaNCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
-        return view('phieunhap.create',compact('MaKVT','nhanVien','MaNCC'));
+        return view('phieunhap.create',compact('MaPX','nhanVien','MaNCC'));
     }
 
     /**
@@ -55,14 +54,14 @@ class PhieuNhapController extends Controller
     public function store(Request $request)
     {
         $message = [
-            'MaKVT.required' => 'Mã kho vật tư không được để trống',
+            'MaPX.required' => 'Mã phân xưởng không được để trống',
             'MaPN.unique' => 'Mã phiếu nhập đã tồn tại',
             'MaPN.required' => 'Mã phiếu nhập không được để trống',
             'MaNCC.required' => 'Mã nhà cung cấp không được để trống',
             'MaVT.required' => 'Mã vật tư không được để trống',
         ];
         $rules = [
-            'MaKVT' => 'required|string|max:10',
+            'MaPX' => 'required|string|max:10',
             'MaPN' => 'required|string|max:10|unique:phieu_nhap',
             'MaNCC' => 'required|string|max:10',
             'MaVT' => 'required|max:10',
@@ -77,10 +76,10 @@ class PhieuNhapController extends Controller
         };
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
-            $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
+            $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaPX',$request->MaPX)->first();
             if(!$check){
                 ChiTietKhoVT::create([
-                    'MaKVT' => $request->MaKVT,
+                    'MaPX' => $request->MaPX,
                     'MaVT' => $request->MaVT[$i],
                     'SoLuongTon' => $request->SoLuong[$i],
                 ]);
@@ -100,7 +99,7 @@ class PhieuNhapController extends Controller
 
         PhieuNhap::create([
             'MaPN' =>$request->MaPN,
-            'MaKVT' => $request->MaKVT,
+            'MaPX' => $request->MaPX,
             'MaNV' => $request->MaNV,
             'MaNCC' => $request->MaNCC,
             'NoiDung' => $request->NoiDung,

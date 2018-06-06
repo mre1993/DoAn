@@ -16,7 +16,7 @@
                 <th>STT</th>
                 <th>Mã phiếu nhập</th>
                 <th>Nhân viên</th>
-                <th>Kho vật tư</th>
+                <th>Phân xưởng</th>
                 <th>Nhà cung cấp</th>
                 <th>Nội dung</th>
                 <th>
@@ -30,7 +30,7 @@
                     <td>{{$i++}}</td>
                     <td>{{$item->MaPN}}</td>
                     <td>{{$item->NhanVien->TenNV}}</td>
-                    <td>{{$item->KhoVatTu->TenKVT}}</td>
+                    <td>{{$item->PhanXuong->TenPX}}</td>
                     <td>{{$item->NhaCungCap->TenNCC}}</td>
                     <td>{{$item->NoiDung}}</td>
                     <td>

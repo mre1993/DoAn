@@ -60,18 +60,6 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="MaLoaiVT" class="col-md-4 col-form-label text-md-right">Loại vật tư</label>
-
-                        <div class="col-md-6">
-                            <select style="width: 50%;height: 100%;"  name="MaLoaiVT" id="MaLoaiVT" class="form-control">
-                                @foreach($MaLoaiVT as $item2)
-                                    <option value="{{ $item2->MaLoaiVT }}" @if( $item->LoaiVatTu->TenLoaiVT=== $item2->TenLoaiVT) selected='selected' @endif> {{ $item2->TenLoaiVT }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
                         <label for="DonGia" class="col-md-4 col-form-label text-md-right">DonGia<span class="color-red">*</span></label>
 
                         <div class="col-md-6">

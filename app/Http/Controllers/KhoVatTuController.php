@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ChiTietKhoVT;
 use App\KhoVatTu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -106,6 +107,7 @@ class KhoVatTuController extends Controller
     public function update(Request $request, KhoVatTu $khoVatTu)
     {
         $item = KhoVatTu::where('MaKVT',$request->id)->first();
+        $chiTietKVT = ChiTietKhoVT::where('MaKVT',$request->id)->get();
         $message = [
             'MaKVT.required' => 'Mã kho không được để trống',
             'MaKVT.max' => 'Mã nhà cung cấp vượt quá 10 ký tự',
@@ -128,11 +130,14 @@ class KhoVatTuController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        foreach ($chiTietKVT as $chiTiet){
+            $chiTiet->MaKVT   = $request->MaKVT;
+            $chiTiet->save();
+        }
         $item->MaKVT = $request->MaKVT;
         $item->TenKVT = $request->TenKVT;
         $item->DiaChi = $request->DiaChi;
         $item->SDT = $request->SDT;
-        $item->Fax = $request->Fax;
         $item->ThuKho = $request->ThuKho;
         $item->GhiChu = $request->GhiChu;
         $item->save();

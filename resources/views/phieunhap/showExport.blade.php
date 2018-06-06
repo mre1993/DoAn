@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU NHẬP KHO</p></td>
+                <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU NHẬP VẬT TƯ</p></td>
                 <td colspan="2" style="padding-top: 25px"><p>Mã phiếu: {{$phieuNhap->MaPN}}</p></td>
             </tr>
             <tr>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td colspan="7" style="border: none">
-                    <p>Nhập tại kho: {{$phieuNhap->KhoVatTu->TenKVT}}, <span>Địa chỉ: {{$phieuNhap->KhoVatTu->DiaChi}}</span></p>
+                    <p>Nhập tại xưởng: {{$phieuNhap->PhanXuong->TenPX}}, <span>Địa chỉ: {{$phieuNhap->PhanXuong->DiaChi}}</span></p>
                 </td>
             </tr>
             <tr class="khung-header">
