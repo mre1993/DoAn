@@ -109,8 +109,8 @@ class NhaCungCapController extends Controller
      */
     public function update(Request $request)
     {
-
         $provider = NhaCungCap::where('MaNCC',$request->id)->first();
+        $vatTu = VatTu::where('MaNCC',$request->id)->get();
         $message = [
             'MaNCC.required' => 'Mã nhà cung cấp  không được để trống',
             'MaNCC.max' => 'Mã nhà cung cấp vượt quá 10 ký tự',
@@ -129,12 +129,15 @@ class NhaCungCapController extends Controller
             'sdtNCC' => 'required|string|regex:/^[0-9-+]+$/|max:13',
             'emailNCC' => 'required|string|email',
         ];
-
         $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
+        }
+        foreach($vatTu as $item){
+            $item->MaNCC = $request->MaNCC;
+            $item->save();
         }
         VatTu::where('MaNCC', '=', $provider->MaNCC)->update(['MaNCC' => $request->MaNCC]);
         $provider->MaNCC = $request->MaNCC;

@@ -21,8 +21,8 @@
                 <input id="MaPN" name="MaPN" class="form-control col-md-8" readonly value="{{$phieuNhap->MaPN}}">
             </div>
             <div class="col-md-6">
-                <label for="MaKVT" class="col-md-4 col-form-label">Kho Vật Tư</label>
-                <input id="MaKVT" name="MaKVT" class="form-control col-md-8" readonly value="{{$phieuNhap->KhoVatTu->TenKVT}}">
+                <label for="MaPX" class="col-md-4 col-form-label">Phân xưởng</label>
+                <input id="MaPX" name="MaPX" class="form-control col-md-8" readonly value="{{$phieuNhap->PhanXuong->TenPX}}">
             </div>
             <div class="col-md-6">
                 <label for="MaNCC" class="col-md-4 col-form-label">Nhà cung cấp</label>
@@ -81,7 +81,7 @@
                     </tr>
                     <tr>
                         <td colspan="2"></td>
-                        <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU NHẬP KHO</p></td>
+                        <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU NHẬP VẬT TƯ</p></td>
                         <td colspan="2" style="padding-top: 25px"><p>Mã phiếu: {{$phieuNhap->MaPN}}</p></td>
                     </tr>
                     <tr>
@@ -92,7 +92,7 @@
                     </tr>
                     <tr>
                         <td colspan="7" style="border: none">
-                            <p>Nhập tại kho: {{$phieuNhap->KhoVatTu->TenKVT}}, <span>Địa chỉ: {{$phieuNhap->KhoVatTu->DiaChi}}</span></p>
+                            <p>Nhập tại xưởng: {{$phieuNhap->PhanXuong->TenPX}}, <span>Địa chỉ: {{$phieuNhap->PhanXuong->TenPX}}</span></p>
                         </td>
                     </tr>
                     <tr class="khung-header">

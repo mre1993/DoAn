@@ -18,7 +18,6 @@
                 <th>Tên vật tư</th>
                 <th>Đơn vị tính</th>
                 <th>Nhà cung cấp</th>
-                <th>Loại vật tư</th>
                 <th>Đơn giá</th>
                 <th>Mô tả</th>
                 <th>
@@ -36,7 +35,6 @@
                     <td>{{$item->TenVT}}</td>
                     <td>{{$item->DVT}}</td>
                     <td>{{$item->NhaCungCap->TenNCC}}</td>
-                    <td>{{$item->LoaiVatTu->TenLoaiVT}}</td>
                     <td>{{$item->DonGia}}</td>
                     <td>{{$item->MoTa}}</td>
                     <td>

@@ -9,19 +9,19 @@ class PhieuNhap extends Model
     protected $table = 'phieu_nhap';
 
     protected $fillable = [
-        'MaPN', 'MaNV', 'MaKVT', 'MaNCC', 'NoiDung',
+        'MaPN', 'MaNV', 'MaPX', 'MaNCC', 'NoiDung',
     ];
 
     protected $primaryKey = "MaPN";
 
     public $incrementing = false;
 
-    public function NhanVien(){
-        return $this->belongsTo('App\NhanVien','MaNV', 'MaNV');
+    public function PhanXuong(){
+        return $this->belongsTo('App\PhanXuong','MaPX', 'MaPX');
     }
 
-    public function KhoVatTu(){
-        return $this->belongsTo('App\KhoVatTu','MaKVT', 'MaKVT');
+    public function NhanVien(){
+        return $this->belongsTo('App\NhanVien','MaNV', 'MaNV');
     }
 
     public function NhaCungCap(){

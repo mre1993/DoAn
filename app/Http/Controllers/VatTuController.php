@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\ChiTietKhoVT;
+use App\ChiTietPhieuNhap;
 use App\NhaCungCap;
-use App\TheLoai;
 use App\VatTu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -31,8 +32,7 @@ class VatTuController extends Controller
     {
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');
         $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
-        $MaLoaiVT = TheLoai::orderBy('MaLoaiVT','ASC')->get();
-        return view('vattu.create',compact('MaLoaiVT','NCC','DVT'));
+        return view('vattu.create',compact('NCC','DVT'));
     }
 
     /**
@@ -69,7 +69,6 @@ class VatTuController extends Controller
             'TenVT' => $request->TenVT,
             'DVT' => $request->DVT,
             'MaNCC' => $request->MaNCC,
-            'MaLoaiVT' => $request->MaLoaiVT,
             'DonGia' => $request->DonGia,
             'MoTa' =>$request->MoTa
         ]);
@@ -98,8 +97,7 @@ class VatTuController extends Controller
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');
         $item = VatTu::find($id);
         $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
-        $MaLoaiVT = TheLoai::orderBy('MaLoaiVT','ASC')->get();
-        return view('vattu.edit',compact('item','NCC','MaLoaiVT','DVT'));
+        return view('vattu.edit',compact('item','NCC','DVT'));
     }
 
     /**
@@ -132,11 +130,25 @@ class VatTuController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        $chiTietPhieuNhap = ChiTietPhieuNhap::where('MaVT',$request->MaVT)->get();
+//        $chiTietPhieuXuat = ChiTietPhieuXuat::where('MaVT',$request->MaVT)->get();
+        $chiTietKhoVT = ChiTietKhoVT::where('MaVT',$request->MaVT)->get();
+        foreach($chiTietPhieuNhap as $item1){
+            $item1->MaVT = $request->MaVT;
+            $item1->save();
+        }
+//        foreach($chiTietPhieuXuat as $item2){
+//            $item2->MaVT = $request->MaVT;
+//            $item2->save();
+//        }
+        foreach($chiTietKhoVT as $item3){
+            $item3->MaVT = $request->MaVT;
+            $item3->save();
+        }
         $item->MaVT = $request->MaVT;
         $item->TenVT = $request->TenVT;
         $item->DVT = $request->DVT;
         $item->MaNCC = $request->MaNCC;
-        $item->MaLoaiVT = $request->MaLoaiVT;
         $item->DonGia = $request->DonGia;
         $item->MoTa = $request->MoTa;
         $item->save();
