@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\NhanVien;
+use App\PhieuNhap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -104,6 +105,9 @@ class NhanVienController extends Controller
     public function update(Request $request, NhanVien $nhanVien)
     {
         $item = NhanVien::where('MaNV',$request->id)->first();
+        $phieuNhap = PhieuNhap::where('MaNV',$request->id)->get();
+//        $phieuXuat = PhieuNhap::where('MaNV',$request->id)->get();
+        $user = PhieuNhap::where('MaNV',$request->id)->get();
         $message = [
             'MaNV.required' => 'Mã nhân viên  không được để trống',
             'MaNV.max' => 'Mã nhân viên vượt quá 10 ký tự',
@@ -122,6 +126,18 @@ class NhanVienController extends Controller
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
+        }
+        foreach($phieuNhap as $item1){
+            $item1->MaNV = $request->MaNV;
+            $item1->save();
+        }
+//        foreach($phieuXuat as $item2){
+//            $item2->MaNV = $request->MaNV;
+//            $item2->save();
+//        }
+        foreach($user as $item3){
+            $item3->MaNV = $request->MaNV;
+            $item3->save();
         }
         $item->MaNV = $request->MaNV;
         $item->TenNV = $request->TenNV;

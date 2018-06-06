@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ChiTietKhoVT;
+use App\ChiTietPhieuNhap;
 use App\NhaCungCap;
 use App\VatTu;
 use Illuminate\Http\Request;
@@ -127,6 +129,21 @@ class VatTuController extends Controller
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
+        }
+        $chiTietPhieuNhap = ChiTietPhieuNhap::where('MaVT',$request->MaVT)->get();
+//        $chiTietPhieuXuat = ChiTietPhieuXuat::where('MaVT',$request->MaVT)->get();
+        $chiTietKhoVT = ChiTietKhoVT::where('MaVT',$request->MaVT)->get();
+        foreach($chiTietPhieuNhap as $item1){
+            $item1->MaVT = $request->MaVT;
+            $item1->save();
+        }
+//        foreach($chiTietPhieuXuat as $item2){
+//            $item2->MaVT = $request->MaVT;
+//            $item2->save();
+//        }
+        foreach($chiTietKhoVT as $item3){
+            $item3->MaVT = $request->MaVT;
+            $item3->save();
         }
         $item->MaVT = $request->MaVT;
         $item->TenVT = $request->TenVT;

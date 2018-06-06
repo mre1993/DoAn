@@ -20,7 +20,6 @@
             <ul class="collapse" id="danhmuc">
                 <li class=""><a href="{{route('provider.index')}}"><i class="fa fa-th-list"></i> <span>Nhà cung cấp</span></a></li>
                 <li class=""><a href="{{route('phanxuong.index')}}"><i class="fa fa-th-list"></i> <span>Phân xưởng</span></a></li>
-                <li class=""><a href="{{route('theloai.index')}}"><i class="fa fa-th-list"></i> <span>Loại vật tư</span></a></li>
                 <li class=""><a href="{{route('vattu.index')}}"><i class="fa fa-th-list"></i> <span>Vật tư</span></a></li>
                 <li class=""><a href="{{route('nhanvien.index')}}"><i class="fa fa-th-list"></i> <span>Nhân viên</span></a></li>
                 <li class=""><a href="{{route('khovattu.index')}}"><i class="fa fa-th-list"></i> <span>Kho vật tư</span></a></li>
