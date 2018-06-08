@@ -17,8 +17,7 @@ class NhanVienController extends Controller
     public function index()
     {
         $items = NhanVien::orderBy('MaNV','ASC')->paginate(10);
-        $i = 1;
-        return view('nhanvien.index',compact('items','i'));
+        return view('nhanvien.index',compact('items'));
     }
 
     /**

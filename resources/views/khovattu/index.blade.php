@@ -29,6 +29,7 @@
             </tr>
             </thead>
             <tbody>
+            <?php $i = ($items->currentpage() - 1) * $items->perpage() + 1 ?>
             @foreach($items as $item)
                 <tr>
                     <td>{{$i++}}</td>
@@ -51,5 +52,6 @@
             @endforeach
             </tbody>
         </table>
+        <div class="pagination">{{ $items->links() }}</div>
     </div>
 @stop

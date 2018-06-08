@@ -148,3 +148,7 @@ fieldset.infor-phieu-nhap legend{
 .show-form{
     margin-top:30px;
 }
+.pagination{
+    margin-top:0!important;
+    float: right;
+}

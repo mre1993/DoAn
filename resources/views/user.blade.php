@@ -22,6 +22,7 @@
             </tr>
             </thead>
             <tbody>
+            <?php $i = ($users->currentpage() - 1) * $users->perpage() + 1 ?>
             @foreach($users as $user)
                 <tr>
                     <td>{{$i++}}</td>
@@ -135,6 +136,7 @@
             @endforeach
             </tbody>
         </table>
+        <div class="pagination">{{ $users->links() }}</div>
     </div>
     <!-- Modal create-->
 @stop

@@ -17,9 +17,9 @@ class NhaCungCapController extends Controller
      */
     public function index()
     {
-        $provider = NhaCungCap::orderBy('MaNCC','ASC')->paginate(10);
+        $items = NhaCungCap::orderBy('MaNCC','ASC')->paginate(10);
         $i = 1;
-        return view('provider.index',compact('provider','i'));
+        return view('provider.index',compact('items','i'));
     }
 
     /**
