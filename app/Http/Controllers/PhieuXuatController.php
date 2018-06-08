@@ -3,21 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\ChiTietKhoVT;
-use App\ChiTietPhieuNhap;
-use App\NhaCungCap;
-use App\NhanVien;
+use App\ChiTietPhieuXuat;
+use App\KhoVatTu;
 use App\PhanXuong;
-use App\PhieuNhap;
-use App\VatTu;
-use Illuminate\Auth\Access\Response;
+use App\PhieuXuat;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use App\NhanVien;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
-
-class PhieuNhapController extends Controller
+class PhieuXuatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,8 +23,8 @@ class PhieuNhapController extends Controller
     public function index()
     {
         $i = 1;
-        $items = PhieuNhap::orderBy('MaPN','ASC')->paginate(10);
-        return view('phieunhap.index',compact('items','i'));
+        $items = PhieuXuat::orderBy('MaPhieuXuat','ASC')->paginate(10);
+        return view('phieuxuat.index',compact('items','i'));
     }
 
     /**
@@ -41,8 +37,8 @@ class PhieuNhapController extends Controller
         $user =  Auth::user();
         $nhanVien = NhanVien::find($user->MaNV);
         $MaPX = PhanXuong::orderBy('MaPX','ASC')->get();
-        $MaNCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
-        return view('phieunhap.create',compact('MaPX','nhanVien','MaNCC'));
+        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
+        return view('phieuxuat.create',compact('MaPX','nhanVien','MaKVT'));
     }
 
     /**
@@ -55,15 +51,15 @@ class PhieuNhapController extends Controller
     {
         $message = [
             'MaPX.required' => 'Mã phân xưởng không được để trống',
-            'MaPN.unique' => 'Mã phiếu nhập đã tồn tại',
-            'MaPN.required' => 'Mã phiếu nhập không được để trống',
-            'MaNCC.required' => 'Mã nhà cung cấp không được để trống',
+            'MaPhieuXuat.unique' => 'Mã phiếu nhập đã tồn tại',
+            'MaPhieuXuat.required' => 'Mã phiếu nhập không được để trống',
+            'MaKVT.required' => 'Mã kho vật tư không được để trống',
             'MaVT.required' => 'Mã vật tư không được để trống',
         ];
         $rules = [
             'MaPX' => 'required|string|max:10',
-            'MaPN' => 'required|string|max:10|unique:phieu_nhap',
-            'MaNCC' => 'required|string|max:10',
+            'MaPhieuXuat' => 'required|string|max:10|unique:phieu_xuat',
+            'MaKVT' => 'required|string|max:10',
             'MaVT' => 'required|max:10',
         ];
 
@@ -76,8 +72,20 @@ class PhieuNhapController extends Controller
         };
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
-            ChiTietPhieuNhap::create([
-                'MaPN' => $request->MaPN,
+            $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
+            if(!$check){
+                ChiTietKhoVT::create([
+                    'MaKVT' => $request->MaKVT,
+                    'MaVT' => $request->MaVT[$i],
+                    'SoLuongTon' => $request->SoLuong[$i],
+                ]);
+            }else{
+                $soLuongTon = $check->SoLuongTon;
+                $check->SoLuongTon = $request->SoLuong[$i]+$soLuongTon;
+                $check->save();
+            }
+            ChiTietPhieuXuat::create([
+                'MaPhieuXuat' => $request->MaPhieuXuat,
                 'MaVT' => $request->MaVT[$i],
                 'SoLuong' => $request->SoLuong[$i],
                 'DonGia' => $request->DonGia[$i],
@@ -85,26 +93,26 @@ class PhieuNhapController extends Controller
             ]);
         }
 
-        PhieuNhap::create([
-            'MaPN' =>$request->MaPN,
+        PhieuXuat::create([
+            'MaPhieuXuat' =>$request->MaPhieuXuat,
             'MaPX' => $request->MaPX,
             'MaNV' => $request->MaNV,
-            'MaNCC' => $request->MaNCC,
+            'MaKVT' => $request->MaKVT,
             'NoiDung' => $request->NoiDung,
         ]);
-        return redirect('phieunhap');
+        return redirect('phieuxuat');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\PhieuNhap  $phieuNhap
+     * @param  \App\PhieuXuat  $phieuXuat
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $chiTiet = ChiTietPhieuNhap::where('MaPN',$id)->orderBy('id','ASC')->get();
-        $phieuNhap = PhieuNhap::find($id)->first();
+        $chiTiet = ChiTietPhieuXuat::where('MaPhieuXuat',$id)->orderBy('id','ASC')->get();
+        $phieuXuat = PhieuXuat::find($id)->first();
         $i=1;
         $sumSL = 0;
         $sumTT = 0;
@@ -112,16 +120,16 @@ class PhieuNhapController extends Controller
             $sumSL = $sumSL + $item->SoLuong;
             $sumTT = $sumTT + $item->ThanhTien;
         }
-        return view('phieunhap.show',compact('phieuNhap','chiTiet','i','sumTT','sumSL'));
+        return view('phieuxuat.show',compact('phieuXuat','chiTiet','i','sumTT','sumSL'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PhieuNhap  $phieuNhap
+     * @param  \App\PhieuXuat  $phieuXuat
      * @return \Illuminate\Http\Response
      */
-    public function edit(PhieuNhap $phieuNhap)
+    public function edit(PhieuXuat $phieuXuat)
     {
         //
     }
@@ -130,10 +138,10 @@ class PhieuNhapController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PhieuNhap  $phieuNhap
+     * @param  \App\PhieuXuat  $phieuXuat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PhieuNhap $phieuNhap)
+    public function update(Request $request, PhieuXuat $phieuXuat)
     {
         //
     }
@@ -141,28 +149,18 @@ class PhieuNhapController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PhieuNhap  $phieuNhap
+     * @param  \App\PhieuXuat  $phieuXuat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PhieuNhap $phieuNhap)
+    public function destroy(PhieuXuat $phieuXuat)
     {
         //
     }
 
-//    public function search($request){
-//        $result = VatTu::where('TenVT','LIKE','%'.$request.'%')->get();
-//        return response()->json($result);
-//    }
-
-//    public function getVT($request){
-//        $result = VatTu::where('MaVT',$request)->first();
-//        return response()->json($result);
-//    }
-
     public function printExcel($id)
     {
-        $vatTu = ChiTietPhieuNhap::where('MaPN',$id)->orderBy('id','ASC')->get();
-        $phieuNhap = PhieuNhap::find($id)->first();
+        $vatTu = ChiTietPhieuXuat::where('MaPhieuXuat',$id)->orderBy('id','ASC')->get();
+        $phieuXuat = PhieuXuat::find($id)->first();
         $i=1;
         $sumSL = 0;
         $sumTT = 0;
@@ -170,15 +168,15 @@ class PhieuNhapController extends Controller
             $sumSL = $sumSL + $item->SoLuong;
             $sumTT = $sumTT + $item->ThanhTien;
         }
-        Excel::create('New', function($excel) use($vatTu,$phieuNhap,$i,$sumSL,$sumTT) {
+        Excel::create('New', function($excel) use($vatTu,$phieuXuat,$i,$sumSL,$sumTT) {
 
-            $excel->sheet('First sheet', function($sheet)  use($vatTu,$phieuNhap,$i,$sumSL,$sumTT) {
-                $sheet->loadView('phieunhap.showExport')
+            $excel->sheet('First sheet', function($sheet)  use($vatTu,$phieuXuat,$i,$sumSL,$sumTT) {
+                $sheet->loadView('phieuxuat.showExport')
                     ->mergeCells('B1:G2')
                     ->mergeCells('B1:G1')
                     ->mergeCells('B1:B2')
                     ->with('vatTu' , $vatTu)
-                    ->with('phieuNhap' , $phieuNhap)
+                    ->with('phieuXuat' , $phieuXuat)
                     ->with('sumSL' , $sumSL)
                     ->with('sumTT' , $sumTT)
                     ->with('i' , $i);
@@ -186,4 +184,3 @@ class PhieuNhapController extends Controller
         })->download('xlsx');
     }
 }
-
