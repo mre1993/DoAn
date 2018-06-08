@@ -31,7 +31,7 @@
             </a>
             <ul class="collapse" id="nhapxuat">
                 <li class=""><a href="{{route('phieunhap.index')}}"><i class="fa fa-th-list"></i> <span>Quản lý nhập</span></a></li>
-                <li class=""><a href="{{route('phieunhap.create')}}"><i class="fa fa-th-list"></i> <span>Thêm phiếu nhập</span></a></li>
+                <li class=""><a href="{{route('phieuxuat.index')}}"><i class="fa fa-th-list"></i> <span>Quản lý xuất</span></a></li>
             </ul>
         </div>
     </div>

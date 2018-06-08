@@ -76,18 +76,6 @@ class PhieuNhapController extends Controller
         };
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
-            $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaPX',$request->MaPX)->first();
-            if(!$check){
-                ChiTietKhoVT::create([
-                    'MaPX' => $request->MaPX,
-                    'MaVT' => $request->MaVT[$i],
-                    'SoLuongTon' => $request->SoLuong[$i],
-                ]);
-            }else{
-                $soLuongTon = $check->SoLuongTon;
-                $check->SoLuongTon = $request->SoLuong[$i]+$soLuongTon;
-                $check->save();
-            }
             ChiTietPhieuNhap::create([
                 'MaPN' => $request->MaPN,
                 'MaVT' => $request->MaVT[$i],
@@ -161,15 +149,15 @@ class PhieuNhapController extends Controller
         //
     }
 
-    public function search($request){
-        $result = VatTu::where('TenVT','LIKE','%'.$request.'%')->get();
-        return response()->json($result);
-    }
+//    public function search($request){
+//        $result = VatTu::where('TenVT','LIKE','%'.$request.'%')->get();
+//        return response()->json($result);
+//    }
 
-    public function getVT($request){
-        $result = VatTu::where('MaVT',$request)->first();
-        return response()->json($result);
-    }
+//    public function getVT($request){
+//        $result = VatTu::where('MaVT',$request)->first();
+//        return response()->json($result);
+//    }
 
     public function printExcel($id)
     {

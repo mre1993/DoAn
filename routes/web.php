@@ -27,8 +27,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/nhanvien', 'NhanVienController');
     Route::resource('khovattu','KhoVatTuController');
     Route::resource('/phieunhap','PhieuNhapController');
-    Route::get('phieunhap/search/{TimVT}','PhieuNhapController@search')->name('search');
-    Route::get('phieunhap/getVT/{TimVT}','PhieuNhapController@getVT')->name('getVT');
+    Route::get('search/{TimVT}','VatTuController@search')->name('search');
+    Route::get('getVT/{TimVT}','VatTuController@getVT')->name('getVT');
     Route::get('phieunhap/showExport/{id}',[
         'as' => 'phieunhap.showExport',
         'uses' => 'PhieuNhapController@showExport'
@@ -37,5 +37,14 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'phieunhap.printExcel',
         'uses' => 'PhieuNhapController@printExcel'
     ]);
+    Route::get('phieuxuat/showExport/{id}',[
+        'as' => 'phieuxuat.showExport',
+        'uses' => 'PhieuXuatController@showExport'
+    ]);
+    Route::get('phieuxuat/printExcel/{id}',[
+        'as' => 'phieuxuat.printExcel',
+        'uses' => 'PhieuXuatController@printExcel'
+    ]);
+    Route::resource('/phieuxuat','PhieuXuatController');
 
 });

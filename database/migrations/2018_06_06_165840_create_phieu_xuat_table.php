@@ -18,7 +18,7 @@ class CreatePhieuXuatTable extends Migration
             $table->char('MaPX');
             $table->char('MaKVT');
             $table->char('MaNV');
-            $table->string('NoiDung');
+            $table->string('NoiDung')->nullable();
             $table->timestamps();
         });
     }

@@ -168,4 +168,14 @@ class VatTuController extends Controller
         $item->delete();
         return redirect()->back();
     }
+
+    public function search($request){
+        $result = VatTu::where('TenVT','LIKE','%'.$request.'%')->get();
+        return response()->json($result);
+    }
+
+    public function getVT($request){
+        $result = VatTu::where('MaVT',$request)->first();
+        return response()->json($result);
+    }
 }

@@ -20,7 +20,7 @@ $(document).ready(function() {
             $.ajax({
                 dataType: 'JSON',
                 type: 'GET',
-                url: "search/" + request.term,
+                url: "../search/" + request.term,
                 data: {},
                 success: function (data) {
                     $('.suggest-search a').remove();
@@ -40,7 +40,7 @@ $(document).ready(function() {
         $.ajax({
             dataType: 'JSON',
             type: 'GET',
-            url: "getVT/" + MaVT,
+            url: "../getVT/" + MaVT,
             data: {},
             success: function (data) {
                 var DonGia = data['DonGia'];
