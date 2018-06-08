@@ -11,11 +11,12 @@
             </a>
             <ul class="collapse" id="hethong">
                 <li class=""> <a href="{{route('user.index')}}"><i class="fa fa-th-list"></i> <span>Tài Khoản</span></a> </li>
+                <li class=""><a href="{{route('tim-tk')}}"><i class="fa fa-search"></i> <span>Tìm kiếm tài khoản</span></a></li>
             </ul>
         </div>
         <div class="menu-list">
             <a data-toggle="collapse" href="#danhmuc" class="list-group-item">
-                <span class="fa fa-th"></span> <b> Quản lý danh mục </b>
+                <span class="fa fa-list-ul"></span> <b> Quản lý danh mục </b>
             </a>
             <ul class="collapse" id="danhmuc">
                 <li class=""><a href="{{route('provider.index')}}"><i class="fa fa-th-list"></i> <span>Nhà cung cấp</span></a></li>
@@ -23,15 +24,26 @@
                 <li class=""><a href="{{route('vattu.index')}}"><i class="fa fa-th-list"></i> <span>Vật tư</span></a></li>
                 <li class=""><a href="{{route('nhanvien.index')}}"><i class="fa fa-th-list"></i> <span>Nhân viên</span></a></li>
                 <li class=""><a href="{{route('khovattu.index')}}"><i class="fa fa-th-list"></i> <span>Kho vật tư</span></a></li>
+                <li class=""><a href="{{route('tim-dm')}}"><i class="fa fa-search"></i> <span>Tìm kiếm danh mục</span></a></li>
             </ul>
         </div>
         <div class="menu-list">
             <a data-toggle="collapse" href="#nhapxuat" class="list-group-item">
-                <span class="fa fa-in"></span> <b>Quản lý nhập xuất tồn</b>
+                <span class="fa fa-random"></span> <b>Nhập xuất tồn</b>
             </a>
             <ul class="collapse" id="nhapxuat">
-                <li class=""><a href="{{route('phieunhap.index')}}"><i class="fa fa-th-list"></i> <span>Quản lý nhập</span></a></li>
-                <li class=""><a href="{{route('phieuxuat.index')}}"><i class="fa fa-th-list"></i> <span>Quản lý xuất</span></a></li>
+                <li class=""><a href="{{route('phieunhap.index')}}"><i class="fa fa-download"></i> <span>Quản lý nhập</span></a></li>
+                <li class=""><a href="{{route('phieuxuat.index')}}"><i class="fa fa-upload"></i> <span>Quản lý xuất</span></a></li>
+                <li class=""><a href="{{route('tim-n-x-t')}}"><i class="fa fa-search"></i> <span>Tìm kiếm nhập-xuất-tồn</span></a></li>
+            </ul>
+        </div>
+        <div class="menu-list">
+            <a data-toggle="collapse" href="#bao-cao" class="list-group-item">
+                <span class="fa fa-archive"></span> <b>Báo cáo thống kê</b>
+            </a>
+            <ul class="collapse" id="bao-cao">
+                {{--<li class=""><a href="{{route('timkiembaocao.index')}}"><i class="fa fa-file-alt"></i> <span>Tìm kiếm tài khoản</span></a></li>--}}
+                <li class=""><a href="{{route('tim-bc')}}"><i class="fa fa-search"></i> <span>Tìm kiếm tài khoản</span></a></li>
             </ul>
         </div>
     </div>

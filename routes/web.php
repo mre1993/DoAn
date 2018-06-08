@@ -46,5 +46,10 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'PhieuXuatController@printExcel'
     ]);
     Route::resource('/phieuxuat','PhieuXuatController');
-
+    Route::prefix('search')->group(function(){
+       Route::get('tim-tai-khoan')->name('tim-tk');
+       Route::get('tim-danh-muc')->name('tim-dm');
+       Route::get('tim-nhap-xuat-ton')->name('tim-n-x-t');
+       Route::get('tim-bao-cao')->name('tim-bc');
+    });
 });
