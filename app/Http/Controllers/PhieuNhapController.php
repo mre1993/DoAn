@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ChiTietKhoVT;
+use App\ChiTietPhanXuong;
 use App\ChiTietPhieuNhap;
 use App\NhaCungCap;
 use App\NhanVien;
@@ -76,6 +77,18 @@ class PhieuNhapController extends Controller
         };
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
+            $check = ChiTietPhanXuong::where('MaVT',$request->MaVT[$i])->where('MaPX',$request->MaPX)->first();
+            if(!$check){
+                ChiTietPhanXuong::create([
+                    'MaPX' => $request->MaPX,
+                    'MaVT' => $request->MaVT[$i],
+                    'SoLuongTon' => $request->SoLuong[$i],
+                ]);
+            }else{
+                $soLuongTon = $check->SoLuongTon;
+                $check->SoLuongTon = $request->SoLuong[$i]+$soLuongTon;
+                $check->save();
+            }
             ChiTietPhieuNhap::create([
                 'MaPN' => $request->MaPN,
                 'MaVT' => $request->MaVT[$i],
