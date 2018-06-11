@@ -52,4 +52,24 @@ Route::group(['middleware' => 'auth'], function () {
        Route::get('tim-nhap-xuat-ton')->name('tim-n-x-t');
        Route::get('tim-bao-cao')->name('tim-bc');
     });
+    Route::get('/bc-vattu',[
+        'as' => 'baocao.vattu',
+        'uses' => 'VatTuController@report'
+    ]);
+    Route::get('/bc-phieuxuat',[
+        'as' => 'report.phieuxuat',
+        'uses' => 'PhieuXuatController@report'
+    ]);
+//    Route::post('/bc-phieuxuat/{request}',[
+//        'as' => 'report.phieunhap',
+//        'uses' => 'PhieuNhapController@report'
+//    ]);
+    Route::get('/bc-phieunhap',[
+        'as' => 'report.phieunhap',
+        'uses' => 'PhieuNhapController@report'
+    ]);
+//    Route::post('/bc-phieunhap/{request}',[
+//        'as' => 'report.phieunhap',
+//        'uses' => 'PhieuNhapController@report'
+//    ]);
 });

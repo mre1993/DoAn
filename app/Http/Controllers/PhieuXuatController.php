@@ -183,4 +183,12 @@ class PhieuXuatController extends Controller
             });
         })->download('xlsx');
     }
+
+    public function report(){
+        $user =  Auth::user();
+        $nhanVien = NhanVien::find($user->MaNV);
+        $MaPX = PhanXuong::orderBy('MaPX','ASC')->get();
+        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
+        return view('report.phieuxuat',compact('MaPX','nhanVien','MaKVT'));
+    }
 }

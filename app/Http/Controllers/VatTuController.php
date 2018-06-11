@@ -178,4 +178,8 @@ class VatTuController extends Controller
         $result = VatTu::where('MaVT',$request)->first();
         return response()->json($result);
     }
+
+    public function report(){
+        return view('report.vattu');
+    }
 }
