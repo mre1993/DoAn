@@ -159,3 +159,6 @@ fieldset.infor-phieu-nhap legend{
 .report .form-group{
     margin-bottom:25px;
 }
+#piechart-1,#piechart-2{
+    display: inline-block;
+}
