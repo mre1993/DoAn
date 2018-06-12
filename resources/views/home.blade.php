@@ -36,5 +36,8 @@
         </div>
     </div>
 </div>
+
 @yield('right-content')
+<div id="piechart-1"></div>
+<div id="piechart-2"></div>
 @stop

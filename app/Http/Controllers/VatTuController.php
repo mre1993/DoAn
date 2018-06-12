@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ChiTietKhoVT;
+use App\ChiTietPhanXuong;
 use App\ChiTietPhieuNhap;
 use App\NhaCungCap;
 use App\VatTu;
@@ -178,4 +179,46 @@ class VatTuController extends Controller
         $result = VatTu::where('MaVT',$request)->first();
         return response()->json($result);
     }
+
+    public function mostSupplies(){
+        $vatTuPX = ChiTietPhanXuong::all();
+        $vatTuKhoVT = ChiTietKhoVT::all();
+        $array1 = array();
+        $array2 = array();
+        $array3 = array();
+        foreach($vatTuPX as $item1)
+        {
+            $array1[] = [$item1->VatTu->TenVT,$item1->SoLuongTon];
+        }
+
+        foreach($vatTuKhoVT as $item2)
+        {
+            $array2[] = [$item2->VatTu->TenVT,$item2->SoLuongTon];
+        }
+        $count1 = count($array1);
+        $count2 = count($array2);
+        $key1 = array();
+        $key2 = array();
+        for($i=0;$i<$count1;$i++){
+            for($j=0;$j<$count2;$j++){
+                if($array1[$i][0]=== $array2[$j][0]){
+                    $array3[] = [$array1[$i][0],$array1[$i][1] + $array2[$j][1]];
+                    $key1[] = $i;
+                    $key2[] =$j;
+                }
+            }
+        }
+        $array1 = array_diff_key($array1,$key1);
+        $array2 = array_diff_key($array2,$key2);
+        $array1 = array_merge($array1,$array2);
+        $array1 = array_merge($array1,$array3);
+        $sum = 0;
+        foreach($array1 as $key => $item){
+            $sum = $sum + $item[1];
+        }
+        array_unshift($array1,['Vật tư','Số lượng mỗi loại vật tư']);
+        return response()->json($array1);
+    }
 }
+;
+;
