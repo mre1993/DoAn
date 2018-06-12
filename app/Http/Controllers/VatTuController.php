@@ -180,6 +180,9 @@ class VatTuController extends Controller
         return response()->json($result);
     }
 
+    public function report(){
+        return view('report.vattu');
+
     public function mostSupplies(){
         $vatTuPX = ChiTietPhanXuong::all();
         $vatTuKhoVT = ChiTietKhoVT::all();
@@ -220,5 +223,3 @@ class VatTuController extends Controller
         return response()->json($array1);
     }
 }
-;
-;

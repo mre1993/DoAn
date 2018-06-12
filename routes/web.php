@@ -43,5 +43,25 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'PhieuXuatController@printExcel'
     ]);
     Route::resource('/phieuxuat','PhieuXuatController');
+    Route::prefix('search')->group(function(){
+       Route::get('tim-tai-khoan')->name('tim-tk');
+       Route::get('tim-danh-muc')->name('tim-dm');
+       Route::get('tim-nhap-xuat-ton')->name('tim-n-x-t');
+       Route::get('tim-bao-cao')->name('tim-bc');
+    });
+    Route::get('/bc-vattu',[
+        'as' => 'baocao.vattu',
+        'uses' => 'VatTuController@report'
+    ]);
+    Route::get('/bc-phieuxuat','PhieuXuatController@report')->name('report.phieuxuat');
+    Route::get('/bc-phieuxuat/get/','PhieuXuatController@returnReport')->name('reportRecord.phieuxuat');
+    Route::get('/bc-phieunhap',[
+        'as' => 'report.phieunhap',
+        'uses' => 'PhieuNhapController@report'
+    ]);
+//    Route::post('/bc-phieunhap/{request}',[
+//        'as' => 'report.phieunhap',
+//        'uses' => 'PhieuNhapController@report'
+//    ]);
     Route::get('/mostsupplies','VatTuController@mostSupplies');
 });

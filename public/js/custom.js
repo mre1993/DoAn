@@ -63,6 +63,64 @@ $(document).ready(function() {
         $(target).parent().parent().parent().remove();
     });
 
+    //function display export record
+    $('#create-report').on('click',function () {
+        var fd = $('#myform').serialize();
+        $.ajax({
+            dataType: 'JSON',
+            type: 'get',
+            url: "http://localhost/doan/public/bc-phieuxuat/get",
+            data: fd,
+            success: function (data) {
+                console.log(data);
+                var content = '';
+                console.log();
+                $.each(data, function(k, v){
+                    content =
+                        '<tr>'+
+                            '<td></td>'+
+                            '<td>'+ v['MaPhieuXuat'] +'</td>'+
+                            '<td>'+ v['MaVT'] +'</td>'+
+                            '<td>'+ v['TenVT'] +'</td>'+
+                            '<td>'+ v['TenPX'] +'</td>'+
+                            '<td>'+ v['TenKVT'] +'</td>'+
+                            '<td>'+ v['SoLuong'] +'</td>'+
+                            '<td>'+ v['DonGia'] +'</td>'+
+                            '<td>'+ v['ThanhTien'] +'</td>'+
+                            '<td>'+ v['GhiChu'] +'</td>'+
+                            '<td>'+ v['created_at'] +'</td>'+
+                            '<td>'+ v['TenNV'] +'</td>'+
+                        '</tr>'
+                    return k <= data.length
+                });
+                var record =
+                    '<table class="table">'+
+                        '<thead>'+
+                            '<tr>'+
+                                '<th>STT</th>'+
+                                '<th>Mã phiếu xuất</th>'+
+                                '<th>Mã vật tư</th>'+
+                                '<th>Tên vật tư</th>'+
+                                '<th>Phân xưởng</th>'+
+                                '<th>Kho vật tư</th>'+
+                                '<th>Số lượng</th>'+
+                                '<th>Đơn Giá</th>'+
+                                '<th>Thành Tiền</th>'+
+                                '<th>Ghi chú</th>'+
+                                '<th>Ngày tạo</th>'+
+                                '<th>Nhân viên</th>'+
+                            '</tr>'+
+                        '</thead>'+
+                        '<tbody class="export-content">'+
+                            content +
+                        '</tbody>'+
+                    '</table>';
+                    $('#export-report').children().remove();
+                    $('#export-report').append(record);
+            }
+        });
+    })
+
     ///charts
     var jsonData1  ;
     $.ajax({

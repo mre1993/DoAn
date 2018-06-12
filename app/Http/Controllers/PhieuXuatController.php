@@ -9,10 +9,12 @@ use App\KhoVatTu;
 use App\PhanXuong;
 use App\PhieuXuat;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use App\NhanVien;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class PhieuXuatController extends Controller
 {
@@ -187,5 +189,44 @@ class PhieuXuatController extends Controller
                     ->with('i' , $i);
             });
         })->download('xlsx');
+    }
+
+    public function report(){
+        $user =  Auth::user();
+        $nhanVien = NhanVien::find($user->MaNV);
+        $MaPX = PhanXuong::orderBy('MaPX','ASC')->get();
+        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
+        return view('report.phieuxuat',compact('MaPX','nhanVien','MaKVT'));
+    }
+
+    public function returnReport(Request $request){
+        $result = DB::table('phieu_xuat')
+            ->select(
+                'phieu_xuat.MaPhieuXuat',
+                'phan_xuong.TenPX',
+                'kho_vat_tu.TenKVT',
+                'nhan_vien.TenNV',
+                'phieu_xuat.NoiDung',
+                'phieu_xuat.created_at',
+                'kho_vat_tu.TenKVT',
+                'phan_xuong.TenPX',
+                'nhan_vien.TenNV',
+                'chi_tiet_phieu_xuat.*',
+                'vat_tu.MoTa',
+                'vat_tu.TenVT'
+            )
+            ->join('kho_vat_tu','kho_vat_tu.MaKVT','phieu_xuat.MaKVT')
+            ->join('phan_xuong','phan_xuong.MaPX','phieu_xuat.MaPX')
+            ->join('nhan_vien','nhan_vien.MaNV','phieu_xuat.MaNV')
+            ->join('chi_tiet_phieu_xuat','chi_tiet_phieu_xuat.MaPhieuXuat','phieu_xuat.MaPhieuXuat')
+            ->join('vat_tu','vat_tu.MaVT','chi_tiet_phieu_xuat.MaVT')
+            ->whereBetween('phieu_xuat.created_at', array($request->date_from, $request->date_to))
+            ->where('kho_vat_tu.MaKVT','LIKE','%'.$request->MaKVT.'%')
+            ->where('phan_xuong.MaPX','LIKE','%'.$request->MaPX.'%')
+            ->where('nhan_vien.MaNV','LIKE','%'.$request->MaNV.'%')
+            ->where('vat_tu.MaVT','LIKE','%'.$request->MaVT.'%')
+            ->where('phieu_xuat.MaPhieuXuat','LIKE','%'.$request->MaPhieuXuat.'%')
+            ->orderBy('phieu_xuat.MaPhieuXuat')->get();
+        return response()->json($result);
     }
 }
