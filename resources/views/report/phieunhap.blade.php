@@ -11,7 +11,7 @@
             </div>
         @endif
         <div class="card report">
-            <div class="card-header">{{ __('Bảng kê phiếu xuất') }}</div>
+            <div class="card-header">{{ __('Bảng kê phiếu nhập') }}</div>
             <div class="card-body">
                 <form name="create" id="myform" action="{{route('reportRecord.phieuxuat')}}">
                     @csrf
@@ -31,7 +31,7 @@
                     </div>
                 <div class="form-group row">
                     <div class="col-md-4">
-                        <label class="control-label col-md-4" for="MaPhieuXuat">Phiếu xuất</label>
+                        <label class="control-label col-md-4" for="MaPhieuXuat">Phiếu nhập</label>
                         <input type="text" placeholder="Nhập mã phiếu xuất" class="form-control col-md-8" name="MaPhieuXuat">
                     </div>
                     <div class="col-md-4">
@@ -44,11 +44,11 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label class="control-label col-md-4" for="MaKVT">Kho vật tư</label>
-                        <select style="height: auto;"  name="MaKVT" class="form-control col-md-8" id="MaKVT">
-                            <option value="" disabled selected>Chọn kho vật tư</option>
-                            @foreach($MaKVT as $item)
-                                <option value="{{ $item->MaKVT }}" > {{ $item->TenKVT }}</option>
+                        <label class="control-label col-md-4" for="MaNCC">Nhà cung cấp</label>
+                        <select style="height: auto;"  name="MaNCC" class="form-control col-md-8" id="MaNCC">
+                            <option value="" disabled selected>Chọn nhà cung cấp</option>
+                            @foreach($MaNCC as $item)
+                                <option value="{{ $item->MaNCC }}" > {{ $item->TenNCC }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="form-group row mb-0">
                     <div class="col-md-7 offset-md-5">
-                        <button type="button" class="btn btn-primary" id="create-report-phieuxuat">
+                        <button type="button" class="btn btn-primary" id="create-report-phieunhap">
                             {{ __('Tạo') }}
                         </button>
                     </div>

@@ -64,12 +64,12 @@ $(document).ready(function() {
     });
 
     //function display export record
-    $('#create-report').on('click',function () {
+    $('#create-report-phieuxuat').on('click',function () {
         var fd = $('#myform').serialize();
         $.ajax({
             dataType: 'JSON',
             type: 'get',
-            url: "http://localhost/doan/public/bc-phieuxuat/get",
+            url: "bc-phieuxuat/get",
             data: fd,
             success: function (data) {
                 console.log(data);
@@ -90,7 +90,7 @@ $(document).ready(function() {
                             '<td>'+ v['GhiChu'] +'</td>'+
                             '<td>'+ v['created_at'] +'</td>'+
                             '<td>'+ v['TenNV'] +'</td>'+
-                        '</tr>'
+                        '</tr>';
                     return k <= data.length
                 });
                 var record =
@@ -119,8 +119,63 @@ $(document).ready(function() {
                     $('#export-report').append(record);
             }
         });
-    })
+    });
 
+    //function display export record
+    $('#create-report-phieunhap').on('click',function () {
+        var fd = $('#myform').serialize();
+        $.ajax({
+            dataType: 'JSON',
+            type: 'get',
+            url: "bc-phieunhap/get",
+            data: fd,
+            success: function (data) {
+                var content = '';
+                $.each(data, function(k, v){
+                    content =
+                        '<tr>'+
+                        '<td></td>'+
+                        '<td>'+ v['MaPN'] +'</td>'+
+                        '<td>'+ v['MaVT'] +'</td>'+
+                        '<td>'+ v['TenVT'] +'</td>'+
+                        '<td>'+ v['TenPX'] +'</td>'+
+                        '<td>'+ v['TenNCC'] +'</td>'+
+                        '<td>'+ v['SoLuong'] +'</td>'+
+                        '<td>'+ v['DonGia'] +'</td>'+
+                        '<td>'+ v['ThanhTien'] +'</td>'+
+                        '<td>'+ v['GhiChu'] +'</td>'+
+                        '<td>'+ v['created_at'] +'</td>'+
+                        '<td>'+ v['TenNV'] +'</td>'+
+                        '</tr>';
+                    return k <= data.length
+                });
+                var record =
+                    '<table class="table">'+
+                    '<thead>'+
+                    '<tr>'+
+                    '<th>STT</th>'+
+                    '<th>Mã phiếu nhập</th>'+
+                    '<th>Mã vật tư</th>'+
+                    '<th>Tên vật tư</th>'+
+                    '<th>Phân xưởng</th>'+
+                    '<th>Nhà cung cấp</th>'+
+                    '<th>Số lượng</th>'+
+                    '<th>Đơn Giá</th>'+
+                    '<th>Thành Tiền</th>'+
+                    '<th>Ghi chú</th>'+
+                    '<th>Ngày tạo</th>'+
+                    '<th>Nhân viên</th>'+
+                    '</tr>'+
+                    '</thead>'+
+                    '<tbody class="export-content">'+
+                    content +
+                    '</tbody>'+
+                    '</table>';
+                $('#export-report').children().remove();
+                $('#export-report').append(record);
+            }
+        });
+    });
     ///charts
     var jsonData1  ;
     $.ajax({

@@ -59,9 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'report.phieunhap',
         'uses' => 'PhieuNhapController@report'
     ]);
-//    Route::post('/bc-phieunhap/{request}',[
-//        'as' => 'report.phieunhap',
-//        'uses' => 'PhieuNhapController@report'
-//    ]);
+    Route::get('/bc-phieunhap/get/','PhieuNhapController@returnReport')->name('reportRecord.phieunhap');
+
     Route::get('/mostsupplies','VatTuController@mostSupplies');
 });
