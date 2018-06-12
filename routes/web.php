@@ -56,14 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'baocao.vattu',
         'uses' => 'VatTuController@report'
     ]);
-    Route::get('/bc-phieuxuat',[
-        'as' => 'report.phieuxuat',
-        'uses' => 'PhieuXuatController@report'
-    ]);
-//    Route::post('/bc-phieuxuat/{request}',[
-//        'as' => 'report.phieunhap',
-//        'uses' => 'PhieuNhapController@report'
-//    ]);
+    Route::get('/bc-phieuxuat','PhieuXuatController@report')->name('report.phieuxuat');
+    Route::get('/bc-phieuxuat/get/','PhieuXuatController@returnReport')->name('reportRecord.phieuxuat');
     Route::get('/bc-phieunhap',[
         'as' => 'report.phieunhap',
         'uses' => 'PhieuNhapController@report'

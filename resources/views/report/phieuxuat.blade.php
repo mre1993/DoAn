@@ -13,15 +13,16 @@
         <div class="card report">
             <div class="card-header">{{ __('Bảng kê phiếu xuất') }}</div>
             <div class="card-body">
-                @csrf
+                <form name="create" id="myform" action="{{route('reportRecord.phieuxuat')}}">
+                    @csrf
                 <div class="form-group row">
                         <div class="col-md-4">
-                            <label for="date-from" class="col-md-4 col-form-label">Từ ngày</label>
-                            <input type="date" class="form-control col-md-8" id="date-from" name="date-from">
+                            <label for="date_from" class="col-md-4 col-form-label">Từ ngày</label>
+                            <input type="date" class="form-control col-md-8" id="date_from" name="date_from">
                         </div>
                         <div class="col-md-4">
-                            <label for="date-from" class="col-md-4 col-form-label">Từ ngày</label>
-                            <input type="date" class="form-control col-md-8" id="date-from" name="date-from">
+                            <label for="date_to" class="col-md-4 col-form-label">Từ ngày</label>
+                            <input type="date" class="form-control col-md-8" id="date_to" name="date_to">
                         </div>
                         <div class="col-md-4">
                             <label class="control-label col-md-4" for="TenNV">Nhân viên</label>
@@ -35,7 +36,7 @@
                     </div>
                     <div class="col-md-4">
                         <label class="control-label col-md-4" for="MaPX">Phân xưởng</label>
-                        <select style="height: 100%;"  name="MaPX" class="form-control col-md-8" id="MaPX">
+                        <select style="height: auto;"  name="MaPX" class="form-control col-md-8" id="MaPX">
                             <option value="" disabled selected>Chọn phân xưởng</option>
                             @foreach($MaPX as $item)
                                 <option value="{{ $item->MaPX }}" > {{ $item->TenPX }}</option>
@@ -44,7 +45,7 @@
                     </div>
                     <div class="col-md-4">
                         <label class="control-label col-md-4" for="MaKVT">Kho vật tư</label>
-                        <select style="height: 100%;"  name="MaKVT" class="form-control col-md-8" id="MaKVT">
+                        <select style="height: auto;"  name="MaKVT" class="form-control col-md-8" id="MaKVT">
                             <option value="" disabled selected>Chọn kho vật tư</option>
                             @foreach($MaKVT as $item)
                                 <option value="{{ $item->MaKVT }}" > {{ $item->TenKVT }}</option>
@@ -58,31 +59,16 @@
                         <input type="text" placeholder="Nhập tên vật hoặc mã vật tư" name="TimVT" class="form-control col-md-8">
                     </div>
                 </div>
-                <hr>
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <table class="table table-striped table-PN">
-                                <thead>
-                                <tr>
-                                    <th>Vật tư</th>
-                                    <th>Số lượng</th>
-                                    <th>Đơn giá</th>
-                                    <th>Thành tiền</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody class="inputVT">
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="form-group row mb-0">
+                    <div class="col-md-7 offset-md-5">
+                        <button type="button" class="btn btn-primary" id="create-report">
+                            {{ __('Tạo') }}
+                        </button>
                     </div>
-                    <div class="form-group row mb-0">
-                        <div class="col-md-7 offset-md-5">
-                            <button type="button" class="btn btn-primary">
-                                {{ __('Tạo') }}
-                            </button>
-                        </div>
-                    </div>
+                </div>
+                </form>
+                <div class="form-group row" id="export-report">
+                </div>
             </div>
         </div>
     </div>
