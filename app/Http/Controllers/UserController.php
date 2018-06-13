@@ -36,10 +36,15 @@ class UserController extends Controller
      */
     public function indexCreate()
     {
-        if(Auth::user()->MaQuyen !== '3'){
+        if(Auth::user()->MaQuyen != 3){
             return view('welcome');
         }
-        $nhanvien = NhanVien::orderBy('MaNV','ASC')->get();
+        $user = User::all();
+        $maNV = array();
+        foreach ($user as $item){
+            $maNV[] = $item->MaNV;
+        }
+        $nhanvien = NhanVien::orderBy('MaNV','ASC')->whereNotIn('MaNV',$maNV)->get();
         return view('createUser',compact('nhanvien'));
     }
 
@@ -51,7 +56,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->MaQuyen !== '3'){
+        if(Auth::user()->MaQuyen !== 3){
             return redirect()->back();
         }
         $message = [
@@ -111,7 +116,7 @@ class UserController extends Controller
      */
     public function update(Request $request, PhanQuyen $phanQuyen)
     {
-        if(Auth::user()->MaQuyen !== '3'){
+        if(Auth::user()->MaQuyen !== 3){
             return redirect()->back();
         }
         if($request->get('role')){
@@ -162,7 +167,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->MaQuyen !== '3'){
+        if(Auth::user()->MaQuyen !== 3){
             return false;
         }
         $user = User::find($id);
