@@ -37,7 +37,7 @@
                     <div class="col-md-4">
                         <label class="control-label col-md-4" for="MaPX">Phân xưởng</label>
                         <select style="height: auto;"  name="MaPX" class="form-control col-md-8" id="MaPX">
-                            <option value="" disabled selected>Chọn phân xưởng</option>
+                            <option value="" selected>Chọn phân xưởng</option>
                             @foreach($MaPX as $item)
                                 <option value="{{ $item->MaPX }}" > {{ $item->TenPX }}</option>
                             @endforeach
@@ -46,7 +46,7 @@
                     <div class="col-md-4">
                         <label class="control-label col-md-4" for="MaKVT">Kho vật tư</label>
                         <select style="height: auto;"  name="MaKVT" class="form-control col-md-8" id="MaKVT">
-                            <option value="" disabled selected>Chọn kho vật tư</option>
+                            <option value=""  selected>Chọn kho vật tư</option>
                             @foreach($MaKVT as $item)
                                 <option value="{{ $item->MaKVT }}" > {{ $item->TenKVT }}</option>
                             @endforeach
