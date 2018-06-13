@@ -21,7 +21,7 @@
                         <label for="MaKVT" class="col-md-4 col-form-label text-md-right">Mã kho<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="MaKVT" type="text" class="form-control" name="MaKVT">
+                            <input id="MaKVT" type="text" class="form-control" name="MaKVT" value="{{old('MaKVT')}}">
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@
                         <label for="TenKVT" class="col-md-4 col-form-label text-md-right">Tên kho<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="TenKVT" type="text" class="form-control" name="TenKVT">
+                            <input id="TenKVT" type="text" class="form-control" name="TenKVT" value="{{old('TenKVT')}}">
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@
                         <label for="DiaChi" class="col-md-4 col-form-label text-md-right">Địa chỉ<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="DiaChi" type="text" class="form-control" name="DiaChi">
+                            <input id="DiaChi" type="text" class="form-control" name="DiaChi" value="{{old('DiaChi')}}">
                         </div>
                     </div>
 
@@ -45,15 +45,7 @@
                         <label for="SDT" class="col-md-4 col-form-label text-md-right">Số điện thoại<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="SDT" type="text" class="form-control" name="SDT">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="Fax" class="col-md-4 col-form-label text-md-right">Fax</label>
-
-                        <div class="col-md-6">
-                            <input id="Fax" type="text" class="form-control" name="Fax">
+                            <input id="SDT" type="text" class="form-control" name="SDT" value="{{old('SDT')}}">
                         </div>
                     </div>
 
@@ -61,7 +53,7 @@
                         <label for="ThuKho" class="col-md-4 col-form-label text-md-right">Thủ kho</label>
 
                         <div class="col-md-6">
-                            <input id="ThuKho" type="text" class="form-control" name="ThuKho">
+                            <input id="ThuKho" type="text" class="form-control" name="ThuKho" value="{{old('ThuKho')}}">
                         </div>
                     </div>
 
@@ -69,7 +61,7 @@
                         <label for="GhiChu" class="col-md-4 col-form-label text-md-right">Ghi chú</label>
 
                         <div class="col-md-6">
-                            <textarea class="form-control" name="GhiChu" id="GhiChu">
+                            <textarea class="form-control" name="GhiChu" id="GhiChu">{{old('GhiChu')}}
                             </textarea>
                         </div>
                     </div>

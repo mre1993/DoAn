@@ -6,6 +6,7 @@ use App\ChiTietKhoVT;
 use App\KhoVatTu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class KhoVatTuController extends Controller
 {
@@ -28,6 +29,9 @@ class KhoVatTuController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         return view('khovattu.create');
     }
 
@@ -39,6 +43,9 @@ class KhoVatTuController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $message = [
             'MaKVT.required' => 'Mã kho không được để trống',
             'MaKVT.max' => 'Mã nhà cung cấp vượt quá 10 ký tự',
@@ -67,7 +74,6 @@ class KhoVatTuController extends Controller
             'MaKVT' => $request->MaKVT,
             'DiaChi' => $request->DiaChi,
             'SDT' => $request->SDT,
-            'Fax' => $request->Fax,
             'ThuKho' => $request->ThuKho,
             'GhiChu' => $request->GhiChu,
         ]);
@@ -93,6 +99,9 @@ class KhoVatTuController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         $item = KhoVatTu::find($id)->first();
         return view('khovattu.edit',compact('item'));
     }
@@ -106,6 +115,9 @@ class KhoVatTuController extends Controller
      */
     public function update(Request $request, KhoVatTu $khoVatTu)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $item = KhoVatTu::where('MaKVT',$request->id)->first();
         $chiTietKVT = ChiTietKhoVT::where('MaKVT',$request->id)->get();
         $message = [
@@ -118,7 +130,7 @@ class KhoVatTuController extends Controller
             'SDT.max'  => 'Số điện thoại không hợp lệ'
         ];
         $rules = [
-            'MaKVT' => 'required|string|max:10|unique:kho_vat_tu',
+            'MaKVT' => 'required|string|max:10',
             'TenKVT' => 'required|string|max:200',
             'DiaChi' => 'required|string',
             'SDT' => 'required|string|regex:/^[0-9-+]+$/|max:13',
@@ -153,6 +165,9 @@ class KhoVatTuController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $item = KhoVatTu::find($id);
         $item->delete();
         return redirect()->back();

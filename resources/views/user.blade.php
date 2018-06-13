@@ -30,6 +30,7 @@
                     <th>{{$user->nhanVien->TenNV}}</th>
                     <td>{{ $user->phanQuyen->TenQuyen }}</td>
                     <td>
+                        @if(\Illuminate\Support\Facades\Auth::user()->MaQuyen === 3)
                         <button class="btn btn-comment fa fa-edit" data-toggle="modal" data-target="#changeRole-{{$user->id}}"></button>
                         <button class="btn btn-primary fa fa-user" data-toggle="modal" data-target="#changePass-{{$user->id}}"></button>
                         <form class="delete-form" action="{{ route('user.destroy',$user->id) }}" method="post">
@@ -37,6 +38,7 @@
                             <button class="btn btn-danger fa fa-remove">Delete</button>
                             {{ csrf_field() }}
                         </form>
+                        @endif
                         <div class="modal fade" id="changeRole-{{$user->id}}" role="dialog">
                             <div class="modal-dialog">
                                 <!-- Modal content-->

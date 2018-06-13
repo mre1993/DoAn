@@ -9,7 +9,7 @@ class KhoVatTu extends Model
     protected $table = 'kho_vat_tu';
 
     protected $fillable = [
-        'MaKVT', 'TenKVT', 'DiaChi', 'SDT', 'ThuKho', 'GhiChu', 'Fax'
+        'MaKVT', 'TenKVT', 'DiaChi', 'SDT', 'ThuKho', 'GhiChu'
     ];
 
     protected $primaryKey = "MaKVT";

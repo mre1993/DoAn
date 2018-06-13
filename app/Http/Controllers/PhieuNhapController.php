@@ -40,6 +40,9 @@ class PhieuNhapController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         $user =  Auth::user();
         $nhanVien = NhanVien::find($user->MaNV);
         $MaPX = PhanXuong::orderBy('MaPX','ASC')->get();
@@ -118,7 +121,7 @@ class PhieuNhapController extends Controller
     public function show($id)
     {
         $chiTiet = ChiTietPhieuNhap::where('MaPN',$id)->orderBy('id','ASC')->get();
-        $phieuNhap = PhieuNhap::find($id)->first();
+        $phieuNhap = PhieuNhap::where('MaPN',$id)->first();
         $i=1;
         $sumSL = 0;
         $sumTT = 0;
@@ -176,7 +179,7 @@ class PhieuNhapController extends Controller
     public function printExcel($id)
     {
         $vatTu = ChiTietPhieuNhap::where('MaPN',$id)->orderBy('id','ASC')->get();
-        $phieuNhap = PhieuNhap::find($id)->first();
+        $phieuNhap = PhieuNhap::where('MaPN',$id)->first();
         $i=1;
         $sumSL = 0;
         $sumTT = 0;

@@ -26,7 +26,7 @@
                             <select style="height: 100%;"  name="MaPX" class="form-control">
                                 <option value="" disabled selected>Chọn phân xưởng</option>
                                 @foreach($MaPX as $item)
-                                    <option value="{{ $item->MaPX }}" > {{ $item->TenPX }}</option>
+                                    <option value="{{ $item->MaPX }}" {{ old('MaPX') == $item->MaPX ? 'selected' : '' }}> {{ $item->TenPX }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -34,12 +34,12 @@
                             <select style="height: 100%;"  name="MaNCC" class="form-control">
                                 <option value="" disabled selected>Chọn nhà cung cấp</option>
                                 @foreach($MaNCC as $item)
-                                    <option value="{{ $item->MaNCC }}" > {{ $item->TenNCC }}</option>
+                                    <option value="{{ $item->MaNCC }}" {{ old('MaNCC') == $item->MaNCC ? 'selected' : '' }}> {{ $item->TenNCC }}</option>
                             @endforeach
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="text" placeholder="Nhập mã phiếu nhập" class="form-control" name="MaPN">
+                            <input type="text" placeholder="Nhập mã phiếu nhập" class="form-control" name="MaPN" value="{{old('MaPN')}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -50,7 +50,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="NoiDung">Nội dung</label>
-                            <textarea id="NoiDung" name="NoiDung" class="form-control" placeholder></textarea>
+                            <textarea id="NoiDung" name="NoiDung" class="form-control" placeholder>{{old('NoiDung')}}</textarea>
                         </div>
                     </div>
                     <hr>
