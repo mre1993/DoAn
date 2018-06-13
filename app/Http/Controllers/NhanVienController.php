@@ -6,6 +6,7 @@ use App\NhanVien;
 use App\PhieuNhap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class NhanVienController extends Controller
 {
@@ -27,6 +28,9 @@ class NhanVienController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         return view('nhanvien.create');
     }
 
@@ -38,6 +42,9 @@ class NhanVienController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $message = [
             'MaNV.required' => 'Mã nhân viên  không được để trống',
             'MaNV.max' => 'Mã nhân viên vượt quá 10 ký tự',
@@ -88,6 +95,9 @@ class NhanVienController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         $item = NhanVien::where('MaNV',$id)->first();
         $sex = ['nam','nữ'];
         return view('nhanvien.edit',compact('item','sex'));
@@ -103,6 +113,9 @@ class NhanVienController extends Controller
      */
     public function update(Request $request, NhanVien $nhanVien)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $item = NhanVien::where('MaNV',$request->id)->first();
         $phieuNhap = PhieuNhap::where('MaNV',$request->id)->get();
 //        $phieuXuat = PhieuNhap::where('MaNV',$request->id)->get();
@@ -156,6 +169,9 @@ class NhanVienController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $item = NhanVien::find($id);
         $item->delete();
         return redirect()->back();

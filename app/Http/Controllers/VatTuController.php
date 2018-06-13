@@ -8,6 +8,7 @@ use App\ChiTietPhieuNhap;
 use App\NhaCungCap;
 use App\VatTu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class VatTuController extends Controller
@@ -31,6 +32,9 @@ class VatTuController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return redirect()->back();
+        }
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');
         $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
         return view('vattu.create',compact('NCC','DVT'));
@@ -44,6 +48,9 @@ class VatTuController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return redirect()->back();
+        }
         $message = [
             'MaVT.required' => 'Mã vật tư  không được để trống',
             'TenVT.required' => 'Tên vật tư không được để trống',
@@ -95,6 +102,9 @@ class VatTuController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return redirect()->back();
+        }
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');
         $item = VatTu::find($id);
         $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
@@ -110,6 +120,9 @@ class VatTuController extends Controller
      */
     public function update(Request $request)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return redirect()->back();
+        }
         $item = VatTu::where('MaVT',$request->id)->first();
         $message = [
             'MaVT.required' => 'Mã vật tư  không được để trống',
@@ -165,6 +178,9 @@ class VatTuController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $item = VatTu::find($id);
         $item->delete();
         return redirect()->back();

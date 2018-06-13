@@ -28,7 +28,7 @@
                         <label for="TenNCC" class="col-md-4 col-form-label text-md-right">Tên nhà cung cấp<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="TenNCC" type="text" class="form-control" name="TenNCC" {{old('TenNCC')}}>
+                            <input id="TenNCC" type="text" class="form-control" name="TenNCC" value="{{old('TenNCC')}}">
                         </div>
                     </div>
 
@@ -36,7 +36,7 @@
                         <label for="DiaChi" class="col-md-4 col-form-label text-md-right">Địa chỉ nhà cung cấp<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="DiaChi" type="text" class="form-control" name="DiaChi" {{old('MaNCC')}}>
+                            <input id="DiaChi" type="text" class="form-control" name="DiaChi" value="{{old('DiaChi')}}">
                         </div>
                     </div>
 
@@ -44,7 +44,7 @@
                         <label for="sdtNCC" class="col-md-4 col-form-label text-md-right">Số điện thoại<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="sdtNCC" type="text" class="form-control" name="sdtNCC" {{old('sdtNCC')}}>
+                            <input id="sdtNCC" type="text" class="form-control" name="sdtNCC" value="{{old('sdtNCC')}}">
                         </div>
                     </div>
 
@@ -52,7 +52,7 @@
                         <label for="fax" class="col-md-4 col-form-label text-md-right">Fax</label>
 
                         <div class="col-md-6">
-                            <input id="fax" type="text" class="form-control" name="fax" {{old('fax')}}>
+                            <input id="fax" type="text" class="form-control" name="fax" value="{{old('fax')}}">
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                         <label for="emailNCC" class="col-md-4 col-form-label text-md-right">Email<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
-                            <input id="emailNCC" type="email" class="form-control" name="emailNCC" {{old('emailNCC')}}>
+                            <input id="emailNCC" type="email" class="form-control" name="emailNCC" value="{{old('emailNCC')}}">
                         </div>
                     </div>
 

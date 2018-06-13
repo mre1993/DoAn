@@ -7,6 +7,7 @@ use App\VatTu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 
 class NhaCungCapController extends Controller
 {
@@ -29,6 +30,9 @@ class NhaCungCapController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         return view('provider.create');
     }
 
@@ -40,6 +44,9 @@ class NhaCungCapController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $message = [
             'MaNCC.required' => 'Mã nhà cung cấp  không được để trống',
             'MaNCC.max' => 'Mã nhà cung cấp vượt quá 10 ký tự',
@@ -96,6 +103,9 @@ class NhaCungCapController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         $provider = NhaCungCap::where('MaNCC',$id)->first();
         return view('provider.edit',compact('provider'));
     }
@@ -160,6 +170,9 @@ class NhaCungCapController extends Controller
      */
     public function destroy(NhaCungCap $id)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $provider = NhaCungCap::find($id);
         $provider->delete();
         return redirect()->back();

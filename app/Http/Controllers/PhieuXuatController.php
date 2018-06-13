@@ -37,6 +37,9 @@ class PhieuXuatController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         $user =  Auth::user();
         $nhanVien = NhanVien::find($user->MaNV);
         $MaPX = PhanXuong::orderBy('MaPX','ASC')->get();
@@ -52,6 +55,9 @@ class PhieuXuatController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $message = [
             'MaPX.required' => 'Mã phân xưởng không được để trống',
             'MaPhieuXuat.unique' => 'Mã phiếu nhập đã tồn tại',
@@ -119,7 +125,7 @@ class PhieuXuatController extends Controller
     public function show($id)
     {
         $chiTiet = ChiTietPhieuXuat::where('MaPhieuXuat',$id)->orderBy('id','ASC')->get();
-        $phieuXuat = PhieuXuat::find($id)->first();
+        $phieuXuat = PhieuXuat::where('MaPN',$id)->first();
         $i=1;
         $sumSL = 0;
         $sumTT = 0;
@@ -167,7 +173,7 @@ class PhieuXuatController extends Controller
     public function printExcel($id)
     {
         $vatTu = ChiTietPhieuXuat::where('MaPhieuXuat',$id)->orderBy('id','ASC')->get();
-        $phieuXuat = PhieuXuat::find($id)->first();
+        $phieuXuat = PhieuXuat::where('MaPhieuXuart',$id)->first();
         $i=1;
         $sumSL = 0;
         $sumTT = 0;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PhanXuong;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class PhanXuongController extends Controller
 {
@@ -27,6 +28,9 @@ class PhanXuongController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         return view('phanxuong.create');
     }
 
@@ -38,6 +42,9 @@ class PhanXuongController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $message = [
             'MaPX.required' => 'Mã phân xưởng  không được để trống',
             'TenPX.required' => 'Tên phân xưởng không được để trống',
@@ -81,6 +88,9 @@ class PhanXuongController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         $factory  = PhanXuong::where('MaPX',$id)->first();
         return view('phanxuong.edit',compact('factory'));
     }
@@ -94,6 +104,9 @@ class PhanXuongController extends Controller
      */
     public function update(Request $request)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $provider = PhanXuong::where('MaPX',$request->id)->first();
         $message = [
             'MaPX.required' => 'Mã phân xưởng  không được để trống',
@@ -128,6 +141,9 @@ class PhanXuongController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return false;
+        }
         $factory = PhanXuong::where('MaPX',$id)->first();
         $factory->delete();
         return redirect()->back();

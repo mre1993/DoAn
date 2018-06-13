@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\PhanQuyen;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -35,6 +36,9 @@ class UserController extends Controller
      */
     public function indexCreate()
     {
+        if(Auth::user()->MaQuyen !== '3'){
+            return view('welcome');
+        }
         $nhanvien = NhanVien::orderBy('MaNV','ASC')->get();
         return view('createUser',compact('nhanvien'));
     }
@@ -47,12 +51,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->MaQuyen !== '3'){
+            return redirect()->back();
+        }
         $message = [
             'password.required' => 'Mật khẩu  không được để trống',
+            'MaNV.required' => 'Bạn hãy chọn nhân viên'
         ];
         $rules = [
             'name' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'MaNV' => 'required'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -65,6 +74,7 @@ class UserController extends Controller
         User::create([
             'name' => $request['name'],
             'password' => Hash::make($request['password']),
+            'MaNV' => $request->MaNV
         ]);
 
         return redirect('/user');
@@ -101,6 +111,9 @@ class UserController extends Controller
      */
     public function update(Request $request, PhanQuyen $phanQuyen)
     {
+        if(Auth::user()->MaQuyen !== '3'){
+            return redirect()->back();
+        }
         if($request->get('role')){
             $role = $request->get('role');
             $user = User::find($request->input('userId'));
@@ -149,6 +162,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->MaQuyen !== '3'){
+            return false;
+        }
         $user = User::find($id);
         $user->delete();
         return redirect()->back();
