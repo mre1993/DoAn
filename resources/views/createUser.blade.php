@@ -29,7 +29,7 @@
                                 <select class="form-control" id="MaNV" name="MaNV" style="height:100%">
                                     <option selected disabled>Chọn nhân viên</option>
                                     @foreach($nhanvien as $item)
-                                        <option value="{{$item->MaNV}}">{{$item->TenNV}} - {{$item->MaNV}}</option>
+                                        <option value="{{$item->MaNV}}" {{ old('MaNV') == $item->MaNV ? 'selected' : '' }}>{{$item->TenNV}} - {{$item->MaNV}}</option>
                                     @endforeach
                                 </select>
                             </div>
