@@ -223,7 +223,7 @@ class PhieuNhapController extends Controller
                 'nha_cung_cap.TenNCC',
                 'phan_xuong.TenPX',
                 'nhan_vien.TenNV',
-                'chi_tiet_phieu_xuat.*',
+                'chi_tiet_phieu_nhap.*',
                 'vat_tu.MoTa',
                 'vat_tu.TenVT'
             )
@@ -232,12 +232,42 @@ class PhieuNhapController extends Controller
             ->join('nhan_vien','nhan_vien.MaNV','phieu_nhap.MaNV')
             ->join('chi_tiet_phieu_nhap','chi_tiet_phieu_nhap.MaPN','phieu_nhap.MaPN')
             ->join('vat_tu','vat_tu.MaVT','chi_tiet_phieu_nhap.MaVT')
-            ->whereBetween('phieu_nhap.created_at', array($request->date_from, $request->date_to))
-            ->where('nha_cung_cap.MaNCC','LIKE','%'.$request->MaNCC.'%')
-            ->where('phan_xuong.MaPX','LIKE','%'.$request->MaPX.'%')
-            ->where('nhan_vien.MaNV','LIKE','%'.$request->MaNV.'%')
-            ->where('vat_tu.MaVT','LIKE','%'.$request->MaVT.'%')
-            ->where('phieu_nhap.MaPN','LIKE','%'.$request->MaPN.'%')
+            ->where(function ($result) use ($request){
+                if($request->MaNCC!=null){
+                    $result->where('nha_cung_cap.MaNCC','LIKE','%'.$request->MaNCC.'%');
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->MaPX!=null){
+                    $result->where('phan_xuong.MaPX','LIKE','%'.$request->MaPX.'%');
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->TimVT!=null){
+                    $result->where('vat_tu.MaVT','LIKE','%'.$request->TimVT.'%')
+                        ->orWhere('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->TenNV!=null){
+                    $result->where('nhan_vien.TenNV','LIKE','%'.$request->TenNV.'%');
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->MaPN!=null){
+                    $result->where('phieu_nhap.MaPN','LIKE','%'.$request->MaPN.'%');
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->date_from!=null){
+                    $result->whereDate('phieu_nhap.created_at','>=',$request->date_from);
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->date_to!=null){
+                    $result->whereDate('phieu_nhap.created_at','<=',$request->date_to);
+                }
+            })
             ->orderBy('phieu_nhap.MaPN')->get();
         return response()->json($result);
     }

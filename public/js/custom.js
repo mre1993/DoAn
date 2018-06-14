@@ -72,11 +72,15 @@ $(document).ready(function() {
             url: "bc-phieuxuat/get",
             data: fd,
             success: function (data) {
-                console.log(data);
-                var content = '';
+                var content = [];
                 console.log();
                 $.each(data, function(k, v){
-                    content =
+                    var d = v['created_at'].split(" ")[0];
+                    var NoiDung = v['NoiDung'];
+                    if(NoiDung==null){
+                        NoiDung = '';
+                    }
+                    content.push(
                         '<tr>'+
                             '<td></td>'+
                             '<td>'+ v['MaPhieuXuat'] +'</td>'+
@@ -87,10 +91,10 @@ $(document).ready(function() {
                             '<td>'+ v['SoLuong'] +'</td>'+
                             '<td>'+ v['DonGia'] +'</td>'+
                             '<td>'+ v['ThanhTien'] +'</td>'+
-                            '<td>'+ v['GhiChu'] +'</td>'+
-                            '<td>'+ v['created_at'] +'</td>'+
+                            '<td>'+ NoiDung +'</td>'+
+                            '<td>'+ d +'</td>'+
                             '<td>'+ v['TenNV'] +'</td>'+
-                        '</tr>';
+                        '</tr>');
                     return k <= data.length
                 });
                 var record =
@@ -130,9 +134,14 @@ $(document).ready(function() {
             url: "bc-phieunhap/get",
             data: fd,
             success: function (data) {
-                var content = '';
+                var content = [];
                 $.each(data, function(k, v){
-                    content =
+                    var d = v['created_at'].split(" ")[0];
+                    var NoiDung = v['NoiDung'];
+                    if(NoiDung==null){
+                        NoiDung = '';
+                    }
+                    content.push(
                         '<tr>'+
                         '<td></td>'+
                         '<td>'+ v['MaPN'] +'</td>'+
@@ -143,10 +152,10 @@ $(document).ready(function() {
                         '<td>'+ v['SoLuong'] +'</td>'+
                         '<td>'+ v['DonGia'] +'</td>'+
                         '<td>'+ v['ThanhTien'] +'</td>'+
-                        '<td>'+ v['GhiChu'] +'</td>'+
-                        '<td>'+ v['created_at'] +'</td>'+
+                        '<td>'+ NoiDung +'</td>'+
+                        '<td>'+ d +'</td>'+
                         '<td>'+ v['TenNV'] +'</td>'+
-                        '</tr>';
+                        '</tr>');
                     return k <= data.length
                 });
                 var record =
