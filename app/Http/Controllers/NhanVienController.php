@@ -51,12 +51,13 @@ class NhanVienController extends Controller
             'MaNV.unique' => 'Mã nhân viên đã tồn tại',
             'TenNV.required' => 'Tên nhân viên không được để trống',
             'SDT.regex'  => 'Số điện thoại không hợp lệ',
-            'SDT.max'  => 'Số điện thoại không hợp lệ'
+            'SDT.max'  => 'Số điện thoại không hợp lệ',
+            'SDT.min'  => 'Số điện thoại không hợp lệ'
         ];
         $rules = [
             'MaNV' => 'required|string|max:10|unique:nhan_vien',
             'TenNV' => 'required|string|max:200',
-            'SDT' => 'required|string|regex:/^[0-9-+]+$/|max:13',
+            'SDT' => 'required|string|regex:/^[0-9-+]+$/|max:13|min:10',
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -125,12 +126,13 @@ class NhanVienController extends Controller
             'MaNV.max' => 'Mã nhân viên vượt quá 10 ký tự',
             'TenNV.required' => 'Tên nhân viên không được để trống',
             'SDT.regex'  => 'Số điện thoại không hợp lệ',
-            'SDT.max'  => 'Số điện thoại không hợp lệ'
+            'SDT.max'  => 'Số điện thoại không hợp lệ',
+            'SDT.min'  => 'Số điện thoại không hợp lệ'
         ];
         $rules = [
             'MaNV' => 'required|string|max:10|',
             'TenNV' => 'required|string|max:200',
-            'SDT' => 'required|string|regex:/^[0-9-+]+$/|max:13',
+            'SDT' => 'required|string|regex:/^[0-9-+]+$/|max:13|min:10',
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);

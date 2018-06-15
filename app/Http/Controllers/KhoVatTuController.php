@@ -102,7 +102,7 @@ class KhoVatTuController extends Controller
         if(Auth::user()->MaQuyen < '2'){
             return view('welcome');
         }
-        $item = KhoVatTu::find($id)->first();
+        $item = KhoVatTu::where('MaKVT',$id)->first();
         return view('khovattu.edit',compact('item'));
     }
 
@@ -168,7 +168,7 @@ class KhoVatTuController extends Controller
         if(Auth::user()->MaQuyen < '2'){
             return false;
         }
-        $item = KhoVatTu::find($id);
+        $item = KhoVatTu::where('MaKVT',$id);
         $item->delete();
         return redirect()->back();
     }

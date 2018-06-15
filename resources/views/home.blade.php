@@ -45,7 +45,6 @@
                 <li class=""><a href="{{route('baocao.vattu')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo vật tư</span></a></li>
                 <li class=""><a href="{{route('report.phieuxuat')}}"><i class="fa fa-file-alt"></i> <span>Bảng kê phiếu xuất</span></a></li>
                 <li class=""><a href="{{route('report.phieunhap')}}"><i class="fa fa-file-alt"></i> <span>Bảng kê phiếu nhập</span></a></li>
-                <li class=""><a href="{{route('baocao.vattu')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo vật tư</span></a></li>
                 <li class=""><a href="{{route('tim-bc')}}"><i class="fa fa-search"></i> <span>Tìm kiếm tài khoản</span></a></li>
             </ul>
         </div>

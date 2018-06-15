@@ -65,7 +65,7 @@ $(document).ready(function() {
 
     //function display export record
     $('#create-report-phieuxuat').on('click',function () {
-        var fd = $('#myform').serialize();
+        var fd = $('#myform-xuat').serialize();
         $.ajax({
             dataType: 'JSON',
             type: 'get',
@@ -73,7 +73,6 @@ $(document).ready(function() {
             data: fd,
             success: function (data) {
                 var content = [];
-                console.log();
                 $.each(data, function(k, v){
                     var d = v['created_at'].split(" ")[0];
                     var NoiDung = v['NoiDung'];
@@ -98,7 +97,7 @@ $(document).ready(function() {
                     return k <= data.length
                 });
                 var record =
-                    '<table class="table">'+
+                    '<table class="table text-center">'+
                         '<thead>'+
                             '<tr>'+
                                 '<th>STT</th>'+
@@ -127,7 +126,7 @@ $(document).ready(function() {
 
     //function display export record
     $('#create-report-phieunhap').on('click',function () {
-        var fd = $('#myform').serialize();
+        var fd = $('#myform-nhap').serialize();
         $.ajax({
             dataType: 'JSON',
             type: 'get',
@@ -159,7 +158,7 @@ $(document).ready(function() {
                     return k <= data.length
                 });
                 var record =
-                    '<table class="table">'+
+                    '<table class="table text-center">'+
                     '<thead>'+
                     '<tr>'+
                     '<th>STT</th>'+
@@ -174,6 +173,54 @@ $(document).ready(function() {
                     '<th>Ghi chú</th>'+
                     '<th>Ngày tạo</th>'+
                     '<th>Nhân viên</th>'+
+                    '</tr>'+
+                    '</thead>'+
+                    '<tbody class="export-content">'+
+                    content +
+                    '</tbody>'+
+                    '</table>'+
+                    '<form action="bc-phieunhap/printReport/'+fd+'"><button type="button" class="btn btn-primary offset-md-5">Tạo</button></form>';
+                $('#export-report').children().remove();
+                $('#export-report').append(record);
+            }
+        });
+    });
+
+    $('#report-ton').on('click',function () {
+        var fd = $('#myform-ton').serialize();
+        $.ajax({
+            dataType: 'JSON',
+            type: 'get',
+            url: "bc-vattu/get",
+            data: fd,
+            success: function (data) {
+                var content = [];
+                $.each(data, function(k, v){
+                    var NoiDung = v['MoTa'];
+                    if(NoiDung==null){
+                        NoiDung = '';
+                    }
+                    content.push(
+                        '<tr>'+
+                        '<td></td>'+
+                        '<td>'+ v['MaVT'] +'</td>'+
+                        '<td>'+ v['TenVT'] +'</td>'+
+                        '<td>'+ v['sum'] +'</td>'+
+                        '<td>'+ v['DonGia'] +'</td>'+
+                        '<td>'+ NoiDung +'</td>'+
+                        '</tr>');
+                    return k <= data.length
+                });
+                var record =
+                    '<table class="table text-center">'+
+                    '<thead>'+
+                    '<tr>'+
+                    '<th>STT</th>'+
+                    '<th>Mã vật tư</th>'+
+                    '<th>Tên vật tư</th>'+
+                    '<th>Số lượng</th>'+
+                    '<th>Đơn Giá</th>'+
+                    '<th>Mô Tả</th>'+
                     '</tr>'+
                     '</thead>'+
                     '<tbody class="export-content">'+
