@@ -13,7 +13,7 @@
         <div class="card report">
             <div class="card-header">{{ __('Bảng kê phiếu nhập') }}</div>
             <div class="card-body">
-                <form name="create" id="myform" action="{{route('reportRecord.phieuxuat')}}">
+                <form name="create" id="myform-nhap" action="{{route('reportRecord.phieuxuat')}}">
                     @csrf
                 <div class="form-group row">
                         <div class="col-md-4">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 </form>
-                <div class="form-group row" id="export-report">
+                <div class="form-group" id="export-report">
                 </div>
             </div>
         </div>

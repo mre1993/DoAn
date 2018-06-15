@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\ChiTietKhoVT;
 use App\ChiTietPhanXuong;
 use App\ChiTietPhieuNhap;
+use App\KhoVatTu;
 use App\NhaCungCap;
 use App\VatTu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class VatTuController extends Controller
 {
@@ -106,7 +108,7 @@ class VatTuController extends Controller
             return redirect()->back();
         }
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');
-        $item = VatTu::find($id);
+        $item = VatTu::where('MaVT',$id)->get();
         $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
         return view('vattu.edit',compact('item','NCC','DVT'));
     }
@@ -198,7 +200,8 @@ class VatTuController extends Controller
 
     public function report()
     {
-        return view('report.vattu');
+        $MaKVT = KhoVatTu::all();
+        return view('report.vattu',compact('MaKVT'));
     }
 
     public function mostSupplies(){
@@ -239,5 +242,44 @@ class VatTuController extends Controller
         }
         array_unshift($array1,['Vật tư','Số lượng mỗi loại vật tư']);
         return response()->json($array1);
+    }
+
+    public function returnReport(Request $request){
+        $result = DB::table('chi_tiet_kho_vat_tu')
+            ->join('kho_vat_tu','kho_vat_tu.MaKVT','chi_tiet_kho_vat_tu.MaKVT')
+            ->join('vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
+            ->select('vat_tu.*'
+            )
+            ->groupBy('vat_tu.MaVT')
+            ->selectRaw('sum(chi_tiet_kho_vat_tu.SoLuongTon) As sum')
+            ->where(function ($result) use ($request){
+                if($request->MaKVT!=null){
+                    $result->where('kho_vat_tu.MaKVT','LIKE','%'.$request->MaKVT.'%');
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->TimVT!=null){
+                    $result->where('vat_tu.MaVT','LIKE','%'.$request->TimVT.'%')
+                        ->orWhere('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->start!=null){
+                    $check = DB::select('SELECT sum(chi_tiet_kho_vat_tu.SoLuongTon) As sum from `chi_tiet_kho_vat_tu` GROUP BY MaKVT');
+                    foreach ($check as $item) {
+                        $result->where($item->sum,'<=',$request->start);
+                    }                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->end!=null){
+                    $check = DB::select('SELECT sum(chi_tiet_kho_vat_tu.SoLuongTon) As sum from `chi_tiet_kho_vat_tu` GROUP BY MaKVT');
+                    foreach ($check as $item) {
+                        $result->where($item->sum,'<=',$request->end);
+                    }
+                }
+            })
+            ->orderBy('chi_tiet_kho_vat_tu.MaVT','DESC')->get();
+
+        return response()->json($result);
     }
 }

@@ -173,7 +173,7 @@ class NhaCungCapController extends Controller
         if(Auth::user()->MaQuyen < '2'){
             return false;
         }
-        $provider = NhaCungCap::find($id);
+        $provider = NhaCungCap::where('MaNCC',$id);
         $provider->delete();
         return redirect()->back();
     }
