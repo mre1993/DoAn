@@ -65,7 +65,7 @@ $(document).ready(function() {
 
     //function display export record
     $('#create-report-phieuxuat').on('click',function () {
-        var fd = $('#myform-xuat').serialize();
+        var fd = $('#myform').serialize();
         $.ajax({
             dataType: 'JSON',
             type: 'get',
@@ -74,6 +74,7 @@ $(document).ready(function() {
             success: function (data) {
                 var content = [];
                 $.each(data, function(k, v){
+                    var i = k+1;
                     var d = v['created_at'].split(" ")[0];
                     var NoiDung = v['NoiDung'];
                     if(NoiDung==null){
@@ -81,7 +82,7 @@ $(document).ready(function() {
                     }
                     content.push(
                         '<tr>'+
-                            '<td></td>'+
+                            '<td>'+i+'</td>'+
                             '<td>'+ v['MaPhieuXuat'] +'</td>'+
                             '<td>'+ v['MaVT'] +'</td>'+
                             '<td>'+ v['TenVT'] +'</td>'+
@@ -118,6 +119,7 @@ $(document).ready(function() {
                             content +
                         '</tbody>'+
                     '</table>';
+                    $('#btn-export').css('display','block');
                     $('#export-report').children().remove();
                     $('#export-report').append(record);
             }
@@ -126,7 +128,7 @@ $(document).ready(function() {
 
     //function display export record
     $('#create-report-phieunhap').on('click',function () {
-        var fd = $('#myform-nhap').serialize();
+        var fd = $('#myform').serialize();
         $.ajax({
             dataType: 'JSON',
             type: 'get',
@@ -135,6 +137,7 @@ $(document).ready(function() {
             success: function (data) {
                 var content = [];
                 $.each(data, function(k, v){
+                    var i = k+1;
                     var d = v['created_at'].split(" ")[0];
                     var NoiDung = v['NoiDung'];
                     if(NoiDung==null){
@@ -142,7 +145,7 @@ $(document).ready(function() {
                     }
                     content.push(
                         '<tr>'+
-                        '<td></td>'+
+                        '<td>'+i+'</td>'+
                         '<td>'+ v['MaPN'] +'</td>'+
                         '<td>'+ v['MaVT'] +'</td>'+
                         '<td>'+ v['TenVT'] +'</td>'+
@@ -178,8 +181,8 @@ $(document).ready(function() {
                     '<tbody class="export-content">'+
                     content +
                     '</tbody>'+
-                    '</table>'+
-                    '<form action="bc-phieunhap/printReport/'+fd+'"><button type="button" class="btn btn-primary offset-md-5">Tạo</button></form>';
+                    '</table>';
+                $('#btn-export').css("display",'block');
                 $('#export-report').children().remove();
                 $('#export-report').append(record);
             }
@@ -196,13 +199,14 @@ $(document).ready(function() {
             success: function (data) {
                 var content = [];
                 $.each(data, function(k, v){
+                    var i = k+1;
                     var NoiDung = v['MoTa'];
                     if(NoiDung==null){
                         NoiDung = '';
                     }
                     content.push(
                         '<tr>'+
-                        '<td></td>'+
+                        '<td>'+i+'</td>'+
                         '<td>'+ v['MaVT'] +'</td>'+
                         '<td>'+ v['TenVT'] +'</td>'+
                         '<td>'+ v['sum'] +'</td>'+
@@ -231,6 +235,30 @@ $(document).ready(function() {
                 $('#export-report').append(record);
             }
         });
+    });
+
+    $('#btn-export').click(function() {
+        var fd = $('#myform').serialize();
+        url = "bc-phieunhap/printReport/";
+        urlXuat = "bc-phieuxuat/printReport/";
+        check = "phieuxuat";
+        currentURL = window.location.href;
+        if(currentURL.indexOf(check) != -1){
+            url = urlXuat;
+        }
+        console.log(url);
+        $.ajax({
+            url: url, // the url of the php file that will generate the excel file
+            data:fd , //or similar - based on the grid's API
+            success: function(response){
+                var a = document.createElement("a");
+                a.href = response.file;
+                a.download = response.name;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            },
+        })
     });
     ///charts
     var jsonData1  ;

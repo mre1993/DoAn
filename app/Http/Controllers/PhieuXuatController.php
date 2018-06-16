@@ -266,7 +266,9 @@ class PhieuXuatController extends Controller
         return response()->json($result);
     }
 
-    public function printPhieu($request){
+    public function printReport(Request $request){
+        $check = 'PhieuXuat';
+        $i = 1;
         $result = DB::table('phieu_xuat')
             ->select(
                 'phieu_xuat.MaPhieuXuat',
@@ -324,6 +326,42 @@ class PhieuXuatController extends Controller
                 }
             })
             ->orderBy('phieu_xuat.MaPhieuXuat')->get();
-        return view('report.printPhieu',compact('result'));
+        $count = count($result);
+        $setborder = $count + 3;
+        $setHeight1 = $count + 4;
+        $setHeight2 = $count + 5;
+//        return response()->json($result);
+
+        $myFile =  Excel::create('New', function($excel) use($result,$i,$check,$count,$setborder,$setHeight1,$setHeight2) {
+            $excel->sheet('First sheet', function($sheet)  use($result,$i,$check,$count,$setborder,$setHeight1,$setHeight2) {
+                $sheet->loadView('report.printPhieu')
+                    ->setBorder('A3:L'.$setborder, 'thin')
+                    ->setHeight(1,50)
+                    ->setHeight($setHeight1,40)
+                    ->setHeight($setHeight2,20)
+                    ->setWidth('A',7)
+                    ->setWidth('B',15)
+                    ->setWidth('C',10)
+                    ->setWidth('D',30)
+                    ->setWidth('E',18)
+                    ->setWidth('F',18)
+                    ->setWidth('G',10)
+                    ->setWidth('H',8)
+                    ->setWidth('I',15)
+                    ->setWidth('J',10)
+                    ->setWidth('K',20)
+                    ->setWidth('L',20)
+                    ->with('i' , $i)
+                    ->with('result' , $result)
+                    ->with('check' , $check);
+            });
+        });
+        $myFile = $myFile->string('xlsx'); //change xlsx for the format you want, default is xls
+        $response =  array(
+            'name' => "filename", //no extention needed
+            'file' => "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,".base64_encode($myFile) //mime type of used format
+        );
+        return response()->json($response);
+//        return view('report.printPhieu',compact('result','i','check'));
     }
 }

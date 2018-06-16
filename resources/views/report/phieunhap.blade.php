@@ -11,9 +11,9 @@
             </div>
         @endif
         <div class="card report">
-            <div class="card-header">{{ __('Bảng kê phiếu nhập') }}</div>
+            <div class="card-header">{{ __('Báo cáo phiếu nhập') }}</div>
             <div class="card-body">
-                <form name="create" id="myform-nhap" action="{{route('reportRecord.phieuxuat')}}">
+                <form name="create" id="myform" action="{{route('reportRecord.phieunhap')}}">
                     @csrf
                 <div class="form-group row">
                         <div class="col-md-4">
@@ -31,8 +31,8 @@
                     </div>
                 <div class="form-group row">
                     <div class="col-md-4">
-                        <label class="control-label col-md-4" for="MaPhieuXuat">Phiếu nhập</label>
-                        <input type="text" placeholder="Nhập mã phiếu xuất" class="form-control col-md-8" name="MaPhieuXuat">
+                        <label class="control-label col-md-4" for="MaPhieunhap">Phiếu nhập</label>
+                        <input type="text" placeholder="Nhập mã phiếu nhập" class="form-control col-md-8" name="MaPhieuNhap">
                     </div>
                     <div class="col-md-4">
                         <label class="control-label col-md-4" for="MaPX">Phân xưởng</label>
@@ -69,6 +69,7 @@
                 </form>
                 <div class="form-group" id="export-report">
                 </div>
+                <button type="submit" id="btn-export" class="btn btn-primary offset-md-5 fa fa-file-excel-o" style="display: none;"> Excel</button>'
             </div>
         </div>
     </div>
