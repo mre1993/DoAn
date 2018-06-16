@@ -16,8 +16,8 @@
                 <th>STT</th>
                 <th>Mã phiếu xuất</th>
                 <th>Nhân viên</th>
-                <th>Phân xưởng</th>
                 <th>Kho vật tư</th>
+                <th>Phân xưởng</th>
                 <th>Ngày xuất</th>
                 <th>Nội dung</th>
                 <th>
@@ -34,8 +34,8 @@
                     <td>{{$i++}}</td>
                     <td>{{$item->MaPhieuXuat}}</td>
                     <td>{{$item->NhanVien->TenNV}}</td>
-                    <td>{{$item->PhanXuong->TenPX}}</td>
                     <td>{{$item->KhoVatTu->TenKVT}}</td>
+                    <td>{{$item->PhanXuong->TenPX}}</td>
                     <td>{{$item->created_at->format('d-m-Y')}}</td>
                     <td>{{$item->NoiDung}}</td>
                     <td>

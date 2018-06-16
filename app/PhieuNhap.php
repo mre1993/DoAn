@@ -9,15 +9,15 @@ class PhieuNhap extends Model
     protected $table = 'phieu_nhap';
 
     protected $fillable = [
-        'MaPN', 'MaNV', 'MaPX', 'MaNCC', 'NoiDung',
+        'MaPN', 'MaNV', 'MaKVT', 'MaNCC', 'NoiDung',
     ];
 
     protected $primaryKey = "MaPN";
 
     public $incrementing = false;
 
-    public function PhanXuong(){
-        return $this->belongsTo('App\PhanXuong','MaPX', 'MaPX');
+    public function KhoVatTu(){
+        return $this->belongsTo('App\PhanXuong','MaKVT', 'MaKVT');
     }
 
     public function NhanVien(){

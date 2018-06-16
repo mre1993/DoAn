@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td colspan="7" style="border: none">
-                    <p>Nhập tại xưởng: {{$phieuNhap->PhanXuong->TenPX}}, <span>Địa chỉ: {{$phieuNhap->PhanXuong->DiaChi}}</span></p>
+                    <p>Nhập tại kho: {{$phieuNhap->KhoVatTu->TenKVT}}, <span>Địa chỉ: {{$phieuNhap->KhoVatTu->DiaChi}}</span></p>
                 </td>
             </tr>
             <tr class="khung-header">

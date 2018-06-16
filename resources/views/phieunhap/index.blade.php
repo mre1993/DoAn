@@ -34,8 +34,8 @@
                     <td>{{$i++}}</td>
                     <td>{{$item->MaPN}}</td>
                     <td>{{$item->NhanVien->TenNV}}</td>
-                    <td>{{$item->PhanXuong->TenPX}}</td>
                     <td>{{$item->NhaCungCap->TenNCC}}</td>
+                    <td>{{$item->KhoVatTu->TenKVT}}</td>
                     <td>{{$item->created_at->format('d-m-Y')}}</td>
                     <td>{{$item->NoiDung}}</td>
                     <td>

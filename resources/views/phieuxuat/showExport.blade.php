@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU NHẬP VẬT TƯ</p></td>
+                <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU XUẤT VẬT TƯ</p></td>
                 <td colspan="2" style="padding-top: 25px"><p>Mã phiếu: {{$phieuXuat->MaPN}}</p></td>
             </tr>
             <tr>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td colspan="7" style="border: none">
-                    <p>Nhập tại xưởng: {{$phieuXuat->PhanXuong->TenPX}}, <span>Địa chỉ: {{$phieuXuat->PhanXuong->DiaChi}}</span></p>
+                    <p>Xuất tại kho: {{$phieuXuat->KhoVatTu->TenKVT}}, <span>Địa chỉ: {{$phieuXuat->KhoVatTu->DiaChi}}</span></p>
                 </td>
             </tr>
             <tr class="khung-header">

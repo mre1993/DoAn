@@ -82,21 +82,10 @@ class PhieuXuatController extends Controller
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
             $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
-            $phanXuong = ChiTietPhanXuong::where('MaVT',$request->MaVT[$i])->where('MaPX',$request->MaPX)->first();
-            $soLuongTonPX = $phanXuong->SoLuongTon;
-            if(!$check){
-                ChiTietKhoVT::create([
-                    'MaKVT' => $request->MaKVT,
-                    'MaVT' => $request->MaVT[$i],
-                    'SoLuongTon' => $request->SoLuong[$i],
-                ]);
-            }else{
-                $soLuongTon = $check->SoLuongTon;
-                $check->SoLuongTon = $request->SoLuong[$i]+$soLuongTon;
-                $check->save();
-            }
-            $phanXuong->SoLuongTon = $soLuongTonPX - $request->SoLuong[$i];
-            $phanXuong->save();
+            $soLuongTon = $check->SoLuongTon;
+            $check->SoLuongTon = $soLuongTon - $request->SoLuong[$i];
+            $check->save();
+
             ChiTietPhieuXuat::create([
                 'MaPhieuXuat' => $request->MaPhieuXuat,
                 'MaVT' => $request->MaVT[$i],

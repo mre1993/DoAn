@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ChiTietKhoVT;
 use App\ChiTietPhanXuong;
 use App\ChiTietPhieuNhap;
+use App\KhoVatTu;
 use App\NhaCungCap;
 use App\NhanVien;
 use App\PhanXuong;
@@ -45,9 +46,9 @@ class PhieuNhapController extends Controller
         }
         $user =  Auth::user();
         $nhanVien = NhanVien::find($user->MaNV);
-        $MaPX = PhanXuong::orderBy('MaPX','ASC')->get();
+        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
         $MaNCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
-        return view('phieunhap.create',compact('MaPX','nhanVien','MaNCC'));
+        return view('phieunhap.create',compact('MaKVT','nhanVien','MaNCC'));
     }
 
     /**
@@ -59,14 +60,14 @@ class PhieuNhapController extends Controller
     public function store(Request $request)
     {
         $message = [
-            'MaPX.required' => 'Mã phân xưởng không được để trống',
+            'MaKVT.required' => 'Mã phân xưởng không được để trống',
             'MaPN.unique' => 'Mã phiếu nhập đã tồn tại',
             'MaPN.required' => 'Mã phiếu nhập không được để trống',
             'MaNCC.required' => 'Mã nhà cung cấp không được để trống',
             'MaVT.required' => 'Mã vật tư không được để trống',
         ];
         $rules = [
-            'MaPX' => 'required|string|max:10',
+            'MaKVT' => 'required|string|max:10',
             'MaPN' => 'required|string|max:10|unique:phieu_nhap',
             'MaNCC' => 'required|string|max:10',
             'MaVT' => 'required|max:10',
@@ -81,10 +82,10 @@ class PhieuNhapController extends Controller
         };
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
-            $check = ChiTietPhanXuong::where('MaVT',$request->MaVT[$i])->where('MaPX',$request->MaPX)->first();
+            $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
             if(!$check){
-                ChiTietPhanXuong::create([
-                    'MaPX' => $request->MaPX,
+                ChiTietKhoVT::create([
+                    'MaKVT' => $request->MaKVT,
                     'MaVT' => $request->MaVT[$i],
                     'SoLuongTon' => $request->SoLuong[$i],
                 ]);
@@ -105,7 +106,7 @@ class PhieuNhapController extends Controller
 
         PhieuNhap::create([
             'MaPN' =>$request->MaPN,
-            'MaPX' => $request->MaPX,
+            'MaKVT' => $request->MaKVT,
             'MaNV' => $request->MaNV,
             'MaNCC' => $request->MaNCC,
             'NoiDung' => $request->NoiDung,
@@ -207,29 +208,29 @@ class PhieuNhapController extends Controller
     public function report(){
         $user =  Auth::user();
         $nhanVien = NhanVien::find($user->MaNV);
-        $MaPX = PhanXuong::orderBy('MaPX','ASC')->get();
+        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
         $MaNCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
-        return view('report.phieunhap',compact('MaPX','nhanVien','MaNCC'));
+        return view('report.phieunhap',compact('MaKVT','nhanVien','MaNCC'));
     }
 
     public function returnReport(Request $request){
         $result = DB::table('phieu_nhap')
             ->select(
                 'phieu_nhap.MaPN',
-                'phan_xuong.TenPX',
+                'kho_vat_tu.MaKVT',
                 'nha_cung_cap.TenNCC',
                 'nhan_vien.TenNV',
                 'phieu_nhap.NoiDung',
                 'phieu_nhap.created_at',
                 'nha_cung_cap.TenNCC',
-                'phan_xuong.TenPX',
+                'kho_vat_tu.TenKVT',
                 'nhan_vien.TenNV',
                 'chi_tiet_phieu_nhap.*',
                 'vat_tu.MoTa',
                 'vat_tu.TenVT'
             )
             ->join('nha_cung_cap','nha_cung_cap.MaNCC','phieu_nhap.MaNCC')
-            ->join('phan_xuong','phan_xuong.MaPX','phieu_nhap.MaPX')
+            ->join('kho_vat_tu','kho_vat_tu.MaKVT','phieu_nhap.MaKVT')
             ->join('nhan_vien','nhan_vien.MaNV','phieu_nhap.MaNV')
             ->join('chi_tiet_phieu_nhap','chi_tiet_phieu_nhap.MaPN','phieu_nhap.MaPN')
             ->join('vat_tu','vat_tu.MaVT','chi_tiet_phieu_nhap.MaVT')
@@ -239,8 +240,8 @@ class PhieuNhapController extends Controller
                 }
             })
             ->where(function ($result) use ($request){
-                if($request->MaPX!=null){
-                    $result->where('phan_xuong.MaPX','LIKE','%'.$request->MaPX.'%');
+                if($request->MaKVT!=null){
+                    $result->where('kho_vat_tu.MaKVT','LIKE','%'.$request->MaKVT.'%');
                 }
             })
             ->where(function ($result) use ($request){
@@ -279,20 +280,20 @@ class PhieuNhapController extends Controller
         $result = DB::table('phieu_nhap')
             ->select(
                 'phieu_nhap.MaPN',
-                'phan_xuong.TenPX',
+                'kho_vat_tu.TenKVT',
                 'nha_cung_cap.TenNCC',
                 'nhan_vien.TenNV',
                 'phieu_nhap.NoiDung',
                 'phieu_nhap.created_at',
                 'nha_cung_cap.TenNCC',
-                'phan_xuong.TenPX',
+                'kho_vat_tu.TenKVT',
                 'nhan_vien.TenNV',
                 'chi_tiet_phieu_nhap.*',
                 'vat_tu.MoTa',
                 'vat_tu.TenVT'
             )
             ->join('nha_cung_cap','nha_cung_cap.MaNCC','phieu_nhap.MaNCC')
-            ->join('phan_xuong','phan_xuong.MaPX','phieu_nhap.MaPX')
+            ->join('kho_vat_tu','kho_vat_tu.MaKVT','phieu_nhap.MaKVT')
             ->join('nhan_vien','nhan_vien.MaNV','phieu_nhap.MaNV')
             ->join('chi_tiet_phieu_nhap','chi_tiet_phieu_nhap.MaPN','phieu_nhap.MaPN')
             ->join('vat_tu','vat_tu.MaVT','chi_tiet_phieu_nhap.MaVT')
@@ -302,8 +303,8 @@ class PhieuNhapController extends Controller
                 }
             })
             ->where(function ($result) use ($request){
-                if($request->MaPX!=null){
-                    $result->where('phan_xuong.MaPX','LIKE','%'.$request->MaPX.'%');
+                if($request->MaKVT!=null){
+                    $result->where('kho_vat_tu.MaKVT','LIKE','%'.$request->MaKVT.'%');
                 }
             })
             ->where(function ($result) use ($request){
