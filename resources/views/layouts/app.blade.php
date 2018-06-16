@@ -16,6 +16,7 @@
     <script src="{{ asset('js/jquery-ui.min.js') }}" defer></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('js/loader.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/fontawesome.min.js')}}" type="text/javascript"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="{{ asset('css/Raleway.css') }}" rel="stylesheet" type="text/css">

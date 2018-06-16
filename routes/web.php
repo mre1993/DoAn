@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'PhieuNhapController@report'
     ]);
     Route::get('/bc-phieunhap/get/','PhieuNhapController@returnReport')->name('reportRecord.phieunhap');
-    Route::get('/bc-phieuxuat/printReport/{request}','PhieuXuatController@printReport');
-    Route::get('/bc-phieunhap/printReport/{request}','PhieuNhapController@printReport');
+    Route::get('/bc-phieuxuat/printReport/','PhieuXuatController@printReport');
+    Route::get('/bc-phieunhap/printReport/','PhieuNhapController@printReport');
     Route::get('/mostsupplies','VatTuController@mostSupplies');
 });
