@@ -56,12 +56,12 @@
         </td>
         <td> {{$item->MaVT}} </td>
         <td> {{$item->TenVT}} </td>
-        <td> {{$item->TenPX}} </td>
+        <td> {{$item->TenKVT}} </td>
         <td>
             @if($check == 'PhieuNhap')
                 {{$item->TenNCC}}
             @else
-                {{$item->TenKVT}}
+                {{$item->TenPX}}
             @endif
         <td> {{$item->SoLuong}} </td>
         <td> {{$item->DonGia}} </td>

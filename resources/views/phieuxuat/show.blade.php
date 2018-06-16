@@ -92,7 +92,7 @@
                     </tr>
                     <tr>
                         <td colspan="7" style="border: none">
-                            <p>Xuất tại xưởng: {{$phieuXuat->PhanXuong->TenPX}}, <span>Địa chỉ: {{$phieuXuat->PhanXuong->TenPX}}</span></p>
+                            <p>Xuất tại kho: {{$phieuXuat->PhanXuong->TenPX}}, <span>Địa chỉ: {{$phieuXuat->PhanXuong->TenPX}}</span></p>
                         </td>
                     </tr>
                     <tr class="khung-header">

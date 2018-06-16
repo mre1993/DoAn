@@ -17,7 +17,7 @@ class PhieuNhap extends Model
     public $incrementing = false;
 
     public function KhoVatTu(){
-        return $this->belongsTo('App\PhanXuong','MaKVT', 'MaKVT');
+        return $this->belongsTo('App\KhoVatTu','MaKVT', 'MaKVT');
     }
 
     public function NhanVien(){

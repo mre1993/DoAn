@@ -86,8 +86,8 @@ $(document).ready(function() {
                             '<td>'+ v['MaPhieuXuat'] +'</td>'+
                             '<td>'+ v['MaVT'] +'</td>'+
                             '<td>'+ v['TenVT'] +'</td>'+
-                            '<td>'+ v['TenPX'] +'</td>'+
                             '<td>'+ v['TenKVT'] +'</td>'+
+                            '<td>'+ v['TenPX'] +'</td>'+
                             '<td>'+ v['SoLuong'] +'</td>'+
                             '<td>'+ v['DonGia'] +'</td>'+
                             '<td>'+ v['ThanhTien'] +'</td>'+
@@ -105,8 +105,8 @@ $(document).ready(function() {
                                 '<th>Mã phiếu xuất</th>'+
                                 '<th>Mã vật tư</th>'+
                                 '<th>Tên vật tư</th>'+
-                                '<th>Phân xưởng</th>'+
                                 '<th>Kho vật tư</th>'+
+                                '<th>Phân xưởng</th>'+
                                 '<th>Số lượng</th>'+
                                 '<th>Đơn Giá</th>'+
                                 '<th>Thành Tiền</th>'+
@@ -149,8 +149,8 @@ $(document).ready(function() {
                         '<td>'+ v['MaPN'] +'</td>'+
                         '<td>'+ v['MaVT'] +'</td>'+
                         '<td>'+ v['TenVT'] +'</td>'+
-                        '<td>'+ v['TenPX'] +'</td>'+
                         '<td>'+ v['TenNCC'] +'</td>'+
+                        '<td>'+ v['TenKVT'] +'</td>'+
                         '<td>'+ v['SoLuong'] +'</td>'+
                         '<td>'+ v['DonGia'] +'</td>'+
                         '<td>'+ v['ThanhTien'] +'</td>'+
@@ -168,8 +168,8 @@ $(document).ready(function() {
                     '<th>Mã phiếu nhập</th>'+
                     '<th>Mã vật tư</th>'+
                     '<th>Tên vật tư</th>'+
-                    '<th>Phân xưởng</th>'+
                     '<th>Nhà cung cấp</th>'+
+                    '<th>Kho vật tư</th>'+
                     '<th>Số lượng</th>'+
                     '<th>Đơn Giá</th>'+
                     '<th>Thành Tiền</th>'+
