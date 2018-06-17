@@ -43,6 +43,9 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'PhieuXuatController@printExcel'
     ]);
     Route::resource('/phieuxuat','PhieuXuatController');
+    Route::get('/tim-danh-muc','HomeController@searchDM')->name('search.tim-dm');
+    Route::get('/tim-nhap-xuat','HomeController@searchNX')->name('search.tim-nhap-xuat');
+//       Route::get('tim-ton','HomeController@searchTon')->name('search.tim-ton');
     Route::get('/ton-kho','KhoVatTuController@showTonKho')->name('tonkho.index');
     Route::get('/ton-kho/quan-ly-hong/{request}','KhoVatTuController@checkHong')->name('tonkho.edit');
     Route::get('/bc-vattu',[
@@ -50,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'VatTuController@report'
     ]);
     Route::get('/bc-vattu/get/','VatTuController@returnReport')->name('reportRecord.vattu');
+    Route::get('/bc-vattu/printTon','VatTuController@printTon')->name('printTon.vattu');
     Route::get('/bc-phieuxuat','PhieuXuatController@report')->name('report.phieuxuat');
     Route::get('/bc-phieuxuat/get/','PhieuXuatController@returnReport')->name('reportRecord.phieuxuat');
     Route::get('/bc-phieunhap',[
@@ -59,6 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bc-phieunhap/get/','PhieuNhapController@returnReport')->name('reportRecord.phieunhap');
     Route::get('/bc-phieuxuat/printReport/','PhieuXuatController@printReport');
     Route::get('/bc-phieunhap/printReport/','PhieuNhapController@printReport');
+    Route::get('/mostimport','VatTuController@mostImport');
+    Route::get('/mostexport','VatTuController@mostExport');
+    Route::get('/mostinventory','VatTuController@mostInventory');
     Route::get('/mostsupplies','VatTuController@mostSupplies');
     Route::prefix('search')->group(function(){
         Route::get('tim-tai-khoan')->name('tim-tk');

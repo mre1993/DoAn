@@ -51,9 +51,8 @@
                 <span class="fa fa-search"></span> <b>Tìm kiếm</b>
             </a>
             <ul class="collapse" id="tim-kiem">
-                <li class=""><a href="{{route('baocao.vattu')}}"><i class="fa fa-file-alt"></i> <span>Tìm kiếm danh mục</span></a></li>
-                <li class=""><a href="{{route('report.phieunhap')}}"><i class="fa fa-file-alt"></i> <span>Tìm kiếm phiếu nhập vật tư</span></a></li>
-                <li class=""><a href="{{route('report.phieuxuat')}}"><i class="fa fa-file-alt"></i> <span>Tìm kiếm phiếu xuất vật tư</span></a></li>
+                <li class=""><a href="{{route('search.tim-dm')}}"><i class="fa fa-file-alt"></i> <span>Tìm kiếm danh mục</span></a></li>
+                <li class=""><a href="{{route('search.tim-nhap-xuat')}}"><i class="fa fa-file-alt"></i> <span>Tìm kiếm phiếu nhập-xuất</span></a></li>
             </ul>
         </div>
     </div>

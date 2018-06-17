@@ -162,7 +162,7 @@ class PhieuXuatController extends Controller
     public function printExcel($id)
     {
         $vatTu = ChiTietPhieuXuat::where('MaPhieuXuat',$id)->orderBy('id','ASC')->get();
-        $phieuXuat = PhieuXuat::where('MaPhieuXuart',$id)->first();
+        $phieuXuat = PhieuXuat::where('MaPhieuXuat',$id)->first();
         $i=1;
         $sumSL = 0;
         $sumTT = 0;

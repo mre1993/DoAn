@@ -207,9 +207,12 @@ $(document).ready(function() {
                     content.push(
                         '<tr>'+
                         '<td>'+i+'</td>'+
+                        '<td>'+v['TenKVT']+'</td>'+
                         '<td>'+ v['MaVT'] +'</td>'+
                         '<td>'+ v['TenVT'] +'</td>'+
-                        '<td>'+ v['sum'] +'</td>'+
+                        '<td>'+ v['SoLuongTon'] +'</td>'+
+                        '<td>'+ v['SoLuongHong'] +'</td>'+
+                        '<td>'+ v['TongSoLuong'] +'</td>'+
                         '<td>'+ v['DonGia'] +'</td>'+
                         '<td>'+ NoiDung +'</td>'+
                         '</tr>');
@@ -220,9 +223,12 @@ $(document).ready(function() {
                     '<thead>'+
                     '<tr>'+
                     '<th>STT</th>'+
+                    '<th>Kho vật tư</th>'+
                     '<th>Mã vật tư</th>'+
                     '<th>Tên vật tư</th>'+
-                    '<th>Số lượng</th>'+
+                    '<th>Số lượng tồn</th>'+
+                    '<th>Số lượng hỏng</th>'+
+                    '<th>Tổng số lượng</th>'+
                     '<th>Đơn Giá</th>'+
                     '<th>Mô Tả</th>'+
                     '</tr>'+
@@ -231,10 +237,28 @@ $(document).ready(function() {
                     content +
                     '</tbody>'+
                     '</table>';
+                $('#btn-export-ton').css("display",'block');
                 $('#export-report').children().remove();
                 $('#export-report').append(record);
             }
         });
+    });
+
+    $('#btn-export-ton').click(function() {
+        var fd = $('#myform-ton').serialize();
+        url = "bc-vattu/printTon";
+        $.ajax({
+            url: url, // the url of the php file that will generate the excel file
+            data:fd , //or similar - based on the grid's API
+            success: function(response){
+                var a = document.createElement("a");
+                a.href = response.file;
+                a.download = response.name;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            },
+        })
     });
 
     $('#btn-export').click(function() {
@@ -262,11 +286,14 @@ $(document).ready(function() {
     });
     ///charts
     var jsonData1  ;
+    var jsonData2  ;
+    var jsonData3  ;
     $.ajax({
         dataType: 'JSON',
         type: 'GET',
-        url: "mostsupplies",
+        url: "mostimport",
         success:function (data) {
+            console.log(data);
             jsonData1 = data
         }
     });
@@ -282,5 +309,49 @@ $(document).ready(function() {
         // Display the chart inside the <div> element with id="piechart"
         var chart = new google.visualization.PieChart(document.getElementById('piechart-1'));
         chart.draw(data1, options);
+    }
+
+    $.ajax({
+        dataType: 'JSON',
+        type: 'GET',
+        url: "mostexport",
+        success:function (data) {
+            jsonData2 = data
+        }
+    });
+    // Load google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart2);
+    // Draw the chart and set the chart values
+    function drawChart2() {
+        var data2 = google.visualization.arrayToDataTable(jsonData2);
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Vật tư xuất nhiều nhất', 'width':550, 'height':400};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart-2'));
+        chart.draw(data2, options);
+    }
+
+    $.ajax({
+        dataType: 'JSON',
+        type: 'GET',
+        url: "mostinventory",
+        success:function (data) {
+            jsonData3 = data
+        }
+    });
+    // Load google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart3);
+    // Draw the chart and set the chart values
+    function drawChart3() {
+        var data3 = google.visualization.arrayToDataTable(jsonData3);
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Vật tư tồn nhiều nhất', 'width':550, 'height':400};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart-3'));
+        chart.draw(data3, options);
     }
 });
