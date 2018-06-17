@@ -31,10 +31,10 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <select style="height: 100%;"  name="MaNCC" class="form-control">
-                                <option value="" disabled selected>Chọn nhà cung cấp</option>
-                                @foreach($MaNCC as $item)
-                                    <option value="{{ $item->MaNCC }}" {{ old('MaNCC') == $item->MaNCC ? 'selected' : '' }}> {{ $item->TenNCC }}</option>
+                            <select style="height: 100%;"  name="MaKVT" class="form-control">
+                                <option value="" disabled selected>Chọn kho lưu vật tư</option>
+                                @foreach($MaKVT as $item)
+                                    <option value="{{ $item->MaKVT }}" {{ old('MaKVT') == $item->MaKVT ? 'selected' : '' }}> {{ $item->TenKVT }}</option>
                             @endforeach
                             </select>
                         </div>
