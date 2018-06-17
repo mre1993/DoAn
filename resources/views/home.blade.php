@@ -33,7 +33,7 @@
             <ul class="collapse" id="nhapxuat">
                 <li class=""><a href="{{route('phieunhap.index')}}"><i class="fa fa-download"></i> <span>Quản lý nhập vật tư</span></a></li>
                 <li class=""><a href="{{route('phieuxuat.index')}}"><i class="fa fa-upload"></i> <span>Quản lý xuất vật tư</span></a></li>
-                <li class=""><a href="{{route('phieuxuat.index')}}"><i class="fa fa-upload"></i> <span>Quản lý tồn kho vật tư</span></a></li>
+                <li class=""><a href="{{route('tonkho.index')}}"><i class="fa fa-upload"></i> <span>Quản lý tồn kho vật tư</span></a></li>
             </ul>
         </div>
         <div class="menu-list">

@@ -60,7 +60,7 @@ class PhieuNhapController extends Controller
     public function store(Request $request)
     {
         $message = [
-            'MaKVT.required' => 'Mã phân xưởng không được để trống',
+            'MaKVT.required' => 'Mã kho vật tư không được để trống',
             'MaPN.unique' => 'Mã phiếu nhập đã tồn tại',
             'MaPN.required' => 'Mã phiếu nhập không được để trống',
             'MaNCC.required' => 'Mã nhà cung cấp không được để trống',
@@ -88,10 +88,13 @@ class PhieuNhapController extends Controller
                     'MaKVT' => $request->MaKVT,
                     'MaVT' => $request->MaVT[$i],
                     'SoLuongTon' => $request->SoLuong[$i],
+                    'TongSoLuong' => $request->SoLuong[$i]
                 ]);
             }else{
+                $soLuongHong = $check->SoLuongHong;
                 $soLuongTon = $check->SoLuongTon;
                 $check->SoLuongTon = $request->SoLuong[$i]+$soLuongTon;
+                $check->TongSoLuong = $request->SoLuong[$i]+$soLuongTon+$soLuongHong;
                 $check->DonGia = $request->DonGia;
                 $check->save();
             }
