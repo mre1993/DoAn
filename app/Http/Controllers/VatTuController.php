@@ -205,45 +205,52 @@ class VatTuController extends Controller
         return view('report.vattu',compact('MaKVT'));
     }
 
-    public function mostSupplies(){
-        $vatTuPX = ChiTietPhanXuong::all();
-        $vatTuKhoVT = ChiTietKhoVT::all();
-        $array1 = array();
-        $array2 = array();
-        $array3 = array();
-        foreach($vatTuPX as $item1)
-        {
-            $array1[] = [$item1->VatTu->TenVT,$item1->SoLuongTon];
+    public function mostImport(){
+        $nhap = DB::table('chi_tiet_phieu_nhap')
+            ->join('vat_tu','vat_tu.MaVT','chi_tiet_phieu_nhap.MaVT')
+            ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_phieu_nhap.SoLuong) as SoLuong'))
+            ->groupBy('chi_tiet_phieu_nhap.MaVT')
+            ->orderBy('ID','DESC')
+            ->get()->toArray();
+        $array = [];
+        $array[] = ['Vật tư','Số lượng'];
+        foreach ($nhap as $value){
+            $array[] = [$value->TenVT,json_decode($value->SoLuong)];
         }
-
-        foreach($vatTuKhoVT as $item2)
-        {
-            $array2[] = [$item2->VatTu->TenVT,$item2->SoLuongTon];
-        }
-        $count1 = count($array1);
-        $count2 = count($array2);
-        $key1 = array();
-        $key2 = array();
-        for($i=0;$i<$count1;$i++){
-            for($j=0;$j<$count2;$j++){
-                if($array1[$i][0]=== $array2[$j][0]){
-                    $array3[] = [$array1[$i][0],$array1[$i][1] + $array2[$j][1]];
-                    $key1[] = $i;
-                    $key2[] =$j;
-                }
-            }
-        }
-        $array1 = array_diff_key($array1,$key1);
-        $array2 = array_diff_key($array2,$key2);
-        $array1 = array_merge($array1,$array2);
-        $array1 = array_merge($array1,$array3);
-        $sum = 0;
-        foreach($array1 as $key => $item){
-            $sum = $sum + $item[1];
-        }
-        array_unshift($array1,['Vật tư','Số lượng mỗi loại vật tư']);
-        return response()->json($array1);
+        return response()->json($array);
     }
+
+    public function mostInventory(){
+        $nhap = DB::table('chi_tiet_kho_vat_tu')
+            ->join('vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
+            ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongTon) as SoLuong'))
+            ->groupBy('chi_tiet_kho_vat_tu.MaVT')
+            ->orderBy('ID','DESC')
+            ->get()->toArray();
+        $array = [];
+        $array[] = ['Vật tư','Số lượng'];
+        foreach ($nhap as $value){
+            $array[] = [$value->TenVT,json_decode($value->SoLuong)];
+        }
+        return response()->json($array);
+    }
+
+    public function mostExport(){
+        $xuat = DB::table('chi_tiet_phieu_xuat')
+            ->join('vat_tu','vat_tu.MaVT','chi_tiet_phieu_xuat.MaVT')
+            ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_phieu_xuat.SoLuong) as SoLuong'))
+            ->groupBy('chi_tiet_phieu_xuat.MaVT')
+            ->orderBy('ID','DESC')
+            ->limit(10)
+            ->get()->toArray();
+        $array = [];
+        $array[] = ['Vật tư','Số lượng'];
+        foreach ($xuat as $value){
+            $array[] = [$value->TenVT,json_decode($value->SoLuong)];
+        }
+        return response()->json($array);
+    }
+
 
     public function returnReport(Request $request){
         $result = DB::table('chi_tiet_kho_vat_tu')

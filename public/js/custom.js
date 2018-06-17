@@ -286,11 +286,14 @@ $(document).ready(function() {
     });
     ///charts
     var jsonData1  ;
+    var jsonData2  ;
+    var jsonData3  ;
     $.ajax({
         dataType: 'JSON',
         type: 'GET',
-        url: "mostsupplies",
+        url: "mostimport",
         success:function (data) {
+            console.log(data);
             jsonData1 = data
         }
     });
@@ -306,5 +309,49 @@ $(document).ready(function() {
         // Display the chart inside the <div> element with id="piechart"
         var chart = new google.visualization.PieChart(document.getElementById('piechart-1'));
         chart.draw(data1, options);
+    }
+
+    $.ajax({
+        dataType: 'JSON',
+        type: 'GET',
+        url: "mostexport",
+        success:function (data) {
+            jsonData2 = data
+        }
+    });
+    // Load google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart2);
+    // Draw the chart and set the chart values
+    function drawChart2() {
+        var data2 = google.visualization.arrayToDataTable(jsonData2);
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Vật tư xuất nhiều nhất', 'width':550, 'height':400};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart-2'));
+        chart.draw(data2, options);
+    }
+
+    $.ajax({
+        dataType: 'JSON',
+        type: 'GET',
+        url: "mostinventory",
+        success:function (data) {
+            jsonData3 = data
+        }
+    });
+    // Load google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart3);
+    // Draw the chart and set the chart values
+    function drawChart3() {
+        var data3 = google.visualization.arrayToDataTable(jsonData3);
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Vật tư tồn nhiều nhất', 'width':550, 'height':400};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart-3'));
+        chart.draw(data3, options);
     }
 });
