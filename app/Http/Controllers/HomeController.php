@@ -25,4 +25,12 @@ class HomeController extends Controller
     {
         return view('dashboard');
     }
+
+    public function searchDM(){
+        return view('tim-kiem.danhmuc');
+    }
+
+    public function searchNX(){
+        return view('tim-kiem.nhapxuat');
+    }
 }
