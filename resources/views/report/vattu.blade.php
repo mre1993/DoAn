@@ -32,17 +32,17 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <label class="control-label col-md-4" for="start">Số lượng ít nhất</label>
+                            <label class="control-label col-md-4" for="start">Số lượng tồn ít nhất</label>
                             <input type="number" placeholder="Từ số lượng" name="start" class="form-control col-md-8">
                         </div>
                         <div class="col-md-6">
-                            <label class="control-label col-md-4" for="end">Số lượng lớn nhất</label>
+                            <label class="control-label col-md-4" for="end">Số lượng tồn lớn nhất</label>
                             <input type="number" placeholder="Đến số lượng" name="end" class="form-control col-md-8">
                         </div>
                     </div>
                     <div class="form-group row mb-0">
                         <div class="col-md-7 offset-md-5">
-                            <button type="submit" class="btn btn-primary" id="report-ton">
+                            <button type="button" class="btn btn-primary" id="report-ton">
                                 {{ __('Tạo') }}
                             </button>
                         </div>
@@ -50,6 +50,7 @@
                 </form>
                 <div class="form-group" id="export-report">
                 </div>
+                <button type="submit" id="btn-export-ton" class="btn btn-primary offset-md-5 fa fa-file-excel-o" style="display: none;"> Excel</button>
             </div>
         </div>
     </div>

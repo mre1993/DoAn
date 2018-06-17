@@ -44,16 +44,15 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
     Route::resource('/phieuxuat','PhieuXuatController');
     Route::prefix('search')->group(function(){
-       Route::get('tim-tai-khoan')->name('tim-tk');
        Route::get('tim-danh-muc')->name('tim-dm');
        Route::get('tim-nhap-xuat-ton')->name('tim-n-x-t');
-       Route::get('tim-bao-cao')->name('tim-bc');
     });
     Route::get('/bc-vattu',[
         'as' => 'baocao.vattu',
         'uses' => 'VatTuController@report'
     ]);
     Route::get('/bc-vattu/get/','VatTuController@returnReport')->name('reportRecord.vattu');
+    Route::get('/bc-vattu/printTon','VatTuController@printTon')->name('printTon.vattu');
     Route::get('/bc-phieuxuat','PhieuXuatController@report')->name('report.phieuxuat');
     Route::get('/bc-phieuxuat/get/','PhieuXuatController@returnReport')->name('reportRecord.phieuxuat');
     Route::get('/bc-phieunhap',[

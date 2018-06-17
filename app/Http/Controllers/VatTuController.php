@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VatTuController extends Controller
 {
@@ -248,10 +249,8 @@ class VatTuController extends Controller
         $result = DB::table('chi_tiet_kho_vat_tu')
             ->join('kho_vat_tu','kho_vat_tu.MaKVT','chi_tiet_kho_vat_tu.MaKVT')
             ->join('vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
-            ->select('vat_tu.*'
+            ->select('vat_tu.*','kho_vat_tu.TenKVT','chi_tiet_kho_vat_tu.*'
             )
-            ->groupBy('vat_tu.MaVT')
-            ->selectRaw('sum(chi_tiet_kho_vat_tu.SoLuongTon) As sum')
             ->where(function ($result) use ($request){
                 if($request->MaKVT!=null){
                     $result->where('kho_vat_tu.MaKVT','LIKE','%'.$request->MaKVT.'%');
@@ -264,22 +263,82 @@ class VatTuController extends Controller
                 }
             })
             ->where(function ($result) use ($request){
-                if($request->start!=null){
-                    $check = DB::select('SELECT sum(chi_tiet_kho_vat_tu.SoLuongTon) As sum from `chi_tiet_kho_vat_tu` GROUP BY MaKVT');
-                    foreach ($check as $item) {
-                        $result->where($item->sum,'<=',$request->start);
-                    }                }
+                if($request->start!=null) {
+                    $result->where('chi_tiet_kho_vat_tu.SoLuongTon', '>=', $request->start);
+                }
             })
             ->where(function ($result) use ($request){
                 if($request->end!=null){
-                    $check = DB::select('SELECT sum(chi_tiet_kho_vat_tu.SoLuongTon) As sum from `chi_tiet_kho_vat_tu` GROUP BY MaKVT');
-                    foreach ($check as $item) {
-                        $result->where($item->sum,'<=',$request->end);
-                    }
+                    $result->where('chi_tiet_kho_vat_tu.SoLuongTon','<=',$request->end);
                 }
             })
-            ->orderBy('chi_tiet_kho_vat_tu.MaVT','DESC')->get();
+            ->orderBy('chi_tiet_kho_vat_tu.MaKVT','DESC')->get();
 
         return response()->json($result);
+    }
+
+    public function printTon(Request $request){
+        $i=1;
+        $result = DB::table('chi_tiet_kho_vat_tu')
+            ->join('kho_vat_tu','kho_vat_tu.MaKVT','chi_tiet_kho_vat_tu.MaKVT')
+            ->join('vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
+            ->select('vat_tu.*','kho_vat_tu.TenKVT','chi_tiet_kho_vat_tu.*'
+            )
+            ->where(function ($result) use ($request){
+                if($request->MaKVT!=null){
+                    $result->where('kho_vat_tu.MaKVT','LIKE','%'.$request->MaKVT.'%');
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->TimVT!=null){
+                    $result->where('vat_tu.MaVT','LIKE','%'.$request->TimVT.'%')
+                        ->orWhere('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->start!=null) {
+                    $result->where('chi_tiet_kho_vat_tu.SoLuongTon', '>=', $request->start);
+                }
+            })
+            ->where(function ($result) use ($request){
+                if($request->end!=null){
+                    $result->where('chi_tiet_kho_vat_tu.SoLuongTon','<=',$request->end);
+                }
+            })
+            ->orderBy('chi_tiet_kho_vat_tu.MaKVT','DESC')->get();
+        $count = count($result);
+        $setborder = $count + 3;
+        $setHeight1 = $count + 4;
+        $setHeight2 = $count + 5;
+        $myFile =  Excel::create('New', function($excel) use($result,$i,$count,$setborder,$setHeight1,$setHeight2) {
+            $excel->sheet('First sheet', function($sheet)  use($result,$i,$count,$setborder,$setHeight1,$setHeight2) {
+                $sheet->loadView('report.printTon')
+//                    ->setBorder('A3:L'.$setborder, 'thin')
+                    ->setHeight(1,50)
+//                    ->setHeight($setHeight1,40)
+//                    ->setHeight($setHeight2,20)
+//                    ->setWidth('A',7)
+//                    ->setWidth('B',15)
+//                    ->setWidth('C',10)
+//                    ->setWidth('D',30)
+//                    ->setWidth('E',18)
+//                    ->setWidth('F',18)
+//                    ->setWidth('G',10)
+//                    ->setWidth('H',8)
+//                    ->setWidth('I',15)
+//                    ->setWidth('J',10)
+//                    ->setWidth('K',20)
+//                    ->setWidth('L',20)
+                    ->with('i' , $i)
+                    ->with('result' , $result);
+            });
+        });
+        $myFile = $myFile->string('xlsx'); //change xlsx for the format you want, default is xls
+        $response =  array(
+            'name' => "filename", //no extention needed
+            'file' => "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,".base64_encode($myFile) //mime type of used format
+        );
+        return response()->json($response);
+//        return view('report.printTon');
     }
 }
