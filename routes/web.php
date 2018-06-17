@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tim-danh-muc','HomeController@searchDM')->name('search.tim-dm');
     Route::get('/tim-nhap-xuat','HomeController@searchNX')->name('search.tim-nhap-xuat');
 //       Route::get('tim-ton','HomeController@searchTon')->name('search.tim-ton');
+    Route::get('/ton-kho','KhoVatTuController@showTonKho')->name('tonkho.index');
+    Route::get('/ton-kho/quan-ly-hong/{request}','KhoVatTuController@checkHong')->name('tonkho.edit');
     Route::get('/bc-vattu',[
         'as' => 'baocao.vattu',
         'uses' => 'VatTuController@report'
@@ -64,4 +66,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/mostimport','VatTuController@mostImport');
     Route::get('/mostexport','VatTuController@mostExport');
     Route::get('/mostinventory','VatTuController@mostInventory');
+    Route::get('/mostsupplies','VatTuController@mostSupplies');
+    Route::prefix('search')->group(function(){
+        Route::get('tim-tai-khoan')->name('tim-tk');
+        Route::get('tim-danh-muc')->name('tim-dm');
+        Route::get('tim-nhap-xuat-ton')->name('tim-n-x-t');
+        Route::get('tim-bao-cao')->name('tim-bc');
+    });
 });

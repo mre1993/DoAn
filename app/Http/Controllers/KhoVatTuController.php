@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\ChiTietKhoVT;
 use App\KhoVatTu;
+use App\VatTu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class KhoVatTuController extends Controller
 {
@@ -171,5 +173,42 @@ class KhoVatTuController extends Controller
         $item = KhoVatTu::where('MaKVT',$id);
         $item->delete();
         return redirect()->back();
+    }
+
+    public function showTonKho(){
+        $items = DB::table('vat_tu')
+            ->select(
+                'vat_tu.MaVT',
+                'vat_tu.TenVT',
+                'chi_tiet_kho_vat_tu.MaKVT',
+                DB::raw('SUM(chi_tiet_kho_vat_tu.TongSoLuong) as TongSoLuong'),
+                DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongTon) as SoLuongTon'),
+                DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongHong) as SoLuongHong')
+            )
+            ->join('chi_tiet_kho_vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
+            ->groupBy('chi_tiet_kho_vat_tu.MaVT')
+            ->orderBy('vat_tu.MaVT','DESC')
+            ->paginate(10);
+        return view('tonkho.index',compact('items'));
+    }
+
+    public function checkHong($id){
+        $item = DB::table('vat_tu')
+            ->select(
+                'vat_tu.MaVT',
+                'vat_tu.TenVT',
+                'kho_vat_tu.TenKVT',
+                DB::raw('SUM(chi_tiet_kho_vat_tu.TongSoLuong) as TongSoLuong'),
+
+                DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongTon) as SoLuongTon'),
+                DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongHong) as SoLuongHong')
+            )
+            ->join('chi_tiet_kho_vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
+            ->join('kho_vat_tu','kho_vat_tu.MaKVT','chi_tiet_kho_vat_tu.MaKVT')
+            ->where('vat_tu.MaVT',$id)
+            ->groupBy('vat_tu.MaVT')
+            ->orderBy('vat_tu.MaVT','DESC')
+            ->first();
+        return view('tonkho.edit',compact('item','id'));
     }
 }
