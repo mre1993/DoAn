@@ -15,15 +15,15 @@
         </td>
     </tr>
     <tr >
-        <td colspan="12" class=" text-uppercase">
+        <td colspan="9" class=" text-uppercase">
             <h1 style="margin-top:30px;margin-bottom: 0;text-align: center;">
                 BÁO CÁO TỒN KHO
             </h1>
         </td>
     </tr>
     <tr>
-        <td>
-            <span id="date" style="text-align: center;display: block;margin-bottom:30px">18/06/2018</span>
+        <td colspan="9">
+            <span id="date" style="text-align: center;display: block;margin-bottom:30px">Ngày: 18/06/2018</span>
         </td>
     </tr>
     <tr>
