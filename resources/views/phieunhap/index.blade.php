@@ -22,7 +22,7 @@
                 <th>STT</th>
                 <th>Mã phiếu nhập</th>
                 <th>Nhân viên</th>
-                <th>Phân xưởng</th>
+                <th>Nhà cung cấp</th>
                 <th>Nhà cung cấp</th>
                 <th>Ngày nhập</th>
                 <th>Nội dung</th>

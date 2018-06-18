@@ -31,7 +31,7 @@ class KhoVatTuController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return view('welcome');
         }
         return view('khovattu.create');
@@ -45,7 +45,7 @@ class KhoVatTuController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return false;
         }
         $message = [
@@ -101,7 +101,7 @@ class KhoVatTuController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return view('welcome');
         }
         $item = KhoVatTu::where('MaKVT',$id)->first();
@@ -117,7 +117,7 @@ class KhoVatTuController extends Controller
      */
     public function update(Request $request, KhoVatTu $khoVatTu)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return false;
         }
         $item = KhoVatTu::where('MaKVT',$request->id)->first();
@@ -167,7 +167,7 @@ class KhoVatTuController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return false;
         }
         $item = KhoVatTu::where('MaKVT',$id);

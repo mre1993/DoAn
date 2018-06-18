@@ -28,7 +28,7 @@ class NhanVienController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return view('welcome');
         }
         return view('nhanvien.create');
@@ -42,7 +42,7 @@ class NhanVienController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return false;
         }
         $message = [
@@ -96,7 +96,7 @@ class NhanVienController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return view('welcome');
         }
         $item = NhanVien::where('MaNV',$id)->first();
@@ -114,7 +114,7 @@ class NhanVienController extends Controller
      */
     public function update(Request $request, NhanVien $nhanVien)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return false;
         }
         $item = NhanVien::where('MaNV',$request->id)->first();
@@ -171,7 +171,7 @@ class NhanVienController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return false;
         }
         $item = NhanVien::find($id);

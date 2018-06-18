@@ -2,6 +2,13 @@
 
 //Tính tiền cho phiếu nhập
 function myFunction(e) {
+    var max = parseInt($(e).attr('max'));
+    if(max != 'undefined'){
+        if ($(e).val() > max)
+        {
+            $(e).val(max);
+        }
+    }
     var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val();
     var SoLuong =  $(e).val();
     var ThanhTien =DonGia*SoLuong;
@@ -45,9 +52,10 @@ $(document).ready(function() {
             $.ajax({
                 dataType: 'JSON',
                 type: 'GET',
-                url: "../search/" + request.term,
+                url: "search/" + request.term,
                 data: {},
                 success: function (data) {
+                    console.log(data);
                     $('.suggest-search a').remove();
                     $.each(data, function(k, v){
                         VT = v;
@@ -62,17 +70,28 @@ $(document).ready(function() {
     $(".suggest-search").click(function(e){
         var target = e.target;
         var MaVT = $(target).find("input[name='MaVT[]']").val();
+        url = "../getVT/";
+        urlXuat = "../getVT-xuat/";
+        check = "phieuxuat";
+        currentURL = window.location.href;
+        if(currentURL.indexOf(check) != -1){
+            url = urlXuat;
+        }
         $.ajax({
             dataType: 'JSON',
             type: 'GET',
-            url: "../getVT/" + MaVT,
+            url: url + MaVT,
             data: {},
             success: function (data) {
+                var max = '';
+                if(data['SoLuongTon'] != 'undefined'){
+                    max = data['SoLuongTon'];
+                }
                 var DonGia = data['DonGia'];
                 var valuationId = MaVT;
                 var record =  '<tr class="input-record" >'+
                     '<td class="TenVT">'+$(target).text()+'<input type="hidden" name="MaVT[]" value="'+MaVT+'"></td>' +
-                    '<td><input name="SoLuong[]" type="number" class="form-control" onclick="return  myFunction(this)" min="0" value="0"></td>' +
+                    '<td><input name="SoLuong[]" type="number" class="form-control" onchange="return  myFunction(this)" min="0" value="0" max="'+ max +'"></td>' +
                     '<td><input name="DonGia[]" name="DonGia[]"  readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
                     '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
                     '<td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>'+
@@ -295,7 +314,6 @@ $(document).ready(function() {
         if(currentURL.indexOf(check) != -1){
             url = urlXuat;
         }
-        console.log(url);
         $.ajax({
             url: url, // the url of the php file that will generate the excel file
             data:fd , //or similar - based on the grid's API
@@ -318,7 +336,6 @@ $(document).ready(function() {
         type: 'GET',
         url: "mostimport",
         success:function (data) {
-            console.log(data);
             jsonData1 = data
         }
     });

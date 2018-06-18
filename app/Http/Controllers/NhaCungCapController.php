@@ -30,7 +30,7 @@ class NhaCungCapController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return view('welcome');
         }
         return view('provider.create');
@@ -44,7 +44,7 @@ class NhaCungCapController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return false;
         }
         $message = [
@@ -103,7 +103,7 @@ class NhaCungCapController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return view('welcome');
         }
         $provider = NhaCungCap::where('MaNCC',$id)->first();
@@ -119,6 +119,9 @@ class NhaCungCapController extends Controller
      */
     public function update(Request $request)
     {
+        if(Auth::user()->MaQuyen < '3'){
+            return view('welcome');
+        }
         $provider = NhaCungCap::where('MaNCC',$request->id)->first();
         $vatTu = VatTu::where('MaNCC',$request->id)->get();
         $message = [
@@ -168,12 +171,12 @@ class NhaCungCapController extends Controller
      * @param  \App\NhaCungCap  $provider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NhaCungCap $id)
+    public function destroy($id)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return false;
         }
-        $provider = NhaCungCap::where('MaNCC',$id);
+        $provider = NhaCungCap::find($id);
         $provider->delete();
         return redirect()->back();
     }

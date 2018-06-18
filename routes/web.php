@@ -24,9 +24,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/nhanvien', 'NhanVienController');
     Route::resource('khovattu','KhoVatTuController');
     Route::resource('/phieunhap','PhieuNhapController');
-    Route::get('search/{TimVT}','VatTuController@search')->name('search');
-    Route::get('search-vt/{TimVT}','VatTuController@searchVT')->name('search');
+    Route::get('phieunhap/search/{TimVT}','VatTuController@searchPN');
+    Route::get('phieuxuat/search/{TimVT}','VatTuController@searchPX');
+    Route::get('search-vt/{TimVT}','VatTuController@searchVT');
     Route::get('getVT/{TimVT}','VatTuController@getVT')->name('getVT');
+    Route::get('getVT-xuat/{TimVT}','VatTuController@getVTX')->name('getVT');
     Route::get('phieunhap/showExport/{id}',[
         'as' => 'phieunhap.showExport',
         'uses' => 'PhieuNhapController@showExport'

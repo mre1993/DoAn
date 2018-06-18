@@ -189,8 +189,19 @@ class VatTuController extends Controller
         return redirect()->back();
     }
 
-    public function search($request){
+    public function searchPN($request){
         $result = VatTu::where('TenVT','LIKE','%'.$request.'%')->get();
+        return response()->json($result);
+    }
+
+    public function searchPX($request){
+        $result = DB::table('chi_tiet_kho_vat_tu')
+            ->join('vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
+            ->join('kho_vat_tu','chi_iet_kho_vat_tu.MaKVT','kho_vat_tu.MaKVT')
+            ->select('chi_tiet_kho_vat_tu.MaVT','vat_tu.TenVT')
+            ->where('TenVT','LIKE','%'.$request.'%')
+            ->where('MaKVT',$request->MaKVT)
+            ->get();
         return response()->json($result);
     }
 
@@ -201,6 +212,15 @@ class VatTuController extends Controller
 
     public function getVT($request){
         $result = VatTu::where('MaVT',$request)->first();
+        return response()->json($result);
+    }
+
+    public function getVTX($request){
+        $result = DB::table('vat_tu')
+            ->join('chi_tiet_kho_vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
+            ->select('chi_tiet_kho_vat_tu.*','vat_tu.*')
+            ->where('vat_tu.MaVT',$request)
+            ->first();
         return response()->json($result);
     }
 

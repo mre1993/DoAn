@@ -28,7 +28,7 @@ class PhanXuongController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return view('welcome');
         }
         return view('phanxuong.create');
@@ -88,7 +88,7 @@ class PhanXuongController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return view('welcome');
         }
         $factory  = PhanXuong::where('MaPX',$id)->first();
@@ -104,7 +104,7 @@ class PhanXuongController extends Controller
      */
     public function update(Request $request)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return false;
         }
         $provider = PhanXuong::where('MaPX',$request->id)->first();
@@ -141,7 +141,7 @@ class PhanXuongController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->MaQuyen < '2'){
+        if(Auth::user()->MaQuyen < '3'){
             return false;
         }
         $factory = PhanXuong::where('MaPX',$id)->first();
