@@ -15,6 +15,31 @@ function remove(e){
 $(document).ready(function() {
 
     //search vật tư
+    $(".search-vat-tu").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                dataType: 'JSON',
+                type: 'GET',
+                url: "../search-vt/" + request.term,
+                data: {},
+                success: function (data) {
+                    $('.suggest-search-vat-tu a').remove();
+                    $.each(data, function(k, v){
+                        VT = v;
+                        $('.suggest-search-vat-tu').css('display','block').append('<a href="#">'+v['TenVT']+'<input type="hidden" value="'+v['TenVT']+'" name="TenVT">'+'</a>');
+                    });
+                }
+            });
+        }
+    });
+    $(".suggest-search-vat-tu").click(function(e){
+        var target = e.target;
+        var TenVT = $(target).find("input[name='TenVT']").val();
+        $("input[name='TimVT']").val(TenVT);
+        $('.suggest-search-vat-tu').css('display','none').find("a").remove();
+    });
+
+
     $(".search-query").autocomplete({
         source: function (request, response) {
             $.ajax({

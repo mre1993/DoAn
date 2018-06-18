@@ -194,6 +194,11 @@ class VatTuController extends Controller
         return response()->json($result);
     }
 
+    public function searchVT($request){
+        $result = VatTu::where('TenVT','LIKE','%'.$request.'%')->get();
+        return response()->json($result);
+    }
+
     public function getVT($request){
         $result = VatTu::where('MaVT',$request)->first();
         return response()->json($result);
@@ -265,8 +270,7 @@ class VatTuController extends Controller
             })
             ->where(function ($result) use ($request){
                 if($request->TimVT!=null){
-                    $result->where('vat_tu.MaVT','LIKE','%'.$request->TimVT.'%')
-                        ->orWhere('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
+                    $result->where('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
                 }
             })
             ->where(function ($result) use ($request){
@@ -298,8 +302,7 @@ class VatTuController extends Controller
             })
             ->where(function ($result) use ($request){
                 if($request->TimVT!=null){
-                    $result->where('vat_tu.MaVT','LIKE','%'.$request->TimVT.'%')
-                        ->orWhere('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
+                    $result->where('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
                 }
             })
             ->where(function ($result) use ($request){

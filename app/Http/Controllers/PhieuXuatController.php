@@ -230,8 +230,7 @@ class PhieuXuatController extends Controller
             })
             ->where(function ($result) use ($request){
                 if($request->TimVT!=null){
-                    $result->where('vat_tu.MaVT','LIKE','%'.$request->TimVT.'%')
-                    ->orWhere('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
+                    $result->where('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
                 }
             })
             ->where(function ($result) use ($request){
@@ -293,8 +292,7 @@ class PhieuXuatController extends Controller
             })
             ->where(function ($result) use ($request){
                 if($request->TimVT!=null){
-                    $result->where('vat_tu.MaVT','LIKE','%'.$request->TimVT.'%')
-                        ->orWhere('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
+                    $result->where('vat_tu.TenVT','LIKE','%'.$request->TimVT.'%');
                 }
             })
             ->where(function ($result) use ($request){

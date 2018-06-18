@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('khovattu','KhoVatTuController');
     Route::resource('/phieunhap','PhieuNhapController');
     Route::get('search/{TimVT}','VatTuController@search')->name('search');
+    Route::get('search-vt/{TimVT}','VatTuController@searchVT')->name('search');
     Route::get('getVT/{TimVT}','VatTuController@getVT')->name('getVT');
     Route::get('phieunhap/showExport/{id}',[
         'as' => 'phieunhap.showExport',
@@ -45,21 +46,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/phieuxuat','PhieuXuatController');
     Route::get('/ton-kho','KhoVatTuController@showTonKho')->name('tonkho.index');
     Route::get('/ton-kho/quan-ly-hong/{request}','KhoVatTuController@checkHong')->name('tonkho.edit');
-    Route::get('/bc-vattu',[
+    Route::get('/bao-cao/bc-vattu',[
         'as' => 'baocao.vattu',
         'uses' => 'VatTuController@report'
     ]);
-    Route::get('/bc-vattu/get/','VatTuController@returnReport')->name('reportRecord.vattu');
-    Route::get('/bc-vattu/printTon','VatTuController@printTon')->name('printTon.vattu');
-    Route::get('/bc-phieuxuat','PhieuXuatController@report')->name('report.phieuxuat');
-    Route::get('/bc-phieuxuat/get/','PhieuXuatController@returnReport')->name('reportRecord.phieuxuat');
-    Route::get('/bc-phieunhap',[
+    Route::get('/bao-cao/bc-vattu/get/','VatTuController@returnReport')->name('reportRecord.vattu');
+    Route::get('/bao-cao/bc-vattu/printTon','VatTuController@printTon')->name('printTon.vattu');
+    Route::get('/bao-cao/bc-phieuxuat','PhieuXuatController@report')->name('report.phieuxuat');
+    Route::get('/bao-cao/bc-phieuxuat/get/','PhieuXuatController@returnReport')->name('reportRecord.phieuxuat');
+    Route::get('/bao-cao/bc-phieunhap',[
         'as' => 'report.phieunhap',
         'uses' => 'PhieuNhapController@report'
     ]);
-    Route::get('/bc-phieunhap/get/','PhieuNhapController@returnReport')->name('reportRecord.phieunhap');
-    Route::get('/bc-phieuxuat/printReport/','PhieuXuatController@printReport');
-    Route::get('/bc-phieunhap/printReport/','PhieuNhapController@printReport');
+    Route::get('/bao-cao/bc-phieunhap/get/','PhieuNhapController@returnReport')->name('reportRecord.phieunhap');
+    Route::get('/bao-cao/bc-phieuxuat/printReport/','PhieuXuatController@printReport');
+    Route::get('/bao-cao/bc-phieunhap/printReport/','PhieuNhapController@printReport');
     Route::get('/mostimport','VatTuController@mostImport');
     Route::get('/mostexport','VatTuController@mostExport');
     Route::get('/mostinventory','VatTuController@mostInventory');

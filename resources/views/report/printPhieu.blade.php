@@ -10,9 +10,9 @@
         <td colspan="12" class=" text-uppercase">
             <h1 style="margin-top:30px;margin-bottom: 0;text-align: center;">
                 @if($check == 'PhieuNhap')
-                    BẢNG KÊ PHIẾU NHẬP
+                    BÁO CÁO PHIẾU NHẬP
                 @else
-                    BẢNG KÊ PHIẾU XUẤT
+                    BÁO CÁO PHIẾU XUẤT
                 @endif
             </h1>
             <span id="date" style="text-align: center;display: block;margin-bottom:30px"></span>

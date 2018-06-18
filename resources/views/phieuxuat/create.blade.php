@@ -16,7 +16,6 @@
             <div class="card-body">
                 <form method="POST" action="{{ route('phieuxuat.store') }}" name="create">
                     @csrf
-
                     <div class="form-group row">
                         <div class="col-md-3">
                             <label for="TenNV" class="col-form-label">Nhân viên: {{$nhanVien->TenNV}}</label>
@@ -26,20 +25,20 @@
                             <select style="height: 100%;"  name="MaKVT" class="form-control">
                                 <option value="" disabled selected>Chọn kho vật tư</option>
                                 @foreach($MaKVT as $item)
-                                    <option value="{{ $item->MaKVT }}" > {{ $item->TenKVT }}</option>
-                            @endforeach
+                                    <option value="{{ $item->MaKVT }}" {{ old('MaKVT') == $item->MaKVT ? 'selected' : '' }}> {{ $item->TenKVT }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-3">
                             <select style="height: 100%;"  name="MaPX" class="form-control">
                                 <option value="" disabled selected>Chọn phân xưởng</option>
                                 @foreach($MaPX as $item)
-                                    <option value="{{ $item->MaPX }}" > {{ $item->TenPX }}</option>
+                                    <option value="{{ $item->MaPX }}" {{ old('MaNCC') == $item->MaPX ? 'selected' : '' }}> {{ $item->TenPX }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="text" placeholder="Nhập mã phiếu xuất" class="form-control" name="MaPhieuXuat">
+                            <input type="text" placeholder="Nhập mã phiếu xuất" class="form-control" name="MaPhieuXuat" value="{{old('MaPhieuXuat')}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -50,7 +49,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="NoiDung">Nội dung</label>
-                            <textarea id="NoiDung" name="NoiDung" class="form-control" placeholder></textarea>
+                            <textarea id="NoiDung" name="NoiDung" class="form-control">{{old('NoiDung')}}</textarea>
                         </div>
                     </div>
                     <hr>

@@ -27,7 +27,10 @@
                         </div>
                         <div class="col-md-6">
                             <label for="TimVT" class="col-md-4 col-form-label">Vật tư</label>
-                            <input type="text" placeholder="Nhập tên vật hoặc mã vật tư" name="TimVT" class="form-control col-md-8">
+                            <div class="col-md-8" style="padding: 0">
+                                <input type="text" placeholder="Nhập tên vật tư" name="TimVT" class="form-control search-vat-tu">
+                                <div class="suggest-search-vat-tu col-md-12"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
