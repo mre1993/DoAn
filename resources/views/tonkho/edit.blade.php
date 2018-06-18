@@ -11,7 +11,7 @@
             </div>
         @endif
         <fieldset class="col-md-12 infor-phieu-nhap">
-            <legend class="scheduler-border">Phiếu nhập</legend>
+            <legend class="scheduler-border">Tồn kho vật tư</legend>
             <div class="col-md-6">
                 <label for="MaVT" class="col-md-4 col-form-label">Mã vật tư</label>
                 <input id="MaVT" name="MaVT" class="form-control col-md-8" readonly value="{{$id}}">

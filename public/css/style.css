@@ -178,3 +178,25 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0;
 }
+.search-container input[type=text] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-top: 8px;
+    font-size: 17px;
+}
+.search-container button:hover {
+    background: #ccc;
+}
+.search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+.search-container {
+    float: right;
+}

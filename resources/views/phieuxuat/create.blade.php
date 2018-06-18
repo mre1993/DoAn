@@ -11,7 +11,7 @@
             </div>
         @endif
         <div class="card">
-            <div class="card-header">{{ __('Nhập vật tư') }}</div>
+            <div class="card-header">{{ __('Xuất vật tư') }}</div>
 
             <div class="card-body">
                 <form method="POST" action="{{ route('phieuxuat.store') }}" name="create">

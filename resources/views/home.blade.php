@@ -41,18 +41,9 @@
                 <span class="fa fa-archive"></span> <b>Báo cáo thống kê</b>
             </a>
             <ul class="collapse" id="bao-cao">
-                <li class=""><a href="{{route('baocao.vattu')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo tồn vật tư</span></a></li>
                 <li class=""><a href="{{route('report.phieunhap')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo phiếu nhập</span></a></li>
                 <li class=""><a href="{{route('report.phieuxuat')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo phiếu xuất</span></a></li>
-            </ul>
-        </div>
-        <div class="menu-list">
-            <a data-toggle="collapse" href="#tim-kiem" class="list-group-item">
-                <span class="fa fa-search"></span> <b>Tìm kiếm</b>
-            </a>
-            <ul class="collapse" id="tim-kiem">
-                <li class=""><a href="{{route('search.tim-dm')}}"><i class="fa fa-file-alt"></i> <span>Tìm kiếm danh mục</span></a></li>
-                <li class=""><a href="{{route('search.tim-nhap-xuat')}}"><i class="fa fa-file-alt"></i> <span>Tìm kiếm phiếu nhập-xuất</span></a></li>
+                <li class=""><a href="{{route('baocao.vattu')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo tồn vật tư</span></a></li>
             </ul>
         </div>
     </div>

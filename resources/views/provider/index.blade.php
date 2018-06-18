@@ -10,13 +10,19 @@
                 </ul>
             </div>
         @endif
+        <div class="search-container">
+            <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>STT</th>
                 <th>Mã NCC</th>
                 <th>Nhà cung cấp</th>
-                <th>Địc chỉ</th>
+                <th>Địa chỉ</th>
                 <th>Số điện thoại</th>
                 <th>Fax</th>
                 <th>Email</th>

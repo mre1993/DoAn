@@ -43,9 +43,6 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'PhieuXuatController@printExcel'
     ]);
     Route::resource('/phieuxuat','PhieuXuatController');
-    Route::get('/tim-danh-muc','HomeController@searchDM')->name('search.tim-dm');
-    Route::get('/tim-nhap-xuat','HomeController@searchNX')->name('search.tim-nhap-xuat');
-//       Route::get('tim-ton','HomeController@searchTon')->name('search.tim-ton');
     Route::get('/ton-kho','KhoVatTuController@showTonKho')->name('tonkho.index');
     Route::get('/ton-kho/quan-ly-hong/{request}','KhoVatTuController@checkHong')->name('tonkho.edit');
     Route::get('/bc-vattu',[

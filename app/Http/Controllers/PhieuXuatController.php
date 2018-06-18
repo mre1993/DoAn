@@ -82,6 +82,9 @@ class PhieuXuatController extends Controller
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
             $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
+            if($check->SoLuongTon < $request->SoLuong[$i]){
+                return false;
+            }
             $soLuongTon = $check->SoLuongTon;
             $check->SoLuongTon = $soLuongTon - $request->SoLuong[$i];
             $check->save();
