@@ -182,12 +182,13 @@ class NhaCungCapController extends Controller
         return redirect()->back();
     }
 
-    public function searchNCC($request){
+    public function searchNCC(Request $request)
+    {
         $i = 1;
         $items = DB::table('nha_cung_cap')
             ->select('nha_cung_cap.*')
-            ->where('TenNCC','LIKE','%'.$request.'%')
-            ->orWhere('DiaChi','LIKE','%'.$request.'%')
+            ->where('TenNCC','LIKE','%'.$request->search.'%')
+            ->orWhere('DiaChi','LIKE','%'.$request->search.'%')
             ->orderBy('MaNCC','ASC')
             ->paginate(10);
         return view('provider.search',compact('items','i'));

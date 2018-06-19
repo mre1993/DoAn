@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PhanXuong;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -147,5 +148,16 @@ class PhanXuongController extends Controller
         $factory = PhanXuong::where('MaPX',$id)->first();
         $factory->delete();
         return redirect()->back();
+    }
+
+    public function searchPX(Request $request){
+        $i = 1;
+        $items = DB::table('phan_xuong')
+            ->select('phan_xuong.*')
+            ->where('TenPX','LIKE','%'.$request->search.'%')
+            ->orWhere('MaPX','LIKE','%'.$request->search.'%')
+            ->orderBy('MaPX','ASC')
+            ->paginate(10);
+        return view('phanxuong.search',compact('items','i'));
     }
 }

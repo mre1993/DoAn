@@ -11,7 +11,8 @@
             </div>
         @endif
         <div class="search-container">
-            <form action="{{route('searchNCC')}}" method="GET" role="search">
+            <form action="{{route('searchNCC')}}" method="POST">
+                @csrf
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
@@ -27,9 +28,9 @@
                 <th>Fax</th>
                 <th>Email</th>
                 <th>Ghi chú</th>
-                <th>
+                <th style="padding-top: 0px; padding-bottom: 5px;">
                     <form action="{{route('provider.create')}}">
-                        <button class="btn btn-success fa fa-plus-circle" ></button>
+                        <button class="btn btn-success fa fa-plus-circle" style=""></button>
                     </form>
                 </th>
             </tr>

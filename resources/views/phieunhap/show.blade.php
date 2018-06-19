@@ -97,8 +97,8 @@
                     </tr>
                     <tr class="khung-header">
                         <td><p>STT</p></td>
-                        <td><p>TÊN VẬT TƯ</p></td>
                         <td><p>MÃ VẬT TƯ</p></td>
+                        <td><p>TÊN VẬT TƯ</p></td>
                         <td><p>ĐVT</p></td>
                         <td><p>Đơn giá</p></td>
                         <td><p>SỐ LƯỢNG</p></td>

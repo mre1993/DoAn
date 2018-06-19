@@ -244,21 +244,19 @@ $(document).ready(function() {
                 var content = [];
                 $.each(data, function(k, v){
                     var i = k+1;
-                    var NoiDung = v['MoTa'];
-                    if(NoiDung==null){
-                        NoiDung = '';
-                    }
+                    var ThanhTien = v['SoLuongTon']*v['DonGia'] ;
                     content.push(
                         '<tr>'+
                         '<td>'+i+'</td>'+
                         '<td>'+v['TenKVT']+'</td>'+
                         '<td>'+ v['MaVT'] +'</td>'+
                         '<td>'+ v['TenVT'] +'</td>'+
+                        '<td>'+ v['DVT'] +'</td>'+
+                        '<td>'+ v['DonGia'] +'</td>'+
                         '<td>'+ v['SoLuongTon'] +'</td>'+
                         '<td>'+ v['SoLuongHong'] +'</td>'+
                         '<td>'+ v['TongSoLuong'] +'</td>'+
-                        '<td>'+ v['DonGia'] +'</td>'+
-                        '<td>'+ NoiDung +'</td>'+
+                        '<td>'+ ThanhTien +'</td>'+
                         '</tr>');
                     return k <= data.length
                 });
@@ -270,11 +268,12 @@ $(document).ready(function() {
                     '<th>Kho vật tư</th>'+
                     '<th>Mã vật tư</th>'+
                     '<th>Tên vật tư</th>'+
+                    '<th>Đơn vị tính</th>'+
+                    '<th>Đơn Giá</th>'+
                     '<th>Số lượng tồn</th>'+
                     '<th>Số lượng hỏng</th>'+
                     '<th>Tổng số lượng</th>'+
-                    '<th>Đơn Giá</th>'+
-                    '<th>Mô Tả</th>'+
+                    '<th>Giá trị tồn</th>'+
                     '</tr>'+
                     '</thead>'+
                     '<tbody class="export-content">'+

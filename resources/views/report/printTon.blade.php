@@ -42,100 +42,30 @@
         <td>Tổng số lượng</td>
         <td>Tổng giá trị tồn</td>
     </tr>
-    <tr class="khung-header">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr class="khung-header">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr class="khung-header">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr class="khung-header">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr class="khung-header">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr class="khung-header">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr class="khung-header">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr class="khung-header">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+    <?php $sumSLT = 0; $sumSLH =0; $sumTSL = 0; $sumTT = 0;?>
+    @foreach($result as $item)
+        {{$sumSLT = $sumSLT + $item->SoLuongTon}}
+        {{$sumSLH = $sumSLH + $item->SoLuongHong}}
+        {{$sumTSL = $sumTSL + $item->TongSoLuong}}
+        {{$sumTT = $sumTT + array_sum([$item->DonGia,$item->SoLuongTon])}}
+        <tr class="khung-header">
+            <td>{{$i++}}</td>
+            <td>{{$item->MaVT}}</td>
+            <td>{{$item->TenVT}}</td>
+            <td>{{$item->DVT}}</td>
+            <td>{{$item->DonGia}}</td>
+            <td>{{$item->SoLuongTon}}</td>
+            <td>{{$item->SoLuongHong}}</td>
+            <td>{{$item->TongSoLuong}}</td>
+            <td>{{array_sum([$item->DonGia,$item->SoLuongTon])}}</td>
+        </tr>
+    @endforeach
     <tr class="khung-header">
         <td colspan="5" style="text-align: center">Tổng cộng</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{$sumSLT}}</td>
+        <td>{{$sumSLH}}</td>
+        <td>{{$sumTSL}}</td>
+        <td>{{$sumTT}}</td>
     </tr>
     <tr></tr>
     <tr >

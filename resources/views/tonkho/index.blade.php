@@ -16,6 +16,7 @@
                 <th>STT</th>
                 <th>Tên vật tư</th>
                 <th>Kho còn vật tư</th>
+                <th>Đơn vị tính</th>
                 <th>Tổng số lượng vật tư</th>
                 <th>Tổng số lượng vật tư hỏng</th>
                 <th>Tổng số lượng vật tư tồn</th>
@@ -37,6 +38,7 @@
                             @endforeach
                         @endforeach
                     </td>
+                    <td>{{$item->DVT}}</td>
                     <td>{{$item->SoLuongTon}}</td>
                     <td>{{$item->SoLuongHong}}</td>
                     <td>{{$item->TongSoLuong}}</td>

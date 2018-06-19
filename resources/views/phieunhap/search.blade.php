@@ -21,7 +21,7 @@
             <thead>
             <tr>
                 <th width="5%">STT</th>
-                <th width="10%">Mã phiếu nhập</th>
+                <th width="15%">Mã phiếu nhập</th>
                 <th width="10%">Nhân viên</th>
                 <th width="15%">Nhà cung cấp</th>
                 <th width="15%">Kho vật tư</th>
@@ -40,18 +40,18 @@
                 <tr>
                     <td>{{$i++}}</td>
                     <td>{{$item->MaPN}}</td>
-                    <td>{{$item->NhanVien->TenNV}}</td>
-                    <td>{{$item->NhaCungCap->TenNCC}}</td>
-                    <td>{{$item->KhoVatTu->TenKVT}}</td>
-                    <td>{{$item->created_at->format('d-m-Y')}}</td>
+                    <td>{{$item->TenNV}}</td>
+                    <td>{{$item->TenNCC}}</td>
+                    <td>{{$item->TenKVT}}</td>
+                    <td>{{ Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}}</td>
                     <td>{{$item->NoiDung}}</td>
                     <td>
                         <a class="btn fa fa-eye" href="{{route('phieunhap.show',$item->MaPN)}}" style="background-color: blue;color: white"></a>
                         <a class="btn btn-comment fa fa-edit" href="{{route('phieunhap.edit',$item->MaPN)}}"></a>
                         <form class="delete-form" action="{{ route('phieunhap.destroy',$item->MaPN) }}" method="post">
-                            <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-danger fa fa-remove"></button>
-                            {{ csrf_field() }}
+                        <input name="_method" type="hidden" value="DELETE">
+                        <button class="btn btn-danger fa fa-remove"></button>
+                        {{ csrf_field() }}
                         </form>
                     </td>
                 </tr>

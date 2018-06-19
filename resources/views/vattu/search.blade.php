@@ -11,7 +11,7 @@
             </div>
         @endif
         <div class="search-container">
-            <form action="{{route('searchKVT')}}" method="post">
+            <form action="{{route('searchVTIndex')}}" method="POST">
                 @csrf
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
@@ -21,14 +21,14 @@
             <thead>
             <tr>
                 <th>STT</th>
-                <th>Mã Kho Vật Tư</th>
-                <th>Tên Kho</th>
-                <th>Địa chỉ</th>
-                <th>Số điện thoại</th>
-                <th>Thủ kho</th>
-                <th>Ghi chú</th>
+                <th>Mã Vật tư</th>
+                <th>Tên vật tư</th>
+                <th>Đơn vị tính</th>
+                <th>Nhà cung cấp</th>
+                <th>Đơn giá</th>
+                <th>Mô tả</th>
                 <th>
-                    <form action="{{route('khovattu.create')}}">
+                    <form action="{{route('vattu.create')}}">
                         <button class="btn btn-success fa fa-plus-circle" ></button>
                     </form>
                 </th>
@@ -39,15 +39,15 @@
             @foreach($items as $item)
                 <tr>
                     <td>{{$i++}}</td>
-                    <td>{{$item->MaKVT}}</td>
-                    <td>{{$item->TenKVT}}</td>
-                    <td>{{$item->DiaChi}}</td>
-                    <td>{{$item->SDT}}</td>
-                    <td>{{$item->ThuKho}}</td>
-                    <td>{{$item->GhiChu}}</td>
+                    <td>{{$item->MaVT}}</td>
+                    <td>{{$item->TenVT}}</td>
+                    <td>{{$item->DVT}}</td>
+                    <td>{{$item->TenNCC}}</td>
+                    <td>{{$item->DonGia}}</td>
+                    <td>{{$item->MoTa}}</td>
                     <td>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('khovattu.edit',$item->MaKVT)}}"></a>
-                        <form class="delete-form" action="{{ route('khovattu.destroy',$item->MaKVT) }}" method="post">
+                        <a class="btn btn-comment fa fa-edit" href="{{route('vattu.edit',$item->MaVT)}}"></a>
+                        <form class="delete-form" action="{{ route('vattu.destroy',$item->MaVT) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove"></button>
                             {{ csrf_field() }}

@@ -354,4 +354,21 @@ class PhieuXuatController extends Controller
         return response()->json($response);
 //        return view('report.printPhieu',compact('result','i','check'));
     }
+
+    public function searchPX(Request $request)
+    {
+        $i = 1;
+        $items = DB::table('phieu_xuat')
+            ->join('nhan_vien','nhan_vien.MaNV','phieu_xuat.MaNV')
+            ->join('phan_xuong','phan_xuong.MaPX','phieu_xuat.MaPX')
+            ->join('kho_vat_tu','kho_vat_tu.MaKVT','phieu_xuat.MaKVT')
+            ->select('phieu_xuat.*','nhan_vien.TenNV','kho_vat_tu.TenKVT','phan_xuong.TenPX')
+            ->where('phieu_xuat.MaPhieuXuat','LIKE','%'.$request->search.'%')
+            ->orWhere('nhan_vien.TenNV','LIKE','%'.$request->search.'%')
+            ->orWhere('kho_vat_tu.TenKVT','LIKE','%'.$request->search.'%')
+            ->orWhere('phan_xuong.TenPX','LIKE','%'.$request->search.'%')
+            ->orderBy('phieu_xuat.MaPhieuXuat','ASC')
+            ->paginate(10);
+        return view('phieuxuat.search',compact('items','i'));
+    }
 }

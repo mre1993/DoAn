@@ -11,7 +11,8 @@
             </div>
         @endif
         <div class="search-container">
-            <form action="/action_page.php">
+            <form action="{{route('searchPhieuXuat')}}" method="POST">
+                @csrf
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
@@ -46,12 +47,12 @@
                     <td>{{$item->NoiDung}}</td>
                     <td>
                         <a class="btn fa fa-eye" href="{{route('phieuxuat.show',$item->MaPhieuXuat)}}" style="background-color: blue;color: white"></a>
-                        {{--<a class="btn btn-comment fa fa-edit" href="{{route('phieuxuat.edit',$item->MaPhieuXuat)}}"></a>--}}
-                        {{--<form class="delete-form" action="{{ route('phieuxuat.destroy',$item->MaPhieuXuat) }}" method="post">--}}
-                            {{--<input name="_method" type="hidden" value="DELETE">--}}
-                            {{--<button class="btn btn-danger fa fa-remove"></button>--}}
-                            {{--{{ csrf_field() }}--}}
-                        {{--</form>--}}
+                        <a class="btn btn-comment fa fa-edit" href="{{route('phieuxuat.edit',$item->MaPhieuXuat)}}"></a>
+                        <form class="delete-form" action="{{ route('phieuxuat.destroy',$item->MaPhieuXuat) }}" method="post">
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button class="btn btn-danger fa fa-remove"></button>
+                            {{ csrf_field() }}
+                        </form>
                     </td>
                 </tr>
             @endforeach

@@ -11,7 +11,7 @@
             </div>
         @endif
         <div class="card report">
-            <div class="card-header">{{ __('Báo cáo phiếu nhập') }}</div>
+            <div class="card-header">{{ __('Báo cáo nhập vật tư') }}</div>
             <div class="card-body">
                 <form name="create" id="myform" action="{{route('reportRecord.phieunhap')}}">
                     @csrf

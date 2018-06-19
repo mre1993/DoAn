@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\NhanVien;
 use App\PhieuNhap;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -177,5 +178,18 @@ class NhanVienController extends Controller
         $item = NhanVien::find($id);
         $item->delete();
         return redirect()->back();
+    }
+
+    public function searchNV(Request $request){
+        $i = 1;
+        $items = DB::table('nhan_vien')
+            ->select('nhan_vien.*')
+            ->where('TenNV','LIKE','%'.$request->search.'%')
+            ->orWhere('MaNV','LIKE','%'.$request->search.'%')
+            ->orWhere('ChucVu','LIKE','%'.$request->search.'%')
+            ->orWhere('SDT','LIKE','%'.$request->search.'%')
+            ->orderBy('MaNV','ASC')
+            ->paginate(10);
+        return view('nhanvien.search',compact('items','i'));
     }
 }

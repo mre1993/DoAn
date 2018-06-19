@@ -178,6 +178,7 @@ class KhoVatTuController extends Controller
     public function showTonKho(){
         $items = DB::table('vat_tu')
             ->select(
+                'vat_tu.DVT',
                 'vat_tu.MaVT',
                 'vat_tu.TenVT',
                 'chi_tiet_kho_vat_tu.MaKVT',
@@ -195,6 +196,7 @@ class KhoVatTuController extends Controller
     public function checkHong($id){
         $item = DB::table('vat_tu')
             ->select(
+                'vat_tu.DVT',
                 'vat_tu.MaVT',
                 'vat_tu.TenVT',
                 'kho_vat_tu.TenKVT',
@@ -210,5 +212,20 @@ class KhoVatTuController extends Controller
             ->orderBy('vat_tu.MaVT','DESC')
             ->first();
         return view('tonkho.edit',compact('item','id'));
+    }
+
+    public function searchKVT(Request $request)
+    {
+        $i = 1;
+        $items = DB::table('kho_vat_tu')
+            ->select('kho_vat_tu.*')
+            ->where('TenKVT','LIKE','%'.$request->search.'%')
+            ->orWhere('DiaChi','LIKE','%'.$request->search.'%')
+            ->orWhere('MaKVT','LIKE','%'.$request->search.'%')
+            ->orWhere('ThuKho','LIKE','%'.$request->search.'%')
+            ->orWhere('SDT','LIKE','%'.$request->search.'%')
+            ->orderBy('MaKVT','ASC')
+            ->paginate(10);
+        return view('khovattu.search',compact('items','i'));
     }
 }

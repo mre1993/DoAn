@@ -67,10 +67,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/mostexport','VatTuController@mostExport');
     Route::get('/mostinventory','VatTuController@mostInventory');
     Route::get('/mostsupplies','VatTuController@mostSupplies');
-    Route::prefix('search')->group(function(){
-        Route::get('tim-tai-khoan')->name('tim-tk');
-        Route::get('tim-danh-muc')->name('tim-dm');
-        Route::get('tim-nhap-xuat-ton')->name('tim-n-x-t');
-        Route::get('tim-bao-cao')->name('tim-bc');
-    });
+    Route::post('provider/searchNCC','NhaCungCapController@searchNCC')->name('searchNCC');
+    Route::post('phanxuong/searchPX','PhanXuongController@searchPX')->name('searchPX');
+    Route::post('vattu/searchVT','VatTuController@searchVTIndex')->name('searchVTIndex');
+    Route::post('nhanvien/searchNV','NhanVienController@searchNV')->name('searchNV');
+    Route::post('khovattu/searchKVT','KhoVatTuController@searchKVT')->name('searchKVT');
+    Route::post('phieunhap/searchPN','PhieuNhapController@searchPN')->name('searchPN');
+    Route::post('phieuxuat/searchPX','PhieuXuatController@searchPX')->name('searchPhieuXuat');
 });

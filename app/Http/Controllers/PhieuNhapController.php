@@ -371,5 +371,22 @@ class PhieuNhapController extends Controller
         return response()->json($response);
 //        return view('report.printPhieu',compact('result','i','check'));
     }
+
+    public function searchPN(Request $request)
+    {
+        $i = 1;
+        $items = DB::table('phieu_nhap')
+            ->join('nhan_vien','nhan_vien.MaNV','phieu_nhap.MaNV')
+            ->join('nha_cung_cap','nha_cung_cap.MaNCC','phieu_nhap.MaNCC')
+            ->join('kho_vat_tu','kho_vat_tu.MaKVT','phieu_nhap.MaKVT')
+            ->select('phieu_nhap.*','nhan_vien.TenNV','kho_vat_tu.TenKVT','nha_cung_cap.TenNCC')
+            ->where('phieu_nhap.MaPN','LIKE','%'.$request->search.'%')
+            ->orWhere('nhan_vien.TenNV','LIKE','%'.$request->search.'%')
+            ->orWhere('kho_vat_tu.TenKVT','LIKE','%'.$request->search.'%')
+            ->orWhere('nha_cung_cap.TenNCC','LIKE','%'.$request->search.'%')
+            ->orderBy('phieu_nhap.MaPN','ASC')
+            ->paginate(10);
+        return view('phieunhap.search',compact('items','i'));
+    }
 }
 

@@ -371,4 +371,17 @@ class VatTuController extends Controller
         return response()->json($response);
 //        return view('report.printTon');
     }
+
+    public function searchVTIndex(Request $request){
+        $i = 1;
+        $items = DB::table('vat_tu')
+            ->join('nha_cung_cap','nha_cung_cap.MaNCC','vat_tu.MaNCC')
+            ->select('vat_tu.*','nha_cung_cap.TenNCC')
+            ->where('vat_tu.TenVT','LIKE','%'.$request->search.'%')
+            ->orWhere('vat_tu.MaVT','LIKE','%'.$request->search.'%')
+            ->orWhere('nha_cung_cap.TenNCC','LIKE','%'.$request->search.'%')
+            ->orderBy('vat_tu.MaVT','ASC')
+            ->paginate(10);
+        return view('vattu.search',compact('items','i'));
+    }
 }
