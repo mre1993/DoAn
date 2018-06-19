@@ -114,16 +114,9 @@ class UserController extends Controller
      * @param  \App\PhanQuyen  $phanQuyen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PhanQuyen $phanQuyen)
+    public function update(Request $request)
     {
         if(Auth::user()->MaQuyen !== 3){
-            return redirect()->back();
-        }
-        if($request->get('role')){
-            $role = $request->get('role');
-            $user = User::find($request->input('userId'));
-            $user->MaQuyen = $role;
-            $user->save();
             return redirect()->back();
         }
         if($request->get('password')){
@@ -173,5 +166,12 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect()->back();
+    }
+
+    public function phanQuyen(){
+        $users = User::orderBy('id','ASC')->paginate(10);
+        $listQuyen = PhanQuyen::orderBy('MaQuyen','ASC')->get();
+        $i = 1;
+        return view('phanquyen', compact('users','listQuyen','i'));
     }
 }

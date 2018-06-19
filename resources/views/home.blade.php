@@ -11,7 +11,7 @@
             </a>
             <ul class="collapse" id="hethong">
                 <li class=""> <a href="{{route('user.index')}}"><i class="fa fa-th-list"></i> <span>Quản lý tài Khoản</span></a> </li>
-                <li class=""> <a href="{{route('user.index')}}"><i class="fa fa-th-list"></i> <span>Phân quyền người dùng</span></a> </li>
+                <li class=""> <a href="{{route('phanQuyen')}}"><i class="fa fa-th-list"></i> <span>Phân quyền người dùng</span></a> </li>
             </ul>
         </div>
         <div class="menu-list">

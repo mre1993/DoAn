@@ -16,8 +16,8 @@
             <tr>
                 <th>STT</th>
                 <th>Tên đăng nhập</th>
-                <th>Tên nhân viên</th>
-                <th><a href="{{route('createUser')}}" class="btn btn-comment fa fa-plus-circle" style="padding:3px 4px;font-size:20px"></a></th>
+                <th>Vai trò</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -26,17 +26,12 @@
                 <tr>
                     <td>{{$i++}}</td>
                     <td>{{ $user->name }}</td>
-                    <th>{{$user->nhanVien->TenNV}}</th>
+                    <td>{{ $user->phanQuyen->TenQuyen }}</td>
                     <td>
                         @if(\Illuminate\Support\Facades\Auth::user()->MaQuyen === 3)
-                        <button class="btn btn-primary fa fa-user" data-toggle="modal" data-target="#changePass-{{$user->id}}"></button>
-                        <form class="delete-form" action="{{ route('user.destroy',$user->id) }}" method="post">
-                            <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-danger fa fa-remove">Delete</button>
-                            {{ csrf_field() }}
-                        </form>
+                        <button class="btn btn-comment fa fa-edit" data-toggle="modal" data-target="#changeRole-{{$user->id}}"></button>
                         @endif
-                        <div class="modal fade" id="changePass-{{$user->id}}" role="dialog">
+                        <div class="modal fade" id="changeRole-{{$user->id}}" role="dialog">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
                                 <div class="modal-content">
@@ -53,26 +48,18 @@
                                                 <label for="name" class="col-sm-4 text-md-right">{{ __('Username') }}</label>
 
                                                 <div class="col-md-6">
-                                                    {{$user->name}}
+                                                   {{$user->name}}
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu mới') }}</label>
-                                                <div class="col-md-6">
-                                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="oldpassword" class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu') }}</label>
-                                                <div class="col-md-6">
-                                                    <input id="oldpassword" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="oldpassword" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="cpassword" class="col-md-4 col-form-label text-md-right">{{ __('Nhập lại mật khẩu') }}</label>
-                                                <div class="col-md-6">
-                                                    <input id="cpassword" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="cpassword" required>
+                                                <label for="quyen" class="col-md-4 col-form-label text-md-right">Quyền</label>
+                                                <div  class="col-md-6">
+                                                    <select style="width: 50%;height: 100%;"  name="role">
+                                                        @foreach($listQuyen as $item)
+                                                            <option value="{{ $item->MaQuyen }}" @if($user->phanQuyen->TenQuyen=== $item->TenQuyen) selected='selected' @endif> {{ strtoupper($item->TenQuyen) }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
 

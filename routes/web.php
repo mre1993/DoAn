@@ -15,6 +15,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/chart','HomeController@chart');
+    Route::get('phanquyen','UserController@phanQuyen')->name('phanQuyen');
     Route::resource('user', 'UserController');
     Route::get('/user/create', 'UserController@indexCreate')->name('createUser');
     Route::resource('/provider', 'NhaCungCapController');
