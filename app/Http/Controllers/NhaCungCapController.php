@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\NhaCungCap;
 use App\VatTu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
@@ -179,5 +180,16 @@ class NhaCungCapController extends Controller
         $provider = NhaCungCap::find($id);
         $provider->delete();
         return redirect()->back();
+    }
+
+    public function searchNCC($request){
+        $i = 1;
+        $items = DB::table('nha_cung_cap')
+            ->select('nha_cung_cap.*')
+            ->where('TenNCC','LIKE','%'.$request.'%')
+            ->orWhere('DiaChi','LIKE','%'.$request.'%')
+            ->orderBy('MaNCC','ASC')
+            ->paginate(10);
+        return view('provider.search',compact('items','i'));
     }
 }

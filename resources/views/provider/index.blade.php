@@ -11,7 +11,7 @@
             </div>
         @endif
         <div class="search-container">
-            <form action="/action_page.php">
+            <form action="{{route('searchNCC')}}" method="GET" role="search">
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
