@@ -73,6 +73,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('vattu/searchVT','VatTuController@searchVTIndex')->name('searchVTIndex');
     Route::post('nhanvien/searchNV','NhanVienController@searchNV')->name('searchNV');
     Route::post('khovattu/searchKVT','KhoVatTuController@searchKVT')->name('searchKVT');
-    Route::post('phieunhap/searchPN','PhieuNhapController@searchPN')->name('searchPN');
-    Route::post('phieuxuat/searchPX','PhieuXuatController@searchPX')->name('searchPhieuXuat');
+    Route::post('phieunhap/searchPhieuNhap','PhieuNhapController@searchPhieuNhap')->name('searchPhieuNhap');
+    Route::post('phieuxuat/searchPhieuXuat','PhieuXuatController@searchPhieuXuat')->name('searchPhieuXuat');
 });

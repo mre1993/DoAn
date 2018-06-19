@@ -355,7 +355,7 @@ class PhieuXuatController extends Controller
 //        return view('report.printPhieu',compact('result','i','check'));
     }
 
-    public function searchPX(Request $request)
+    public function searchPhieuXuat(Request $request)
     {
         $i = 1;
         $items = DB::table('phieu_xuat')

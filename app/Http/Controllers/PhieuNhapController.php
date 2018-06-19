@@ -372,7 +372,7 @@ class PhieuNhapController extends Controller
 //        return view('report.printPhieu',compact('result','i','check'));
     }
 
-    public function searchPN(Request $request)
+    public function searchPhieuNhap(Request $request)
     {
         $i = 1;
         $items = DB::table('phieu_nhap')
