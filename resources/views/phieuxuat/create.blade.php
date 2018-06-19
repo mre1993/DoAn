@@ -22,7 +22,7 @@
                             <input type="hidden" name="MaNV" value="{{$nhanVien->MaNV}}">
                         </div>
                         <div class="col-md-3">
-                            <select style="height: 100%;"  name="MaKVT" class="form-control">
+                            <select style="height: 100%;"  name="MaKVT" class="form-control" id="MaKVT">
                                 <option value="" disabled selected>Chọn kho vật tư</option>
                                 @foreach($MaKVT as $item)
                                     <option value="{{ $item->MaKVT }}" {{ old('MaKVT') == $item->MaKVT ? 'selected' : '' }}> {{ $item->TenKVT }}</option>

@@ -194,13 +194,19 @@ class VatTuController extends Controller
         return response()->json($result);
     }
 
-    public function searchPX($request){
+    public function searchPX(Request $request){
         $result = DB::table('chi_tiet_kho_vat_tu')
             ->join('vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
-            ->join('kho_vat_tu','chi_iet_kho_vat_tu.MaKVT','kho_vat_tu.MaKVT')
+            ->join('kho_vat_tu','chi_tiet_kho_vat_tu.MaKVT','kho_vat_tu.MaKVT')
             ->select('chi_tiet_kho_vat_tu.MaVT','vat_tu.TenVT')
-            ->where('TenVT','LIKE','%'.$request.'%')
-            ->where('MaKVT',$request->MaKVT)
+            ->where(function ($result) use ($request){
+                if($request->MaKVT!=null){
+                    $result->where('TenVT','LIKE','%'.$request->term.'%')
+                    ->where('chi_tiet_kho_vat_tu.MaKVT','LIKE','%'.$request->MaKVT.'%');
+                }else{
+                    $result->where('TenVT','LIKE','%'.$request->term.'%');
+                }
+            })
             ->get();
         return response()->json($result);
     }

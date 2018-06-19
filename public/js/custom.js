@@ -49,11 +49,15 @@ $(document).ready(function() {
 
     $(".search-query").autocomplete({
         source: function (request, response) {
+                var MaKVT =  $('#MaKVT  :selected').val();
             $.ajax({
                 dataType: 'JSON',
                 type: 'GET',
                 url: "search/" + request.term,
-                data: {},
+                data: {
+                    MaKVT: MaKVT,
+                    term : request.term
+                },
                 success: function (data) {
                     console.log(data);
                     $('.suggest-search a').remove();
@@ -273,7 +277,7 @@ $(document).ready(function() {
                     '<th>Số lượng tồn</th>'+
                     '<th>Số lượng hỏng</th>'+
                     '<th>Tổng số lượng</th>'+
-                    '<th>Giá trị tồn</th>'+
+                    '<th>Tổng giá trị t</th>'+
                     '</tr>'+
                     '</thead>'+
                     '<tbody class="export-content">'+
