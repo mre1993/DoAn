@@ -23,7 +23,7 @@
                             <input type="hidden" name="MaNV" value="{{$nhanVien->MaNV}}">
                         </div>
                         <div class="col-md-3">
-                            <select style="height: 100%;"  name="MaNCC" class="form-control">
+                            <select style="height: 100%;"  name="MaNCC" class="form-control" id="MaNCC">
                                 <option value="" disabled selected>Chọn nhà cung cấp</option>
                                 @foreach($MaNCC as $item)
                                     <option value="{{ $item->MaNCC }}" {{ old('MaNCC') == $item->MaNCC ? 'selected' : '' }}> {{ $item->TenNCC }}</option>
@@ -60,6 +60,7 @@
                                 <thead>
                                 <tr>
                                     <th>Vật tư</th>
+                                    <th>Đơn vị tính</th>
                                     <th>Số lượng</th>
                                     <th>Đơn giá</th>
                                     <th>Thành tiền</th>

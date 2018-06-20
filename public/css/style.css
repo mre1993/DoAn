@@ -109,7 +109,6 @@
 }
 .form-nhap table tr td{
     border:1px solid white;
-    width: 14%;
 }
 .company-infor td{
     border:1px solid black !important;
@@ -117,6 +116,10 @@
 }
 .khung td{
     border: 1px solid black!important;
+    text-align: right;
+}
+.khung-header{
+    text-align: center;
 }
 .khung-header td {
     border: 1px solid black !important;

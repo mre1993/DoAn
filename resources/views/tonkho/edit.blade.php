@@ -57,37 +57,40 @@
                             <td>{{$value->TongSoLuong}}</td>
                             <td>
                                 <form action="">
-                                    <button type="button" class="btn btn-comment fa fa-cogs"  data-toggle="modal" data-target="#hong"></button>
+                                    <button type="button" class="btn btn-comment fa fa-cogs"  data-toggle="modal" data-target="#hong-{{$ten->TenKVT}}"></button>
                                 </form>
                             </td>
                         </tr>
+                        <div class="modal fade" id="hong-{{$ten->TenKVT}}" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Số lượng vật tư hỏng cho {{$ten->TenKVT}}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="edit-hong" action="">
+                                            <div class="form-group row mb-0">
+                                                <div class="col-md-12">
+                                                    <label for="SoLuongHong" class="col-md-6 col-form-label">
+                                                        Thêm lượng vật tư hỏng
+                                                    </label>
+                                                    <input type="number" placeholder="Nhập số lượng hàng hỏng" class="form-control col-md-6" id="SoLuongHong">
+                                                </div>
+                                                <div class="col-md-12" style="margin-top: 10px;">
+                                                    <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 @endforeach
             @endforeach
             </tbody>
         </table>
-    </div>
-    <div class="modal fade" id="hong" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Thêm số lượng hàng hỏng User</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="edit-hong" action="">
-                        <div class="form-group row mb-0">
-                            <div class="cold-md-8">
-                                <input type="number" placeholder="Nhập số lượng hàng hỏng" class="form-control">
-                            </div>
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 @stop

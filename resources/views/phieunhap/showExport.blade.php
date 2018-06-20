@@ -8,7 +8,6 @@
  <div class="form-nhap">
         <table class="table print-phieu-nhap">
             <tr  class="company-infor">
-                <td rowspan="2"></td>
                 <td ><p>
                     CÔNG TY TNHH KỸ THUẬT XÂY DỰNG E-POWER<br>
                     Tầng 12, tháp B, tòa nhà Sông Đà, Phạm Hùng, Mỹ Đình I, Nam Từ Liêm<br>
@@ -76,13 +75,9 @@
                 <td colspan="4"><p class="text-center">Ngày {{date('d')}} tháng {{date('m')}} năm {{date('Y')}}</p></td>
             </tr>
             <tr class="bottom-form text-center">
-                <td><p>Phê duyệt</p></td>
-                <td class="width-14"><p></p></td>
-                <td class="width-18" colspan="2"><p>Thủ kho</p></td>
-                <td><p>KCS</p></td>
-                <td><p></p></td>
-                <td><p>Bảo vệ</p></td>
-                <td style="border:none"><p></p></td>
+                <td class="width-18" colspan="3"><p>Người lập phiếu</p></td>
+                <td colspan="3"><p>Người giao</p></td>
+                <td colspan="2"><p>Thủ kho</p></td>
             </tr>
         </table>
     </div>

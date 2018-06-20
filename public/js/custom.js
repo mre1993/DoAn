@@ -50,11 +50,13 @@ $(document).ready(function() {
     $(".search-query").autocomplete({
         source: function (request, response) {
                 var MaKVT =  $('#MaKVT  :selected').val();
+                var MaNCC = $('#MaNCC :selected').val();
             $.ajax({
                 dataType: 'JSON',
                 type: 'GET',
                 url: "search/" + request.term,
                 data: {
+                    MaNCC: MaNCC,
                     MaKVT: MaKVT,
                     term : request.term
                 },
@@ -95,6 +97,7 @@ $(document).ready(function() {
                 var valuationId = MaVT;
                 var record =  '<tr class="input-record" >'+
                     '<td class="TenVT">'+$(target).text()+'<input type="hidden" name="MaVT[]" value="'+MaVT+'"></td>' +
+                    '<td><input type="text" readonly class="form-control" name="DVT" value="'+ data['DVT'] +'"></td>' +
                     '<td><input name="SoLuong[]" type="number" class="form-control" onchange="return  myFunction(this)" min="0" value="0" max="'+ max +'"></td>' +
                     '<td><input name="DonGia[]" name="DonGia[]"  readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
                     '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +

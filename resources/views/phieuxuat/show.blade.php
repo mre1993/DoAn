@@ -64,8 +64,7 @@
         <div class="col-md-12 show-form">
                 <table class="table print-phieu-nhap">
                     <tr  class="company-infor">
-                        <td colspan="1" rowspan="2"></td>
-                        <td colspan="6" rowspan="2" class="text-center">
+                        <td colspan="7" rowspan="2" class="text-center">
                             <p>"CÔNG TY TNHH KỸ THUẬT XÂY DỰNG E-POWER</p>
                             <p>Tầng 12, tháp B, tòa nhà Sông Đà, Phạm Hùng, Mỹ Đình I, Nam Từ Liêm</p>
                             <p>Tel: +84 24.626.027.61 - Fax: +84 24.321.235.60"</p>
@@ -82,7 +81,7 @@
                     <tr>
                         <td colspan="2"></td>
                         <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU NHẬP VẬT TƯ</p></td>
-                        <td colspan="2" style="padding-top: 25px"><p>Mã phiếu: {{$phieuXuat->MaPhieuXuat}}</p></td>
+                        <td colspan="2" style="padding-top: 25px;text-align: center"><p>Mã phiếu: {{$phieuXuat->MaPhieuXuat}}</p></td>
                     </tr>
                     <tr>
                         <td colspan="8"><p>Người xuất: {{$phieuXuat->NhanVien->TenNV}}</p></td>
@@ -96,13 +95,13 @@
                         </td>
                     </tr>
                     <tr class="khung-header">
-                        <td><p>STT</p></td>
-                        <td><p>TÊN VẬT TƯ</p></td>
-                        <td><p>MÃ VẬT TƯ</p></td>
-                        <td><p>ĐVT</p></td>
-                        <td><p>Đơn giá</p></td>
-                        <td><p>SỐ LƯỢNG</p></td>
-                        <td><p>Thành tiền</p></td>
+                        <td width="5%"><p>STT</p></td>
+                        <td width="19%"><p>MÃ VẬT TƯ</p></td>
+                        <td width="19%"><p>TÊN VẬT TƯ</p></td>
+                        <td width="10"><p>ĐVT</p></td>
+                        <td width="10%"><p>Đơn giá</p></td>
+                        <td width="10%"><p>SỐ LƯỢNG</p></td>
+                        <td width="10%"><p>Thành tiền</p></td>
                         <td><p>GHI CHÚ</p></td>
                     </tr>
                     @foreach($chiTiet as $item)
@@ -132,13 +131,9 @@
                         <td colspan="4"><p class="text-center">Ngày {{date('d')}} tháng {{date('m')}} năm {{date('Y')}}</p></td>
                     </tr>
                     <tr class="bottom-form text-center">
-                        <td><p>Phê duyệt</p></td>
-                        <td class="width-14"><p></p></td>
-                        <td class="width-18" colspan="2"><p>Thủ kho</p></td>
-                        <td><p>KCS</p></td>
-                        <td><p></p></td>
-                        <td><p>Bảo vệ</p></td>
-                        <td style="border:none"><p></p></td>
+                        <td class="width-18" colspan="3"><p>Người lập phiếu</p></td>
+                        <td colspan="3"><p>Người giao</p></td>
+                        <td colspan="2"><p>Thủ kho</p></td>
                     </tr>
                 </table>
             </div>

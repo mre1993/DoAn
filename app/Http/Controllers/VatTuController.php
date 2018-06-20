@@ -189,8 +189,18 @@ class VatTuController extends Controller
         return redirect()->back();
     }
 
-    public function searchPN($request){
-        $result = VatTu::where('TenVT','LIKE','%'.$request.'%')->get();
+    public function searchPN(Request $request){
+        $result = DB::table('vat_tu')
+            ->join('nha_cung_cap','nha_cung_cap.MaNCC','vat_tu.MaNCC')
+            ->select('vat_tu.*')
+            ->where(function ($result) use ($request){
+                if($request->MaNCC!=null){
+                    $result->where('TenVT','LIKE','%'.$request->term.'%')
+                        ->where('nha_cung_cap.MaNCC','LIKE','%'.$request->MaNCC.'%');
+                }else{
+                    $result->where('TenVT','LIKE','%'.$request->term.'%');
+                }
+            })->get();
         return response()->json($result);
     }
 
