@@ -193,4 +193,21 @@ class NhaCungCapController extends Controller
             ->paginate(10);
         return view('provider.search',compact('items','i'));
     }
+
+    public function createNew(Request $request)
+    {
+        if(Auth::user()->MaQuyen < '3'){
+            return false;
+        }
+        $NCC = NhaCungCap::create([
+            'TenNCC' => $request['TenNCCNew'],
+            'MaNCC' => $request['MaNCCNew'],
+            'DiaChi' => $request['DiaChi'],
+            'SDT' => $request['sdtNCC'],
+            'Email' => $request['emailNCC'],
+            'fax' => $request['Fax'],
+            'GhiChu' => $request['ghiChu'],
+        ]);
+        return response()->json($NCC);
+    }
 }

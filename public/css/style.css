@@ -160,6 +160,9 @@ fieldset.infor-phieu-nhap legend{
     width: auto;
     margin: 0;
 }
+.new-vt, .newNCC{
+    height:34px!important;
+}
 .infor-phieu-nhap .col-md-6{
     margin-top:10px;
     margin-bottom:10px;

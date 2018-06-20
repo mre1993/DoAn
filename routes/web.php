@@ -19,9 +19,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController');
     Route::get('/user/create', 'UserController@indexCreate')->name('createUser');
     Route::resource('/provider', 'NhaCungCapController');
+    Route::post('/provider/createNew','NhaCungCapController@createNew')->name('newNCC');
     Route::resource('/phanxuong', 'PhanXuongController');
     Route::resource('/vattu', 'VatTuController');
-    Route::resource('/theloai', 'TheLoaiController');
     Route::resource('/nhanvien', 'NhanVienController');
     Route::resource('khovattu','KhoVatTuController');
     Route::resource('/phieunhap','PhieuNhapController');

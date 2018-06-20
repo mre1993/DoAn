@@ -21,6 +21,37 @@ function remove(e){
 
 $(document).ready(function() {
 
+    //them moi NCC
+    $('#saveNCC').click(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var fd = $('.form-new-NCC').serialize();
+        var MaNCC = $('.form-new-NCC input[name="MaNCCNew"]').val();
+        var TenNCC = $('.form-new-NCC input[name="TenNCCNew"]').val();
+        $.ajax({
+            dataType: 'JSON',
+            type: 'POST',
+            url: "../provider/createNew",
+            data: fd,
+            success: function (data) {
+                console.log(data);
+                $('#MaNCC').append($('<option>', {
+                    value: MaNCC,
+                    text: TenNCC
+                }));
+                $('#MaNCC').val(MaNCC).attr('selected', true);
+                $('#newNCC').modal('hide');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            },
+            error:function () {
+            }
+        });
+    });
+
     //search vật tư
     $(".search-vat-tu").autocomplete({
         source: function (request, response) {

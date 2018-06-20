@@ -1,5 +1,5 @@
 @extends('home')
-@section('content')
+@section('right-content')
     <div class="col-md-10" style="margin:auto">
         @if ($errors->any())
             <div class="alert alert-danger">
