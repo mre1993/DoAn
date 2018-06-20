@@ -13,14 +13,6 @@
                     Tầng 12, tháp B, tòa nhà Sông Đà, Phạm Hùng, Mỹ Đình I, Nam Từ Liêm<br>
                     Tel: +84 24.626.027.61 - Fax: +84 24.321.235.60</p>
                 </td>
-                <td>
-                    <p>Ngày:{{date('d/m/Y')}}</p>
-                </td>
-            </tr>
-            <tr class="company-infor">
-                <td style="padding: 5px">
-                    <p>BM.01B-QT.EP.32</p>
-                </td>
             </tr>
             <tr>
                 <td colspan="2"></td>

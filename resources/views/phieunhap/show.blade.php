@@ -63,34 +63,26 @@
         {{--</fieldset>--}}
         <div class="col-md-12 show-form">
                 <table class="table print-phieu-nhap">
-                    <tr  class="company-infor">
-                        <td colspan="7" rowspan="2" class="text-center">
+                    <tr class="company-infor size-16">
+                            <td colspan="8" class="text-center">
                             <p>"CÔNG TY TNHH KỸ THUẬT XÂY DỰNG E-POWER</p>
                             <p>Tầng 12, tháp B, tòa nhà Sông Đà, Phạm Hùng, Mỹ Đình I, Nam Từ Liêm</p>
                             <p>Tel: +84 24.626.027.61 - Fax: +84 24.321.235.60"</p>
-                        </td>
-                        <td>
-                            <p>Ngày:{{date('d/m/Y')}}</p>
-                        </td>
-                    </tr>
-                    <tr class="company-infor">
-                        <td style="padding: 5px">
-                            <p>BM.01B-QT.EP.32</p>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2"></td>
                         <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU NHẬP VẬT TƯ</p></td>
-                        <td colspan="2" style="padding-top: 25px;text-align: center"><p>Mã phiếu: {{$phieuNhap->MaPN}}</p></td>
+                        <td colspan="2" style="padding-top: 25px;text-align: center" class="size-16"><p>Mã phiếu: {{$phieuNhap->MaPN}}</p></td>
                     </tr>
                     <tr>
-                        <td colspan="8"><p>Người nhập: {{$phieuNhap->NhanVien->TenNV}}</p></td>
+                        <td colspan="8" class="size-16"><p>Người nhập: {{$phieuNhap->NhanVien->TenNV}}</p></td>
                     </tr>
                     <tr>
-                        <td colspan="8"><p>Lý do nhập: {{$phieuNhap->NoiDung}}</p></td>
+                        <td colspan="8" class="size-16"><p>Lý do nhập: {{$phieuNhap->NoiDung}}</p></td>
                     </tr>
                     <tr>
-                        <td colspan="7" style="border: none">
+                        <td colspan="7" style="border: none" class="size-16">
                             <p>Nhập tại kho: {{$phieuNhap->KhoVatTu->TenKVT}}, <span>Địa chỉ: {{$phieuNhap->KhoVatTu->TenPX}}</span></p>
                         </td>
                     </tr>
