@@ -64,10 +64,10 @@
         <div class="col-md-12 show-form">
                 <table class="table print-phieu-nhap">
                     <tr class="company-infor size-16">
-                            <td colspan="8" class="text-center">
-                            <p>"CÔNG TY TNHH KỸ THUẬT XÂY DỰNG E-POWER</p>
+                        <td colspan="8" class="text-center">
+                            <p class="font-weight-bold" style="font-size: 18px">CÔNG TY TNHH KỸ THUẬT XÂY DỰNG E-POWER</p>
                             <p>Tầng 12, tháp B, tòa nhà Sông Đà, Phạm Hùng, Mỹ Đình I, Nam Từ Liêm</p>
-                            <p>Tel: +84 24.626.027.61 - Fax: +84 24.321.235.60"</p>
+                            <p style="text-decoration: underline">Tel: +84 24.626.027.61 - Fax: +84 24.321.235.60</p>
                         </td>
                     </tr>
                     <tr>
@@ -83,7 +83,7 @@
                     </tr>
                     <tr>
                         <td colspan="7" style="border: none" class="size-16">
-                            <p>Nhập tại kho: {{$phieuNhap->KhoVatTu->TenKVT}}, <span>Địa chỉ: {{$phieuNhap->KhoVatTu->TenPX}}</span></p>
+                            <p>Nhập tại kho: {{$phieuNhap->KhoVatTu->TenKVT}}
                         </td>
                     </tr>
                     <tr class="khung-header">
