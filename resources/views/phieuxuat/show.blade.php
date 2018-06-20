@@ -98,7 +98,7 @@
                         <td width="5%"><p>STT</p></td>
                         <td width="19%"><p>MÃ VẬT TƯ</p></td>
                         <td width="19%"><p>TÊN VẬT TƯ</p></td>
-                        <td width="10"><p>ĐVT</p></td>
+                        <td width="10%"><p>ĐVT</p></td>
                         <td width="10%"><p>Đơn giá</p></td>
                         <td width="10%"><p>SỐ LƯỢNG</p></td>
                         <td width="10%"><p>Thành tiền</p></td>
