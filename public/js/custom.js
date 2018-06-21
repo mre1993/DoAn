@@ -15,12 +15,57 @@ function myFunction(e) {
     $(e).parent().parent().find("input[name='ThanhTien[]']").val(ThanhTien);
 }
 
+function myFunction2(e) {
+    var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val();
+    var SoLuong =  $(e).parent().parent().find("input[name='SoLuong[]']").val();
+    var ThanhTien =DonGia*SoLuong;
+    $(e).parent().parent().find("input[name='ThanhTien[]']").val(ThanhTien);
+}
+
 function remove(e){
     $(e).parent().parent().remove();
 }
 
 $(document).ready(function() {
-
+    $('.new-vt').click(function(){
+        $("#new-vt").addClass('in').css('display','block');
+    });
+    //them moi vat tu phieu nhap
+    $('#saveVT').click(function(e){
+        e.preventDefault();
+       MaNCC =  $('#MaNCC').val();
+        if(MaNCC==null){
+            $('.error-vt').show();
+            $('.error-vt h5').show();
+        }else {
+            var fd = $('#new-vt form').serialize();
+            var MaVT = $('#MaVT').val();
+            var DVT = $('#DVT').val();
+            var DonGia = $('#DonGia').val();
+            var TenVT = $('#TenVT').val();
+            var MoTa = $('#MoTa').val();
+            var record =  '<tr class="input-record" >'+
+                '<td class="TenVT">'+ TenVT +'<input type="hidden" name="MaVT[]" value="'+MaVT+'"><input type="hidden" name="MoTa[]" value="'+MoTa+'"></td>' +
+                '<td><input type="text" readonly class="form-control" name="DVT[]" value="'+ DVT +'"></td>' +
+                '<td><input name="SoLuong[]" type="number" class="form-control" onchange="return  myFunction(this)" min="0" value="0"></td>' +
+                '<td><input name="DonGia[]" name="DonGia[]" onchange="return  myFunction2(this)"  readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
+                '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
+                '<td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>'+
+                '</tr>';
+            $('.suggest-search').css('display','none').find("a").remove();
+            $('.inputVT').append(record);
+            $('#new-vt').modal('hide').removeClass('in');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        }
+    });
+    $('#new-vt').on('hidden.bs.modal', function () {
+        // and empty the modal-content element
+        $(this).find('form').trigger('reset');
+        //
+        $('.error-vt').hide();
+        $('.error-vt h5').hide();
+    });
     //them moi NCC
     $('#saveNCC').click(function(){
         $.ajaxSetup({
@@ -37,7 +82,6 @@ $(document).ready(function() {
             url: "../provider/createNew",
             data: fd,
             success: function (data) {
-                console.log(data);
                 $('#MaNCC').append($('<option>', {
                     value: MaNCC,
                     text: TenNCC
@@ -92,7 +136,6 @@ $(document).ready(function() {
                     term : request.term
                 },
                 success: function (data) {
-                    console.log(data);
                     $('.suggest-search a').remove();
                     $.each(data, function(k, v){
                         VT = v;
@@ -130,7 +173,7 @@ $(document).ready(function() {
                     '<td class="TenVT">'+$(target).text()+'<input type="hidden" name="MaVT[]" value="'+MaVT+'"></td>' +
                     '<td><input type="text" readonly class="form-control" name="DVT" value="'+ data['DVT'] +'"></td>' +
                     '<td><input name="SoLuong[]" type="number" class="form-control" onchange="return  myFunction(this)" min="0" value="0" max="'+ max +'"></td>' +
-                    '<td><input name="DonGia[]" name="DonGia[]"  readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
+                    '<td><input name="DonGia[]" name="DonGia[]" onchange="return  myFunction2(this)" type="text" value="'+DonGia+'" class="form-control"></td>' +
                     '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
                     '<td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>'+
                     '</tr>';

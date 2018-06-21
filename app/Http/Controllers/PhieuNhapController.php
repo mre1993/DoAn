@@ -44,11 +44,11 @@ class PhieuNhapController extends Controller
         if(Auth::user()->MaQuyen < '2'){
             return view('welcome');
         }
-        $user =  Auth::user();
+        $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');        $user =  Auth::user();
         $nhanVien = NhanVien::find($user->MaNV);
         $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
         $MaNCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
-        return view('phieunhap.create',compact('MaKVT','nhanVien','MaNCC'));
+        return view('phieunhap.create',compact('MaKVT','nhanVien','MaNCC','DVT'));
     }
 
     /**
@@ -83,7 +83,23 @@ class PhieuNhapController extends Controller
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
             $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
+            $checkVT = VatTu::where('MaVT',$request->MaVT[$i])->first();
+            $checkVTKho = DB::table('vat_tu')
+            ->join('chi_tiet_kho_vat_tu','chi_tiet_kho_vat_tu.MaVT','vat_tu.MaVT')
+            ->where('chi_tiet_kho_vat_tu.MaVT',$request->MaVT[$i])
+            ->select(DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongTon) as SoLuongTon'),'DonGia')
+            ->first();
             if(!$check){
+                if(!$checkVT){
+                    VatTu::create([
+                        'MaVT'=> $request->MaVT[$i],
+                        'TenVT'=> $request->TenVT[$i],
+                        'MaNCC'=> $request->MaNCC,
+                        'DVT'=> $request->DVT[$i],
+                        'DonGia'=> $request->DonGia[$i],
+                        'MoTa'=> $request->MoTa[$i],
+                    ]);
+                }
                 ChiTietKhoVT::create([
                     'MaKVT' => $request->MaKVT,
                     'MaVT' => $request->MaVT[$i],
@@ -91,11 +107,14 @@ class PhieuNhapController extends Controller
                     'TongSoLuong' => $request->SoLuong[$i]
                 ]);
             }else{
+                $tongTon = $checkVTKho->SoLuongTon;
                 $soLuongHong = $check->SoLuongHong;
                 $soLuongTon = $check->SoLuongTon;
+                $donGiaCu = $checkVTKho->DonGia;
+                $donGiaMoi = round(($tongTon*$donGiaCu + $request->ThanhTien[$i])/($tongTon + $request->SoLuongTon[$i]));
                 $check->SoLuongTon = $request->SoLuong[$i]+$soLuongTon;
                 $check->TongSoLuong = $request->SoLuong[$i]+$soLuongTon+$soLuongHong;
-                $check->DonGia = $request->DonGia;
+                $checkVT->DonGia = $donGiaMoi;
                 $check->save();
             }
             ChiTietPhieuNhap::create([

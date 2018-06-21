@@ -41,7 +41,8 @@
                                 @foreach($DVT as $dvt)
                                     <option value="{{ $dvt }}" {{ old('DVT') == $dvt ? 'selected' : '' }}> {{ $dvt }}</option>
                                 @endforeach
-                            </select>                        </div>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group row">

@@ -43,13 +43,13 @@
                                     <div class="suggest-search"></div>
                                 </div>
                                 <div class="col-md-1">
-                                    <button class="btn btn-primary fa fa-plus new-vt" type="button"></button>
+                                    <button class="btn btn-primary fa fa-plus new-vt"  data-toggle="modal" data-target="#new-vt" type="button"></button>
                                 </div>
                         </div>
                         <div class="col-md-6">
                             <label for="MaNCC">Chọn nhà cung cấp</label>
                             <select name="MaNCC" class="form-control col-md-10" id="MaNCC" style="height: 34px">
-                                <option value="" selected>Chọn nhà cung cấp</option>
+                                <option value="" selected disabled >Chọn nhà cung cấp</option>
                                 @foreach($MaNCC as $item)
                                     <option value="{{ $item->MaNCC }}" {{ old('MaNCC') == $item->MaNCC ? 'selected' : '' }}> {{ $item->TenNCC }}</option>
                                 @endforeach
@@ -72,6 +72,7 @@
                                 <thead>
                                 <tr>
                                     <th>Vật tư</th>
+                                    <th>Đơn vị tính</th>
                                     <th>Số lượng</th>
                                     <th>Đơn giá</th>
                                     <th>Thành tiền</th>
@@ -162,6 +163,68 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-2">
                                 <button type="button" class="btn btn-primary" id="saveNCC" >{{ __('Save') }}</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="new-vt" role="dialog">
+        <div class="modal-dialog  modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm mới vật tư</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="error-vt" style="display: none">
+                        <h5 class="color-red" style="margin-top: 0;display: none">Bạn phải chọn nhà cung cấp trước</h5>
+                    </div>
+                    <form method="POST" action="{{ route('vattu.store') }}" name="create">
+                        @csrf
+                        <div class="form-group row">
+                            <label for="MaVT" class="col-md-4 col-form-label text-md-right">Mã vật tư<span class="color-red">*</span></label>
+
+                            <div class="col-md-6">
+                                <input id="MaVT" type="text" class="form-control" name="MaVT" value="{{old('MaVT')}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="TenVT" class="col-md-4 col-form-label text-md-right">Tên vật tư<span class="color-red">*</span></label>
+
+                            <div class="col-md-6">
+                                <input id="TenVT" type="text" class="form-control" name="TenVT" value="{{old('TenVT')}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="DVT" class="col-md-4 col-form-label text-md-right">Đơn vị tính</label>
+                            <div class="col-md-6">
+                                <select style="width: 50%;height: 100%;"  name="DVT" id="DVT" class="form-control">
+                                    @foreach($DVT as $dvt)
+                                        <option value="{{ $dvt }}" {{ old('DVT') == $dvt ? 'selected' : '' }}> {{ $dvt }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="DonGia" class="col-md-4 col-form-label text-md-right">Đơn giá</label>
+                            <div class="col-md-6">
+                                <input id="DonGia" type="text" class="form-control" name="DonGia" value="{{old('DonGia')}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="MoTa" class="col-md-4 col-form-label text-md-right">Mô tả</label>
+
+                            <div class="col-md-6">
+                                <textarea id="MoTa" class="form-control" name="MoTa">{{old('MoTa')}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-2">
+                                <button type="button" class="btn btn-primary" id="saveVT" >{{ __('Save') }}</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
