@@ -80,7 +80,7 @@ class NhaCungCapController extends Controller
             'DiaChi' => $request['DiaChi'],
             'SDT' => $request['sdtNCC'],
             'Email' => $request['emailNCC'],
-            'fax' => $request['Fax'],
+            'Fax' => $request['Fax'],
             'GhiChu' => $request['ghiChu'],
         ]);
         return redirect('provider');

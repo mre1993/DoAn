@@ -252,11 +252,27 @@ class VatTuController extends Controller
             ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_phieu_nhap.SoLuong) as SoLuong'))
             ->groupBy('chi_tiet_phieu_nhap.MaVT')
             ->orderBy('ID','DESC')
+            ->limit(10)
             ->get()->toArray();
         $array = [];
-        $array[] = ['Vật tư','Số lượng'];
+        $check = DB::table('chi_tiet_phieu_nhap')
+            ->join('vat_tu','vat_tu.MaVT','chi_tiet_phieu_nhap.MaVT')
+            ->select(DB::raw('SUM(chi_tiet_phieu_nhap.SoLuong) as SoLuong1'))
+            ->where(function ($result) use ($nhap){
+                foreach ($nhap as $item){
+                    $result->where('vat_tu.TenVT', '!=', $item->TenVT);
+                }
+            })
+            ->groupBy('chi_tiet_phieu_nhap.MaVT')
+            ->orderBy('ID','DESC')
+            ->get()->toArray();
         foreach ($nhap as $value){
-            $array[] = [$value->TenVT,json_decode($value->SoLuong)];
+            $array[] = array(
+                'name' => $value->TenVT,
+                'number' => json_decode($value->SoLuong));
+        }
+        if(!empty($check)){
+            $array[] = array('name' => 'Loại khác', 'number' => json_decode($check[0]->SoLuong1));
         }
         return response()->json($array);
     }
@@ -267,11 +283,27 @@ class VatTuController extends Controller
             ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongTon) as SoLuong'))
             ->groupBy('chi_tiet_kho_vat_tu.MaVT')
             ->orderBy('ID','DESC')
+            ->limit(10)
             ->get()->toArray();
         $array = [];
-        $array[] = ['Vật tư','Số lượng'];
+        $check = DB::table('chi_tiet_kho_vat_tu')
+            ->join('vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
+            ->select(DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongTon) as SoLuongTon'))
+            ->where(function ($result) use ($nhap){
+                foreach ($nhap as $item){
+                    $result->where('vat_tu.TenVT', '!=', $item->TenVT);
+                }
+            })
+            ->groupBy('chi_tiet_kho_vat_tu.MaVT')
+            ->orderBy('ID','DESC')
+            ->get()->toArray();
         foreach ($nhap as $value){
-            $array[] = [$value->TenVT,json_decode($value->SoLuong)];
+            $array[] = array(
+                'name' => $value->TenVT,
+                'number' => json_decode($value->SoLuong));
+        }
+        if(!empty($check)){
+            $array[] = array('name' => 'Loại khác', 'number' => json_decode($check[0]->SoLuongTon));
         }
         return response()->json($array);
     }
@@ -285,9 +317,24 @@ class VatTuController extends Controller
             ->limit(10)
             ->get()->toArray();
         $array = [];
-        $array[] = ['Vật tư','Số lượng'];
+        $check = DB::table('chi_tiet_phieu_xuat')
+            ->join('vat_tu','vat_tu.MaVT','chi_tiet_phieu_xuat.MaVT')
+            ->select(DB::raw('SUM(chi_tiet_phieu_xuat.SoLuong) as SoLuong1'))
+            ->where(function ($result) use ($xuat){
+                foreach ($xuat as $item){
+                    $result->where('vat_tu.TenVT', '!=', $item->TenVT);
+                }
+            })
+            ->groupBy('chi_tiet_phieu_xuat.MaVT')
+            ->orderBy('ID','DESC')
+            ->get()->toArray();
         foreach ($xuat as $value){
-            $array[] = [$value->TenVT,json_decode($value->SoLuong)];
+            $array[] = array(
+                'name' => $value->TenVT,
+                'number' => json_decode($value->SoLuong));
+        }
+        if(!empty($check)){
+            $array[] = array('name' => 'Loại khác', 'number' => json_decode($check[0]->SoLuongTon));
         }
         return response()->json($array);
     }

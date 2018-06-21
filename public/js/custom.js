@@ -408,72 +408,69 @@ $(document).ready(function() {
         })
     });
     ///charts
-    var jsonData1  ;
-    var jsonData2  ;
-    var jsonData3  ;
     $.ajax({
         dataType: 'JSON',
         type: 'GET',
         url: "mostimport",
         success:function (data) {
-            jsonData1 = data
+            AmCharts.makeChart("chartNhap", {
+                "type": "pie",
+                "theme": "light",
+                "dataProvider" : data,
+                "valueField": "number",
+                "titleField": "name",
+                "outlineAlpha": 0.4,
+                "depth3D": 15,
+                "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+                "angle": 30,
+                "export": {
+                    "enabled": false
+                }
+            });
         }
     });
-    // Load google charts
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    // Draw the chart and set the chart values
-    function drawChart() {
-        var data1 = google.visualization.arrayToDataTable(jsonData1);
-        // Optional; add a title and set the width and height of the chart
-        var options = {'title':'Vật tư nhập nhiều nhất', 'width':550, 'height':400};
-
-        // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.PieChart(document.getElementById('piechart-1'));
-        chart.draw(data1, options);
-    }
 
     $.ajax({
         dataType: 'JSON',
         type: 'GET',
         url: "mostexport",
         success:function (data) {
-            jsonData2 = data
+            AmCharts.makeChart("chartXuat", {
+                "type": "pie",
+                "theme": "light",
+                "dataProvider" : data,
+                "valueField": "number",
+                "titleField": "name",
+                "outlineAlpha": 0.4,
+                "depth3D": 15,
+                "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+                "angle": 30,
+                "export": {
+                    "enabled": false
+                }
+            });
         }
     });
-    // Load google charts
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart2);
-    // Draw the chart and set the chart values
-    function drawChart2() {
-        var data2 = google.visualization.arrayToDataTable(jsonData2);
-        // Optional; add a title and set the width and height of the chart
-        var options = {'title':'Vật tư xuất nhiều nhất', 'width':550, 'height':400};
-
-        // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.PieChart(document.getElementById('piechart-2'));
-        chart.draw(data2, options);
-    }
 
     $.ajax({
         dataType: 'JSON',
         type: 'GET',
         url: "mostinventory",
         success:function (data) {
-            jsonData3 = data
-        }
+            AmCharts.makeChart("chartTon", {
+                "type": "pie",
+                "theme": "light",
+                "dataProvider" : data,
+                "valueField": "number",
+                "titleField": "name",
+                "outlineAlpha": 0.4,
+                "depth3D": 15,
+                "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+                "angle": 30,
+                "export": {
+                    "enabled": false
+                }
+            });        }
     });
-    // Load google charts
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart3);
-    // Draw the chart and set the chart values
-    function drawChart3() {
-        var data3 = google.visualization.arrayToDataTable(jsonData3);
-        // Optional; add a title and set the width and height of the chart
-        var options = {'title':'Vật tư tồn nhiều nhất', 'width':550, 'height':400};
 
-        // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.PieChart(document.getElementById('piechart-3'));
-        chart.draw(data3, options);
-    }
 });
