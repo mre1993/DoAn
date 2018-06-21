@@ -57,11 +57,11 @@
                             <td>{{$value->TongSoLuong}}</td>
                             <td>
                                 <form action="">
-                                    <button type="button" class="btn btn-comment fa fa-cogs"  data-toggle="modal" data-target="#hong-{{$ten->TenKVT}}"></button>
+                                    <button type="button" class="btn btn-comment fa fa-cogs"  data-toggle="modal" data-target="#hong-{{$ten->MaKVT}}"></button>
                                 </form>
                             </td>
                         </tr>
-                        <div class="modal fade" id="hong-{{$ten->TenKVT}}" role="dialog">
+                        <div class="modal fade" id="hong-{{$ten->MaKVT}}" role="dialog">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
                                 <div class="modal-content">
