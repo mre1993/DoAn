@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-md-6">
-                                <label for="TimVT">Tìm kiếm vật tư</label>
+                                <label for="TimVT" class="col-md-12" style="padding:0">Tìm kiếm vật tư</label>
                                 <div class="col-md-10" style="padding: 0">
                                     <input type="text" placeholder="Nhập để tìm" name="TimVT" class="form-control search-query">
                                     <div class="suggest-search"></div>
