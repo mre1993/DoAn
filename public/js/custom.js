@@ -168,12 +168,11 @@ $(document).ready(function() {
                     max = data['SoLuongTon'];
                 }
                 var DonGia = data['DonGia'];
-                var valuationId = MaVT;
                 var record =  '<tr class="input-record" >'+
                     '<td class="TenVT">'+$(target).text()+'<input type="hidden" name="MaVT[]" value="'+MaVT+'"></td>' +
-                    '<td><input type="text" readonly class="form-control" name="DVT" value="'+ data['DVT'] +'"></td>' +
+                    '<td><input type="text" readonly class="form-control" name="DVT[]" value="'+ data['DVT'] +'"></td>' +
                     '<td><input name="SoLuong[]" type="number" class="form-control" onchange="return  myFunction(this)" min="0" value="0" max="'+ max +'"></td>' +
-                    '<td><input name="DonGia[]" name="DonGia[]" onchange="return  myFunction2(this)" type="text" value="'+DonGia+'" class="form-control"></td>' +
+                    '<td><input name="DonGia[]" onchange="return  myFunction2(this)" type="text" value="'+DonGia+'" class="form-control"></td>' +
                     '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
                     '<td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>'+
                     '</tr>';

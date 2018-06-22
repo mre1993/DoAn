@@ -10,6 +10,7 @@ use App\NhaCungCap;
 use App\NhanVien;
 use App\PhanXuong;
 use App\PhieuNhap;
+use App\PhieuXuat;
 use App\VatTu;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
@@ -59,6 +60,7 @@ class PhieuNhapController extends Controller
      */
     public function store(Request $request)
     {
+
         $message = [
             'MaKVT.required' => 'Mã kho vật tư không được để trống',
             'MaPN.unique' => 'Mã phiếu nhập đã tồn tại',
@@ -80,6 +82,7 @@ class PhieuNhapController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         };
+
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
             $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
@@ -111,11 +114,12 @@ class PhieuNhapController extends Controller
                 $soLuongHong = $check->SoLuongHong;
                 $soLuongTon = $check->SoLuongTon;
                 $donGiaCu = $checkVTKho->DonGia;
-                $donGiaMoi = round(($tongTon*$donGiaCu + $request->ThanhTien[$i])/($tongTon + $request->SoLuongTon[$i]));
+                $donGiaMoi = round(($tongTon*$donGiaCu + $request->ThanhTien[$i])/($tongTon + $request->SoLuong[$i]));
                 $check->SoLuongTon = $request->SoLuong[$i]+$soLuongTon;
                 $check->TongSoLuong = $request->SoLuong[$i]+$soLuongTon+$soLuongHong;
                 $checkVT->DonGia = $donGiaMoi;
                 $check->save();
+                $checkVT->save();
             }
             ChiTietPhieuNhap::create([
                 'MaPN' => $request->MaPN,
@@ -185,9 +189,27 @@ class PhieuNhapController extends Controller
      * @param  \App\PhieuNhap  $phieuNhap
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PhieuNhap $phieuNhap)
+    public function destroy($id)
     {
-        //
+        $phieuNhap = PhieuNhap::where('MaPN',$id)->first();
+        $vatTuPhieuNhap = ChiTietPhieuNhap::where('MaPN',$id)->get();
+        foreach ($vatTuPhieuNhap as $item){
+            $vatTuKho = ChiTietKhoVT::where('MaVT',$item->MaVT)->first();
+            $vatTu = VatTu::where('MaVT',$item->MaVT)->first();
+            $soLuongTonCu = $vatTuKho->SoLuongTon;
+            $soLuongNhapKho= $item->SoLuong;
+            $soLuongTonMoi = $soLuongTonCu - $soLuongNhapKho;
+            $donGiaCu = $vatTu->DonGia;
+            $thanhTien = $item->ThanhTien;
+            $donGiaMoi = round(($donGiaCu*$soLuongTonCu - $thanhTien)/$soLuongTonMoi);
+            $vatTuKho->SoLuongTon = $soLuongTonMoi;
+            $vatTu->DonGia = $donGiaMoi;
+            $vatTuKho->save();
+            $vatTu->save();
+            $item->delete();
+        }
+        $phieuNhap->delete();
+        return redirect()->back();
     }
 
 //    public function search($request){

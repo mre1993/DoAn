@@ -183,20 +183,20 @@
                     <div class="error-vt" style="display: none">
                         <h5 class="color-red" style="margin-top: 0;display: none">Bạn phải chọn nhà cung cấp trước</h5>
                     </div>
-                    <form method="POST" action="{{ route('vattu.store') }}" name="create">
+                    <form class="form">
                         @csrf
                         <div class="form-group row">
-                            <label for="MaVT" class="col-md-4 col-form-label text-md-right">Mã vật tư<span class="color-red">*</span></label>
+                            <label for="MaVTNew" class="col-md-4 col-form-label text-md-right">Mã vật tư<span class="color-red">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="MaVT" type="text" class="form-control" name="MaVT" value="{{old('MaVT')}}">
+                                <input id="MaVTNew" type="text" class="form-control" name="MaVTNew">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="TenVT" class="col-md-4 col-form-label text-md-right">Tên vật tư<span class="color-red">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="TenVT" type="text" class="form-control" name="TenVT" value="{{old('TenVT')}}">
+                                <input id="TenVT" type="text" class="form-control" name="TenVT" >
                             </div>
                         </div>
                         <div class="form-group row">
@@ -210,16 +210,16 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="DonGia" class="col-md-4 col-form-label text-md-right">Đơn giá</label>
+                            <label for="DonGiaMoi" class="col-md-4 col-form-label text-md-right">Đơn giá</label>
                             <div class="col-md-6">
-                                <input id="DonGia" type="text" class="form-control" name="DonGia" value="{{old('DonGia')}}">
+                                <input id="DonGiaMoi" type="text" class="form-control" name="DonGiaMoi" >
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="MoTa" class="col-md-4 col-form-label text-md-right">Mô tả</label>
+                            <label for="MoTaMoi" class="col-md-4 col-form-label text-md-right">Mô tả</label>
 
                             <div class="col-md-6">
-                                <textarea id="MoTa" class="form-control" name="MoTa">{{old('MoTa')}}</textarea>
+                                <textarea id="MoTaMoi" class="form-control" name="MoTaMoi"></textarea>
                             </div>
                         </div>
                         <div class="form-group row mb-0">

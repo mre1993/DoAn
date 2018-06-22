@@ -109,7 +109,7 @@ class VatTuController extends Controller
             return redirect()->back();
         }
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');
-        $item = VatTu::where('MaVT',$id)->get();
+        $item = VatTu::where('MaVT',$id)->first();
         $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
         return view('vattu.edit',compact('item','NCC','DVT'));
     }

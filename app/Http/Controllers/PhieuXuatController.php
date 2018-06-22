@@ -8,6 +8,7 @@ use App\ChiTietPhieuXuat;
 use App\KhoVatTu;
 use App\PhanXuong;
 use App\PhieuXuat;
+use App\VatTu;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -157,9 +158,27 @@ class PhieuXuatController extends Controller
      * @param  \App\PhieuXuat  $phieuXuat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PhieuXuat $phieuXuat)
+    public function destroy($id)
     {
-        //
+        $PhieuXuat = PhieuXuat::where('MaPhieuXuat',$id)->first();
+        $vatTuPhieuXuat = ChiTietPhieuXuat::where('MaPhieuXuat',$id)->get();
+        foreach ($vatTuPhieuXuat as $item){
+            $vatTuKho = ChiTietKhoVT::where('MaVT',$item->MaVT)->first();
+            $vatTu = VatTu::where('MaVT',$item->MaVT)->first();
+            $soLuongTonCu = $vatTuKho->SoLuongTon;
+            $soLuongXuatKho= $item->SoLuong;
+            $soLuongTonMoi = $soLuongTonCu + $soLuongXuatKho;
+            $donGiaCu = $vatTu->DonGia;
+            $thanhTien = $item->ThanhTien;
+            $donGiaMoi = round(($donGiaCu*$soLuongTonCu + $thanhTien)/$soLuongTonMoi);
+            $vatTuKho->SoLuongTon = $soLuongTonMoi;
+            $vatTu->DonGia = $donGiaMoi;
+            $vatTuKho->save();
+            $vatTu->save();
+            $item->delete();
+        }
+        $PhieuXuat->delete();
+        return redirect()->back();
     }
 
     public function printExcel($id)
