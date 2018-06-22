@@ -43,7 +43,7 @@
                     <td>{{$item->TenVT}}</td>
                     <td>{{$item->DVT}}</td>
                     <td>{{$item->NhaCungCap->TenNCC}}</td>
-                    <td>{{$item->DonGia}}</td>
+                    <td>{{number_format($item->DonGia, 0, ',', '.')}}</td>
                     <td>{{$item->MoTa}}</td>
                     <td>
                         <a class="btn btn-comment fa fa-edit" href="{{route('vattu.edit',$item->MaVT)}}"></a>

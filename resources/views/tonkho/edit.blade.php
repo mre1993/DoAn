@@ -22,15 +22,15 @@
             </div>
             <div class="col-md-6">
                 <label for="SoLuongTon" class="col-md-4 col-form-label">Số lượng tồn</label>
-                <input id="SoLuongTon" name="SoLuongTon" class="form-control col-md-8" readonly value="{{$item->SoLuongTon}}">
+                <input id="SoLuongTon" name="SoLuongTon" class="form-control col-md-8" readonly value="{{number_format($item->SoLuongTon, 0, ',', '.')}}">
             </div>
             <div class="col-md-6">
                 <label for="SoLuongHong" class="col-md-4 col-form-label">Số lượng vật tư hỏng</label>
-                <input id="SoLuongHong" name="SoLuongHong" class="form-control col-md-8" readonly value="{{$item->SoLuongHong}}">
+                <input id="SoLuongHong" name="SoLuongHong" class="form-control col-md-8" readonly value="{{number_format($item->SoLuongHong, 0, ',', '.')}}">
             </div>
             <div class="col-md-6">
                 <label for="TongSoLuong" class="col-md-4 col-form-label">Tổng số vật tư</label>
-                <input id="TongSoLuong" name="TongSoLuong" class="form-control col-md-8" readonly value="{{$item->TongSoLuong}}">
+                <input id="TongSoLuong" name="TongSoLuong" class="form-control col-md-8" readonly value="{{number_format($item->TongSoLuong, 0, ',', '.')}}">
             </div>
         </fieldset>
         <table class="table table-striped">
@@ -52,9 +52,9 @@
                         <tr>
                             <td>{{$ten->TenKVT}}</td>
                             <td>{{$ten->DiaChi}}</td>
-                            <td>{{$value->SoLuongTon}}</td>
-                            <td>{{$value->SoLuongHong}}</td>
-                            <td>{{$value->TongSoLuong}}</td>
+                            <td>{{number_format($value->SoLuongTon, 0, ',', '.')}}</td>
+                            <td>{{number_format($value->SoLuongHong, 0, ',', '.')}}</td>
+                            <td>{{number_format($value->TongSoLuong, 0, ',', '.')}}</td>
                             <td>
                                 <form action="">
                                     <button type="button" class="btn btn-comment fa fa-cogs"  data-toggle="modal" data-target="#hong-{{$ten->MaKVT}}"></button>

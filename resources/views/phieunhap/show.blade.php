@@ -102,17 +102,17 @@
                             <td><p>{{$item->MaVT}}</p></td>
                             <td><p>{{$item->VatTu->TenVT}}</p></td>
                             <td><p>{{$item->VatTu->DVT}}</p></td>
-                            <td><p>{{$item->DonGia}}</p></td>
-                            <td><p>{{$item->SoLuong}}</p></td>
-                            <td><p>{{$item->ThanhTien}}</p></td>
+                            <td><p>{{number_format($item->DonGia, 0, ',', '.')}}</p></td>
+                            <td><p>{{number_format($item->SoLuong, 0, ',', '.')}}</p></td>
+                            <td><p>{{number_format($item->ThanhTien, 0, ',', '.')}}</p></td>
                             <td><p>{{$item->GhiChu}}</p></td>
                         </tr>
                     @endforeach
                     <tr class="khung">
                         <td colspan="4"><p class="text-center">Tổng</p></td>
                         <td><p></p></td>
-                        <td><p>{{$sumSL}}</p></td>
-                        <td><p>{{$sumTT}}</p></td>
+                        <td><p>{{number_format($sumSL, 0, ',', '.')}}</p></td>
+                        <td><p>{{number_format($sumTT, 0, ',', '.')}}</p></td>
                         <td><p></p></td>
                     </tr>
                     <tr>

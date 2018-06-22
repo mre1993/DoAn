@@ -39,9 +39,9 @@
                         @endforeach
                     </td>
                     <td>{{$item->DVT}}</td>
-                    <td>{{$item->SoLuongTon}}</td>
-                    <td>{{$item->SoLuongHong}}</td>
-                    <td>{{$item->TongSoLuong}}</td>
+                    <td>{{number_format($item->SoLuongTon, 0, ',', '.')}}</td>
+                    <td>{{number_format($item->SoLuongHong, 0, ',', '.')}}</td>
+                    <td>{{number_format($item->TongSoLuong, 0, ',', '.')}}</td>
                     <td>
                         <form action="{{route('tonkho.edit',$item->MaVT)}}">
                             <button class="btn btn-primary fa fa-minus"></button>

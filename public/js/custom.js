@@ -167,7 +167,7 @@ $(document).ready(function() {
                 if(data['SoLuongTon'] != 'undefined'){
                     max = data['SoLuongTon'];
                 }
-                var DonGia = data['DonGia'];
+                var DonGia = parseFloat(data['DonGia']).toLocaleString('us');
                 var record =  '<tr class="input-record" >'+
                     '<td class="TenVT">'+$(target).text()+'<input type="hidden" name="MaVT[]" value="'+MaVT+'"></td>' +
                     '<td><input type="text" readonly class="form-control" name="DVT[]" value="'+ data['DVT'] +'"></td>' +
@@ -212,9 +212,9 @@ $(document).ready(function() {
                             '<td>'+ v['TenVT'] +'</td>'+
                             '<td>'+ v['TenKVT'] +'</td>'+
                             '<td>'+ v['TenPX'] +'</td>'+
-                            '<td>'+ v['SoLuong'] +'</td>'+
-                            '<td>'+ v['DonGia'] +'</td>'+
-                            '<td>'+ v['ThanhTien'] +'</td>'+
+                            '<td>'+  parseFloat(v['SoLuong']).toLocaleString('us') +'</td>'+
+                            '<td>'+ parseFloat(v['DonGia']).toLocaleString('us') +'</td>'+
+                            '<td>'+ parseFloat(v['ThanhTien']).toLocaleString('us') +'</td>'+
                             '<td>'+ NoiDung +'</td>'+
                             '<td>'+ d +'</td>'+
                             '<td>'+ v['TenNV'] +'</td>'+
@@ -275,9 +275,9 @@ $(document).ready(function() {
                         '<td>'+ v['TenVT'] +'</td>'+
                         '<td>'+ v['TenNCC'] +'</td>'+
                         '<td>'+ v['TenKVT'] +'</td>'+
-                        '<td>'+ v['SoLuong'] +'</td>'+
-                        '<td>'+ v['DonGia'] +'</td>'+
-                        '<td>'+ v['ThanhTien'] +'</td>'+
+                        '<td>'+ parseFloat(v['SoLuong']).toLocaleString('us') +'</td>'+
+                        '<td>'+ parseFloat(v['DonGia']).toLocaleString('us') +'</td>'+
+                        '<td>'+ parseFloat(v['ThanhTien']).toLocaleString('us') +'</td>'+
                         '<td>'+ NoiDung +'</td>'+
                         '<td>'+ d +'</td>'+
                         '<td>'+ v['TenNV'] +'</td>'+
@@ -332,11 +332,12 @@ $(document).ready(function() {
                         '<td>'+ v['MaVT'] +'</td>'+
                         '<td>'+ v['TenVT'] +'</td>'+
                         '<td>'+ v['DVT'] +'</td>'+
-                        '<td>'+ v['DonGia'] +'</td>'+
-                        '<td>'+ v['SoLuongTon'] +'</td>'+
-                        '<td>'+ v['SoLuongHong'] +'</td>'+
-                        '<td>'+ v['TongSoLuong'] +'</td>'+
-                        '<td>'+ ThanhTien +'</td>'+
+                        '<td>'+ parseFloat(v['DonGia']).toLocaleString('us') +'</td>'+
+                        '<td>'+ parseFloat(v['SoLuongTon']).toLocaleString('us') +'</td>'+
+                        '<td>'+ parseFloat(v['SoLuongHong']).toLocaleString('us') +'</td>'+
+                        '<td>'+ parseFloat(v['TongSoLuong']).toLocaleString('us') +'</td>'+
+                        '<td>'+  +'</td>'+
+                        '<td>'+ parseFloat(ThanhTien).toLocaleString('us') +'</td>'+
                         '</tr>');
                     return k <= data.length
                 });
