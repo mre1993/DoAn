@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/phieuxuat','PhieuXuatController');
     Route::get('/ton-kho','KhoVatTuController@showTonKho')->name('tonkho.index');
     Route::get('/ton-kho/quan-ly-hong/{request}','KhoVatTuController@checkHong')->name('tonkho.edit');
-    Route::post('/ton-kho/quan-ly-hong/edit','VatTuController@editHong')->name('hong.edit');
+    Route::post('/ton-kho/quan-ly-hong/edit','KhoVatTuController@editHong')->name('hong.edit');
     Route::get('/bao-cao/bc-vattu',[
         'as' => 'baocao.vattu',
         'uses' => 'VatTuController@report'

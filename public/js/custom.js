@@ -354,7 +354,7 @@ $(document).ready(function() {
                     '<th>Số lượng tồn</th>'+
                     '<th>Số lượng hỏng</th>'+
                     '<th>Tổng số lượng</th>'+
-                    '<th>Tổng giá trị trij</th>'+
+                    '<th>Tổng giá trị trị</th>'+
                     '</tr>'+
                     '</thead>'+
                     '<tbody class="export-content">'+

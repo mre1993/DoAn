@@ -56,48 +56,42 @@
                             <td>{{number_format($value->SoLuongHong, 0, ',', '.')}}</td>
                             <td>{{number_format($value->TongSoLuong, 0, ',', '.')}}</td>
                             <td>
-                                <form action="">
-                                    <button type="button" class="btn btn-comment fa fa-cogs"  data-toggle="modal" data-target="#hong-{{$ten->MaKVT}}"></button>
-                                </form>
-                            </td>
-                        </tr>
-                        <div class="modal fade" id="hong-{{$ten->MaKVT}}" role="dialog">
-                            <div class="modal-dialog">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Số lượng vật tư hỏng cho {{$ten->TenKVT}}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row mb-0">
-                                            <form action="{{route('hong.edit')}}" method="post" class="edit-hong form-group" >
-                                                @csrf
-                                                <input type="hidden" name="MaVT" value="{{$item->MaVT}}">
-                                                <div class="col-md-12">
-                                                    <label for="SoLuongHong" class="col-md-6 col-form-label">
-                                                        Thêm lượng vật tư hỏng
-                                                    </label>
-                                                    <input type="number" placeholder="Nhập số lượng hàng hỏng" class="form-control col-md-6" id="SoLuongHong">
-                                                </div>
-                                                <div class="col-md-12" style="margin-top: 10px;">
-                                                    <button onclick="form_submit()" id="form" class="btn btn-primary">{{ __('Save') }}</button>
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </form>
+                                <button type="button" class="btn btn-comment fa fa-cogs"  data-toggle="modal" data-target="#hong-{{$ten->MaKVT}}"></button>
+                                <div class="modal fade" id="hong-{{$ten->MaKVT}}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Số lượng vật tư hỏng cho {{$ten->TenKVT}}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" action="{{route('hong.edit')}}" class="edit-hong">
+                                                    @csrf
+                                                    <input type="hidden" name="MaKVT" value="{{$ten->MaKVT}}">
+                                                    <input type="hidden" name="MaVT" value="{{$item->MaVT}}">
+                                                    <div class="form-group row mb-0">
+                                                        <div class="col-md-12">
+                                                            <label for="SoLuongHong" class="col-md-6 col-form-label">
+                                                                Thêm lượng vật tư hỏng
+                                                            </label>
+                                                            <input type="number" placeholder="Nhập số lượng hàng hỏng" class="form-control col-md-6" name="SoLuongHong" max="{{$value->TongSoLuong}}">
+                                                        </div>
+                                                        <div class="col-md-12" style="margin-top: 10px;">
+                                                            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </td>
+                        </tr>
                 @endforeach
             @endforeach
             </tbody>
         </table>
     </div>
-    <script type="text/javascript">
-        function form_submit() {
-            document.getElementById("form").submit();
-        }
-    </script>
 @stop

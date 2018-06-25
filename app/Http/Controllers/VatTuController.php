@@ -448,7 +448,4 @@ class VatTuController extends Controller
         return view('vattu.search',compact('items','i'));
     }
 
-    public function editHong(Request $request){
-        dd($request);
-    }
 }

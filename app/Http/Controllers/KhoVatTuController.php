@@ -228,4 +228,16 @@ class KhoVatTuController extends Controller
             ->paginate(10);
         return view('khovattu.search',compact('items','i'));
     }
+
+    public function editHong(Request $request){
+        $kho = KhoVatTu::where('MaKVT',$request->MaKVT)->first();
+        $chiTietKho = ChiTietKhoVT::where('MaKVT',$kho->MaKVT)->where('MaVT',$request->MaVT)->first();
+        $TongLuongHong =$request->SoLuongHong + $chiTietKho->SoLuongHong;
+        if($TongLuongHong  <= $chiTietKho->TongSoLuong) {
+            $chiTietKho->SoLuongHong = $request->SoLuongHong;
+            $chiTietKho->SoLuongTon = $chiTietKho->TongSoLuong - $chiTietKho->SoLuongHong;
+            $chiTietKho->save();
+        }
+        return redirect()->back();
+    }
 }
