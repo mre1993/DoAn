@@ -263,6 +263,7 @@ $(document).ready(function() {
                 $.each(data, function(k, v){
                     var i = k+1;
                     var d = v['created_at'].split(" ")[0];
+                    var ThanhTien = v['SoLuong']*v['DonGia'];
                     var NoiDung = v['NoiDung'];
                     if(NoiDung==null){
                         NoiDung = '';
@@ -277,7 +278,7 @@ $(document).ready(function() {
                         '<td>'+ v['TenKVT'] +'</td>'+
                         '<td>'+ parseFloat(v['SoLuong']).toLocaleString('us') +'</td>'+
                         '<td>'+ parseFloat(v['DonGia']).toLocaleString('us') +'</td>'+
-                        '<td>'+ parseFloat(v['ThanhTien']).toLocaleString('us') +'</td>'+
+                        '<td>'+ parseFloat(ThanhTien).toLocaleString('us') +'</td>'+
                         '<td>'+ NoiDung +'</td>'+
                         '<td>'+ d +'</td>'+
                         '<td>'+ v['TenNV'] +'</td>'+
@@ -353,7 +354,7 @@ $(document).ready(function() {
                     '<th>Số lượng tồn</th>'+
                     '<th>Số lượng hỏng</th>'+
                     '<th>Tổng số lượng</th>'+
-                    '<th>Tổng giá trị trị</th>'+
+                    '<th>Tổng giá trị trij</th>'+
                     '</tr>'+
                     '</thead>'+
                     '<tbody class="export-content">'+

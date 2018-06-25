@@ -17,9 +17,9 @@
                 <th>Tên vật tư</th>
                 <th>Kho còn vật tư</th>
                 <th>Đơn vị tính</th>
-                <th>Tổng số lượng vật tư</th>
-                <th>Tổng số lượng vật tư hỏng</th>
-                <th>Tổng số lượng vật tư tồn</th>
+                <th>Số lượng vật tư</th>
+                <th>Số lượng vật tư hỏng</th>
+                <th>Số lượng vật tư tồn</th>
                 <th></th>
             </tr>
             </thead>

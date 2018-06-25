@@ -70,10 +70,10 @@
                                         <h4 class="modal-title">Số lượng vật tư hỏng cho {{$ten->TenKVT}}</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="edit-hong" action="{{route('hong.edit')}}" method="POST">
-                                            <input type="hidden" name="MaVT" value="{{$item->MaVT}}">
-                                            @csrf
-                                            <div class="form-group row mb-0">
+                                        <div class="row mb-0">
+                                            <form action="{{route('hong.edit')}}" method="post" class="edit-hong form-group" >
+                                                @csrf
+                                                <input type="hidden" name="MaVT" value="{{$item->MaVT}}">
                                                 <div class="col-md-12">
                                                     <label for="SoLuongHong" class="col-md-6 col-form-label">
                                                         Thêm lượng vật tư hỏng
@@ -81,11 +81,11 @@
                                                     <input type="number" placeholder="Nhập số lượng hàng hỏng" class="form-control col-md-6" id="SoLuongHong">
                                                 </div>
                                                 <div class="col-md-12" style="margin-top: 10px;">
-                                                    <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                                                    <button onclick="form_submit()" id="form" class="btn btn-primary">{{ __('Save') }}</button>
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -95,4 +95,9 @@
             </tbody>
         </table>
     </div>
+    <script type="text/javascript">
+        function form_submit() {
+            document.getElementById("form").submit();
+        }
+    </script>
 @stop
