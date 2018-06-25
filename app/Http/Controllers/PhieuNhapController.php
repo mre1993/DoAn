@@ -12,6 +12,7 @@ use App\PhanXuong;
 use App\PhieuNhap;
 use App\PhieuXuat;
 use App\VatTu;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -60,7 +61,6 @@ class PhieuNhapController extends Controller
      */
     public function store(Request $request)
     {
-
         $message = [
             'MaKVT.required' => 'Mã kho vật tư không được để trống',
             'MaPN.unique' => 'Mã phiếu nhập đã tồn tại',
@@ -83,6 +83,11 @@ class PhieuNhapController extends Controller
                 ->withInput();
         };
 
+        $month = Carbon::now()->format('m');
+        $countPN =  count(PhieuNhap::whereYear('created_at', '=', Carbon::now()->format('Y'))
+            ->whereMonth('created_at', '=', Carbon::now()->format('m'))
+            ->get()) + 1;
+        $maPhieuNhap = $request->MaPhieuXuat.'-'.$countPN.'/T'.$month;
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
             $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
@@ -122,7 +127,7 @@ class PhieuNhapController extends Controller
                 $checkVT->save();
             }
             ChiTietPhieuNhap::create([
-                'MaPN' => $request->MaPN,
+                'MaPN' => $maPhieuNhap,
                 'MaVT' => $request->MaVT[$i],
                 'SoLuong' => $request->SoLuong[$i],
                 'DonGia' => $request->DonGia[$i],
@@ -131,7 +136,7 @@ class PhieuNhapController extends Controller
         }
 
         PhieuNhap::create([
-            'MaPN' =>$request->MaPN,
+            'MaPN' => $maPhieuNhap,
             'MaKVT' => $request->MaKVT,
             'MaNV' => $request->MaNV,
             'MaNCC' => $request->MaNCC,

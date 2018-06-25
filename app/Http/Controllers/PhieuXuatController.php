@@ -9,6 +9,7 @@ use App\KhoVatTu;
 use App\PhanXuong;
 use App\PhieuXuat;
 use App\VatTu;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -81,6 +82,11 @@ class PhieuXuatController extends Controller
                 ->withInput();
         };
         $count = count($request->MaVT);
+        $month = Carbon::now()->format('m');
+        $countPX =  count(PhieuXuat::whereYear('created_at', '=', Carbon::now()->format('Y'))
+            ->whereMonth('created_at', '=', $month)
+            ->get()) + 1;
+        $maPhieuXuat = $request->MaPhieuXuat.'-'.$countPX.'/T'.$month;
         for($i=0; $i<$count; $i++){
             $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
             if($check->SoLuongTon < $request->SoLuong[$i]){
@@ -91,7 +97,7 @@ class PhieuXuatController extends Controller
             $check->save();
 
             ChiTietPhieuXuat::create([
-                'MaPhieuXuat' => $request->MaPhieuXuat,
+                'MaPhieuXuat' => $maPhieuXuat,
                 'MaVT' => $request->MaVT[$i],
                 'SoLuong' => $request->SoLuong[$i],
                 'DonGia' => $request->DonGia[$i],
@@ -100,7 +106,7 @@ class PhieuXuatController extends Controller
         }
 
         PhieuXuat::create([
-            'MaPhieuXuat' =>$request->MaPhieuXuat,
+            'MaPhieuXuat' => $maPhieuXuat,
             'MaPX' => $request->MaPX,
             'MaNV' => $request->MaNV,
             'MaKVT' => $request->MaKVT,
