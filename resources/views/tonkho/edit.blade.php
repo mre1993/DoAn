@@ -57,6 +57,12 @@
                             <td>{{number_format($value->TongSoLuong, 0, ',', '.')}}</td>
                             <td>
                                 <button type="button" class="btn btn-comment fa fa-cogs"  data-toggle="modal" data-target="#hong-{{$ten->MaKVT}}"></button>
+                                <form action="{{route('hong.remove')}}" method="post" style="display: inline-block;">
+                                    @csrf
+                                    <input type="hidden" name="MaKVT" value="{{$ten->MaKVT}}">
+                                    <input type="hidden" name="MaVT" value="{{$item->MaVT}}">
+                                    <button type="submit" class="btn btn-warning fa fa-eraser"></button>
+                                </form>
                                 <div class="modal fade" id="hong-{{$ten->MaKVT}}" role="dialog">
                                     <div class="modal-dialog">
                                         <!-- Modal content-->

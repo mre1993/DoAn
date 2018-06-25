@@ -58,7 +58,8 @@ class NhanVienController extends Controller
         $rules = [
             'MaNV' => 'required|string|max:10|unique:nhan_vien',
             'TenNV' => 'required|string|max:200',
-            'SDT' => 'required|string|regex:/^[0-9-+]+$/|max:13|min:10',
+            'SDT' => 'nullable|regex:/^[0-9-+]+$/|max:13|min:10',
+            'ChucVu' => 'nullable'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
@@ -67,6 +68,12 @@ class NhanVienController extends Controller
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
+        }
+        if($request['SDT'] == null){
+            $request['SDT'] = '';
+        }
+        if($request['ChucVu'] == null){
+            $request['ChucVu'] = '';
         }
         NhanVien::create([
             'TenNV' => $request['TenNV'],

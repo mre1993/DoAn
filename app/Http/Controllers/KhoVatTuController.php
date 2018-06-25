@@ -240,4 +240,13 @@ class KhoVatTuController extends Controller
         }
         return redirect()->back();
     }
+
+    public function removeHong(Request $request){
+        $kho = KhoVatTu::where('MaKVT',$request->MaKVT)->first();
+        $chiTietKho = ChiTietKhoVT::where('MaKVT',$kho->MaKVT)->where("MaVT",$request->MaVT)->first();
+        $chiTietKho->TongSoLuong = $chiTietKho->TongSoLuong - $chiTietKho->SoLuongHong;
+        $chiTietKho->SoLuongHong = 0;
+        $chiTietKho->save();
+        return redirect()->back();
+    }
 }

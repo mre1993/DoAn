@@ -4,6 +4,9 @@
 #contain {
     display: flex;
 }
+#contain .col-md-10{
+    margin:0;
+}
 #contain .role .delete-form{
     display: unset;
 }

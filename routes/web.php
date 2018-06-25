@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/ton-kho','KhoVatTuController@showTonKho')->name('tonkho.index');
     Route::get('/ton-kho/quan-ly-hong/{request}','KhoVatTuController@checkHong')->name('tonkho.edit');
     Route::post('/ton-kho/quan-ly-hong/edit','KhoVatTuController@editHong')->name('hong.edit');
+    Route::post('/ton-kho/quan-ly-hong/remove','KhoVatTuController@removeHong')->name('hong.remove');
     Route::get('/bao-cao/bc-vattu',[
         'as' => 'baocao.vattu',
         'uses' => 'VatTuController@report'

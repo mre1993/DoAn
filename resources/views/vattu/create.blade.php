@@ -1,6 +1,6 @@
 @extends('home')
 @section('right-content')
-    <div class="col-md-10" style="margin:auto">
+    <div class="col-md-10">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="DonGia" class="col-md-4 col-form-label text-md-right">Đơn giá</label>
+                        <label for="DonGia" class="col-md-4 col-form-label text-md-right">Đơn giá<span class="color-red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="DonGia" type="text" class="form-control" name="DonGia" value="{{old('DonGia')}}">

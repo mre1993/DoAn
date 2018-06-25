@@ -1,6 +1,6 @@
 @extends('home')
 @section('right-content')
-    <div class="col-md-10" style="margin:auto">
+    <div class="col-md-10">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

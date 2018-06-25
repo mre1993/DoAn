@@ -131,7 +131,7 @@
             </div>
         <div class="col-md-12 text-center">
                 <a href="{{ \Illuminate\Support\Facades\URL::previous() }}" class="btn btn-back">Quay lại</a>
-                <a class="btn btn-success fa fa-print" style="padding: 10px" href="{{route('phieunhap.printExcel',$item->MaPN)}}"></a>
+                <a class="btn btn-success fa fa-file-excel-o" style="padding: 10px" href="{{route('phieunhap.printExcel',$item->MaPN)}}"></a>
             </div>
     </div>
 @endsection
