@@ -47,7 +47,7 @@
         {{$sumSLT = $sumSLT + $item->SoLuongTon}}
         {{$sumSLH = $sumSLH + $item->SoLuongHong}}
         {{$sumTSL = $sumTSL + $item->TongSoLuong}}
-        {{$sumTT = $sumTT + array_sum([$item->DonGia,$item->SoLuongTon])}}
+        {{$sumTT = $sumTT + $item->DonGia*$item->SoLuongTon}}
         <tr class="khung-header">
             <td>{{$i++}}</td>
             <td>{{$item->MaVT}}</td>
@@ -57,7 +57,7 @@
             <td>{{$item->SoLuongTon}}</td>
             <td>{{$item->SoLuongHong}}</td>
             <td>{{$item->TongSoLuong}}</td>
-            <td>{{array_sum([$item->DonGia,$item->SoLuongTon])}}</td>
+            <td>{{$item->DonGia*$item->SoLuongTon}}</td>
         </tr>
     @endforeach
     <tr class="khung-header">

@@ -70,7 +70,9 @@
                                         <h4 class="modal-title">Số lượng vật tư hỏng cho {{$ten->TenKVT}}</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="edit-hong" action="">
+                                        <form class="edit-hong" action="{{route('hong.edit')}}" method="POST">
+                                            <input type="hidden" name="MaVT" value="{{$item->MaVT}}">
+                                            @csrf
                                             <div class="form-group row mb-0">
                                                 <div class="col-md-12">
                                                     <label for="SoLuongHong" class="col-md-6 col-form-label">

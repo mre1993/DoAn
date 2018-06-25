@@ -47,7 +47,7 @@
                         <label class="control-label col-md-4" for="MaKVT">Chọn kho vật tư</label>
                         <select style="height: auto;"  name="MaKVT" class="form-control col-md-8" id="MaKVT">
                             <option value="" disabled selected>Chọn kho vật tư</option>
-                            @foreach($MaNCC as $item)
+                            @foreach($MaKVT as $item)
                                 <option value="{{ $item->MaKVT }}" > {{ $item->TenKVT }}</option>
                             @endforeach
                         </select>

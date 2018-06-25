@@ -336,7 +336,6 @@ $(document).ready(function() {
                         '<td>'+ parseFloat(v['SoLuongTon']).toLocaleString('us') +'</td>'+
                         '<td>'+ parseFloat(v['SoLuongHong']).toLocaleString('us') +'</td>'+
                         '<td>'+ parseFloat(v['TongSoLuong']).toLocaleString('us') +'</td>'+
-                        '<td>'+  +'</td>'+
                         '<td>'+ parseFloat(ThanhTien).toLocaleString('us') +'</td>'+
                         '</tr>');
                     return k <= data.length
@@ -354,7 +353,7 @@ $(document).ready(function() {
                     '<th>Số lượng tồn</th>'+
                     '<th>Số lượng hỏng</th>'+
                     '<th>Tổng số lượng</th>'+
-                    '<th>Tổng giá trị t</th>'+
+                    '<th>Tổng giá trị trị</th>'+
                     '</tr>'+
                     '</thead>'+
                     '<tbody class="export-content">'+

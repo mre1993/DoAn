@@ -123,7 +123,7 @@ class UserController extends Controller
             $rules = array(
                 'oldpassword' => 'required|string|min:6',
                 'password' => 'required|string|min:6',
-                'cpassword' => 'required|same:password|string|min:6',
+                'cpassword' => 'required|same:oldpassword|string|min:6',
             );
             $message = [
                 'oldpassword.required' => 'Mật khẩu cũ không được để trống',
@@ -149,7 +149,13 @@ class UserController extends Controller
                 return redirect()->back()->withErrors('Mật khẩu cũ không đúng!');
             }
         }
-        return false;
+        else if($request->role)
+        {
+            User::where('id',$request->userId)->update([
+                'MaQuyen' => $request->role,
+            ]);
+            return redirect()->back();
+        }
     }
 
     /**

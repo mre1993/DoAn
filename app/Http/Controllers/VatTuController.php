@@ -447,4 +447,8 @@ class VatTuController extends Controller
             ->paginate(10);
         return view('vattu.search',compact('items','i'));
     }
+
+    public function editHong(Request $request){
+        dd($request);
+    }
 }
