@@ -33,7 +33,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="text" placeholder="Nhập mã phiếu nhập" class="form-control" name="MaPN" value="{{$phieuNhap->MaPN}}">
+                            <input type="text" class="form-control" name="MaPN" readonly value="{{$phieuNhap->MaPN}}">
                         </div>
                     </div>
                     <div class="form-group row">

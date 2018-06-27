@@ -92,11 +92,6 @@ class PhieuNhapController extends Controller
         for($i=0; $i<$count; $i++){
             $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
             $checkVT = VatTu::where('MaVT',$request->MaVT[$i])->first();
-            $checkVTKho = DB::table('vat_tu')
-            ->join('chi_tiet_kho_vat_tu','chi_tiet_kho_vat_tu.MaVT','vat_tu.MaVT')
-            ->where('chi_tiet_kho_vat_tu.MaVT',$request->MaVT[$i])
-            ->select(DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongTon) as SoLuongTon'),'DonGia')
-            ->first();
             if(!$check){
                 if(!$checkVT){
                     VatTu::create([
@@ -130,7 +125,6 @@ class PhieuNhapController extends Controller
                 'ThanhTien' => str_replace(".", "", $request->ThanhTien[$i]),
             ]);
         }
-
         PhieuNhap::create([
             'MaPN' => $maPhieuNhap,
             'MaKVT' => $request->MaKVT,
@@ -187,22 +181,75 @@ class PhieuNhapController extends Controller
      * @param  \App\PhieuNhap  $phieuNhap
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PhieuNhap $phieuNhap)
+    public function update(Request $request)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
+        $phieuNhap = PhieuNhap::where('MaPN',$request->MaPN)->first();
         $itemsDel =  ChiTietPhieuNhap::whereNotIn('MaVT',$request->MaVT)->where('MaPN',$request->MaPN)->get();
-        dd($itemsDel);
         if($itemsDel != null){
             foreach($itemsDel as $itemDel){
-                $check = ChiTietKhoVT::where('MaVT',$itemDel->MaVT)->where('MaKVT',$request->MaKVT)->first();
+                $check = ChiTietKhoVT::where('MaVT',$itemDel->MaVT)->where('MaKVT',$phieuNhap->MaKVT)->first();
                 if($itemDel->SoLuong > $check->SoLuongTon){
                     return redirect()->back()->withErrors(['Số lượng tồn kho nhỏ hơn số lượng nhập']);
                 }
                 $check->SoLuongTon = $check->SoLuongTon - $itemDel->SoLuong;
                 $check->TongSoLuong = $check->TongSoLuong - $itemDel->SoLuong;
-                dd($check);
-//                $itemDel->delete();
+                $check->save();
+                $itemDel->delete();
             }
         }
+        $count = count($request->MaVT);
+        for($i=0;$i<= $count-1;$i++){
+            $checkPhieuNhap = ChiTietPhieuNhap::where('MaVT',$request->MaVT[$i])->where('MaPN',$request->MaPN)->first();
+            $checkKhoVatTu = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$phieuNhap->MaKVT)->first();
+            if(!$checkPhieuNhap){
+                if(!$checkKhoVatTu){
+                    $checkVatTu = VatTu::where('MaVT',$request->MaVT[$i])->get();
+                    if(!$checkVatTu){
+                        VatTu::create([
+                            'MaVT'=> $request->MaVT[$i],
+                            'TenVT'=> $request->TenVT[$i],
+                            'MaNCC'=> $request->MaNCC,
+                            'DVT'=> $request->DVT[$i],
+                            'DonGia'=> str_replace(".", "", $request->DonGia[$i]),
+                            'MoTa'=> $request->MoTa[$i],
+                        ]);
+                    }
+                    ChiTietKhoVT::create([
+                        'MaKVT' => $request->MaKVT,
+                        'MaVT' => $request->MaVT[$i],
+                        'SoLuongTon' => str_replace(".", "", $request->SoLuong[$i]),
+                        'TongSoLuong' => str_replace(".", "", $request->SoLuong[$i])
+                    ]);
+                }else{
+                    $checkKhoVatTu->SoLuongTon = $checkKhoVatTu->SoLuongTon + str_replace(".", "", $request->SoLuong[$i]);
+                    $checkKhoVatTu->TongSoLuong = $checkKhoVatTu->TongSoLuong + str_replace(".", "", $request->SoLuong[$i]);
+                    $checkKhoVatTu->save();
+                }
+                ChiTietPhieuNhap::create([
+                    'MaPN' => $request->MaPN,
+                    'MaVT' => $request->MaVT[$i],
+                    'SoLuong' => str_replace(".", "", $request->SoLuong[$i]),
+                    'DonGia' => str_replace(".", "", $request->DonGia[$i]),
+                    'ThanhTien' => str_replace(".", "", $request->ThanhTien[$i]),
+                ]);
+            }else{
+                $checkKhoVatTu->MaKVT = $request->MaKVT;
+                $checkKhoVatTu->SoLuongTon = $checkKhoVatTu->SoLuongTon + str_replace(".", "", $request->SoLuong[$i]) - $checkPhieuNhap->SoLuong ;
+                $checkKhoVatTu->TongSoLuong = $checkKhoVatTu->TongSoLuong + str_replace(".", "", $request->SoLuong[$i]) - $checkPhieuNhap->SoLuong ;
+                $checkPhieuNhap->SoLuong = str_replace(".", "", $request->SoLuong[$i]);
+                $checkPhieuNhap->DonGia = str_replace(".", "", $request->DonGia[$i]);
+                $checkPhieuNhap->ThanhTien =  str_replace(".", "", $request->ThanhTien[$i]);
+                $checkKhoVatTu->save();
+                $checkPhieuNhap->save();
+            }
+        }
+        $phieuNhap->MaKVT = $request->MaKVT;
+        $phieuNhap->MaNCC = $request->MaNCC;
+        $phieuNhap->save();
+        return redirect('phieunhap');
     }
 
     /**
