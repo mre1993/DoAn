@@ -47,11 +47,13 @@
                     <td>{{$item->NoiDung}}</td>
                     <td>
                         <a class="btn fa fa-eye" href="{{route('phieunhap.show',$item->MaPN)}}" style="background-color: blue;color: white"></a>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('phieunhap.edit',$item->MaPN)}}"></a>
-                        <form class="delete-form" action="{{ route('phieunhap.destroy',$item->MaPN) }}" method="post">
-                            <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-danger fa fa-remove"></button>
+                        <form class="delete-form" action="{{route('phieunhap.edit',$item->MaPN)}}">
+                            <button class="btn btn-comment fa fa-edit"></button>
+                        </form>
+                        <form class="delete-form" action="{{ route('phieunhap.destroy')}}" method="post">
                             {{ csrf_field() }}
+                            <input name="MaPN" type="hidden" value="{{$item->MaPN}}">
+                            <button class="btn btn-danger fa fa-remove"></button>
                         </form>
                     </td>
                 </tr>

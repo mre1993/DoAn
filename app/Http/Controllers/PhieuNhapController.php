@@ -87,7 +87,7 @@ class PhieuNhapController extends Controller
         $countPN =  count(PhieuNhap::whereYear('created_at', '=', Carbon::now()->format('Y'))
             ->whereMonth('created_at', '=', Carbon::now()->format('m'))
             ->get()) + 1;
-        $maPhieuNhap = $request->MaPhieuXuat.'-'.$countPN.'/T'.$month;
+        $maPhieuNhap = $request->MaPN.'-'.$countPN.'_T-'.$month;
         $count = count($request->MaVT);
         for($i=0; $i<$count; $i++){
             $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
@@ -104,34 +104,30 @@ class PhieuNhapController extends Controller
                         'TenVT'=> $request->TenVT[$i],
                         'MaNCC'=> $request->MaNCC,
                         'DVT'=> $request->DVT[$i],
-                        'DonGia'=> $request->DonGia[$i],
+                        'DonGia'=> str_replace(".", "", $request->DonGia[$i]),
                         'MoTa'=> $request->MoTa[$i],
                     ]);
                 }
                 ChiTietKhoVT::create([
                     'MaKVT' => $request->MaKVT,
                     'MaVT' => $request->MaVT[$i],
-                    'SoLuongTon' => $request->SoLuong[$i],
-                    'TongSoLuong' => $request->SoLuong[$i]
+                    'SoLuongTon' => str_replace(".", "", $request->SoLuong[$i]),
+                    'TongSoLuong' => str_replace(".", "", $request->SoLuong[$i])
                 ]);
             }else{
-                $tongTon = $checkVTKho->SoLuongTon;
                 $soLuongHong = $check->SoLuongHong;
                 $soLuongTon = $check->SoLuongTon;
-                $donGiaCu = $checkVTKho->DonGia;
-                $donGiaMoi = round(($tongTon*$donGiaCu + $request->ThanhTien[$i])/($tongTon + $request->SoLuong[$i]));
-                $check->SoLuongTon = $request->SoLuong[$i]+$soLuongTon;
-                $check->TongSoLuong = $request->SoLuong[$i]+$soLuongTon+$soLuongHong;
-                $checkVT->DonGia = $donGiaMoi;
+                $check->SoLuongTon = str_replace(".", "", $request->SoLuong[$i])+$soLuongTon;
+                $check->TongSoLuong = str_replace(".", "", $request->SoLuong[$i])+$soLuongTon+$soLuongHong;
                 $check->save();
                 $checkVT->save();
             }
             ChiTietPhieuNhap::create([
                 'MaPN' => $maPhieuNhap,
                 'MaVT' => $request->MaVT[$i],
-                'SoLuong' => $request->SoLuong[$i],
-                'DonGia' => $request->DonGia[$i],
-                'ThanhTien' => $request->ThanhTien[$i],
+                'SoLuong' => str_replace(".", "", $request->SoLuong[$i]),
+                'DonGia' => str_replace(".", "", $request->DonGia[$i]),
+                'ThanhTien' => str_replace(".", "", $request->ThanhTien[$i]),
             ]);
         }
 
@@ -171,9 +167,17 @@ class PhieuNhapController extends Controller
      * @param  \App\PhieuNhap  $phieuNhap
      * @return \Illuminate\Http\Response
      */
-    public function edit(PhieuNhap $phieuNhap)
+    public function edit($id)
     {
-        //
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
+        $phieuNhap = PhieuNhap::where('MaPN',$id)->first();
+        $values = ChiTietPhieuNhap::where('MaPN',$phieuNhap->MaPN)->get();
+        $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');        $user =  Auth::user();
+        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
+        $MaNCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
+        return view('phieunhap.edit',compact('MaKVT','MaNCC','DVT','phieuNhap','values'));
     }
 
     /**
@@ -185,7 +189,20 @@ class PhieuNhapController extends Controller
      */
     public function update(Request $request, PhieuNhap $phieuNhap)
     {
-        //
+        $itemsDel =  ChiTietPhieuNhap::whereNotIn('MaVT',$request->MaVT)->where('MaPN',$request->MaPN)->get();
+        dd($itemsDel);
+        if($itemsDel != null){
+            foreach($itemsDel as $itemDel){
+                $check = ChiTietKhoVT::where('MaVT',$itemDel->MaVT)->where('MaKVT',$request->MaKVT)->first();
+                if($itemDel->SoLuong > $check->SoLuongTon){
+                    return redirect()->back()->withErrors(['Số lượng tồn kho nhỏ hơn số lượng nhập']);
+                }
+                $check->SoLuongTon = $check->SoLuongTon - $itemDel->SoLuong;
+                $check->TongSoLuong = $check->TongSoLuong - $itemDel->SoLuong;
+                dd($check);
+//                $itemDel->delete();
+            }
+        }
     }
 
     /**
@@ -194,21 +211,18 @@ class PhieuNhapController extends Controller
      * @param  \App\PhieuNhap  $phieuNhap
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $phieuNhap = PhieuNhap::where('MaPN',$id)->first();
-        $vatTuPhieuNhap = ChiTietPhieuNhap::where('MaPN',$id)->get();
+        $phieuNhap = PhieuNhap::where('MaPN',$request->MaPN)->first();
+        $vatTuPhieuNhap = ChiTietPhieuNhap::where('MaPN',$request->MaPN)->get();
         foreach ($vatTuPhieuNhap as $item){
-            $vatTuKho = ChiTietKhoVT::where('MaVT',$item->MaVT)->first();
+            $vatTuKho = ChiTietKhoVT::where('MaVT',$item->MaVT)->where('MaKVT',$phieuNhap->MaKVT)->first();
             $vatTu = VatTu::where('MaVT',$item->MaVT)->first();
             $soLuongTonCu = $vatTuKho->SoLuongTon;
             $soLuongNhapKho= $item->SoLuong;
             $soLuongTonMoi = $soLuongTonCu - $soLuongNhapKho;
-            $donGiaCu = $vatTu->DonGia;
-            $thanhTien = $item->ThanhTien;
-            $donGiaMoi = round(($donGiaCu*$soLuongTonCu - $thanhTien)/$soLuongTonMoi);
             $vatTuKho->SoLuongTon = $soLuongTonMoi;
-            $vatTu->DonGia = $donGiaMoi;
+            $vatTuKho->TongSoLuong = $vatTuKho->TongSoLuong - $soLuongTonCu;
             $vatTuKho->save();
             $vatTu->save();
             $item->delete();

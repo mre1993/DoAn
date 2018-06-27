@@ -86,22 +86,22 @@ class PhieuXuatController extends Controller
         $countPX =  count(PhieuXuat::whereYear('created_at', '=', Carbon::now()->format('Y'))
             ->whereMonth('created_at', '=', $month)
             ->get()) + 1;
-        $maPhieuXuat = $request->MaPhieuXuat.'-'.$countPX.'/T'.$month;
+        $maPhieuXuat = $request->MaPhieuXuat.'-'.$countPX.'/T-'.$month;
         for($i=0; $i<$count; $i++){
             $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
-            if($check->SoLuongTon < $request->SoLuong[$i]){
+            if($check->SoLuongTon < str_replace(".", "", $request->SoLuong[$i])){
                 return false;
             }
             $soLuongTon = $check->SoLuongTon;
-            $check->SoLuongTon = $soLuongTon - $request->SoLuong[$i];
+            $check->SoLuongTon = $soLuongTon - str_replace(".", "", $request->SoLuong[$i]);
             $check->save();
 
             ChiTietPhieuXuat::create([
                 'MaPhieuXuat' => $maPhieuXuat,
                 'MaVT' => $request->MaVT[$i],
-                'SoLuong' => $request->SoLuong[$i],
-                'DonGia' => $request->DonGia[$i],
-                'ThanhTien' => $request->ThanhTien[$i],
+                'SoLuong' => str_replace(".", "", $request->SoLuong[$i]),
+                'DonGia' => str_replace(".", "", $request->DonGia[$i]),
+                'ThanhTien' =>  str_replace(".", "", $request->ThanhTien[$i]),
             ]);
         }
 
@@ -164,21 +164,18 @@ class PhieuXuatController extends Controller
      * @param  \App\PhieuXuat  $phieuXuat
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $PhieuXuat = PhieuXuat::where('MaPhieuXuat',$id)->first();
-        $vatTuPhieuXuat = ChiTietPhieuXuat::where('MaPhieuXuat',$id)->get();
+        $PhieuXuat = PhieuXuat::where('MaPhieuXuat',$request->MaPhieuXuat)->first();
+        $vatTuPhieuXuat = ChiTietPhieuXuat::where('MaPhieuXuat',$request->MaPhieuXuat)->get();
         foreach ($vatTuPhieuXuat as $item){
             $vatTuKho = ChiTietKhoVT::where('MaVT',$item->MaVT)->first();
             $vatTu = VatTu::where('MaVT',$item->MaVT)->first();
             $soLuongTonCu = $vatTuKho->SoLuongTon;
             $soLuongXuatKho= $item->SoLuong;
             $soLuongTonMoi = $soLuongTonCu + $soLuongXuatKho;
-            $donGiaCu = $vatTu->DonGia;
-            $thanhTien = $item->ThanhTien;
-            $donGiaMoi = round(($donGiaCu*$soLuongTonCu + $thanhTien)/$soLuongTonMoi);
             $vatTuKho->SoLuongTon = $soLuongTonMoi;
-            $vatTu->DonGia = $donGiaMoi;
+            $vatTuKho->TongSoLuong = $vatTuKho->TongSoLuong + $soLuongTonCu;
             $vatTuKho->save();
             $vatTu->save();
             $item->delete();

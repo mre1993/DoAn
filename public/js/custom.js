@@ -1,5 +1,4 @@
 
-
 //Tính tiền cho phiếu nhập
 function myFunction(e) {
     var max = parseInt($(e).attr('max'));
@@ -11,15 +10,17 @@ function myFunction(e) {
     }
     var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val();
     var SoLuong =  $(e).val();
-    var ThanhTien =DonGia*SoLuong;
-    $(e).parent().parent().find("input[name='ThanhTien[]']").val(ThanhTien);
+    DonGia = DonGia.split('.').join("");
+    var ThanhTien = DonGia*SoLuong;
+    $(e).parent().parent().find("input[name='ThanhTien[]']").val(parseFloat(ThanhTien).toLocaleString('us'));
 }
 
 function myFunction2(e) {
     var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val();
+    DonGia = DonGia.split('.').join("");
     var SoLuong =  $(e).parent().parent().find("input[name='SoLuong[]']").val();
     var ThanhTien =DonGia*SoLuong;
-    $(e).parent().parent().find("input[name='ThanhTien[]']").val(ThanhTien);
+    $(e).parent().parent().find("input[name='ThanhTien[]']").val(parseFloat(ThanhTien).toLocaleString('us'));
 }
 
 function remove(e){
@@ -48,7 +49,7 @@ $(document).ready(function() {
                 '<td class="TenVT">'+ TenVT +'<input type="hidden" name="MaVT[]" value="'+MaVT+'"><input type="hidden" name="MoTa[]" value="'+MoTa+'"></td>' +
                 '<td><input type="text" readonly class="form-control" name="DVT[]" value="'+ DVT +'"></td>' +
                 '<td><input name="SoLuong[]" type="number" class="form-control" onchange="return  myFunction(this)" min="0" value="0"></td>' +
-                '<td><input name="DonGia[]" name="DonGia[]" onchange="return  myFunction2(this)"  readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
+                '<td><input name="DonGia[]" onchange="return  myFunction2(this)"  readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
                 '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
                 '<td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>'+
                 '</tr>';
@@ -124,12 +125,16 @@ $(document).ready(function() {
 
     $(".search-query").autocomplete({
         source: function (request, response) {
-                var MaKVT =  $('#MaKVT  :selected').val();
-                var MaNCC = $('#MaNCC :selected').val();
+            var MaKVT =  $('#MaKVT  :selected').val();
+            var MaNCC = $('#MaNCC :selected').val();
+            var url = "search/" + request.term;
+            if(window.location.href.indexOf("edit") > -1) {
+                url = "../search/" + request.term;
+            }
             $.ajax({
                 dataType: 'JSON',
                 type: 'GET',
-                url: "search/" + request.term,
+                url: url,
                 data: {
                     MaNCC: MaNCC,
                     MaKVT: MaKVT,
@@ -156,6 +161,9 @@ $(document).ready(function() {
         currentURL = window.location.href;
         if(currentURL.indexOf(check) != -1){
             url = urlXuat;
+        }
+        if(window.location.href.indexOf("edit") > -1) {
+            url = "../"+url;
         }
         $.ajax({
             dataType: 'JSON',

@@ -9,7 +9,7 @@ class ChiTietKhoVT extends Model
     protected $table = 'chi_tiet_kho_vat_tu';
 
     protected $fillable = [
-        'id','MaKVT', 'MaVT', 'SoLuongTon', 'GhiChu', 'T'
+        'id','MaKVT', 'MaVT', 'SoLuongTon', 'GhiChu', 'TongSoLuong', 'SoLuongHong'
     ];
 
     public $timestamps = false;
