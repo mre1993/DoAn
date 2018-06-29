@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-6">
                 <label for="MaPN" class="col-md-4 col-form-label">Mã phiếu nhập</label>
-                <input id="MaPN" name="MaPN" class="form-control col-md-8" readonly value="{{$phieuNhap->MaPN}}">
+                <input id="MaPN" name="MaPN" class="form-control col-md-8" readonly value="{{str_replace('_','/',$phieuNhap->PN)}}">
             </div>
             <div class="col-md-6">
                 <label for="MaNCC" class="col-md-4 col-form-label">Nhà cung cấp</label>

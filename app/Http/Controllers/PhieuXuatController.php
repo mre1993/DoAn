@@ -86,7 +86,7 @@ class PhieuXuatController extends Controller
         $countPX =  count(PhieuXuat::whereYear('created_at', '=', Carbon::now()->format('Y'))
             ->whereMonth('created_at', '=', $month)
             ->get()) + 1;
-        $maPhieuXuat = $request->MaPhieuXuat.'-'.$countPX.'/T-'.$month;
+        $maPhieuXuat = $request->MaPhieuXuat.'-'.$countPX.'_T-'.$month;
         for($i=0; $i<$count; $i++){
             $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
             if($check->SoLuongTon < str_replace(".", "", $request->SoLuong[$i])){
@@ -244,18 +244,23 @@ class PhieuXuatController extends Controller
         $i=1;
         $sumSL = 0;
         $sumTT = 0;
+        $countItem = count($vatTu)+7;
+        $setBoder = "A6:H$countItem";
         foreach($vatTu as $item){
             $sumSL = $sumSL + $item->SoLuong;
             $sumTT = $sumTT + $item->ThanhTien;
         }
-        Excel::create('New', function($excel) use($vatTu,$phieuXuat,$i,$sumSL,$sumTT) {
-
-            $excel->sheet('First sheet', function($sheet)  use($vatTu,$phieuXuat,$i,$sumSL,$sumTT) {
+        Excel::create('New', function($excel) use($vatTu,$phieuXuat,$i,$sumSL,$sumTT,$setBoder) {
+            $excel->sheet('First sheet', function($sheet)  use($vatTu,$phieuXuat,$i,$sumSL,$sumTT,$setBoder) {
                 $sheet->loadView('phieuxuat.showExport')
-                    ->mergeCells('A1:G2')
-                    ->mergeCells('A1:G1')
-                    ->mergeCells('A1:B2')
+                    ->setHeight('1',50)
+                    ->setHeight('3',20)
+                    ->setHeight('4',20)
+                    ->setHeight('5',20)
+                    ->mergeCells('A1:H1')
                     ->setWidth('A',5)
+                    ->setBorder('A1', 'thin')
+                    ->setBorder($setBoder, 'thin')
                     ->setWidth('B',19)
                     ->setWidth('C',19)
                     ->setWidth('D',10)

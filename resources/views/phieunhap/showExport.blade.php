@@ -1,36 +1,31 @@
 {{--@extends('home')--}}
 {{--@section('right-content')--}}
-<div class="col-md-12">
-    <form action="{{route('phieunhap.printExcel',$phieuNhap->MaPN)}}" method="get">
-        <button class="print btn btn-primary fa fa-print"></button>
-    </form>
-</div>
  <div class="form-nhap">
         <table class="table print-phieu-nhap">
             <tr  class="company-infor">
-                <td ><p>
+                <td style="text-align: center"  valign="top">
                     CÔNG TY TNHH KỸ THUẬT XÂY DỰNG E-POWER<br>
                     Tầng 12, tháp B, tòa nhà Sông Đà, Phạm Hùng, Mỹ Đình I, Nam Từ Liêm<br>
-                    Tel: +84 24.626.027.61 - Fax: +84 24.321.235.60</p>
+                    Tel: +84 24.626.027.61 - Fax: +84 24.321.235.60
                 </td>
             </tr>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU NHẬP VẬT TƯ</p></td>
-                <td colspan="2" style="padding-top: 25px"><p>Mã phiếu: {{$phieuNhap->MaPN}}</p></td>
+                <td colspan="4"><p class="text-uppercase form-name" style="text-align: center">PHIẾU NHẬP VẬT TƯ</p></td>
+                <td colspan="2" style="padding-top: 25px"><p>Mã phiếu: {{str_replace('_','/',$phieuNhap->PN)}}</p></td>
             </tr>
             <tr>
-                <td colspan="8"><p>Người nhập: {{$phieuNhap->NhanVien->TenNV}}</p></td>
+                <td colspan="8" valign="middle"><p>Người nhập: {{$phieuNhap->NhanVien->TenNV}}</p></td>
             </tr>
             <tr>
-                <td colspan="8"><p>Lý do nhập: {{$phieuNhap->NoiDung}}</p></td>
+                <td colspan="8" valign="middle"><p>Lý do nhập: {{$phieuNhap->NoiDung}}</p></td>
             </tr>
             <tr>
-                <td colspan="7" style="border: none">
-                    <p>Nhập tại kho: {{$phieuNhap->KhoVatTu->TenKVT}}, <span>Địa chỉ: {{$phieuNhap->KhoVatTu->DiaChi}}</span></p>
+                <td colspan="7" style="border: none"  valign="middle">
+                    <p>Nhập tại kho: {{$phieuNhap->KhoVatTu->TenKVT}}</p>
                 </td>
             </tr>
-            <tr class="khung-header">
+            <tr class="khung-header" style="text-align: center">
                 <td><p>STT</p></td>
                 <td><p>TÊN VẬT TƯ</p></td>
                 <td><p>MÃ VẬT TƯ</p></td>
@@ -41,7 +36,7 @@
                 <td><p>GHI CHÚ</p></td>
             </tr>
            @foreach($vatTu as $item)
-                <tr class="khung">
+                <tr class="khung" style="text-align: right">
                     <td><p>{{$i++}}</p></td>
                     <td><p>{{$item->MaVT}}</p></td>
                     <td><p>{{$item->VatTu->TenVT}}</p></td>
@@ -52,7 +47,7 @@
                     <td><p>{{$item->GhiChu}}</p></td>
                 </tr>
            @endforeach
-            <tr class="khung">
+            <tr class="khung" style="text-align: right">
                 <td colspan="4"><p class="text-center">Tổng</p></td>
                 <td><p></p></td>
                 <td><p>{{$sumSL}}</p></td>
