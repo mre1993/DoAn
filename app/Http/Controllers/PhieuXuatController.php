@@ -151,7 +151,7 @@ class PhieuXuatController extends Controller
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');        $user =  Auth::user();
         $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
         $MaNCC = PhanXuong::orderBy('MaPX','ASC')->get();
-        return view('phieunhap.edit',compact('MaKVT','MaPX','DVT','phieuXuat','values'));
+        return view('phieuxuat.edit',compact('MaKVT','MaPX','DVT','phieuXuat','values'));
     }
 
     /**
@@ -413,6 +413,8 @@ class PhieuXuatController extends Controller
         $myFile =  Excel::create('New', function($excel) use($result,$i,$check,$count,$setborder,$setHeight1,$setHeight2) {
             $excel->sheet('First sheet', function($sheet)  use($result,$i,$check,$count,$setborder,$setHeight1,$setHeight2) {
                 $sheet->loadView('report.printPhieu')
+                    ->mergeCells('A1:L1')
+                    ->mergeCells('A2:L2')
                     ->setBorder('A3:L'.$setborder, 'thin')
                     ->setHeight(1,50)
                     ->setHeight($setHeight1,40)

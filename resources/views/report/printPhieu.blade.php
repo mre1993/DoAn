@@ -1,13 +1,13 @@
 <table class="table print-phieu-nhap" width="100%">
     <tr  class="company-infor">
-        <td colspan="5">
+        <td style="text-align: center">
             CÔNG TY TNHH KỸ THUẬT XÂY DỰNG E-POWER<br>
             Tầng 12, tháp B, tòa nhà Sông Đà, Phạm Hùng, Mỹ Đình I, Nam Từ Liêm<br>
             Tel: +84 24.626.027.61 - Fax: +84 24.321.235.60
         </td>
     </tr>
     <tr >
-        <td colspan="12" class=" text-uppercase">
+        <td class="text-uppercase">
             <h1 style="margin-top:30px;margin-bottom: 0;text-align: center;">
                 @if($check == 'PhieuNhap')
                     BÁO CÁO PHIẾU NHẬP
