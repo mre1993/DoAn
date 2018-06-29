@@ -141,9 +141,17 @@ class PhieuXuatController extends Controller
      * @param  \App\PhieuXuat  $phieuXuat
      * @return \Illuminate\Http\Response
      */
-    public function edit(PhieuXuat $phieuXuat)
+    public function edit($id)
     {
-        //
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
+        $phieuXuat = PhieuXuat::where('MaPhieuXuat',$id)->first();
+        $values = ChiTietPhieuXuat::where('MaPhieuXuat',$phieuXuat->MaPhieuXuat)->get();
+        $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');        $user =  Auth::user();
+        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
+        $MaNCC = PhanXuong::orderBy('MaPX','ASC')->get();
+        return view('phieunhap.edit',compact('MaKVT','MaPX','DVT','phieuXuat','values'));
     }
 
     /**
@@ -153,9 +161,54 @@ class PhieuXuatController extends Controller
      * @param  \App\PhieuXuat  $phieuXuat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PhieuXuat $phieuXuat)
+    public function update(Request $request)
     {
-        //
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
+        $phieuXuat = PhieuXuat::where('MaPhieuXuat',$request->MaPhieuXuat)->first();
+        $itemsDel =  ChiTietPhieuXuat::whereNotIn('MaVT',$request->MaVT)->where('MaPhieuXuat',$request->MaPhieuXuat)->get();
+        if($itemsDel != null){
+            foreach($itemsDel as $itemDel){
+                $check = ChiTietKhoVT::where('MaVT',$itemDel->MaVT)->where('MaKVT',$phieuXuat->MaKVT)->first();
+                if($itemDel->SoLuong < $check->SoLuongTon){
+                    return redirect()->back()->withErrors(['Số lượng tồn kho nhỏ hơn số lượng nhập']);
+                }
+                $check->SoLuongTon = $check->SoLuongTon + $itemDel->SoLuong;
+                $check->TongSoLuong = $check->TongSoLuong + $itemDel->SoLuong;
+                $check->save();
+                $itemDel->delete();
+            }
+        }
+        $count = count($request->MaVT);
+        for($i=0;$i<= $count-1;$i++){
+            $checkPhieuXuat = ChiTietPhieuXuat::where('MaVT',$request->MaVT[$i])->where('MaPhieuXuat',$request->MaPhieuXuat)->first();
+            $checkKhoVatTu = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$phieuXuat->MaKVT)->first();
+            $checkKhoVatTu->MaKVT = $request->MaKVT;
+            if(!$checkPhieuXuat){
+                $checkKhoVatTu->SoLuongTon = $checkKhoVatTu->SoLuongTon - str_replace(".", "", $request->SoLuong[$i]);
+                $checkKhoVatTu->TongSoLuong = $checkKhoVatTu->TongSoLuong - str_replace(".", "", $request->SoLuong[$i]);
+                ChiTietPhieuXuat::create([
+                    'MaPhieuXuat' => $request->MaPhieuXuat,
+                    'MaVT' => $request->MaVT[$i],
+                    'SoLuong' => str_replace(".", "", $request->SoLuong[$i]),
+                    'DonGia' => str_replace(".", "", $request->DonGia[$i]),
+                    'ThanhTien' => str_replace(".", "", $request->ThanhTien[$i]),
+                ]);
+            }else{
+                $checkKhoVatTu->SoLuongTon = $checkKhoVatTu->SoLuongTon - str_replace(".", "", $request->SoLuong[$i]) - $checkPhieuXuat->SoLuong ;
+                $checkKhoVatTu->TongSoLuong = $checkKhoVatTu->TongSoLuong - str_replace(".", "", $request->SoLuong[$i]) - $checkPhieuXuat->SoLuong ;
+                $checkPhieuXuat->SoLuong = str_replace(".", "", $request->SoLuong[$i]);
+                $checkPhieuXuat->DonGia = str_replace(".", "", $request->DonGia[$i]);
+                $checkPhieuXuat->ThanhTien =  str_replace(".", "", $request->ThanhTien[$i]);
+                $checkPhieuXuat->save();
+            }
+            $checkKhoVatTu->save();
+        }
+        $phieuXuat->MaKVT = $request->MaKVT;
+        $phieuXuat->MaNCC = $request->MaNCC;
+        $phieuXuat->save();
+        return redirect('phieuxuat');
     }
 
     /**
