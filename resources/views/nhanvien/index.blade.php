@@ -44,7 +44,9 @@
                     <td>{{$item->ChucVu}}</td>
                     <td>{{$item->SDT}}</td>
                     <td>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('nhanvien.edit',$item->MaNV)}}"></a>
+                        <form class="delete-form" action="{{route('nhanvien.edit',$item->MaNV)}}">
+                            <button class="btn btn-comment fa fa-edit"></button>
+                        </form>
                         <form class="delete-form" action="{{ route('nhanvien.destroy',$item->MaNV) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove before-post"></button>

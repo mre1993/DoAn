@@ -46,7 +46,9 @@
                     <td>{{number_format($item->DonGia, 0, ',', '.')}}</td>
                     <td>{{$item->MoTa}}</td>
                     <td>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('vattu.edit',$item->MaVT)}}"></a>
+                        <form class="delete-form" action="{{route('vattu.edit',$item->MaVT)}}">
+                            <button class="btn btn-comment fa fa-edit"></button>
+                        </form>
                         <form class="delete-form" action="{{ route('vattu.destroy',$item->MaVT) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove before-post"></button>

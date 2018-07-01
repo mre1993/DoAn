@@ -47,7 +47,9 @@
                     <td>{{$item->NoiDung}}</td>
                     <td>
                         <a class="btn fa fa-eye" href="{{route('phieuxuat.show',$item->MaPhieuXuat)}}" style="background-color: blue;color: white"></a>
-                        <a class="btn btn-comment fa fa-edit" href="{{route('phieuxuat.edit',$item->MaPhieuXuat)}}"></a>
+                        <form class="delete-form" action="{{route('phieuxuat.edit',$item->MaPhieuXuat)}}">
+                            <button class="btn btn-comment fa fa-edit"></button>
+                        </form>
                         <form class="delete-form" action="{{ route('phieuxuat.destroy',$item->MaPhieuXuat) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger fa fa-remove before-post"></button>

@@ -150,7 +150,7 @@ class PhieuXuatController extends Controller
         $values = ChiTietPhieuXuat::where('MaPhieuXuat',$phieuXuat->MaPhieuXuat)->get();
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');        $user =  Auth::user();
         $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
-        $MaNCC = PhanXuong::orderBy('MaPX','ASC')->get();
+        $MaPX = PhanXuong::orderBy('MaPX','ASC')->get();
         return view('phieuxuat.edit',compact('MaKVT','MaPX','DVT','phieuXuat','values'));
     }
 
