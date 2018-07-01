@@ -49,7 +49,7 @@
                         <a class="btn btn-comment fa fa-edit" href="{{route('khovattu.edit',$item->MaKVT)}}"></a>
                         <form class="delete-form" action="{{ route('khovattu.destroy',$item->MaKVT) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-danger fa fa-remove"></button>
+                            <button class="btn btn-danger fa fa-remove before-post"></button>
                             {{ csrf_field() }}
                         </form>
                     </td>

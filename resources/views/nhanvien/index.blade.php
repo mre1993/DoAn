@@ -47,7 +47,7 @@
                         <a class="btn btn-comment fa fa-edit" href="{{route('nhanvien.edit',$item->MaNV)}}"></a>
                         <form class="delete-form" action="{{ route('nhanvien.destroy',$item->MaNV) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-danger fa fa-remove"></button>
+                            <button class="btn btn-danger fa fa-remove before-post"></button>
                             {{ csrf_field() }}
                         </form>
                     </td>

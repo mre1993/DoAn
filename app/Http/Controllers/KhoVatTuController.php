@@ -19,7 +19,7 @@ class KhoVatTuController extends Controller
      */
     public function index()
     {
-        $items = KhoVatTu::orderBy('MaKVT','ASC')->paginate(10);
+        $items = KhoVatTu::orderBy('MaKVT','ASC')->where('Trang_Thai',false)->paginate(10);
         $i=1;
         return view('khovattu.index',compact('items','i'));
     }
@@ -170,8 +170,9 @@ class KhoVatTuController extends Controller
         if(Auth::user()->MaQuyen < '3'){
             return false;
         }
-        $item = KhoVatTu::where('MaKVT',$id);
-        $item->delete();
+        $item = KhoVatTu::where('MaKVT',$id)->first();
+        $item->Trang_Thai = true;
+        $item->save();
         return redirect()->back();
     }
 
@@ -219,6 +220,7 @@ class KhoVatTuController extends Controller
         $i = 1;
         $items = DB::table('kho_vat_tu')
             ->select('kho_vat_tu.*')
+            ->where('Trang_Thai',false)
             ->where('TenKVT','LIKE','%'.$request->search.'%')
             ->orWhere('DiaChi','LIKE','%'.$request->search.'%')
             ->orWhere('MaKVT','LIKE','%'.$request->search.'%')

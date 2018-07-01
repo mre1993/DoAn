@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\NhanVien;
 use App\PhieuNhap;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +19,7 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        $items = NhanVien::orderBy('MaNV','ASC')->paginate(10);
+        $items = NhanVien::orderBy('MaNV','ASC')->where('Trang_Thai',false)->paginate(10);
         return view('nhanvien.index',compact('items'));
     }
 
@@ -182,8 +183,11 @@ class NhanVienController extends Controller
         if(Auth::user()->MaQuyen < '3'){
             return false;
         }
-        $item = NhanVien::find($id);
-        $item->delete();
+        $item = NhanVien::where('MaNV',$id)->first();
+        $user = User::where('MaNV',$id)->first();
+        $item->Trang_Thai = true;
+        $user->Trang_Thai = true;
+        $item->save();
         return redirect()->back();
     }
 
@@ -191,6 +195,7 @@ class NhanVienController extends Controller
         $i = 1;
         $items = DB::table('nhan_vien')
             ->select('nhan_vien.*')
+            ->where('Trang_Thai',false)
             ->where('TenNV','LIKE','%'.$request->search.'%')
             ->orWhere('MaNV','LIKE','%'.$request->search.'%')
             ->orWhere('ChucVu','LIKE','%'.$request->search.'%')

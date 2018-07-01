@@ -49,7 +49,7 @@
                         <a class="btn btn-comment fa fa-edit" href="{{route('vattu.edit',$item->MaVT)}}"></a>
                         <form class="delete-form" action="{{ route('vattu.destroy',$item->MaVT) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-danger fa fa-remove"></button>
+                            <button class="btn btn-danger fa fa-remove before-post"></button>
                             {{ csrf_field() }}
                         </form>
                     </td>

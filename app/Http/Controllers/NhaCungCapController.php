@@ -19,7 +19,7 @@ class NhaCungCapController extends Controller
      */
     public function index()
     {
-        $items = NhaCungCap::orderBy('MaNCC','ASC')->paginate(10);
+        $items = NhaCungCap::orderBy('MaNCC','ASC')->where('Trang_Thai',false)->paginate(10);
         $i = 1;
         return view('provider.index',compact('items','i'));
     }
@@ -177,8 +177,9 @@ class NhaCungCapController extends Controller
         if(Auth::user()->MaQuyen < '3'){
             return false;
         }
-        $provider = NhaCungCap::find($id);
-        $provider->delete();
+        $provider = NhaCungCap::where('MaNCC',$id)->first();
+        $provider->Trang_Thai = true;
+        $provider->save();
         return redirect()->back();
     }
 
@@ -187,6 +188,7 @@ class NhaCungCapController extends Controller
         $i = 1;
         $items = DB::table('nha_cung_cap')
             ->select('nha_cung_cap.*')
+            ->where('Trang_Thai',false)
             ->where('TenNCC','LIKE','%'.$request->search.'%')
             ->orWhere('DiaChi','LIKE','%'.$request->search.'%')
             ->orderBy('MaNCC','ASC')

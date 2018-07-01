@@ -51,7 +51,7 @@
                             <a class="btn btn-comment fa fa-edit" href="{{route('provider.edit',$item->MaNCC)}}"></a>
                             <form class="delete-form" action="{{ route('provider.destroy',$item->MaNCC) }}" method="post">
                                 <input name="_method" type="hidden" value="DELETE">
-                                <button class="btn btn-danger fa fa-remove"></button>
+                                <button class="btn btn-danger fa fa-remove before-post"></button>
                                 {{ csrf_field() }}
                             </form>
                         </td>

@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id','ASC')->paginate(10);
+        $users = User::orderBy('id','ASC')->where('Trang_Thai',false)->paginate(10);
         $listQuyen = PhanQuyen::orderBy('MaQuyen','ASC')->get();
         $i = 1;
         return view('user', compact('users','listQuyen','i'));

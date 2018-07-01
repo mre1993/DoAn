@@ -28,6 +28,12 @@ function remove(e){
 }
 
 $(document).ready(function() {
+
+    //before submit
+    $('.before-post').on('click',function(e){
+        return confirm("Bạn chắc chắn muốn xóa?");
+    });
+
     $('.new-vt').click(function(){
         $("#new-vt").addClass('in').css('display','block');
     });

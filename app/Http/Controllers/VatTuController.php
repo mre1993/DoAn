@@ -23,7 +23,7 @@ class VatTuController extends Controller
      */
     public function index()
     {
-        $items = VatTu::orderBy('MaVT','ASC')->paginate(10);
+        $items = VatTu::orderBy('MaVT','ASC')->where('Trang_Thai',false)->paginate(10);
         $i = 1;
         return view('vattu.index',compact('items','i'));
     }
@@ -185,7 +185,12 @@ class VatTuController extends Controller
             return false;
         }
         $item = VatTu::find($id);
-        $item->delete();
+        $checkTonKho = DB::table('chi_tiet_kho_vat_tu')->select(DB::raw('SUM(SoLuongTOn) as SoLuongTon'))->first();
+        if($checkTonKho->SoLuongTon > 0){
+            return redirect()->back()->withErrors(['Không thể xóa vật tư còn tồn kho']);
+        }
+        $item->Trang_Thai = true;
+        $item->save();
         return redirect()->back();
     }
 
@@ -193,6 +198,7 @@ class VatTuController extends Controller
         $result = DB::table('vat_tu')
             ->join('nha_cung_cap','nha_cung_cap.MaNCC','vat_tu.MaNCC')
             ->select('vat_tu.*')
+            ->where('Trang_Thai',false)
             ->where(function ($result) use ($request){
                 if($request->MaNCC!=null){
                     $result->where('TenVT','LIKE','%'.$request->term.'%')
@@ -209,6 +215,7 @@ class VatTuController extends Controller
             ->join('vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
             ->join('kho_vat_tu','chi_tiet_kho_vat_tu.MaKVT','kho_vat_tu.MaKVT')
             ->select('chi_tiet_kho_vat_tu.MaVT','vat_tu.TenVT')
+            ->where('Trang_Thai',false)
             ->where(function ($result) use ($request){
                 if($request->MaKVT!=null){
                     $result->where('TenVT','LIKE','%'.$request->term.'%')
@@ -222,12 +229,12 @@ class VatTuController extends Controller
     }
 
     public function searchVT($request){
-        $result = VatTu::where('TenVT','LIKE','%'.$request.'%')->get();
+        $result = VatTu::where('TenVT','LIKE','%'.$request.'%')->where('Trang_Thai',false)->get();
         return response()->json($result);
     }
 
     public function getVT($request){
-        $result = VatTu::where('MaVT',$request)->first();
+        $result = VatTu::where('MaVT',$request)->where('Trang_Thai',false)->first();
         return response()->json($result);
     }
 
@@ -235,6 +242,7 @@ class VatTuController extends Controller
         $result = DB::table('vat_tu')
             ->join('chi_tiet_kho_vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
             ->select('chi_tiet_kho_vat_tu.*','vat_tu.*')
+            ->where('Trang_Thai',false)
             ->where('vat_tu.MaVT',$request)
             ->first();
         return response()->json($result);
@@ -242,7 +250,7 @@ class VatTuController extends Controller
 
     public function report()
     {
-        $MaKVT = KhoVatTu::all();
+        $MaKVT = KhoVatTu::where('Trang_Thai',false)->get();
         return view('report.vattu',compact('MaKVT'));
     }
 
@@ -441,6 +449,7 @@ class VatTuController extends Controller
         $items = DB::table('vat_tu')
             ->join('nha_cung_cap','nha_cung_cap.MaNCC','vat_tu.MaNCC')
             ->select('vat_tu.*','nha_cung_cap.TenNCC')
+            ->where('vat_tu.Trang_Thai',false)
             ->where('vat_tu.TenVT','LIKE','%'.$request->search.'%')
             ->orWhere('vat_tu.MaVT','LIKE','%'.$request->search.'%')
             ->orWhere('nha_cung_cap.TenNCC','LIKE','%'.$request->search.'%')

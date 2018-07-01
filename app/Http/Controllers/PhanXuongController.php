@@ -18,7 +18,7 @@ class PhanXuongController extends Controller
     public function index()
     {
         $i = 1;
-        $items = PhanXuong::orderBy('MaPX','ASC')->paginate(10);
+        $items = PhanXuong::orderBy('MaPX','ASC')->where('Trang_Thai',false)->paginate(10);
         return view('phanxuong.index',compact('items','i'));
     }
 
@@ -146,7 +146,8 @@ class PhanXuongController extends Controller
             return false;
         }
         $factory = PhanXuong::where('MaPX',$id)->first();
-        $factory->delete();
+        $factory->Trang_Thai = true;
+        $factory->save();
         return redirect()->back();
     }
 
@@ -154,6 +155,7 @@ class PhanXuongController extends Controller
         $i = 1;
         $items = DB::table('phan_xuong')
             ->select('phan_xuong.*')
+            ->where('Trang_Thai',false)
             ->where('TenPX','LIKE','%'.$request->search.'%')
             ->orWhere('MaPX','LIKE','%'.$request->search.'%')
             ->orderBy('MaPX','ASC')

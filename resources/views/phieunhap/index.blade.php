@@ -53,7 +53,7 @@
                         <form class="delete-form" action="{{ route('phieunhap.destroy')}}" method="post">
                             {{ csrf_field() }}
                             <input name="MaPN" type="hidden" value="{{$item->MaPN}}">
-                            <button class="btn btn-danger fa fa-remove"></button>
+                            <button class="btn btn-danger fa fa-remove before-post"></button>
                         </form>
                     </td>
                 </tr>

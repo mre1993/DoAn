@@ -48,8 +48,8 @@ class PhieuNhapController extends Controller
         }
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');        $user =  Auth::user();
         $nhanVien = NhanVien::find($user->MaNV);
-        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
-        $MaNCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
+        $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->where('Trang_Thai',false)->get();
+        $MaNCC = NhaCungCap::orderBy('MaNCC','ASC')->where('Trang_Thai',false)->get();
         return view('phieunhap.create',compact('MaKVT','nhanVien','MaNCC','DVT'));
     }
 
