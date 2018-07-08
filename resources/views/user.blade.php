@@ -26,15 +26,21 @@
                 <tr>
                     <td>{{$i++}}</td>
                     <td>{{ $user->name }}</td>
-                    <th>{{$user->nhanVien->TenNV}}</th>
+                    <th>
+                        @if($user->MaNV)
+                            {{$user->nhanVien->TenNV}}
+                        @endif
+                    </th>
                     <td>
                         @if(\Illuminate\Support\Facades\Auth::user()->MaQuyen === 3)
                         <button class="btn btn-primary fa fa-user" data-toggle="modal" data-target="#changePass-{{$user->id}}"></button>
-                        <form class="delete-form" action="{{ route('user.destroy',$user->id) }}" method="post">
-                            <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-danger fa fa-remove before-post">Delete</button>
-                            {{ csrf_field() }}
-                        </form>
+                            @if(\Illuminate\Support\Facades\Auth::user()->id != 1)
+                            <form class="delete-form" action="{{ route('user.destroy',$user->id) }}" method="post">
+                                <input name="_method" type="hidden" value="DELETE">
+                                <button class="btn btn-danger fa fa-remove before-post">Delete</button>
+                                {{ csrf_field() }}
+                            </form>
+                            @endif
                         @endif
                         <div class="modal fade" id="changePass-{{$user->id}}" role="dialog">
                             <div class="modal-dialog">

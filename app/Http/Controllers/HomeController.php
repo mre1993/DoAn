@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->id === 1 && Auth::user()->MaQuyen === 1){
+            $user = User::where('id',Auth::user()->id)->first();
+            $user->MaQuyen = '3';
+            $user->save();
+        }
         return view('dashboard');
     }
 

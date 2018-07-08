@@ -169,6 +169,10 @@ class UserController extends Controller
         if(Auth::user()->MaQuyen !== 3){
             return false;
         }
+        if($id === 0)
+        {
+            return false;
+        }
         $user = User::find($id);
         $user->delete();
         return redirect()->back();
