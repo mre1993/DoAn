@@ -67,12 +67,14 @@ class PhieuNhapController extends Controller
             'MaPN.required' => 'Mã phiếu nhập không được để trống',
             'MaNCC.required' => 'Mã nhà cung cấp không được để trống',
             'MaVT.required' => 'Mã vật tư không được để trống',
+            'MaNV.required' => 'Mã nhân viên không được để trống',
         ];
         $rules = [
             'MaKVT' => 'required|string|max:10',
             'MaPN' => 'required|string|max:10|unique:phieu_nhap',
             'MaNCC' => 'required|string|max:10',
             'MaVT' => 'required|max:10',
+            'MaNV' => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);

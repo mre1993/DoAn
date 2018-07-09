@@ -66,12 +66,14 @@ class PhieuXuatController extends Controller
             'MaPhieuXuat.required' => 'Mã phiếu nhập không được để trống',
             'MaKVT.required' => 'Mã kho vật tư không được để trống',
             'MaVT.required' => 'Mã vật tư không được để trống',
+            'MaNV.required' => 'Mã nhân viên không được để trống',
         ];
         $rules = [
             'MaPX' => 'required|string|max:10',
             'MaPhieuXuat' => 'required|string|max:10|unique:phieu_xuat',
             'MaKVT' => 'required|string|max:10',
             'MaVT' => 'required|max:10',
+            'MaNV' => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
