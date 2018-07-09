@@ -1,3 +1,6 @@
+//collapse menu
+$('.active').css('background-color','#8080802e');
+$('.active').parent().collapse("show");
 
 //Tính tiền cho phiếu nhập
 function myFunction(e) {
