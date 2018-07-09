@@ -17,9 +17,14 @@
                 <form method="POST" action="{{ route('phieuxuat.store') }}" name="create">
                     @csrf
                     <div class="form-group row">
-                        <div class="col-md-3">
-                            <label for="TenNV" class="col-form-label">Nhân viên: {{$nhanVien->TenNV}}</label>
-                            <input type="hidden" name="MaNV" value="{{$nhanVien->MaNV}}">
+                        <div class="col-md-6">
+                            @if($nhanVien)
+                                <label for="TenNV" class="col-form-label">Nhân viên: {{$nhanVien->TenNV}}</label>
+                                <input type="hidden" name="MaNV" value="{{$nhanVien->MaNV}}">
+                            @else
+                                <label for="TenNV" class="col-form-label col-md-3" style="padding-left:0">Nhân viên: </label>
+                                <input type="Text" name="MaNV" value="" id="TenNV" class="form-control col-md-7">
+                            @endif
                         </div>
                         <div class="col-md-3">
                             <select style="height: 100%;"  name="MaKVT" class="form-control" id="MaKVT">
