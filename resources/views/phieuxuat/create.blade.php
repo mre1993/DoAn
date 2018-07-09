@@ -23,7 +23,12 @@
                                 <input type="hidden" name="MaNV" value="{{$nhanVien->MaNV}}">
                             @else
                                 <label for="TenNV" class="col-form-label col-md-3" style="padding-left:0">Nhân viên: </label>
-                                <input type="Text" name="MaNV" value="" id="TenNV" class="form-control col-md-7">
+                                <select style="height: 100%;"  name="MaNV" value="" id="TenNV" class="form-control col-md-7">
+                                    <option value="" disabled selected>Chọn nhân viên</option>
+                                    @foreach($listNV as $item)
+                                        <option value="{{ $item->MaNV }}" {{ old('MaNV') == $item->MaNV ? 'selected' : '' }}> {{ $item->TenNV }}</option>
+                                    @endforeach
+                                </select>
                             @endif
                         </div>
                         <div class="col-md-3">
@@ -35,23 +40,31 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <select style="height: 100%;"  name="MaPX" class="form-control">
+                            <input type="text" placeholder="Nhập mã phiếu xuất" class="form-control" name="MaPhieuXuat" value="{{old('MaPhieuXuat')}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label for="TimVT" class="col-md-12" style="padding:0">Tìm kiếm vật tư</label>
+                            <div class="col-md-10" style="padding: 0">
+                                <input type="text" placeholder="Nhập để tìm" name="TimVT" class="form-control search-query">
+                                <div class="suggest-search"></div>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-primary fa fa-plus new-vt"  data-toggle="modal" data-target="#new-vt" type="button"></button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="TimVT">Chọn phân xưởng</label>
+                            <select style="height: auto;"  name="MaPX" class="form-control">
                                 <option value="" disabled selected>Chọn phân xưởng</option>
                                 @foreach($MaPX as $item)
                                     <option value="{{ $item->MaPX }}" {{ old('MaNCC') == $item->MaPX ? 'selected' : '' }}> {{ $item->TenPX }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-3">
-                            <input type="text" placeholder="Nhập mã phiếu xuất" class="form-control" name="MaPhieuXuat" value="{{old('MaPhieuXuat')}}">
-                        </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-6">
-                            <label for="TimVT">Tìm kiếm vật tư</label>
-                            <input type="text" placeholder="Nhập để tìm" name="TimVT" class="form-control search-query">
-                            <div class="suggest-search"></div>
-                        </div>
                         <div class="col-md-6">
                             <label for="NoiDung">Nội dung</label>
                             <textarea id="NoiDung" name="NoiDung" class="form-control">{{old('NoiDung')}}</textarea>

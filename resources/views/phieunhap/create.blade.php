@@ -24,7 +24,12 @@
                                 <input type="hidden" name="MaNV" value="{{$nhanVien->MaNV}}">
                             @else
                                 <label for="TenNV" class="col-form-label col-md-3" style="padding-left:0">Nhân viên: </label>
-                                <input type="Text" name="MaNV" value="" id="TenNV" class="form-control col-md-7">
+                                <select style="height: 100%;"  name="MaNV" value="" id="TenNV" class="form-control col-md-7">
+                                    <option value="" disabled selected>Chọn nhân viên</option>
+                                    @foreach($listNV as $item)
+                                        <option value="{{ $item->MaNV }}" {{ old('MaNV') == $item->MaNV ? 'selected' : '' }}> {{ $item->TenNV }}</option>
+                                    @endforeach
+                                </select>
                             @endif
                         </div>
                         <div class="col-md-3">

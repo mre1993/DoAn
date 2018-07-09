@@ -44,9 +44,10 @@ class PhieuXuatController extends Controller
         }
         $user =  Auth::user();
         $nhanVien = NhanVien::find($user->MaNV);
+        $listNV = NhanVien::all();
         $MaPX = PhanXuong::orderBy('MaPX','ASC')->get();
         $MaKVT = KhoVatTu::orderBy('MaKVT','ASC')->get();
-        return view('phieuxuat.create',compact('MaPX','nhanVien','MaKVT'));
+        return view('phieuxuat.create',compact('MaPX','nhanVien','MaKVT','listNV'));
     }
 
     /**

@@ -198,7 +198,7 @@ class VatTuController extends Controller
         $result = DB::table('vat_tu')
             ->join('nha_cung_cap','nha_cung_cap.MaNCC','vat_tu.MaNCC')
             ->select('vat_tu.*')
-            ->where('Trang_Thai',false)
+            ->where('vat_tu.Trang_Thai',false)
             ->where(function ($result) use ($request){
                 if($request->MaNCC!=null){
                     $result->where('TenVT','LIKE','%'.$request->term.'%')
@@ -215,7 +215,7 @@ class VatTuController extends Controller
             ->join('vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
             ->join('kho_vat_tu','chi_tiet_kho_vat_tu.MaKVT','kho_vat_tu.MaKVT')
             ->select('chi_tiet_kho_vat_tu.MaVT','vat_tu.TenVT')
-            ->where('Trang_Thai',false)
+            ->where('vat_tu.Trang_Thai',false)
             ->where(function ($result) use ($request){
                 if($request->MaKVT!=null){
                     $result->where('TenVT','LIKE','%'.$request->term.'%')
@@ -242,7 +242,7 @@ class VatTuController extends Controller
         $result = DB::table('vat_tu')
             ->join('chi_tiet_kho_vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
             ->select('chi_tiet_kho_vat_tu.*','vat_tu.*')
-            ->where('Trang_Thai',false)
+            ->where('vat_tu.Trang_Thai',false)
             ->where('vat_tu.MaVT',$request)
             ->first();
         return response()->json($result);
