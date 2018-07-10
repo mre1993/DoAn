@@ -128,8 +128,8 @@ class NhanVienController extends Controller
         }
         $item = NhanVien::where('MaNV',$request->id)->first();
         $phieuNhap = PhieuNhap::where('MaNV',$request->id)->get();
-//        $phieuXuat = PhieuNhap::where('MaNV',$request->id)->get();
-        $user = PhieuNhap::where('MaNV',$request->id)->get();
+        $phieuXuat = PhieuNhap::where('MaNV',$request->id)->get();
+        $user = User::where('MaNV',$request->id)->get();
         $message = [
             'MaNV.required' => 'Mã nhân viên  không được để trống',
             'MaNV.max' => 'Mã nhân viên vượt quá 10 ký tự',
@@ -154,10 +154,10 @@ class NhanVienController extends Controller
             $item1->MaNV = $request->MaNV;
             $item1->save();
         }
-//        foreach($phieuXuat as $item2){
-//            $item2->MaNV = $request->MaNV;
-//            $item2->save();
-//        }
+        foreach($phieuXuat as $item2){
+            $item2->MaNV = $request->MaNV;
+            $item2->save();
+        }
         foreach($user as $item3){
             $item3->MaNV = $request->MaNV;
             $item3->save();
