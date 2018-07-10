@@ -33,7 +33,7 @@
             <ul class="collapse" id="nhapxuat">
                 <li class="{{ request()->is('phieunhap') ? 'active' : '' }}"><a href="{{route('phieunhap.index')}}"><i class="fa fa-download"></i> <span>Quản lý nhập vật tư</span></a></li>
                 <li class="{{ request()->is('phieuxuat') ? 'active' : '' }}"><a href="{{route('phieuxuat.index')}}"><i class="fa fa-upload"></i> <span>Quản lý xuất vật tư</span></a></li>
-                <li class="{{ request()->is('tonkho') ? 'active' : '' }}"><a href="{{route('tonkho.index')}}"><i class="fa fa-upload"></i> <span>Quản lý tồn kho vật tư</span></a></li>
+                <li class="{{ request()->is('ton-kho') ? 'active' : '' }}"><a href="{{route('tonkho.index')}}"><i class="fa fa-upload"></i> <span>Quản lý tồn kho vật tư</span></a></li>
             </ul>
         </div>
         <div class="menu-list">
@@ -41,9 +41,9 @@
                 <span class="fa fa-archive"></span> <b>Báo cáo thống kê</b>
             </a>
             <ul class="collapse" id="bao-cao">
-                <li class="{{ request()->is('phieunhap') ? 'active' : '' }}"><a href="{{route('report.phieunhap')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo phiếu nhập</span></a></li>
-                <li class="{{ request()->is('phieuxuat') ? 'active' : '' }}"><a href="{{route('report.phieuxuat')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo phiếu xuất</span></a></li>
-                <li class="{{ request()->is('baocao') ? 'active' : '' }}"><a href="{{route('baocao.vattu')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo tồn vật tư</span></a></li>
+                <li class="{{ request()->is('bao-cao/bc-phieunhap') ? 'active' : '' }}"><a href="{{route('report.phieunhap')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo phiếu nhập</span></a></li>
+                <li class="{{ request()->is('bao-cao/bc-phieuxuat') ? 'active' : '' }}"><a href="{{route('report.phieuxuat')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo phiếu xuất</span></a></li>
+                <li class="{{ request()->is('bao-cao/bc-vattu') ? 'active' : '' }}"><a href="{{route('baocao.vattu')}}"><i class="fa fa-file-alt"></i> <span>Báo cáo tồn vật tư</span></a></li>
             </ul>
         </div>
     </div>

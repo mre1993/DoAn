@@ -52,6 +52,7 @@
                         </form>
                         <form class="delete-form" action="{{ route('phieuxuat.destroy',$item->MaPhieuXuat) }}" method="post">
                             <input name="_method" type="hidden" value="DELETE">
+                            <input name="MaPhieuXuat" type="hidden" value="{{$item->MaPhieuXuat}}">
                             <button class="btn btn-danger fa fa-remove before-post"></button>
                             {{ csrf_field() }}
                         </form>

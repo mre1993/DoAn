@@ -209,7 +209,7 @@ class PhieuXuatController extends Controller
             $checkKhoVatTu->save();
         }
         $phieuXuat->MaKVT = $request->MaKVT;
-        $phieuXuat->MaNCC = $request->MaNCC;
+        $phieuXuat->MaPX = $request->MaPX;
         $phieuXuat->save();
         return redirect('phieuxuat');
     }
@@ -225,7 +225,7 @@ class PhieuXuatController extends Controller
         $PhieuXuat = PhieuXuat::where('MaPhieuXuat',$request->MaPhieuXuat)->first();
         $vatTuPhieuXuat = ChiTietPhieuXuat::where('MaPhieuXuat',$request->MaPhieuXuat)->get();
         foreach ($vatTuPhieuXuat as $item){
-            $vatTuKho = ChiTietKhoVT::where('MaVT',$item->MaVT)->first();
+            $vatTuKho = ChiTietKhoVT::where('MaVT',$item->MaVT)->where('MaKVT',$PhieuXuat->MaKVT)->first();
             $vatTu = VatTu::where('MaVT',$item->MaVT)->first();
             $soLuongTonCu = $vatTuKho->SoLuongTon;
             $soLuongXuatKho= $item->SoLuong;
