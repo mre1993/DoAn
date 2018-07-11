@@ -85,7 +85,7 @@
                                     <tr class="input-record" >
                                         <td class="TenVT">{{$value->VatTu->TenVT}}<input type="hidden" name="MaVT[]" value="{{$value->MaVT}}"></td>
                                         <td><input type="text" readonly class="form-control" name="DVT[]" value="{{$value->VatTu->DVT}}"></td>
-                                        <td><input name="SoLuong[]" type="number" class="form-control" onchange="return  myFunction(this)" min="0" value="{{number_format($value->SoLuong, 0, ',', '.')}}"></td>
+                                        <td><input name="SoLuong[]" type="number" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction(this)" min="0" value="{{number_format($value->SoLuong, 0, ",", ".")}}"></td>
                                         <td><input name="DonGia[]" onchange="return  myFunction2(this)"  type="text" value="{{number_format($value->VatTu->DonGia, 0, ',', '.')}}" class="form-control"></td>
                                         <td><input type="text" readonly class="form-control" name="ThanhTien[]" value="{{number_format($value->ThanhTien, 0, ',', '.')}}"></td>
                                         <td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>

@@ -14,14 +14,16 @@ function myFunction(e) {
     var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val();
     var SoLuong =  $(e).val();
     DonGia = DonGia.split('.').join("");
+    SoLuong = SoLuong.split('.').join("");
     var ThanhTien = DonGia*SoLuong;
     $(e).parent().parent().find("input[name='ThanhTien[]']").val(parseFloat(ThanhTien).toLocaleString('us'));
 }
 
 function myFunction2(e) {
     var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val();
+    var SoLuong = $(e).parent().parent().find("input[name='SoLuong[]']").val();
     DonGia = DonGia.split('.').join("");
-    var SoLuong =  $(e).parent().parent().find("input[name='SoLuong[]']").val();
+    SoLuong = DonGia.split('.').join("");
     var ThanhTien =DonGia*SoLuong;
     $(e).parent().parent().find("input[name='ThanhTien[]']").val(parseFloat(ThanhTien).toLocaleString('us'));
 }
@@ -57,8 +59,8 @@ $(document).ready(function() {
             var record =  '<tr class="input-record" >'+
                 '<td class="TenVT">'+ TenVT +'<input type="hidden" name="MaVT[]" value="'+MaVT+'"><input type="hidden" name="MoTa[]" value="'+MoTa+'"></td>' +
                 '<td><input type="text" readonly class="form-control" name="DVT[]" value="'+ DVT +'"></td>' +
-                '<td><input name="SoLuong[]" type="number" class="form-control" onchange="return  myFunction(this)" min="0" value="0"></td>' +
-                '<td><input name="DonGia[]" onchange="return  myFunction2(this)"  readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
+                '<td><input name="SoLuong[]" type="number" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction(this)" min="0" value="0"></td>' +
+                '<td><input name="DonGia[]" onchange="return  myFunction2(this)"  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
                 '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
                 '<td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>'+
                 '</tr>';
@@ -188,8 +190,8 @@ $(document).ready(function() {
                 var record =  '<tr class="input-record" >'+
                     '<td class="TenVT">'+$(target).text()+'<input type="hidden" name="MaVT[]" value="'+MaVT+'"></td>' +
                     '<td><input type="text" readonly class="form-control" name="DVT[]" value="'+ data['DVT'] +'"></td>' +
-                    '<td><input name="SoLuong[]" type="number" class="form-control" onchange="return  myFunction(this)" min="0" value="0" max="'+ max +'"></td>' +
-                    '<td><input name="DonGia[]" onchange="return  myFunction2(this)" type="text" value="'+DonGia+'" class="form-control"></td>' +
+                    '<td><input name="SoLuong[]" type="number" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction(this)" min="0" value="0" max="'+ max +'"></td>' +
+                    '<td><input name="DonGia[]" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction2(this)" type="text" value="'+DonGia+'" class="form-control"></td>' +
                     '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
                     '<td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>'+
                     '</tr>';

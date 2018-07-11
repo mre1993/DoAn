@@ -104,6 +104,7 @@ class PhieuNhapController extends Controller
                         'DVT'=> $request->DVT[$i],
                         'DonGia'=> str_replace(".", "", $request->DonGia[$i]),
                         'MoTa'=> $request->MoTa[$i],
+                        'Trang_Thai' => false
                     ]);
                 }
                 ChiTietKhoVT::create([
@@ -218,6 +219,7 @@ class PhieuNhapController extends Controller
                             'DVT'=> $request->DVT[$i],
                             'DonGia'=> str_replace(".", "", $request->DonGia[$i]),
                             'MoTa'=> $request->MoTa[$i],
+                            'Trang_Thai' => false
                         ]);
                     }
                     ChiTietKhoVT::create([
