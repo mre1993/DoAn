@@ -72,7 +72,7 @@
                     </tr>
                     <tr>
                         <td colspan="2"></td>
-                        <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU NHẬP VẬT TƯ</p></td>
+                        <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU XUẤT VẬT TƯ</p></td>
                         <td colspan="2" style="padding-top: 25px;text-align: center" class="size-16"><p>Mã phiếu: {{str_replace('_','/',$phieuXuat->MaPhieuXuat)}}</p></td>
                     </tr>
                     <tr>

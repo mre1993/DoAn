@@ -79,8 +79,6 @@
                                     <th>Vật tư</th>
                                     <th>Đơn vị tính</th>
                                     <th>Số lượng</th>
-                                    <th>Đơn giá</th>
-                                    <th>Thành tiền</th>
                                     <th></th>
                                 </tr>
                                 </thead>

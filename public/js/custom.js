@@ -187,12 +187,18 @@ $(document).ready(function() {
                     max = data['SoLuongTon'];
                 }
                 var DonGia = parseFloat(data['DonGia']).toLocaleString('us');
+                var recordDonGia = '<td><input name="DonGia[]" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction2(this)" type="text" value="'+DonGia+'" class="form-control"></td>';
+                var recordThanhTien = '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' ;
+                if(currentURL.indexOf(check) != -1){
+                    recordDonGia = '<td><input type="hidden" name="DonGia[]" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction2(this)" type="text" value="'+DonGia+'" class="form-control"></td>';
+                    recordThanhTien = '<td><input type="hidden" readonly class="form-control" name="ThanhTien[]" value=""></td>' ;
+                }
                 var record =  '<tr class="input-record" >'+
                     '<td class="TenVT">'+$(target).text()+'<input type="hidden" name="MaVT[]" value="'+MaVT+'"></td>' +
                     '<td><input type="text" readonly class="form-control" name="DVT[]" value="'+ data['DVT'] +'"></td>' +
                     '<td><input name="SoLuong[]" type="number" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction(this)" min="0" value="0" max="'+ max +'"></td>' +
-                    '<td><input name="DonGia[]" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction2(this)" type="text" value="'+DonGia+'" class="form-control"></td>' +
-                    '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
+                    recordDonGia +
+                    recordThanhTien +
                     '<td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>'+
                     '</tr>';
                 $('.suggest-search').css('display','none').find("a").remove();
@@ -231,7 +237,7 @@ $(document).ready(function() {
                             '<td>'+ v['TenVT'] +'</td>'+
                             '<td>'+ v['TenKVT'] +'</td>'+
                             '<td>'+ v['TenPX'] +'</td>'+
-                            '<td>'+  parseFloat(v['SoLuong']).toLocaleString('us') +'</td>'+
+                            '<td>'+ parseFloat(v['SoLuong']).toLocaleString('us') +'</td>'+
                             '<td>'+ parseFloat(v['DonGia']).toLocaleString('us') +'</td>'+
                             '<td>'+ parseFloat(v['ThanhTien']).toLocaleString('us') +'</td>'+
                             '<td>'+ NoiDung +'</td>'+

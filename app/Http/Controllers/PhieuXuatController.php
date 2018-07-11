@@ -63,8 +63,8 @@ class PhieuXuatController extends Controller
         }
         $message = [
             'MaPX.required' => 'Mã phân xưởng không được để trống',
-            'MaPhieuXuat.unique' => 'Mã phiếu nhập đã tồn tại',
-            'MaPhieuXuat.required' => 'Mã phiếu nhập không được để trống',
+            'MaPhieuXuat.unique' => 'Mã phiếu xuất đã tồn tại',
+            'MaPhieuXuat.required' => 'Mã phiếu xuất không được để trống',
             'MaKVT.required' => 'Mã kho vật tư không được để trống',
             'MaVT.required' => 'Mã vật tư không được để trống',
             'MaNV.required' => 'Mã nhân viên không được để trống',
@@ -174,51 +174,64 @@ class PhieuXuatController extends Controller
         if(Auth::user()->MaQuyen < '2'){
             return view('welcome');
         }
+        $message = [
+            'MaPX.required' => 'Mã phân xưởng không được để trống',
+            'MaPhieuXuat.required' => 'Mã phiếu xuất không được để trống',
+            'MaKVT.required' => 'Mã kho vật tư không được để trống',
+            'MaVT.required' => 'Mã vật tư không được để trống',
+            'MaNV.required' => 'Mã nhân viên không được để trống',
+        ];
+        $rules = [
+            'MaPX' => 'required|string|max:10',
+            'MaKVT' => 'required|string|max:10',
+            'MaVT' => 'required|max:10',
+            'MaNV' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        };
         $phieuXuat = PhieuXuat::where('MaPhieuXuat',$request->MaPhieuXuat)->first();
-        $itemsDel =  ChiTietPhieuXuat::whereNotIn('MaVT',$request->MaVT)->where('MaPhieuXuat',$request->MaPhieuXuat)->get();
-        if($itemsDel != null){
-            foreach($itemsDel as $itemDel){
-                $check = ChiTietKhoVT::where('MaVT',$itemDel->MaVT)->where('MaKVT',$phieuXuat->MaKVT)->first();
-                if($itemDel->SoLuong < $check->SoLuongTon){
-                    return redirect()->back()->withErrors(['Số lượng tồn kho nhỏ hơn số lượng xuất']);
-                }
-                $check->SoLuongTon = $check->SoLuongTon + $itemDel->SoLuong;
-                $check->TongSoLuong = $check->TongSoLuong + $itemDel->SoLuong;
-                $check->save();
-                $itemDel->delete();
-            }
+        $chiTietPX = ChiTietPhieuXuat::where('MaPhieuXuat',$request->MaPhieuXuat)->get();
+        foreach($chiTietPX as $item){
+            $getVTKho = ChiTietKhoVT::where('MaVT',$item->MaVT)->first();
+            $getVTKho->SoLuongTon = $getVTKho->SoLuongTon + $item->SoLuong;
+            $getVTKho->TongSoLuong = $getVTKho->TongSoLuong + $item->SoLuong;
+            $getVTKho->save();
         }
+        ChiTietPhieuXuat::where('MaPhieuXuat',$request->MaPhieuXuat)->delete();
         $count = count($request->MaVT);
-        for($i=0;$i<= $count-1;$i++){
-            $checkPhieuXuat = ChiTietPhieuXuat::where('MaVT',$request->MaVT[$i])->where('MaPhieuXuat',$request->MaPhieuXuat)->first();
-            $checkKhoVatTu = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$phieuXuat->MaKVT)->first();
-            $checkKhoVatTu->MaKVT = $request->MaKVT;
-            if(!$checkPhieuXuat){
-                if($checkKhoVatTu->SoLuongTon < $request->SoLuong){
-                    return redirect()->back()->withErrors(['Số lượng tồn kho nhỏ hơn số lượng xuất, hãy chọn lại']);
-                }
-                $checkKhoVatTu->SoLuongTon = $checkKhoVatTu->SoLuongTon - str_replace(".", "", $request->SoLuong[$i]);
-                $checkKhoVatTu->TongSoLuong = $checkKhoVatTu->TongSoLuong - str_replace(".", "", $request->SoLuong[$i]);
-                ChiTietPhieuXuat::create([
-                    'MaPhieuXuat' => $request->MaPhieuXuat,
-                    'MaVT' => $request->MaVT[$i],
-                    'SoLuong' => str_replace(".", "", $request->SoLuong[$i]),
-                    'DonGia' => str_replace(".", "", $request->DonGia[$i]),
-                    'ThanhTien' => str_replace(".", "", $request->ThanhTien[$i]),
-                ]);
-            }else{
-                $checkKhoVatTu->SoLuongTon = $checkKhoVatTu->SoLuongTon - str_replace(".", "", $request->SoLuong[$i]) + $checkPhieuXuat->SoLuong ;
-                $checkKhoVatTu->TongSoLuong = $checkKhoVatTu->TongSoLuong - str_replace(".", "", $request->SoLuong[$i]) + $checkPhieuXuat->SoLuong ;
-                $checkPhieuXuat->SoLuong = str_replace(".", "", $request->SoLuong[$i]);
-                $checkPhieuXuat->DonGia = str_replace(".", "", $request->DonGia[$i]);
-                $checkPhieuXuat->ThanhTien =  str_replace(".", "", $request->ThanhTien[$i]);
-                $checkPhieuXuat->save();
+        for($i=0; $i<$count; $i++){
+            $check = ChiTietKhoVT::where('MaVT',$request->MaVT[$i])->where('MaKVT',$request->MaKVT)->first();
+            if(!$check){
+                return redirect()->back()->withErrors(['Không có vật tư trong kho, hãy lựa chọn lại']);
             }
-            $checkKhoVatTu->save();
+            if($check->SoLuongTon < str_replace(".", "", $request->SoLuong[$i])){
+                return redirect()->back()->withErrors(['Số lượng tồn kho nhỏ hơn số lượng xuất']);
+            }
+            $soLuongTon = $check->SoLuongTon;
+            $tongSoLuong = $check->TongSoLuong;
+            $check->SoLuongTon = $soLuongTon - str_replace(".", "", $request->SoLuong[$i]);
+            $check->TongSoLuong = $tongSoLuong - str_replace(".", "", $request->SoLuong[$i]);
+            $check->save();
+
+            ChiTietPhieuXuat::create([
+                'MaPhieuXuat' => $phieuXuat->MaPhieuXuat,
+                'MaVT' => $request->MaVT[$i],
+                'SoLuong' => str_replace(".", "", $request->SoLuong[$i]),
+                'DonGia' => str_replace(".", "", $request->DonGia[$i]),
+                'ThanhTien' =>  str_replace(".", "", $request->ThanhTien[$i]),
+            ]);
         }
-        $phieuXuat->MaKVT = $request->MaKVT;
         $phieuXuat->MaPX = $request->MaPX;
+        $phieuXuat->MaKVT = $request->MaKVT;
+        $phieuXuat->NoiDung = $request->NoiDung;
         $phieuXuat->save();
+
         return redirect('phieuxuat');
     }
 
@@ -242,8 +255,8 @@ class PhieuXuatController extends Controller
             $vatTuKho->TongSoLuong = $soLuongXuatKho + $soLuongTonCu;
             $vatTuKho->save();
             $vatTu->save();
-            $item->delete();
         }
+        ChiTietPhieuXuat::where('MaPhieuXuat',$request->MaPhieuXuat)->where('MaPX',$PhieuXuat->MaPX)->delete();
         $PhieuXuat->delete();
         return redirect()->back();
     }

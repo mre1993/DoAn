@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-md-3"></div>
                         <div class="col-md-3">
-                            <select style="height: 100%;"  name="MaKVT" class="form-control">
+                            <select style="height: 100%;" name="MaKVT" class="form-control">
                                 <option value="" disabled selected>Chọn kho lưu vật tư</option>
                                 @foreach($MaKVT as $item)
                                     <option value="{{ $item->MaKVT }}" {{ $phieuXuat->MaKVT == $item->MaKVT ? 'selected' : '' }}> {{ $item->TenKVT }}</option>
@@ -75,8 +75,7 @@
                                     <th>Vật tư</th>
                                     <th>Đơn vị tính</th>
                                     <th>Số lượng</th>
-                                    <th>Đơn giá</th>
-                                    <th>Thành tiền</th>
+
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -86,8 +85,8 @@
                                         <td class="TenVT">{{$value->VatTu->TenVT}}<input type="hidden" name="MaVT[]" value="{{$value->MaVT}}"></td>
                                         <td><input type="text" readonly class="form-control" name="DVT[]" value="{{$value->VatTu->DVT}}"></td>
                                         <td><input name="SoLuong[]" type="number" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction(this)" min="0" value="{{number_format($value->SoLuong, 0, ',', '.')}}"></td>
-                                        <td><input name="DonGia[]" onchange="return  myFunction2(this)"  type="text" value="{{number_format($value->VatTu->DonGia, 0, ',', '.')}}" class="form-control"></td>
-                                        <td><input type="text" readonly class="form-control" name="ThanhTien[]" value="{{number_format($value->ThanhTien, 0, ',', '.')}}"></td>
+                                        <td><input name="DonGia[]" onchange="return  myFunction2(this)"  type="hidden" value="{{number_format($value->VatTu->DonGia, 0, ',', '.')}}" class="form-control"></td>
+                                        <td><input type="hidden" readonly class="form-control" name="ThanhTien[]" value="{{number_format($value->ThanhTien, 0, ',', '.')}}"></td>
                                         <td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>
                                     </tr>
                                 @endforeach
