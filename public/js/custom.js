@@ -11,19 +11,15 @@ function myFunction(e) {
             $(e).val(max);
         }
     }
-    var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val();
-    var SoLuong =  $(e).val();
-    DonGia = DonGia.split('.').join("");
-    SoLuong = SoLuong.split('.').join("");
+    var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val().split('.').join("");
+    var SoLuong =  $(e).val().split('.').join("");
     var ThanhTien = DonGia*SoLuong;
     $(e).parent().parent().find("input[name='ThanhTien[]']").val(parseFloat(ThanhTien).toLocaleString('us'));
 }
 
 function myFunction2(e) {
-    var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val();
-    var SoLuong = $(e).parent().parent().find("input[name='SoLuong[]']").val();
-    DonGia = DonGia.split('.').join("");
-    SoLuong = DonGia.split('.').join("");
+    var DonGia = $(e).parent().parent().find("input[name='DonGia[]']").val().split('.').join("");
+    var SoLuong = $(e).parent().parent().find("input[name='SoLuong[]']").val().split('.').join("");
     var ThanhTien =DonGia*SoLuong;
     $(e).parent().parent().find("input[name='ThanhTien[]']").val(parseFloat(ThanhTien).toLocaleString('us'));
 }
