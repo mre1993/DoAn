@@ -50,7 +50,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><span id="date" style="text-align: center;display: block;margin-bottom:30px">Ngày: 18/06/2018</span></td>
+        <td><span id="date" style="text-align: center;display: block;margin-bottom:30px">Ngày: {{ Carbon\Carbon::now()->format('d-m-Y')}}</span></td>
     </tr>
     <tr>
         <td style="text-align: center;">Người lập phiếu</td>

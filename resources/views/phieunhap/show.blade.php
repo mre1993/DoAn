@@ -109,9 +109,7 @@
                         </tr>
                     @endforeach
                     <tr class="khung">
-                        <td colspan="4"><p class="text-center">Tổng</p></td>
-                        <td><p></p></td>
-                        <td><p>{{number_format($sumSL, 0, ',', '.')}}</p></td>
+                        <td colspan="6"><p class="text-center">Tổng</p></td>
                         <td><p>{{number_format($sumTT, 0, ',', '.')}}</p></td>
                         <td><p></p></td>
                     </tr>

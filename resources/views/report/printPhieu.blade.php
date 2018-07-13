@@ -44,8 +44,10 @@
         <td>Ngày nhập</td>
         <td>Nhân viên</td>
     </tr>
+    <?php $sumTT = 0;?>
     @foreach($result as $item)
     <tr style="text-align: center">
+        {{$sumTT = $sumTT + $item->DonGia*$item->SoLuong}}
         <td> {{$i++}} </td>
         <td>
             @if($check == 'PhieuNhap')
@@ -63,6 +65,7 @@
             @else
                 {{$item->TenPX}}
             @endif
+        </td>
         <td> {{$item->SoLuong}} </td>
         <td> {{$item->DonGia}} </td>
         <td> {{$item->ThanhTien}} </td>
@@ -71,32 +74,39 @@
         <td> {{$item->TenNV}} </td>
     </tr>
     @endforeach
-    <tr>
+    <tr style="text-align: center">
+        <td colspan="8" style="text-align: center;vertical-align: middle">Tổng cộng</td>
+        <td><?php echo $sumTT; ?></td>
         <td></td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td style="text-align: center">Người lập</td>
         <td></td>
     </tr>
     <tr>
         <td></td>
         <td></td>
         <td></td>
+        <td style="text-align: center">Người lập</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
+        <td style="text-align: center">Ngày lập</td>
         <td></td>
-        <td style="text-align: center">{{\Illuminate\Support\Facades\Auth::user()->NhanVien->TenNV}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="text-align: center">{{\Illuminate\Support\Facades\Auth::user()->NhanVien != null ?\Illuminate\Support\Facades\Auth::user()->NhanVien->TenNV : ''}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="text-align: center">{{ Carbon\Carbon::now()->format('d-m-Y')}}</td>
         <td></td>
     </tr>
 </table>

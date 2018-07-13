@@ -48,10 +48,8 @@
                 </tr>
            @endforeach
             <tr class="khung" style="text-align: right">
-                <td colspan="4"><p class="text-center">Tổng</p></td>
-                <td><p></p></td>
-                <td><p>{{$sumSL}}</p></td>
-                <td><p>{{$sumTT}}</p></td>
+                <td colspan="6"><p class="text-center">Tổng</p></td>
+                <td><p style="text-align: center">{{$sumTT}}</p></td>
                 <td><p></p></td>
             </tr>
             <tr>
