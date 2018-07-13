@@ -30,7 +30,6 @@
                 <td><p>TÊN VẬT TƯ</p></td>
                 <td><p>MÃ VẬT TƯ</p></td>
                 <td><p>ĐVT</p></td>
-                <td><p>Đơn giá</p></td>
                 <td><p>SỐ LƯỢNG</p></td>
                 <td><p>Thành tiền</p></td>
                 <td><p>GHI CHÚ</p></td>
@@ -41,7 +40,6 @@
                     <td><p>{{$item->MaVT}}</p></td>
                     <td><p>{{$item->VatTu->TenVT}}</p></td>
                     <td><p>{{$item->VatTu->DVT}}</p></td>
-                    <td><p>{{$item->DonGia}}</p></td>
                     <td><p>{{$item->SoLuong}}</p></td>
                     <td><p>{{$item->ThanhTien}}</p></td>
                     <td><p>{{$item->GhiChu}}</p></td>

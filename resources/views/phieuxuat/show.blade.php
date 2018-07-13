@@ -91,7 +91,6 @@
                         <td width="19%"><p>MÃ VẬT TƯ</p></td>
                         <td width="19%"><p>TÊN VẬT TƯ</p></td>
                         <td width="10%"><p>ĐVT</p></td>
-                        <td width="10%"><p>Đơn giá</p></td>
                         <td width="10%"><p>SỐ LƯỢNG</p></td>
                         <td width="10%"><p>Thành tiền</p></td>
                         <td><p>GHI CHÚ</p></td>
@@ -102,7 +101,6 @@
                             <td><p>{{$item->MaVT}}</p></td>
                             <td><p>{{$item->VatTu->TenVT}}</p></td>
                             <td><p>{{$item->VatTu->DVT}}</p></td>
-                            <td><p>{{number_format($item->DonGia, 0, ',', '.')}}</p></td>
                             <td><p>{{number_format($item->SoLuong, 0, ',', '.')}}</p></td>
                             <td><p>{{number_format($item->ThanhTien, 0, ',', '.')}}</p></td>
                             <td><p>{{$item->GhiChu}}</p></td>
@@ -111,7 +109,6 @@
                     <tr class="khung">
                         <td colspan="6"><p class="text-center">Tổng</p></td>
                         <td><p>{{number_format($sumTT, 0, ',', '.')}}</p></td>
-                        <td><p></p></td>
                     </tr>
                     <tr>
                         <td><p></p></td>

@@ -437,9 +437,9 @@ class PhieuXuatController extends Controller
         $myFile =  Excel::create('New', function($excel) use($result,$i,$check,$count,$setborder,$setHeight1,$setHeight2) {
             $excel->sheet('First sheet', function($sheet)  use($result,$i,$check,$count,$setborder,$setHeight1,$setHeight2) {
                 $sheet->loadView('report.printPhieu')
-                    ->mergeCells('A1:L1')
-                    ->mergeCells('A2:L2')
-                    ->setBorder('A3:L'.$setborder, 'thin')
+                    ->mergeCells('A1:K1')
+                    ->mergeCells('A2:K2')
+                    ->setBorder('A3:K'.$setborder, 'thin')
                     ->setHeight(1,50)
                     ->setHeight($setHeight1,40)
                     ->setHeight($setHeight2,20)
@@ -450,11 +450,10 @@ class PhieuXuatController extends Controller
                     ->setWidth('E',18)
                     ->setWidth('F',18)
                     ->setWidth('G',10)
-                    ->setWidth('H',8)
+                    ->setWidth('H',15)
                     ->setWidth('I',15)
-                    ->setWidth('J',10)
+                    ->setWidth('J',20)
                     ->setWidth('K',20)
-                    ->setWidth('L',20)
                     ->with('i' , $i)
                     ->with('result' , $result)
                     ->with('check' , $check);

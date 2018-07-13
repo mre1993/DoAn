@@ -38,7 +38,9 @@
             @endif
         </td>
         <td>SỐ LƯỢNG</td>
-        <td>Đơn giá</td>
+        @if($check == 'PhieuNhap')
+            <td>Đơn giá</td>
+        @endif
         <td>Thành tiền</td>
         <td>GHI CHÚ</td>
         <td>Ngày nhập</td>
@@ -67,7 +69,9 @@
             @endif
         </td>
         <td> {{$item->SoLuong}} </td>
-        <td> {{$item->DonGia}} </td>
+        @if($check == 'PhieuNhap')
+            <td> {{$item->DonGia}} </td>
+        @endif
         <td> {{$item->ThanhTien}} </td>
         <td> {{$item->NoiDung}} </td>
         <td> {{Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}} </td>
@@ -77,7 +81,6 @@
     <tr style="text-align: center">
         <td colspan="8" style="text-align: center;vertical-align: middle">Tổng cộng</td>
         <td><?php echo $sumTT; ?></td>
-        <td></td>
         <td></td>
         <td></td>
     </tr>
