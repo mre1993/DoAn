@@ -29,10 +29,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//        $schedule->command('VatTu:updateDonGia')->when(function () {
-//            return \Carbon\Carbon::now()->endOfMonth()->isToday();
-//        })->at('23:59')->cron('*/5 ****');
-        $schedule->command('VatTu:updateDonGia')->everyMinute()->cron('*/5 ****');
+        $schedule->command('VatTu:updateDonGia')->when(function () {
+            return \Carbon\Carbon::now()->endOfMonth()->isToday();
+        })->at('23:59')->cron('*/5 ****');
+//        $schedule->command('VatTu:updateDonGia')->everyMinute()->cron('*/5 ****');
     }
 
     /**
