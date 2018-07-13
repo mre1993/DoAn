@@ -269,7 +269,7 @@ class PhieuXuatController extends Controller
         $sumSL = 0;
         $sumTT = 0;
         $countItem = count($vatTu)+7;
-        $setBoder = "A6:H$countItem";
+        $setBoder = "A6:G$countItem";
         foreach($vatTu as $item){
             $sumSL = $sumSL + $item->SoLuong;
             $sumTT = $sumTT + $item->ThanhTien;
@@ -281,7 +281,7 @@ class PhieuXuatController extends Controller
                     ->setHeight('3',20)
                     ->setHeight('4',20)
                     ->setHeight('5',20)
-                    ->mergeCells('A1:H1')
+                    ->mergeCells('A1:G1')
                     ->setWidth('A',5)
                     ->setBorder('A1', 'thin')
                     ->setBorder($setBoder, 'thin')
@@ -290,8 +290,7 @@ class PhieuXuatController extends Controller
                     ->setWidth('D',10)
                     ->setWidth('E',10)
                     ->setWidth('F',10)
-                    ->setWidth('G',10)
-                    ->setWidth('H',17)
+                    ->setWidth('G',17)
                     ->with('vatTu' , $vatTu)
                     ->with('phieuXuat' , $phieuXuat)
                     ->with('sumSL' , $sumSL)
@@ -429,7 +428,7 @@ class PhieuXuatController extends Controller
             })
             ->orderBy('phieu_xuat.MaPhieuXuat')->get();
         $count = count($result);
-        $setborder = $count + 3;
+        $setborder = $count + 4;
         $setHeight1 = $count + 4;
         $setHeight2 = $count + 5;
 //        return response()->json($result);

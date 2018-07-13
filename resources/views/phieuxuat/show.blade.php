@@ -64,14 +64,14 @@
         <div class="col-md-12 show-form">
                 <table class="table print-phieu-nhap">
                     <tr  class="company-infor">
-                        <td colspan="8" class="text-center size-16">
+                        <td colspan="7" class="text-center size-16">
                             <p class="font-weight-bold" style="font-size: 18px">CÔNG TY TNHH KỸ THUẬT XÂY DỰNG E-POWER</p>
                             <p>Tầng 12, tháp B, tòa nhà Sông Đà, Phạm Hùng, Mỹ Đình I, Nam Từ Liêm</p>
                             <p style="text-decoration: underline">Tel: +84 24.626.027.61 - Fax: +84 24.321.235.60</p>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2"></td>
+                        <td></td>
                         <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU XUẤT VẬT TƯ</p></td>
                         <td colspan="2" style="padding-top: 25px;text-align: center" class="size-16"><p>Mã phiếu: {{str_replace('_','/',$phieuXuat->MaPhieuXuat)}}</p></td>
                     </tr>
@@ -107,8 +107,9 @@
                         </tr>
                     @endforeach
                     <tr class="khung">
-                        <td colspan="6"><p class="text-center">Tổng</p></td>
+                        <td colspan="5"><p class="text-center">Tổng</p></td>
                         <td><p>{{number_format($sumTT, 0, ',', '.')}}</p></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><p></p></td>

@@ -10,7 +10,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2"></td>
+                <td></td>
                 <td colspan="4"><p class="text-uppercase form-name" style="text-align: center">PHIẾU XUẤT VẬT TƯ</p></td>
                 <td colspan="2" style="padding-top: 25px"><p>Mã phiếu: {{str_replace('_','/',$phieuXuat->MaPhieuXuat)}}</p></td>
             </tr>
@@ -46,7 +46,7 @@
                 </tr>
            @endforeach
             <tr class="khung" style="text-align: right">
-                <td colspan="6"><p class="text-center">Tổng</p></td>
+                <td colspan="5"><p class="text-center">Tổng</p></td>
                 <td><p style="text-align: center">{{$sumTT}}</p></td>
                 <td><p></p></td>
             </tr>

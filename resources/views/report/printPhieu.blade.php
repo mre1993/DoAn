@@ -79,7 +79,11 @@
     </tr>
     @endforeach
     <tr style="text-align: center">
-        <td colspan="8" style="text-align: center;vertical-align: middle">Tổng cộng</td>
+        @if($check == 'PhieuNhap')
+            <td colspan="8" style="text-align: center;vertical-align: middle">Tổng cộng</td>
+        @else
+            <td colspan="7" style="text-align: center;vertical-align: middle">Tổng cộng</td>
+        @endif
         <td><?php echo $sumTT; ?></td>
         <td></td>
         <td></td>

@@ -461,7 +461,7 @@ class PhieuNhapController extends Controller
             })
             ->orderBy('phieu_nhap.MaPN')->get();
         $count = count($result);
-        $setborder = $count + 3;
+        $setborder = $count + 4;
         $setHeight1 = $count + 4;
         $setHeight2 = $count + 5;
         $myFile = Excel::create('New', function($excel) use($result,$i,$check,$count,$setborder,$setHeight1,$setHeight2) {
