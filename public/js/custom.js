@@ -47,16 +47,16 @@ $(document).ready(function() {
             $('.error-vt h5').show();
         }else {
             var fd = $('#new-vt form').serialize();
-            var MaVT = $('#MaVT').val();
+            var MaVT = $('#MaVTNew').val();
             var DVT = $('#DVT').val();
-            var DonGia = $('#DonGia').val();
+            var DonGia = $('#DonGiaMoi').val();
             var TenVT = $('#TenVT').val();
-            var MoTa = $('#MoTa').val();
+            var MoTa = $('#MoTaMoi').val();
             var record =  '<tr class="input-record" >'+
                 '<td class="TenVT">'+ TenVT +'<input type="hidden" name="MaVT[]" value="'+MaVT+'"><input type="hidden" name="MoTa[]" value="'+MoTa+'"></td>' +
                 '<td><input type="text" readonly class="form-control" name="DVT[]" value="'+ DVT +'"></td>' +
                 '<td><input name="SoLuong[]" type="number" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction(this)" min="0" value="0"></td>' +
-                '<td><input name="DonGia[]" onchange="return  myFunction2(this)"  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" readonly type="text" value="'+DonGia+'" class="form-control"></td>' +
+                '<td><input name="DonGia[]" onchange="return  myFunction2(this)"  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" type="text" value="'+DonGia+'" class="form-control"></td>' +
                 '<td><input type="text" readonly class="form-control" name="ThanhTien[]" value=""></td>' +
                 '<td><button type="button" class="btn btn-danger remove-record" onclick="return remove(this)">Delete</button></td>'+
                 '</tr>';

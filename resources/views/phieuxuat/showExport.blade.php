@@ -15,10 +15,10 @@
                 <td colspan="2" style="padding-top: 25px"><p>Mã phiếu: {{str_replace('_','/',$phieuXuat->MaPhieuXuat)}}</p></td>
             </tr>
             <tr>
-                <td colspan="8" valign="middle"><p>Người nhập: {{$phieuXuat->NhanVien->TenNV}}</p></td>
+                <td colspan="7" valign="middle"><p>Người nhập: {{$phieuXuat->NhanVien->TenNV}}</p></td>
             </tr>
             <tr>
-                <td colspan="8" valign="middle"><p>Lý do nhập: {{$phieuXuat->NoiDung}}</p></td>
+                <td colspan="7" valign="middle"><p>Lý do nhập: {{$phieuXuat->NoiDung}}</p></td>
             </tr>
             <tr>
                 <td colspan="7" style="border: none"  valign="middle">
@@ -54,12 +54,11 @@
                 <td><p></p></td>
                 <td><p></p></td>
                 <td><p></p></td>
-                <td><p></p></td>
                 <td colspan="4"><p class="text-center">Ngày {{date('d')}} tháng {{date('m')}} năm {{date('Y')}}</p></td>
             </tr>
             <tr class="bottom-form text-center">
-                <td class="width-18" colspan="3"><p>Người lập phiếu</p></td>
-                <td colspan="3"><p>Người giao</p></td>
+                <td class="width-18" colspan="2"><p>Người lập phiếu</p></td>
+                <td colspan="2"><p>Người giao</p></td>
                 <td colspan="2"><p>Thủ kho</p></td>
             </tr>
         </table>

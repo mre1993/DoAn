@@ -36,7 +36,7 @@ class VatTuController extends Controller
     public function create()
     {
         if(Auth::user()->MaQuyen < '2'){
-            return redirect()->back();
+            return view('welcome');
         }
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');
         $NCC = NhaCungCap::orderBy('MaNCC','ASC')->get();
@@ -52,7 +52,7 @@ class VatTuController extends Controller
     public function store(Request $request)
     {
         if(Auth::user()->MaQuyen < '2'){
-            return redirect()->back();
+            return view('welcome');
         }
         $message = [
             'MaVT.required' => 'Mã vật tư  không được để trống',
@@ -106,7 +106,7 @@ class VatTuController extends Controller
     public function edit($id)
     {
         if(Auth::user()->MaQuyen < '2'){
-            return redirect()->back();
+            return view('welcome');
         }
         $DVT = array('Bộ','Cây','Chiếc','Cm','Cuốn','Đôi','Hộp','Kg','Lạng','Lọ','Mét','Tấm','Thanh','Túi','Viên','Cái');
         $item = VatTu::where('MaVT',$id)->first();
@@ -124,7 +124,7 @@ class VatTuController extends Controller
     public function update(Request $request)
     {
         if(Auth::user()->MaQuyen < '2'){
-            return redirect()->back();
+            return view('welcome');
         }
         $item = VatTu::where('MaVT',$request->id)->first();
         $message = [
@@ -182,7 +182,7 @@ class VatTuController extends Controller
     public function destroy($id)
     {
         if(Auth::user()->MaQuyen < '2'){
-            return false;
+            return view('welcome');
         }
         $item = VatTu::find($id);
         $checkTonKho = DB::table('chi_tiet_kho_vat_tu')->select(DB::raw('SUM(SoLuongTOn) as SoLuongTon'))->first();

@@ -28,7 +28,7 @@ class PhieuXuatController extends Controller
     public function index()
     {
         $i = 1;
-        $items = PhieuXuat::orderBy('MaPhieuXuat','ASC')->paginate(10);
+        $items = PhieuXuat::orderBy('created_at','ASC')->paginate(10);
         return view('phieuxuat.index',compact('items','i'));
     }
 
@@ -440,7 +440,7 @@ class PhieuXuatController extends Controller
                     ->mergeCells('A2:K2')
                     ->setBorder('A3:K'.$setborder, 'thin')
                     ->setHeight(1,50)
-                    ->setHeight($setHeight1,40)
+                    ->setHeight($setHeight1,20)
                     ->setHeight($setHeight2,20)
                     ->setWidth('A',7)
                     ->setWidth('B',15)

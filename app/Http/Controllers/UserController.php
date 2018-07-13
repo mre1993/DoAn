@@ -56,8 +56,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->MaQuyen !== 3){
-            return redirect()->back();
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
         }
         $message = [
             'password.required' => 'Mật khẩu  không được để trống',
@@ -116,8 +116,8 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        if(Auth::user()->MaQuyen !== 3){
-            return redirect()->back();
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
         }
         if($request->get('password')){
             $rules = array(
@@ -166,8 +166,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->MaQuyen !== 3){
-            return false;
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
         }
         if($id === 0)
         {

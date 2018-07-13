@@ -43,9 +43,6 @@
                                 <input type="text" placeholder="Nhập để tìm" name="TimVT" class="form-control search-query">
                                 <div class="suggest-search"></div>
                             </div>
-                            <div class="col-md-1">
-                                <button class="btn btn-primary fa fa-plus new-vt"  data-toggle="modal" data-target="#new-vt" type="button"></button>
-                            </div>
                         </div>
                         <div class="col-md-6">
                             <label for="MaPX">Chọn phân xưởng</label>
@@ -173,68 +170,6 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-2">
                                 <button type="button" class="btn btn-primary" id="saveNCC" >{{ __('Save') }}</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="new-vt" role="dialog">
-        <div class="modal-dialog  modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Thêm mới vật tư</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="error-vt" style="display: none">
-                        <h5 class="color-red" style="margin-top: 0;display: none">Bạn phải chọn phân xưởng trước</h5>
-                    </div>
-                    <form class="form">
-                        @csrf
-                        <div class="form-group row">
-                            <label for="MaVTNew" class="col-md-4 col-form-label text-md-right">Mã vật tư<span class="color-red">*</span></label>
-
-                            <div class="col-md-6">
-                                <input id="MaVTNew" type="text" class="form-control" name="MaVTNew">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="TenVT" class="col-md-4 col-form-label text-md-right">Tên vật tư<span class="color-red">*</span></label>
-
-                            <div class="col-md-6">
-                                <input id="TenVT" type="text" class="form-control" name="TenVT" >
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="DVT" class="col-md-4 col-form-label text-md-right">Đơn vị tính</label>
-                            <div class="col-md-6">
-                                <select style="width: 50%;height: 100%;"  name="DVT" id="DVT" class="form-control">
-                                    @foreach($DVT as $dvt)
-                                        <option value="{{ $dvt }}" {{ old('DVT') == $dvt ? 'selected' : '' }}> {{ $dvt }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="DonGiaMoi" class="col-md-4 col-form-label text-md-right">Đơn giá</label>
-                            <div class="col-md-6">
-                                <input id="DonGiaMoi" type="text" class="form-control" name="DonGiaMoi" >
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="MoTaMoi" class="col-md-4 col-form-label text-md-right">Mô tả</label>
-
-                            <div class="col-md-6">
-                                <textarea id="MoTaMoi" class="form-control" name="MoTaMoi"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-2">
-                                <button type="button" class="btn btn-primary" id="saveVT" >{{ __('Save') }}</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>

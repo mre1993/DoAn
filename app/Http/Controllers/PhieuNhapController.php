@@ -32,7 +32,7 @@ class PhieuNhapController extends Controller
     public function index()
     {
         $i = 1;
-        $items = PhieuNhap::orderBy('MaPN','ASC')->paginate(10);
+        $items = PhieuNhap::orderBy('created_at','ASC')->paginate(10);
         return view('phieunhap.index',compact('items','i'));
     }
 
@@ -62,6 +62,9 @@ class PhieuNhapController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         $message = [
             'MaKVT.required' => 'Mã kho vật tư không được để trống',
             'MaPN.unique' => 'Mã phiếu nhập đã tồn tại',
@@ -471,7 +474,7 @@ class PhieuNhapController extends Controller
                     ->mergeCells('A2:L2')
                     ->setBorder('A3:L'.$setborder, 'thin')
                     ->setHeight(1,50)
-                    ->setHeight($setHeight1,40)
+                    ->setHeight($setHeight1,20)
                     ->setHeight($setHeight2,20)
                     ->setWidth('A',7)
                     ->setWidth('B',15)

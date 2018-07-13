@@ -232,6 +232,9 @@ class KhoVatTuController extends Controller
     }
 
     public function editHong(Request $request){
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         $kho = KhoVatTu::where('MaKVT',$request->MaKVT)->first();
         $chiTietKho = ChiTietKhoVT::where('MaKVT',$kho->MaKVT)->where('MaVT',$request->MaVT)->first();
         $TongLuongHong =$request->SoLuongHong + $chiTietKho->SoLuongHong;
@@ -244,6 +247,9 @@ class KhoVatTuController extends Controller
     }
 
     public function removeHong(Request $request){
+        if(Auth::user()->MaQuyen < '2'){
+            return view('welcome');
+        }
         $kho = KhoVatTu::where('MaKVT',$request->MaKVT)->first();
         $chiTietKho = ChiTietKhoVT::where('MaKVT',$kho->MaKVT)->where("MaVT",$request->MaVT)->first();
         $chiTietKho->TongSoLuong = $chiTietKho->TongSoLuong - $chiTietKho->SoLuongHong;

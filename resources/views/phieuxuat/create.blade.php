@@ -50,9 +50,6 @@
                                 <input type="text" placeholder="Nhập để tìm" name="TimVT" class="form-control search-query">
                                 <div class="suggest-search"></div>
                             </div>
-                            <div class="col-md-1">
-                                <button class="btn btn-primary fa fa-plus new-vt"  data-toggle="modal" data-target="#new-vt" type="button"></button>
-                            </div>
                         </div>
                         <div class="col-md-6">
                             <label for="TimVT">Chọn phân xưởng</label>

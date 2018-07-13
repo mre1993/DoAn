@@ -73,7 +73,7 @@
                     <tr>
                         <td colspan="2"></td>
                         <td colspan="4"><p class="text-center text-uppercase form-name">PHIẾU NHẬP VẬT TƯ</p></td>
-                        <td colspan="2" style="padding-top: 25px;text-align: center" class="size-16"><p>Mã phiếu: {{$phieuNhap->MaPN}}</p></td>
+                        <td colspan="2" style="padding-top: 25px;text-align: center" class="size-16"><p>Mã phiếu:{{str_replace('_','/',$phieuNhap->MaPN)}}</p></td>
                     </tr>
                     <tr>
                         <td colspan="8" class="size-16"><p>Người nhập: {{$phieuNhap->NhanVien->TenNV}}</p></td>
