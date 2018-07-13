@@ -53,7 +53,7 @@ $(document).ready(function() {
             var TenVT = $('#TenVT').val();
             var MoTa = $('#MoTaMoi').val();
             var record =  '<tr class="input-record" >'+
-                '<td class="TenVT">'+ TenVT +'<input type="hidden" name="MaVT[]" value="'+MaVT+'"><input type="hidden" name="MoTa[]" value="'+MoTa+'"></td>' +
+                '<td class="TenVT">'+ TenVT +'<input type="hidden" name="MaVT[]" value="'+MaVT+'"><input type="hidden" name="MoTa[]" value="'+MoTa+'"><input type="hidden" name="TenVT[]" value="'+TenVT+'"></td>' +
                 '<td><input type="text" readonly class="form-control" name="DVT[]" value="'+ DVT +'"></td>' +
                 '<td><input name="SoLuong[]" type="number" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="return  myFunction(this)" min="0" value="0"></td>' +
                 '<td><input name="DonGia[]" onchange="return  myFunction2(this)"  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" type="text" value="'+DonGia+'" class="form-control"></td>' +
