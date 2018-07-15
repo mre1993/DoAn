@@ -61,7 +61,6 @@
                                     @csrf
                                     <input type="hidden" name="MaKVT" value="{{$ten->MaKVT}}">
                                     <input type="hidden" name="MaVT" value="{{$item->MaVT}}">
-                                    <button type="submit" class="btn btn-warning fa fa-eraser"></button>
                                 </form>
                                 <div class="modal fade" id="hong-{{$ten->MaKVT}}" role="dialog">
                                     <div class="modal-dialog">
