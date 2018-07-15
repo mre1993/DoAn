@@ -8,7 +8,7 @@
     </tr>
     <tr >
         <td class="text-uppercase">
-            <h1 style="margin-top:30px;margin-bottom: 0;text-align: center;">
+            <h1 style="margin-top:30px;margin-bottom: 0;text-align: center;font-size:25px;">
                 @if($check == 'PhieuNhap')
                     BÁO CÁO PHIẾU NHẬP
                 @else
@@ -40,8 +40,8 @@
         <td>SỐ LƯỢNG</td>
         @if($check == 'PhieuNhap')
             <td>Đơn giá</td>
+            <td>Thành tiền</td>
         @endif
-        <td>Thành tiền</td>
         <td>GHI CHÚ</td>
         <td>Ngày nhập</td>
         <td>Nhân viên</td>
@@ -71,23 +71,24 @@
         <td> {{$item->SoLuong}} </td>
         @if($check == 'PhieuNhap')
             <td> {{$item->DonGia}} </td>
+            <td> {{$item->ThanhTien}} </td>
         @endif
-        <td> {{$item->ThanhTien}} </td>
         <td> {{$item->NoiDung}} </td>
         <td> {{Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}} </td>
         <td> {{$item->TenNV}} </td>
     </tr>
     @endforeach
+    @if($check == 'PhieuNhap')
+
     <tr style="text-align: center">
-        @if($check == 'PhieuNhap')
-            <td colspan="8" style="text-align: center;vertical-align: middle">Tổng cộng</td>
-        @else
-            <td colspan="7" style="text-align: center;vertical-align: middle">Tổng cộng</td>
-        @endif
-        <td><?php echo $sumTT; ?></td>
+        <td colspan="8" style="text-align: center;vertical-align: middle">
+           Tổng cộng
+        </td>
+        <td>{{$sumTT}}</td>
         <td></td>
         <td></td>
     </tr>
+    @endif
     <tr>
         <td></td>
         <td></td>
@@ -97,8 +98,10 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
-        <td></td>
+        @if($check == 'PhieuNhap')
+            <td></td>
+            <td></td>
+        @endif
         <td style="text-align: center">Ngày lập</td>
         <td></td>
     </tr>
@@ -111,8 +114,10 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
-        <td></td>
+        @if($check == 'PhieuNhap')
+            <td></td>
+            <td></td>
+        @endif
         <td style="text-align: center">{{ Carbon\Carbon::now()->format('d-m-Y')}}</td>
         <td></td>
     </tr>

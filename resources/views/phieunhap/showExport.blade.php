@@ -11,7 +11,7 @@
             </tr>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="4"><p class="text-uppercase form-name" style="text-align: center">PHIẾU NHẬP VẬT TƯ</p></td>
+                <td colspan="4"><h1 class="text-uppercase form-name" style="text-align: center">PHIẾU NHẬP VẬT TƯ</h1></td>
                 <td colspan="2" style="padding-top: 25px"><p>Mã phiếu: {{str_replace('_','/',$phieuNhap->MaPN)}}</p></td>
             </tr>
             <tr>

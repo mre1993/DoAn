@@ -40,18 +40,18 @@ class updateDonGia extends Command
     public function handle()
     {
         $itemKho = DB::table('chi_tiet_kho_vat_tu')
-            ->select(DB::raw('SUM(TongSoLuong) as TongSoLuong'),'MaVT')->WHERE('MaVT','NHOM1MM')->get();
+            ->select(DB::raw('SUM(TongSoLuong) as TongSoLuong'),'MaVT')->get();
         foreach ($itemKho as $item) {
-            $itemVT = VatTu::where('MaVT','NHOM1MM')->first();
+            $itemVT = VatTu::where('MaVT','$item->MaVT')->first();
             $itemNhap = DB::table('chi_tiet_phieu_nhap')
                 ->join('phieu_nhap', 'phieu_nhap.MaPN', 'chi_tiet_phieu_nhap.MaPN')
                 ->select(DB::raw('SUM(SoLuong) as SoLuong'), DB::raw('SUM(ThanhTien) as ThanhTien'))
-                ->where('MaVT', 'NHOM1MM')
+                ->where('MaVT', '$item->MaVT')
                 ->whereMonth('phieu_nhap.created_at', '=', \Carbon\Carbon::now()->month)->first();
             $itemXuat = DB::table('chi_tiet_phieu_xuat')
                 ->join('phieu_xuat', 'phieu_xuat.MaPhieuXuat', 'chi_tiet_phieu_xuat.MaPhieuXuat')
                 ->select(DB::raw('SUM(SoLuong) as SoLuong'), DB::raw('SUM(ThanhTien) as ThanhTien'))
-                ->where('MaVT', "NHOM1MM")
+                ->where('MaVT', "$item->MaVT")
                 ->whereMonth('phieu_xuat.created_at', '=', \Carbon\Carbon::now()->month)->first();
             if(!$itemXuat){
                 $itemXuat->SoLuong = 0;

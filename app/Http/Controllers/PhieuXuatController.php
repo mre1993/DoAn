@@ -269,7 +269,7 @@ class PhieuXuatController extends Controller
         $sumSL = 0;
         $sumTT = 0;
         $countItem = count($vatTu)+7;
-        $setBoder = "A6:G$countItem";
+        $setBoder = "A6:F$countItem";
         foreach($vatTu as $item){
             $sumSL = $sumSL + $item->SoLuong;
             $sumTT = $sumTT + $item->ThanhTien;
@@ -281,16 +281,15 @@ class PhieuXuatController extends Controller
                     ->setHeight('3',20)
                     ->setHeight('4',20)
                     ->setHeight('5',20)
-                    ->mergeCells('A1:G1')
+                    ->mergeCells('A1:F1')
                     ->setWidth('A',5)
                     ->setBorder('A1', 'thin')
                     ->setBorder($setBoder, 'thin')
-                    ->setWidth('B',19)
-                    ->setWidth('C',19)
+                    ->setWidth('B',25)
+                    ->setWidth('C',20)
                     ->setWidth('D',10)
                     ->setWidth('E',10)
-                    ->setWidth('F',10)
-                    ->setWidth('G',17)
+                    ->setWidth('F',20)
                     ->with('vatTu' , $vatTu)
                     ->with('phieuXuat' , $phieuXuat)
                     ->with('sumSL' , $sumSL)
@@ -428,7 +427,7 @@ class PhieuXuatController extends Controller
             })
             ->orderBy('phieu_xuat.MaPhieuXuat')->get();
         $count = count($result);
-        $setborder = $count + 4;
+        $setborder = $count + 3;
         $setHeight1 = $count + 4;
         $setHeight2 = $count + 5;
 //        return response()->json($result);
@@ -436,23 +435,22 @@ class PhieuXuatController extends Controller
         $myFile =  Excel::create('New', function($excel) use($result,$i,$check,$count,$setborder,$setHeight1,$setHeight2) {
             $excel->sheet('First sheet', function($sheet)  use($result,$i,$check,$count,$setborder,$setHeight1,$setHeight2) {
                 $sheet->loadView('report.printPhieu')
-                    ->mergeCells('A1:K1')
-                    ->mergeCells('A2:K2')
-                    ->setBorder('A3:K'.$setborder, 'thin')
+                    ->mergeCells('A1:J1')
+                    ->mergeCells('A2:J2')
+                    ->setBorder('A3:J'.$setborder, 'thin')
                     ->setHeight(1,50)
                     ->setHeight($setHeight1,20)
                     ->setHeight($setHeight2,20)
                     ->setWidth('A',7)
                     ->setWidth('B',15)
-                    ->setWidth('C',10)
+                    ->setWidth('C',15)
                     ->setWidth('D',30)
                     ->setWidth('E',18)
                     ->setWidth('F',18)
                     ->setWidth('G',10)
-                    ->setWidth('H',15)
+                    ->setWidth('H',25)
                     ->setWidth('I',15)
                     ->setWidth('J',20)
-                    ->setWidth('K',20)
                     ->with('i' , $i)
                     ->with('result' , $result)
                     ->with('check' , $check);

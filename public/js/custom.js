@@ -238,7 +238,6 @@ $(document).ready(function() {
                             '<td>'+ v['TenKVT'] +'</td>'+
                             '<td>'+ v['TenPX'] +'</td>'+
                             '<td>'+ parseFloat(v['SoLuong']).toLocaleString('us') +'</td>'+
-                            '<td>'+ parseFloat(v['ThanhTien']).toLocaleString('us') +'</td>'+
                             '<td>'+ NoiDung +'</td>'+
                             '<td>'+ d +'</td>'+
                             '<td>'+ v['TenNV'] +'</td>'+
@@ -256,7 +255,6 @@ $(document).ready(function() {
                                 '<th>Kho vật tư</th>'+
                                 '<th>Phân xưởng</th>'+
                                 '<th>Số lượng</th>'+
-                                '<th>Thành Tiền</th>'+
                                 '<th>Ghi chú</th>'+
                                 '<th>Ngày tạo</th>'+
                                 '<th>Nhân viên</th>'+

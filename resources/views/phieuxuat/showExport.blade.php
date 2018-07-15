@@ -10,18 +10,17 @@
                 </td>
             </tr>
             <tr>
-                <td></td>
-                <td colspan="4"><p class="text-uppercase form-name" style="text-align: center">PHIẾU XUẤT VẬT TƯ</p></td>
+                <td colspan="4"><h1 class="text-uppercase form-name" style="text-align: center;font-size:25px;">PHIẾU XUẤT VẬT TƯ</h1></td>
                 <td colspan="2" style="padding-top: 25px"><p>Mã phiếu: {{str_replace('_','/',$phieuXuat->MaPhieuXuat)}}</p></td>
             </tr>
             <tr>
-                <td colspan="7" valign="middle"><p>Người nhập: {{$phieuXuat->NhanVien->TenNV}}</p></td>
+                <td colspan="6" valign="middle"><p>Người nhập: {{$phieuXuat->NhanVien->TenNV}}</p></td>
             </tr>
             <tr>
-                <td colspan="7" valign="middle"><p>Lý do nhập: {{$phieuXuat->NoiDung}}</p></td>
+                <td colspan="6" valign="middle"><p>Lý do nhập: {{$phieuXuat->NoiDung}}</p></td>
             </tr>
             <tr>
-                <td colspan="7" style="border: none"  valign="middle">
+                <td colspan="6" style="border: none"  valign="middle">
                     <p>Xuất tại kho: {{$phieuXuat->KhoVatTu->TenKVT}}</p>
                 </td>
             </tr>
@@ -31,7 +30,6 @@
                 <td><p>MÃ VẬT TƯ</p></td>
                 <td><p>ĐVT</p></td>
                 <td><p>SỐ LƯỢNG</p></td>
-                <td><p>Thành tiền</p></td>
                 <td><p>GHI CHÚ</p></td>
             </tr>
            @foreach($vatTu as $item)
@@ -41,17 +39,10 @@
                     <td><p>{{$item->VatTu->TenVT}}</p></td>
                     <td><p>{{$item->VatTu->DVT}}</p></td>
                     <td><p>{{$item->SoLuong}}</p></td>
-                    <td><p>{{$item->ThanhTien}}</p></td>
                     <td><p>{{$item->GhiChu}}</p></td>
                 </tr>
            @endforeach
-            <tr class="khung" style="text-align: right">
-                <td colspan="5"><p class="text-center">Tổng</p></td>
-                <td><p style="text-align: center">{{$sumTT}}</p></td>
-                <td><p></p></td>
-            </tr>
             <tr>
-                <td><p></p></td>
                 <td><p></p></td>
                 <td><p></p></td>
                 <td colspan="4"><p class="text-center">Ngày {{date('d')}} tháng {{date('m')}} năm {{date('Y')}}</p></td>
