@@ -40,7 +40,7 @@ class updateDonGia extends Command
     public function handle()
     {
         $itemKho = DB::table('chi_tiet_kho_vat_tu')
-            ->select(DB::raw('SUM(TongSoLuong) as TongSoLuong'),'MaVT')->get();
+            ->select(DB::raw('SUM(TongSoLuong) as TongSoLuong'),'MaVT')->groupBy('MaVT')->get();
         foreach ($itemKho as $item) {
             $itemVT = VatTu::where('MaVT',$item->MaVT)->first();
             $itemNhap = DB::table('chi_tiet_phieu_nhap')
