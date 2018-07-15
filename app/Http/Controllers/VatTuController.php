@@ -259,7 +259,7 @@ class VatTuController extends Controller
             ->join('vat_tu','vat_tu.MaVT','chi_tiet_phieu_nhap.MaVT')
             ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_phieu_nhap.SoLuong) as SoLuong'))
             ->groupBy('chi_tiet_phieu_nhap.MaVT')
-            ->orderBy('ID','DESC')
+            ->orderBy('chi_tiet_phieu_nhap.SoLuong','DESC')
             ->limit(5)
             ->get()->toArray();
         $array = [];
@@ -272,7 +272,7 @@ class VatTuController extends Controller
                 }
             })
             ->groupBy('chi_tiet_phieu_nhap.MaVT')
-            ->orderBy('ID','DESC')
+            ->orderBy('chi_tiet_phieu_nhap.SoLuong','DESC')
             ->get()->toArray();
         foreach ($nhap as $value){
             $array[] = array(
@@ -290,7 +290,7 @@ class VatTuController extends Controller
             ->join('vat_tu','vat_tu.MaVT','chi_tiet_kho_vat_tu.MaVT')
             ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongTon) as SoLuong'))
             ->groupBy('chi_tiet_kho_vat_tu.MaVT')
-            ->orderBy('ID','DESC')
+            ->orderBy('chi_tiet_kho_vat_tu.SoLuongTon','DESC')
             ->limit(5)
             ->get()->toArray();
         $array = [];
@@ -303,7 +303,7 @@ class VatTuController extends Controller
                 }
             })
             ->groupBy('chi_tiet_kho_vat_tu.MaVT')
-            ->orderBy('ID','DESC')
+            ->orderBy('chi_tiet_kho_vat_tu.SoLuongTon','DESC')
             ->get()->toArray();
         foreach ($nhap as $value){
             $array[] = array(
@@ -321,7 +321,7 @@ class VatTuController extends Controller
             ->join('vat_tu','vat_tu.MaVT','chi_tiet_phieu_xuat.MaVT')
             ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_phieu_xuat.SoLuong) as SoLuong'))
             ->groupBy('chi_tiet_phieu_xuat.MaVT')
-            ->orderBy('ID','DESC')
+            ->orderBy('chi_tiet_phieu_xuat.SoLuong','DESC')
             ->limit(5)
             ->get()->toArray();
         $array = [];
@@ -334,7 +334,7 @@ class VatTuController extends Controller
                 }
             })
             ->groupBy('chi_tiet_phieu_xuat.MaVT')
-            ->orderBy('ID','DESC')
+            ->orderBy('chi_tiet_phieu_xuat.Soluong','DESC')
             ->get()->toArray();
         foreach ($xuat as $value){
             $array[] = array(
