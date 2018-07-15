@@ -342,7 +342,7 @@ class VatTuController extends Controller
                 'number' => json_decode($value->SoLuong));
         }
         if(!empty($check)){
-            $array[] = array('name' => 'Loại khác', 'number' => json_decode($check[0]->SoLuongTon));
+            $array[] = array('name' => 'Loại khác', 'number' => json_decode($check[0]->SoLuong1));
         }
         return response()->json($array);
     }
