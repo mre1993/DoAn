@@ -260,7 +260,7 @@ class VatTuController extends Controller
             ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_phieu_nhap.SoLuong) as SoLuong'))
             ->groupBy('chi_tiet_phieu_nhap.MaVT')
             ->orderBy('ID','DESC')
-            ->limit(10)
+            ->limit(5)
             ->get()->toArray();
         $array = [];
         $check = DB::table('chi_tiet_phieu_nhap')
@@ -291,7 +291,7 @@ class VatTuController extends Controller
             ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_kho_vat_tu.SoLuongTon) as SoLuong'))
             ->groupBy('chi_tiet_kho_vat_tu.MaVT')
             ->orderBy('ID','DESC')
-            ->limit(10)
+            ->limit(5)
             ->get()->toArray();
         $array = [];
         $check = DB::table('chi_tiet_kho_vat_tu')
@@ -322,7 +322,7 @@ class VatTuController extends Controller
             ->select('vat_tu.TenVT', DB::raw('SUM(chi_tiet_phieu_xuat.SoLuong) as SoLuong'))
             ->groupBy('chi_tiet_phieu_xuat.MaVT')
             ->orderBy('ID','DESC')
-            ->limit(10)
+            ->limit(5)
             ->get()->toArray();
         $array = [];
         $check = DB::table('chi_tiet_phieu_xuat')

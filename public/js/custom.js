@@ -1,7 +1,11 @@
 //collapse menu
 $('.active').css('background-color','#8080802e');
 $('.active').parent().collapse("show");
-
+$('body').click(function(){
+    var remove = $('.suggest-search');
+    remove.css('display','none').find("a").remove();
+    remove.parent().find('input[name="TimVT"]').val('');
+});
 //Tính tiền cho phiếu nhập
 function myFunction(e) {
     var max = parseInt($(e).attr('max'));
